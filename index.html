@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meu Planner Pessoal</title>
 
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#1e1e1e">
   <link rel="apple-touch-icon" href="icon-192x192.png">
 
@@ -634,7 +634,7 @@
     // --- SCRIPT DO SERVICE WORKER (PWA) ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('./sw.js')
           .then(registration => {
             console.log('Service Worker registrado com sucesso:', registration);
           })
@@ -645,5 +645,6 @@
     }
   </script>
 </body>
+
 
 </html>
