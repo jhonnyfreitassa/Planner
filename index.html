@@ -580,54 +580,80 @@
       // --- INICIALIZAÇÃO DA AGENDA ---
       gerarGrade();
 
-      // --- DADOS PRÉ-DEFINIDOS DA AGENDA ---
-      const corEstatistica = '#5dade2';
-      const corLinguagens = '#48c9b0';
+      // --- DADOS PRÉ-DEFINIDOS DA AGENDA (SEM CONFLITOS) ---
+      const corEstatistica = '#5dade2';      
+      const corLinguagens = '#48c9b0';     
       const corPython = '#50e3c2';
+      const corSQL = '#3498db';
       const corAcademia = '#f5a623';
       const corEstudo = '#9013fe';
       const corRevisao = '#bd10e0';
       const corDescanso = '#6c757d';
       const corEstudosInd = '#7ed321';
 
+      // Faculdade
       adicionarAtividade('Estatística p/ Comp.', 3, '07:00', '11:00', corEstatistica);
       adicionarAtividade('Linguagens Formais', 5, '09:00', '12:00', corLinguagens);
-      adicionarAtividade('Python (Online)', 1, '18:00', '20:00', corPython);
-      adicionarAtividade('Python (Online)', 3, '19:30', '21:30', corPython);
+
+      // Cursos Online
+      adicionarAtividade('Python (Online)', 2, '15:40', '17:40', corPython);
+      adicionarAtividade('Python (Online)', 4, '15:40', '17:40', corPython);
+      adicionarAtividade('SQL p/ Análise de Dados', 1, '18:00', '22:00', corSQL);
+      adicionarAtividade('SQL p/ Análise de Dados', 3, '18:00', '22:00', corSQL);
+      adicionarAtividade('SQL p/ Análise de Dados', 5, '18:00', '22:00', corSQL);
+
+      // Academia
       adicionarAtividade('Academia', 1, '13:00', '15:00', corAcademia);
       adicionarAtividade('Academia', 2, '13:00', '15:00', corAcademia);
       adicionarAtividade('Academia', 3, '13:00', '15:00', corAcademia);
       adicionarAtividade('Academia', 4, '13:00', '15:00', corAcademia);
       adicionarAtividade('Academia', 5, '13:00', '15:00', corAcademia);
       adicionarAtividade('Academia', 6, '15:00', '18:00', corAcademia);
-      adicionarAtividade('Estudos Indep.', 1, '15:00', '17:00', corEstudosInd);
-      adicionarAtividade('Estudos Indep.', 2, '15:00', '17:00', corEstudosInd);
-      adicionarAtividade('Estudos Indep.', 4, '15:00', '17:00', corEstudosInd);
-      adicionarAtividade('Estudos Indep.', 6, '13:00', '15:00', corEstudosInd);
+
+      // Estudos e Revisões (REORGANIZADO)
+      adicionarAtividade('Estudos Indep.', 1, '15:00', '16:00', corEstudosInd); // Reduzido para 1h
+      adicionarAtividade('Revisão Concurso', 1, '16:00', '18:00', corRevisao);   // Movido
       adicionarAtividade('Estudo Concurso', 1, '08:00', '12:00', corEstudo);
+      
+      adicionarAtividade('Estudos Indep.', 2, '19:40', '21:40', corEstudosInd); // Movido para depois do descanso
+      adicionarAtividade('Revisão Concurso', 2, '21:40', '23:00', corRevisao);   // Movido para mais tarde
       adicionarAtividade('Estudo Concurso', 2, '08:00', '12:00', corEstudo);
-      adicionarAtividade('Estudo Concurso', 3, '15:00', '19:00', corEstudo);
+
+      adicionarAtividade('Estudo Concurso', 3, '15:00', '18:00', corEstudo);   // Reduzido para terminar antes do SQL
+
+      adicionarAtividade('Estudos Indep.', 4, '19:40', '21:40', corEstudosInd); // Movido para depois do descanso
+      adicionarAtividade('Revisão Concurso', 4, '21:40', '23:00', corRevisao);   // Movido para mais tarde
       adicionarAtividade('Estudo Concurso', 4, '08:00', '12:00', corEstudo);
-      adicionarAtividade('Estudo Concurso', 5, '15:00', '17:00', corEstudo);
+
+      adicionarAtividade('Estudo Concurso', 5, '15:00', '17:00', corEstudo);   // Movido para depois da academia
+      adicionarAtividade('Revisão Concurso', 5, '22:00', '23:59', corRevisao);   // Movido para depois do SQL
+      
+      adicionarAtividade('Estudos Indep.', 6, '13:00', '15:00', corEstudosInd);
       adicionarAtividade('Estudo Concurso', 6, '08:00', '12:00', corEstudo);
-      adicionarAtividade('Estudo Concurso', 7, '14:00', '18:00', corEstudo);
-      adicionarAtividade('Revisão Concurso', 1, '20:00', '22:00', corRevisao);
-      adicionarAtividade('Revisão Concurso', 2, '19:00', '21:00', corRevisao);
-      adicionarAtividade('Revisão Concurso', 4, '19:00', '21:00', corRevisao);
-      adicionarAtividade('Revisão Concurso', 5, '19:00', '21:00', corRevisao);
       adicionarAtividade('Revisão Concurso', 6, '19:00', '21:00', corRevisao);
+
+      adicionarAtividade('Estudo Concurso', 7, '14:00', '18:00', corEstudo);
       adicionarAtividade('Revisão Concurso', 7, '19:00', '21:00', corRevisao);
+      
+      // Almoço e Descanso (REORGANIZADO)
       adicionarAtividade('Almoço', 1, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Descanso', 1, '22:00', '23:00', corDescanso); // Movido para depois do SQL
+
       adicionarAtividade('Almoço', 2, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Descanso', 2, '17:40', '19:40', corDescanso); // Movido para depois do Python
+
       adicionarAtividade('Almoço', 3, '11:00', '13:00', corDescanso);
+      adicionarAtividade('Descanso', 3, '22:00', '23:00', corDescanso); // Movido para depois do SQL
+
       adicionarAtividade('Almoço', 4, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Descanso', 4, '17:40', '19:40', corDescanso); // Movido para depois do Python
+
       adicionarAtividade('Almoço', 5, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Descanso', 5, '17:00', '18:00', corDescanso); // Reduzido e movido para antes do SQL
+
       adicionarAtividade('Almoço', 6, '12:00', '13:00', corDescanso);
-      adicionarAtividade('Descanso', 1, '17:00', '18:00', corDescanso);
-      adicionarAtividade('Descanso', 2, '17:00', '19:00', corDescanso);
-      adicionarAtividade('Descanso', 4, '17:00', '19:00', corDescanso);
-      adicionarAtividade('Descanso', 5, '17:00', '19:00', corDescanso);
       adicionarAtividade('Descanso', 6, '18:00', '19:00', corDescanso);
+
       adicionarAtividade('Descanso', 7, '18:00', '19:00', corDescanso);
     });
 
@@ -648,3 +674,4 @@
 
 
 </html>
+
