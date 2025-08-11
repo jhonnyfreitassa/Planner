@@ -20,6 +20,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #121212;
       color: #e0e0e0;
+      overscroll-behavior-x: none; /* Previne "puxar para atualizar" na horizontal */
     }
 
     /* --- NAVEGAÇÃO POR ABAS --- */
@@ -49,7 +50,8 @@
 
     .content-section {
       display: none;
-      padding: 20px;
+      /* Remove padding para dar mais espaço em telas pequenas */
+      padding: 0; 
       animation: fadeIn 0.5s;
     }
 
@@ -61,7 +63,6 @@
       from {
         opacity: 0;
       }
-
       to {
         opacity: 1;
       }
@@ -75,13 +76,13 @@
       --cor-texto-principal: #e0e0e0;
       --cor-texto-secundario: #a0a0a0;
       --hora-altura: 60px;
+      padding: 20px; /* Adiciona padding aqui */
     }
 
     #agenda-section .container {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
-      /* Para melhor responsividade */
+      flex-wrap: wrap; 
     }
 
     #agenda-section .formulario-container {
@@ -91,7 +92,6 @@
       width: 280px;
       flex-shrink: 0;
       margin: 0 auto;
-      /* Centraliza em telas pequenas */
     }
 
     #agenda-section .formulario-container h2 {
@@ -141,18 +141,17 @@
     #agenda-section .agenda-container {
       flex-grow: 1;
       display: grid;
-      grid-template-columns: 60px repeat(7, 1fr);
+      grid-template-columns: 50px repeat(7, 1fr); /* Coluna da hora um pouco menor */
       grid-template-rows: 50px repeat(17, var(--hora-altura));
       background-color: var(--cor-superficie);
       border-radius: 8px;
       border: 1px solid var(--cor-borda);
-      min-width: 600px;
-      /* Evita que a grade quebre muito */
+      min-width: 700px; /* Largura mínima para a grade não quebrar */
     }
 
     #agenda-section .grid-item {
       text-align: center;
-      padding: 10px;
+      padding: 10px 5px; /* Menos padding horizontal */
       border-bottom: 1px solid var(--cor-borda);
       border-left: 1px solid var(--cor-borda);
       box-sizing: border-box;
@@ -194,25 +193,26 @@
       display: block;
       font-size: 1.1em;
     }
-
+    
     /* --- ESTILOS DA SEÇÃO DIETA (DIETA.html) --- */
     #dieta-section {
-      --primary-color: #4CAF50;
-      --secondary-color: #f4f4f4;
-      --text-color: #333;
-      --container-bg: #ffffff;
-      --border-radius: 15px;
-      --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      background-color: var(--secondary-color);
-      color: var(--text-color);
-      font-family: 'Poppins', sans-serif;
+        --primary-color: #4CAF50;
+        --secondary-color: #f4f4f4;
+        --text-color: #333;
+        --container-bg: #ffffff;
+        --border-radius: 15px;
+        --box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        font-family: 'Poppins', sans-serif;
+        padding: 20px; /* Adiciona padding aqui */
     }
 
     #dieta-section .container {
       max-width: 900px;
       margin: 0 auto;
       background-color: var(--container-bg);
-      padding: 30px;
+      padding: 20px;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
     }
@@ -224,22 +224,26 @@
 
     #dieta-section header h1 {
       color: var(--primary-color);
-      font-size: 2.5em;
+      font-size: 2em; /* Fonte um pouco menor */
       margin: 0;
     }
 
     #dieta-section header p {
-      font-size: 1.1em;
+      font-size: 1em;
       color: #666;
+    }
+
+    #dieta-section .meal-plan-wrapper {
+        width: 100%;
+        overflow-x: auto; /* A MÁGICA ACONTECE AQUI */
+        -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
     }
 
     #dieta-section .meal-plan {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
-      overflow-x: auto;
-      /* Para rolagem em telas pequenas */
-      display: block;
+      min-width: 600px; /* Largura mínima para a tabela */
     }
 
     #dieta-section .meal-plan th,
@@ -313,6 +317,46 @@
       margin-top: 30px;
       font-style: italic;
       color: #888;
+    }
+
+    /* =============================================== */
+    /* === REGRAS PARA SMARTPHONES (RESPONSIVIDADE) === */
+    /* =============================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 0; /* Remove padding do body em telas pequenas */
+      }
+
+      .content-section.active {
+        padding: 10px; /* Adiciona um padding menor nas seções */
+      }
+      
+      /* --- Ajustes na Agenda --- */
+      #agenda-section .container {
+        flex-direction: column; /* Coloca o formulário em cima da agenda */
+        gap: 25px;
+      }
+
+      #agenda-section .formulario-container {
+        width: 100%; /* Ocupa a largura toda */
+        box-sizing: border-box;
+      }
+      
+      #agenda-section .agenda-container-wrapper {
+        width: 100%;
+        overflow-x: auto; /* A MÁGICA ACONTECE AQUI */
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid var(--cor-borda);
+        border-radius: 8px;
+      }
+      
+      /* --- Ajustes na Dieta --- */
+      #dieta-section {
+        padding: 10px;
+      }
+       #dieta-section .container {
+        padding: 15px;
+       }
     }
   </style>
 </head>
@@ -677,6 +721,7 @@
 
 
 </html>
+
 
 
 
