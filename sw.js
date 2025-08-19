@@ -1,13 +1,14 @@
-// Nova versão do cache para forçar a atualização
-const CACHE_NAME = 'planner-pessoal-cache-v2'; 
+// Incremente a versão sempre que fizer alterações nos arquivos principais
+const CACHE_NAME = 'planner-pessoal-cache-v3'; 
 const urlsToCache = [
   './',
   './index.html',
   './icon-192x192.png',
   './icon-512x512.png'
+  // Adicione aqui outros arquivos importantes (CSS, JS) se tiver
 ];
 
-// Evento de Instalação: Salva os arquivos essenciais no novo cache.
+// Evento de Instalação: Salva os arquivos e força a ativação.
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -16,9 +17,11 @@ self.addEventListener('install', event => {
         return cache.addAll(urlsToCache);
       })
   );
+  // NOVIDADE: Força o novo Service Worker a se ativar imediatamente.
+  self.skipWaiting(); 
 });
 
-// Evento de Ativação: Limpa os caches antigos.
+// Evento de Ativação: Limpa os caches antigos (seu código aqui já estava perfeito).
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -26,7 +29,6 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheWhitelist.indexOf(cacheName) === -1) {
-            // Se o cache não for o atual, ele será deletado
             return caches.delete(cacheName);
           }
         })
@@ -35,19 +37,23 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Evento de Fetch: Responde com o cache, mas tenta atualizar em segundo plano.
+// Evento de Fetch: Estratégia "Stale-While-Revalidate" (a mais recomendada).
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then(response => {
-        // Se encontrar no cache, retorna a resposta do cache
-        if (response) {
-          return response;
-        }
-        // Senão, faz a requisição à rede
-        return fetch(event.request);
-      }
-    )
-  );
+      .then(cachedResponse => {
+        // Retorna o cache imediatamente se existir
+        const fetchPromise = fetch(event.request).then(
+          networkResponse => {
+            // Se a busca na rede funcionar, atualizamos o cache em segundo plano
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, networkResponse.clone());
+            });
+            return networkResponse;
+          }
+        );
+        // Retorna o que estiver no cache primeiro, enquanto a rede atualiza para a próxima visita.
+        return cachedResponse || fetchPromise;
+      })
+    );
 });
-
