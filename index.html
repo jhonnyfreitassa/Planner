@@ -274,56 +274,6 @@
       margin-top: 40px;
     }
 
-    #treino-section .progress-container {
-      background-color: var(--cor-superficie);
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    #treino-section .progress-container h3 {
-      border-bottom: none;
-      margin-top: 0;
-    }
-
-    #treino-section .progress-bar-background {
-      width: 100%;
-      background-color: #333;
-      border-radius: 10px;
-      height: 20px;
-      margin: 15px 0;
-      overflow: hidden;
-    }
-
-    #treino-section .progress-bar-fill {
-      width: 0%;
-      height: 100%;
-      background-color: var(--cor-progresso);
-      border-radius: 10px;
-      transition: width 0.5s ease-in-out;
-    }
-
-    #treino-section #progressText {
-      font-weight: bold;
-    }
-
-    #treino-section .reset-button {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 15px;
-      font-size: 0.9em;
-      transition: background-color 0.2s;
-    }
-
-    #treino-section .reset-button:hover {
-      background-color: #c82333;
-    }
-
     #treino-section .workout-day {
       background-color: var(--cor-superficie);
       border: 1px solid var(--cor-borda);
@@ -554,14 +504,7 @@
 
     <section id="treino-section" class="content-section">
       <h1>Plano de Treino Completo</h1>
-      <div class="progress-container">
-        <h3>Progresso da Semana</h3>
-        <div class="progress-bar-background">
-          <div id="progressBar" class="progress-bar-fill"></div>
-        </div>
-        <span id="progressText">0% Completo</span>
-        <button id="resetButton" class="reset-button">Resetar Semana</button>
-      </div>
+      
       <h2>Detalhes dos Treinos</h2>
       <div class="workout-day">
         <h3>Dia 1: Push 1</h3>
@@ -984,18 +927,7 @@
       if (!document.getElementById('treino-section')) return;
 
       const exerciseItems = document.querySelectorAll('.exercise-item');
-      const progressBar = document.getElementById('progressBar');
-      const progressText = document.getElementById('progressText');
-      const resetButton = document.getElementById('resetButton');
-      const totalExercises = document.querySelectorAll('.exercise-item .exercise-checkbox').length;
       const storageKey = 'workoutProgress';
-
-      function updateProgress() {
-        const completedCheckboxes = document.querySelectorAll('.exercise-item .exercise-checkbox:checked').length;
-        const percentage = totalExercises > 0 ? (completedCheckboxes / totalExercises) * 100 : 0;
-        progressBar.style.width = percentage + '%';
-        progressText.textContent = `${Math.round(percentage)}% Completo (${completedCheckboxes}/${totalExercises})`;
-      }
 
       function saveProgress() {
         const progressData = {};
@@ -1046,7 +978,6 @@
             }
           });
         }
-        updateProgress();
       }
 
       exerciseItems.forEach(item => {
@@ -1055,14 +986,13 @@
         const seriesCounter = item.querySelector('.series-counter');
         const smallText = item.querySelector('small')?.textContent || '';
         
-        // Gerar contador de séries
         if (seriesCounter) {
             let seriesCount = 0;
             const seriesMatch = smallText.match(/(\d+)\s*séries/);
             if (seriesMatch) {
                 seriesCount = parseInt(seriesMatch[1], 10);
             } else if (smallText.includes('até a falha')) {
-                seriesCount = 3; // Default para "até a falha"
+                seriesCount = 3;
             }
 
             for (let i = 0; i < seriesCount; i++) {
@@ -1078,41 +1008,11 @@
         
         checkbox.addEventListener('change', () => {
           item.classList.toggle('completed', checkbox.checked);
-          updateProgress();
           saveProgress();
         });
 
         if (weightInput) {
           weightInput.addEventListener('input', saveProgress);
-        }
-      });
-
-      resetButton.addEventListener('click', () => {
-        if (confirm('Você tem certeza que deseja resetar o progresso da semana?')) {
-          // Carrega os dados salvos
-          const savedData = JSON.parse(localStorage.getItem(storageKey)) || {};
-
-          exerciseItems.forEach(item => {
-            // Limpa a UI
-            item.querySelector('.exercise-checkbox').checked = false;
-            item.querySelectorAll('.series-dot').forEach(dot => {
-              dot.classList.remove('completed');
-            });
-            item.classList.remove('completed');
-            
-            // Atualiza o objeto de dados em memória, mantendo o peso
-            const id = item.dataset.exerciseId;
-            if (id && savedData[id]) {
-              savedData[id].completed = false;
-              savedData[id].series = [];
-            }
-          });
-
-          // Salva o objeto de dados modificado (com os pesos intactos)
-          localStorage.setItem(storageKey, JSON.stringify(savedData));
-          
-          // Atualiza a barra de progresso
-          updateProgress();
         }
       });
 
