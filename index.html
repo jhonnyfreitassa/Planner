@@ -1088,19 +1088,30 @@
       });
 
       resetButton.addEventListener('click', () => {
-        if (confirm('Você tem certeza que deseja resetar todo o progresso da semana?')) {
+        if (confirm('Você tem certeza que deseja resetar o progresso da semana?')) {
+          // Carrega os dados salvos
+          const savedData = JSON.parse(localStorage.getItem(storageKey)) || {};
+
           exerciseItems.forEach(item => {
+            // Limpa a UI
             item.querySelector('.exercise-checkbox').checked = false;
-            const weightInput = item.querySelector('.weight-input');
-            if (weightInput) {
-              weightInput.value = '';
-            }
             item.querySelectorAll('.series-dot').forEach(dot => {
               dot.classList.remove('completed');
             });
             item.classList.remove('completed');
+            
+            // Atualiza o objeto de dados em memória, mantendo o peso
+            const id = item.dataset.exerciseId;
+            if (id && savedData[id]) {
+              savedData[id].completed = false;
+              savedData[id].series = [];
+            }
           });
-          localStorage.removeItem(storageKey);
+
+          // Salva o objeto de dados modificado (com os pesos intactos)
+          localStorage.setItem(storageKey, JSON.stringify(savedData));
+          
+          // Atualiza a barra de progresso
           updateProgress();
         }
       });
