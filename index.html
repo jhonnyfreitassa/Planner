@@ -19,7 +19,6 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      /* Fundo escuro como padrão para todas as abas */
       background-color: #121212;
       color: #e0e0e0;
       overscroll-behavior-x: none;
@@ -351,6 +350,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 15px;
+      flex-wrap: wrap;
     }
 
     #treino-section .exercise-item:last-child {
@@ -386,22 +386,41 @@
       font-style: italic;
     }
 
+    #treino-section .exercise-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    #treino-section .series-counter {
+      display: flex;
+      gap: 5px;
+    }
+
+    #treino-section .series-dot {
+      width: 18px;
+      height: 18px;
+      background-color: #333;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #treino-section .series-dot.completed {
+      background-color: var(--cor-destaque);
+    }
+
     #treino-section .weight-input {
       width: 60px;
       padding: 8px;
       border-radius: 4px;
       border: 1px solid var(--cor-borda);
-      background-color: var(--cor-fundo);
+      background-color: #121212;
       color: var(--cor-texto-principal);
       text-align: center;
     }
-
-    #treino-section input[type=number]::-webkit-inner-spin-button,
-    #treino-section input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
+    
     /* =============================================== */
     /* === REGRAS PARA SMARTPHONES (RESPONSIVIDADE) === */
     /* =============================================== */
@@ -444,9 +463,9 @@
     <section id="dieta-section" class="content-section">
       <div class="container">
         <header>
-          <h1>🥗 Dieta Flexível</h1>
+          <h1>🥗 Dieta Hiperproteica</h1>
           <p>Perda de gordura + Revolade às 22h</p>
-          <p><strong>(~2.050–2.200 kcal, proteína alta, jejum a partir das 18h)</strong></p>
+          <p><strong>(~2.200–2.350 kcal, proteína muito alta, jejum a partir das 18h)</strong></p>
         </header>
         <div class="meal-plan-wrapper">
           <table class="meal-plan">
@@ -462,59 +481,61 @@
                 <td class="meal-time">Café da manhã <br>(8h–9h)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>2 ovos inteiros</li>
-                    <li>40g queijo branco ou cottage</li>
-                    <li>1 pão francês ou 2 fatias de pão de forma</li>
+                    <li>3 ovos inteiros</li>
+                    <li>50g queijo cottage ou minas</li>
+                    <li>1 pão francês ou 2 fatias de pão integral</li>
                     <li>Café com até 1 colher de chá de açúcar</li>
-                    <li>Fruta (100g melão ou melancia)</li>
+                    <li>Fruta (100g mamão ou melão)</li>
                   </ul>
                 </td>
-                <td>~375 kcal | 21g proteína</td>
+                <td>~450 kcal | 28g proteína</td>
               </tr>
               <tr>
                 <td class="meal-time">Lanche da manhã <br>(11h)</td>
                 <td class="meal-details"><strong>Opções:</strong>
                   <ul>
-                    <li><strong>Sanduíche de Frango:</strong> 2 fatias de pão, 40g frango desfiado, 20g queijo branco</li>
-                    <li><strong>Sanduíche de Atum:</strong> 2 fatias de pão, 80g atum em água</li>
-                    <li><strong>Shake:</strong> 1 dose whey concentrado + 200 ml água</li>
+                    <li><strong>Sanduíche de Frango:</strong> 2 fatias de pão, 60g frango desfiado, 30g queijo cottage</li>
+                    <li><strong>Sanduíche de Atum:</strong> 2 fatias de pão, 1 lata de atum em água</li>
+                    <li><strong>Shake:</strong> 1.5 dose whey concentrado + 250 ml água</li>
+                    <li><strong>Iogurte Grego:</strong> 1 pote (150g) de iogurte grego natural + 20g de nozes</li>
+                    <li><strong>Queijo Cottage:</strong> 100g de queijo cottage + mel ou frutas vermelhas</li>
                   </ul>
                 </td>
-                <td>~230–280 kcal | 16–25g proteína</td>
+                <td>~280–350 kcal | 25–35g proteína</td>
               </tr>
               <tr>
                 <td class="meal-time">Almoço / Pré-treino <br>(12h30)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>150g carne magra</li>
-                    <li>120g de carboidrato cozido</li>
-                    <li>80g feijão</li>
+                    <li>180g carne magra (frango, patinho, tilápia)</li>
+                    <li>150g de carboidrato cozido (arroz, batata doce)</li>
+                    <li>100g feijão ou lentilha</li>
                     <li>Salada grande + 1 colher de azeite</li>
                   </ul>
                 </td>
-                <td>~480–520 kcal | 35–38g proteína</td>
+                <td>~600–650 kcal | 45–50g proteína</td>
               </tr>
               <tr>
                 <td class="meal-time">Pós-treino <br>(15h–15h30)</td>
-                <td class="meal-details">
+                <td class="meal-details"><strong>Opções:</strong>
                   <ul>
-                    <li>1 dose whey concentrado</li>
-                    <li>Fruta (100g banana, melão ou melancia)</li>
+                    <li><strong>Líquido:</strong> 1.5 dose whey concentrado + 1 banana média</li>
+                    <li><strong>Sólido:</strong> 120g frango desfiado + 150g batata doce cozida</li>
                   </ul>
                 </td>
-                <td>~210–220 kcal | 24g proteína</td>
+                <td>~350 kcal | 30-35g proteína</td>
               </tr>
               <tr>
                 <td class="meal-time">Última refeição <br>(17h30)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>100g carne magra</li>
-                    <li>100g carboidrato cozido</li>
-                    <li>50g queijo cottage</li>
-                    <li>Brócolis, abobrinha ou couve</li>
+                    <li>150g carne magra (frango, peixe)</li>
+                    <li>100g carboidrato cozido (arroz, mandioquinha)</li>
+                    <li>80g queijo cottage</li>
+                    <li>Vegetais fibrosos à vontade (brócolis, couve-flor)</li>
                   </ul>
                 </td>
-                <td>~290–320 kcal | 25g proteína</td>
+                <td>~400 kcal | 35g proteína</td>
               </tr>
             </tbody>
           </table>
@@ -522,10 +543,10 @@
         <div class="summary">
           <h2>📊 Resumo Diário</h2>
           <ul>
-            <li>Calorias: <span>~2.050–2.200 kcal</span></li>
-            <li>Proteínas: <span>135–150 g</span></li>
-            <li>Carboidratos: <span>170–190 g</span></li>
-            <li>Gorduras: <span>50–55 g</span></li>
+            <li>Calorias: <span>~2.200–2.350 kcal</span></li>
+            <li>Proteínas: <span>~160–180 g</span></li>
+            <li>Carboidratos: <span>~180–200 g</span></li>
+            <li>Gorduras: <span>~60–65 g</span></li>
           </ul>
         </div>
       </div>
@@ -550,37 +571,39 @@
           </li>
           <li class="exercise-item" data-exercise-id="d1ex1">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Declinado com Barra</strong><br><small>4 séries de 6-10</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
+            <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
           </li>
           <li class="exercise-item" data-exercise-id="d1ex1b">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Inclinado com Barra</strong><br><small>4 séries de 6-10 repetições</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Inclinado com Barra</strong><br><small>4 séries de 6-10</small></label></div>
+            <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
           </li>
           <li class="exercise-item" data-exercise-id="d1ex2">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Desenvolvimento Militar (em pé)</strong><br><small>4 séries de 5-8</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
+            <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
           </li>
           <li class="exercise-item" data-exercise-id="d1ex3">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Reto com Halteres</strong><br><small>3 séries de 8-10</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
+            <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
           </li>
           <li class="exercise-item" data-exercise-id="d1ex4">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Paralelas (inclinação p/ frente)</strong><br><small>3 séries até a falha</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
+            <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
           </li>
           <li class="exercise-item" data-exercise-id="d1ex5">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Tríceps Testa com Barra W</strong><br><small>3 séries de 8-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
+            <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
           </li>
-          <li class="exercise-item" data-exercise-id="...">
+          <li class="exercise-item" data-exercise-id="d1abs1">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal na Maquina</strong><br><small>3 séries de 10-15</small></label></div>
+             <div class="exercise-controls"><div class="series-counter"></div></div>
           </li>
           <li class="exercise-item" data-exercise-id="d1abs2">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas na Barra Fixa</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls"><div class="series-counter"></div></div>
           </li>
-          <li class="exercise-item" data-exercise-id="...">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação do troco na polia</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
-          </li>
+          <li class="exercise-item" data-exercise-id="d1abs3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação do troco na polia</strong><br><small>3 séries de 12-15</small></label></div>
+            <div class="exercise-controls"><div class="series-counter"></div></div>
           </li>
           <li class="exercise-item" data-exercise-id="d1cd">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
@@ -590,88 +613,87 @@
       <div class="workout-day">
         <h3>Dia 2: Pull 1</h3>
         <ul>
-          <li class="exercise-item" data-exercise-id="d2aq">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d2ex1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Levantamento Terra ou Barra Fixa</strong><br><small>4 séries de 5-8</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d2ex2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Remada Curvada com Barra</strong><br><small>4 séries de 6-10</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d2ex3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Puxada Frontal (pegada aberta)</strong><br><small>3 séries de 8-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d2ex4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Remada Unilateral (Serrote)</strong><br><small>3 séries de 8-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-
-          <li class="exercise-item" data-exercise-id="d2ex5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Crucifixo Inverso com Halteres</strong><br><small>3 séries de 12-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-
-          <li class="exercise-item" data-exercise-id="d2ex6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Direta com Barra</strong><br><small>4 séries de 8-10</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d2ex6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Scott com Halter (unilateral)</strong><br><small>3 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d2cd">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
-          </li>
+            <li class="exercise-item" data-exercise-id="d2aq">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2ex1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Levantamento Terra ou Barra Fixa</strong><br><small>4 séries de 5-8</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2ex2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Remada Curvada com Barra</strong><br><small>4 séries de 6-10</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2ex3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Puxada Frontal (pegada aberta)</strong><br><small>3 séries de 8-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2ex4">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Remada Unilateral (Serrote)</strong><br><small>3 séries de 8-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2ex5">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Crucifixo Inverso com Halteres</strong><br><small>3 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2ex6">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Direta com Barra</strong><br><small>4 séries de 8-10</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2ex7">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Scott com Halter (unilateral)</strong><br><small>3 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d2cd">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
+            </li>
         </ul>
       </div>
-      <div class="workout-day">
+       <div class="workout-day">
         <h3>Dia 3: Legs 1</h3>
         <ul>
-          <li class="exercise-item" data-exercise-id="d3aq">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3ex1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Agachamento Livre</strong><br><small>5 séries de 5-8</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3ex2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Leg Press 45º</strong><br><small>4 séries de 8-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3ex3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Levantamento Stiff com Barra</strong><br><small>4 séries de 8-10</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3ex4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cadeira Extensora</strong><br><small>3 séries de 10-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3ex5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cadeira Adutora</strong><br><small>3 séries de 12-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3ex6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha em pé</strong><br><small>5 séries de 10-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="...">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal na Maquina</strong><br><small>3 séries de 10-15</small></label></div>
-          </li>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3abs2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas na Barra Fixa</strong><br><small>3 séries até a falha</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="...">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação do troco na polia</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
-          </li>
-          </li>
-          <li class="exercise-item" data-exercise-id="d3cd">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
-          </li>
+            <li class="exercise-item" data-exercise-id="d3aq">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3ex1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Agachamento Livre</strong><br><small>5 séries de 5-8</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3ex2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Leg Press 45º</strong><br><small>4 séries de 8-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3ex3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Levantamento Stiff com Barra</strong><br><small>4 séries de 8-10</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3ex4">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cadeira Extensora</strong><br><small>3 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3ex5">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cadeira Adutora</strong><br><small>3 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3ex6">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha em pé</strong><br><small>5 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3abs1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal na Maquina</strong><br><small>3 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3abs2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas na Barra Fixa</strong><br><small>3 séries até a falha</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3abs3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação do troco na polia</strong><br><small>3 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d3cd">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
+            </li>
         </ul>
       </div>
       <div class="workout-day">
@@ -682,153 +704,157 @@
           </li>
           <li class="exercise-item" data-exercise-id="d4abs1">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Roda Abdominal (Ab Wheel)</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls"><div class="series-counter"></div></div>
           </li>
           <li class="exercise-item" data-exercise-id="d4abs2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Pallof</strong><br><small>3 séries de 30-45s (cada lado)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha no chão (normal)</strong><br><small>3 séries de 30-45s</small></label></div>
+            <div class="exercise-controls"><div class="series-counter"></div></div>
           </li>
           <li class="exercise-item" data-exercise-id="d4abs3">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Infra no Chão</strong><br><small>3 séries de 15-20</small></label></div>
+            <div class="exercise-controls"><div class="series-counter"></div></div>
           </li>
         </ul>
       </div>
       <div class="workout-day">
         <h3>Dia 5: Push 2</h3>
         <ul>
-          <li class="exercise-item" data-exercise-id="d5aq">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d5ex1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Inclinado com Halteres</strong><br><small>4 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d5ex1b">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Reto com Halteres</strong><br><small>3 séries de 8-12 repetições</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d5ex2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cross Over na Polia Baixa</strong><br><small>4 séries de 12-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d5ex3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Desenvolvimento com Halteres</strong><br><small>4 séries de 10-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d5ex4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Lateral com Halteres</strong><br><small>4 séries de 12-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-
-          <li class="exercise-item" data-exercise-id="d5ex5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Lateral na Polia (unilateral)</strong><br><small>3 séries de 12-15 (cada braço)</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-
-          <li class="exercise-item" data-exercise-id="d5ex6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Tríceps na Polia com Corda</strong><br><small>4 séries de 10-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d5ex6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Tríceps Francês Unilateral com Halter</strong><br><small>3 séries de 10-15 (cada braço)</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-
-          <li class="exercise-item" data-exercise-id="d5cd">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
-          </li>
+            <li class="exercise-item" data-exercise-id="d5aq">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Inclinado com Halteres</strong><br><small>4 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex1b">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Reto com Halteres</strong><br><small>3 séries de 8-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cross Over na Polia Baixa</strong><br><small>4 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Desenvolvimento com Halteres</strong><br><small>4 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex4">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Lateral com Halteres</strong><br><small>4 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex5">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Lateral na Polia (unilateral)</strong><br><small>3 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex6">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Tríceps na Polia com Corda</strong><br><small>4 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5ex7">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Tríceps Francês Unilateral com Halter</strong><br><small>3 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d5cd">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
+            </li>
         </ul>
       </div>
       <div class="workout-day">
         <h3>Dia 6: Pull 2</h3>
         <ul>
-          <li class="exercise-item" data-exercise-id="d6aq">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6ex1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Puxada Frontal (pegada neutra)</strong><br><small>4 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6ex2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Remada Cavalinho ou na Máquina</strong><br><small>4 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6ex3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Pull Down (braços estendidos)</strong><br><small>3 séries de 15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6ex4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Face Pull</strong><br><small>3 séries de 15-20</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6ex5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Martelo com Halteres</strong><br><small>3 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6ex6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Inclinada com Halteres</strong><br><small>3 séries de 12-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6ex7">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Zottman</strong><br><small>3 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="...">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal na Maquina</strong><br><small>3 séries de 10-15</small></label></div>
-          </li>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6abs2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas na Barra Fixa</strong><br><small>3 séries até a falha</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="...">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação do troco na polia</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
-          </li>
-          </li>
-          <li class="exercise-item" data-exercise-id="d6cd">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
-          </li>
+            <li class="exercise-item" data-exercise-id="d6aq">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6ex1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Puxada Frontal (pegada neutra)</strong><br><small>4 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6ex2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Remada Cavalinho ou na Máquina</strong><br><small>4 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6ex3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Pull Down (braços estendidos)</strong><br><small>3 séries de 15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6ex4">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Face Pull</strong><br><small>3 séries de 15-20</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6ex5">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Martelo com Halteres</strong><br><small>3 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6ex6">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Inclinada com Halteres</strong><br><small>3 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6ex7">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Zottman</strong><br><small>3 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6abs1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal na Maquina</strong><br><small>3 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6abs2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas na Barra Fixa</strong><br><small>3 séries até a falha</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6abs3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação do troco na polia</strong><br><small>3 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d6cd">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
+            </li>
         </ul>
       </div>
       <div class="workout-day">
         <h3>Dia 7: Legs 2</h3>
         <ul>
-          <li class="exercise-item" data-exercise-id="d7aq">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7ex1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Agachamento Hack ou Afundo</strong><br><small>4 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7ex2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cadeira Flexora</strong><br><small>4 séries de 12-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7ex2b">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Agachamento Búlgaro com Halteres</strong><br><small>4 séries de 10-12</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7ex3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Leg Press Horizontal</strong><br><small>3 séries de 15-20</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7ex4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Pélvica com Barra</strong><br><small>4 séries de 10-15</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7ex5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha sentado</strong><br><small>5 séries de 15-25</small></label></div>
-            <div class="exercise-input"><input type="number" class="weight-input" placeholder="kg"></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7abs1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Roda Abdominal (Ab Wheel)</strong><br><small>3 séries até a falha</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7abs2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Pallof</strong><br><small>3 séries de 30-45s (cada lado)</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7abs3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Infra no Chão</strong><br><small>3 séries de 15-20</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="d7cd">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
-          </li>
+            <li class="exercise-item" data-exercise-id="d7aq">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Aquecimento</strong><br><small>10 min caminhada</small></label></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7ex1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Agachamento Hack ou Afundo</strong><br><small>4 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7ex2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cadeira Flexora</strong><br><small>4 séries de 12-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7ex2b">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Agachamento Búlgaro com Halteres</strong><br><small>4 séries de 10-12</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7ex3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Leg Press Horizontal</strong><br><small>3 séries de 15-20</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7ex4">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Pélvica com Barra</strong><br><small>4 séries de 10-15</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7ex5">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha sentado</strong><br><small>5 séries de 15-25</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg"></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7abs1">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Roda Abdominal (Ab Wheel)</strong><br><small>3 séries até a falha</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7abs2">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha no chão (normal)</strong><br><small>3 séries de 30-45s</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7abs3">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Infra no Chão</strong><br><small>3 séries de 15-20</small></label></div>
+                <div class="exercise-controls"><div class="series-counter"></div></div>
+            </li>
+            <li class="exercise-item" data-exercise-id="d7cd">
+                <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>40 min caminhada</small></label></div>
+            </li>
         </ul>
       </div>
 
@@ -888,19 +914,75 @@
       function adicionarAtividade(t, e, o, i, n) { const [d, a] = o.split(":").map(Number), [r, s] = i.split(":").map(Number); if (isNaN(d)) return; const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60, c = (r * 60 + s - (d * 60 + a)) / 60, h = document.createElement("div"); h.className = "atividade-bloco", h.style.top = `${l * ALTURA_HORA}px`, h.style.height = `${c * ALTURA_HORA}px`, h.style.backgroundColor = n, h.style.borderLeftColor = ajustarCor(n, -40), h.innerHTML = `<strong>${t}</strong> ${o} - ${i}`, agenda.querySelector(`.coluna-dia[data-dia-index='${e}']`)?.appendChild(h) }
       function ajustarCor(t, e) { let o = parseInt(t.slice(1, 3), 16), i = parseInt(t.slice(3, 5), 16), n = parseInt(t.slice(5, 7), 16); return `#${Math.max(0, Math.min(255, o + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, i + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, n + e)).toString(16).padStart(2, "0")}` }
       gerarGrade();
-      const corEstatistica = '#f39c12', corLinguagens = '#27ae60', corPython = '#50e3c2', corSQL = '#3498db', corAcademia = '#e74c3c', corEstudoVideo = '#D9027D', corEstudoExercicio = '#FF79C6', corEstudosInd = '#7ed321', corDomestico = '#1abc9c', corDescanso = '#6c757d';
-      adicionarAtividade('Estudo (Vídeo)', 1, '08:00', '12:00', corEstudoVideo); adicionarAtividade('Almoço', 1, '12:00', '13:00', corDescanso); adicionarAtividade('Academia', 1, '13:00', '15:00', corAcademia); adicionarAtividade('Estudo (Exercícios)', 1, '15:00', '17:00', corEstudoExercicio); adicionarAtividade('Ativ. Domésticas', 1, '17:00', '18:00', corDomestico); adicionarAtividade('SQL p/ Análise de Dados', 1, '18:00', '22:00', corSQL); adicionarAtividade('Descanso', 1, '22:00', '23:00', corDescanso);
-      adicionarAtividade('Estudo (Vídeo)', 2, '08:00', '12:00', corEstudoVideo); adicionarAtividade('Almoço', 2, '12:00', '13:00', corDescanso); adicionarAtividade('Academia', 2, '13:00', '15:00', corAcademia); adicionarAtividade('Python (Online)', 2, '15:40', '17:40', corPython); adicionarAtividade('Estudo (Exercícios)', 2, '18:00', '20:00', corEstudoExercicio); adicionarAtividade('Estudos Indep.', 2, '20:00', '22:00', corEstudosInd); adicionarAtividade('Descanso', 2, '22:00', '23:00', corDescanso);
-      adicionarAtividade('Estatística p/ Comp.', 3, '07:30', '11:05', corEstatistica); adicionarAtividade('Almoço', 3, '12:00', '13:00', corDescanso); adicionarAtividade('Academia', 3, '13:00', '15:00', corAcademia); adicionarAtividade('Ativ. Domésticas', 3, '15:00', '18:00', corDomestico); adicionarAtividade('SQL p/ Análise de Dados', 3, '18:00', '22:00', corSQL); adicionarAtividade('Descanso', 3, '22:00', '23:00', corDescanso);
-      adicionarAtividade('Estudo (Vídeo)', 4, '08:00', '12:00', corEstudoVideo); adicionarAtividade('Almoço', 4, '12:00', '13:00', corDescanso); adicionarAtividade('Academia', 4, '13:00', '15:00', corAcademia); adicionarAtividade('Python (Online)', 4, '15:40', '17:40', corPython); adicionarAtividade('Estudo (Exercícios)', 4, '18:00', '20:00', corEstudoExercicio); adicionarAtividade('Estudos Indep.', 4, '20:00', '22:00', corEstudosInd); adicionarAtividade('Descanso', 4, '22:00', '23:00', corDescanso);
-      adicionarAtividade('Linguagens Formais', 5, '09:25', '12:50', corLinguagens); adicionarAtividade('Almoço', 5, '13:00', '14:00', corDescanso); adicionarAtividade('Academia', 5, '14:00', '16:00', corAcademia); adicionarAtividade('Estudo (Vídeo)', 5, '16:00', '18:00', corEstudoVideo); adicionarAtividade('SQL p/ Análise de Dados', 5, '18:00', '22:00', corSQL); adicionarAtividade('Descanso', 5, '22:00', '23:00', corDescanso);
-      adicionarAtividade('Estudo (Vídeo)', 6, '08:00', '12:00', corEstudoVideo); adicionarAtividade('Almoço', 6, '12:00', '13:00', corDescanso); adicionarAtividade('Estudo (Exercícios)', 6, '13:00', '15:00', corEstudoExercicio); adicionarAtividade('Academia', 6, '15:00', '17:00', corAcademia); adicionarAtividade('Ativ. Domésticas', 6, '17:00', '19:00', corDomestico); adicionarAtividade('Estudos Indep.', 6, '19:00', '21:00', corEstudosInd); adicionarAtividade('Descanso', 6, '21:00', '23:00', corDescanso);
-      adicionarAtividade('Estudo (Vídeo)', 7, '08:00', '12:00', corEstudoVideo); adicionarAtividade('Academia', 7, '12:00', '14:00', corAcademia); adicionarAtividade('Almoço', 7, '14:00', '15:00', corDescanso); adicionarAtividade('Estudo (Exercícios)', 7, '15:00', '18:00', corEstudoExercicio); adicionarAtividade('Estudos Indep.', 7, '18:00', '20:00', corEstudosInd); adicionarAtividade('Descanso', 7, '20:00', '23:00', corDescanso);
+      const corEstatistica = '#f39c12', corLinguagens = '#27ae60', corPython = '#50e3c2', corSQL = '#3498db', corAcademia = '#e74c3c', corEstudoConcurso = '#D9027D', corEstudosInd = '#7ed321', corDomestico = '#1abc9c', corDescanso = '#6c757d';
+
+      // Segunda
+      adicionarAtividade('Estudo para Concurso', 1, '08:00', '12:00', corEstudoConcurso);
+      adicionarAtividade('Almoço', 1, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 1, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Estudos Indep.', 1, '15:00', '17:00', corEstudosInd);
+      adicionarAtividade('Descanso', 1, '17:00', '18:00', corDescanso);
+      adicionarAtividade('SQL p/ Análise de Dados', 1, '18:00', '22:00', corSQL);
+      adicionarAtividade('Descanso', 1, '22:00', '23:00', corDescanso);
+
+      // Terça
+      adicionarAtividade('Estudo para Concurso', 2, '08:00', '12:00', corEstudoConcurso);
+      adicionarAtividade('Almoço', 2, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 2, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Python (Online)', 2, '15:40', '17:40', corPython);
+      adicionarAtividade('Ativ. Domésticas', 2, '18:00', '20:00', corDomestico);
+      adicionarAtividade('Estudos Indep.', 2, '20:00', '22:00', corEstudosInd);
+      adicionarAtividade('Descanso', 2, '22:00', '23:00', corDescanso);
+
+      // Quarta
+      adicionarAtividade('Estatística p/ Comp.', 3, '07:30', '11:05', corEstatistica);
+      adicionarAtividade('Almoço', 3, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 3, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Descanso', 3, '15:00', '16:00', corDescanso);
+      adicionarAtividade('Estudo para Concurso', 3, '16:00', '18:00', corEstudoConcurso);
+      adicionarAtividade('SQL p/ Análise de Dados', 3, '18:00', '22:00', corSQL);
+      adicionarAtividade('Descanso', 3, '22:00', '23:00', corDescanso);
+
+      // Quinta
+      adicionarAtividade('Estudo para Concurso', 4, '08:00', '12:00', corEstudoConcurso);
+      adicionarAtividade('Almoço', 4, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 4, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Python (Online)', 4, '15:40', '17:40', corPython);
+      adicionarAtividade('Ativ. Domésticas', 4, '18:00', '20:00', corDomestico);
+      adicionarAtividade('Estudos Indep.', 4, '20:00', '22:00', corEstudosInd);
+      adicionarAtividade('Descanso', 4, '22:00', '23:00', corDescanso);
+
+      // Sexta
+      adicionarAtividade('Linguagens Formais', 5, '09:25', '12:50', corLinguagens);
+      adicionarAtividade('Almoço', 5, '13:00', '14:00', corDescanso);
+      adicionarAtividade('Academia', 5, '14:00', '16:00', corAcademia);
+      adicionarAtividade('Estudo para Concurso', 5, '16:00', '18:00', corEstudoConcurso);
+      adicionarAtividade('SQL p/ Análise de Dados', 5, '18:00', '22:00', corSQL);
+      adicionarAtividade('Descanso', 5, '22:00', '23:00', corDescanso);
+
+      // Sábado
+      adicionarAtividade('Estudo para Concurso', 6, '08:00', '12:00', corEstudoConcurso);
+      adicionarAtividade('Almoço', 6, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Estudo para Concurso', 6, '13:00', '15:00', corEstudoConcurso);
+      adicionarAtividade('Academia', 6, '15:00', '17:00', corAcademia);
+      adicionarAtividade('Ativ. Domésticas', 6, '17:00', '19:00', corDomestico);
+      adicionarAtividade('Estudos Indep.', 6, '19:00', '21:00', corEstudosInd);
+      adicionarAtividade('Descanso', 6, '21:00', '23:00', corDescanso);
+
+      // Domingo
+      adicionarAtividade('Estudo para Concurso', 7, '08:00', '12:00', corEstudoConcurso);
+      adicionarAtividade('Academia', 7, '12:00', '14:00', corAcademia);
+      adicionarAtividade('Almoço', 7, '14:00', '15:00', corDescanso);
+      adicionarAtividade('Estudo para Concurso', 7, '15:00', '17:00', corEstudoConcurso);
+      adicionarAtividade('Descanso', 7, '17:00', '18:00', corDescanso);
+      adicionarAtividade('Estudos Indep.', 7, '18:00', '20:00', corEstudosInd);
+      adicionarAtividade('Descanso', 7, '20:00', '23:00', corDescanso);
     });
 
     // --- SCRIPT DO TREINO INTERATIVO ---
     document.addEventListener('DOMContentLoaded', function () {
       if (!document.getElementById('treino-section')) return;
+
       const exerciseItems = document.querySelectorAll('.exercise-item');
       const progressBar = document.getElementById('progressBar');
       const progressText = document.getElementById('progressText');
@@ -909,10 +991,10 @@
       const storageKey = 'workoutProgress';
 
       function updateProgress() {
-        const completedExercises = document.querySelectorAll('.exercise-item.completed').length;
-        const percentage = totalExercises > 0 ? (completedExercises / totalExercises) * 100 : 0;
+        const completedCheckboxes = document.querySelectorAll('.exercise-item .exercise-checkbox:checked').length;
+        const percentage = totalExercises > 0 ? (completedCheckboxes / totalExercises) * 100 : 0;
         progressBar.style.width = percentage + '%';
-        progressText.textContent = `${Math.round(percentage)}% Completo (${completedExercises}/${totalExercises})`;
+        progressText.textContent = `${Math.round(percentage)}% Completo (${completedCheckboxes}/${totalExercises})`;
       }
 
       function saveProgress() {
@@ -920,9 +1002,18 @@
         exerciseItems.forEach(item => {
           const id = item.dataset.exerciseId;
           if (id) {
+            const seriesDots = item.querySelectorAll('.series-dot');
+            const completedSeries = [];
+            seriesDots.forEach((dot, index) => {
+              if (dot.classList.contains('completed')) {
+                completedSeries.push(index);
+              }
+            });
+
             progressData[id] = {
               completed: item.querySelector('.exercise-checkbox').checked,
-              weight: item.querySelector('.weight-input')?.value ?? null
+              weight: item.querySelector('.weight-input')?.value ?? null,
+              series: completedSeries
             };
           }
         });
@@ -937,11 +1028,21 @@
             if (id && savedData[id]) {
               const checkbox = item.querySelector('.exercise-checkbox');
               const weightInput = item.querySelector('.weight-input');
+              
               checkbox.checked = savedData[id].completed;
               if (weightInput) {
                 weightInput.value = savedData[id].weight;
               }
               item.classList.toggle('completed', checkbox.checked);
+
+              if (savedData[id].series) {
+                const seriesDots = item.querySelectorAll('.series-dot');
+                seriesDots.forEach((dot, index) => {
+                  if (savedData[id].series.includes(index)) {
+                    dot.classList.add('completed');
+                  }
+                });
+              }
             }
           });
         }
@@ -950,21 +1051,37 @@
 
       exerciseItems.forEach(item => {
         const checkbox = item.querySelector('.exercise-checkbox');
-        const label = item.querySelector('label');
         const weightInput = item.querySelector('.weight-input');
-        const toggleCheck = (event) => {
-          if (event.target.tagName !== 'INPUT') {
-            checkbox.checked = !checkbox.checked;
-            const changeEvent = new Event('change');
-            checkbox.dispatchEvent(changeEvent);
-          }
-        };
-        label.addEventListener('click', toggleCheck);
+        const seriesCounter = item.querySelector('.series-counter');
+        const smallText = item.querySelector('small')?.textContent || '';
+        
+        // Gerar contador de séries
+        if (seriesCounter) {
+            let seriesCount = 0;
+            const seriesMatch = smallText.match(/(\d+)\s*séries/);
+            if (seriesMatch) {
+                seriesCount = parseInt(seriesMatch[1], 10);
+            } else if (smallText.includes('até a falha')) {
+                seriesCount = 3; // Default para "até a falha"
+            }
+
+            for (let i = 0; i < seriesCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'series-dot';
+                dot.addEventListener('click', () => {
+                    dot.classList.toggle('completed');
+                    saveProgress();
+                });
+                seriesCounter.appendChild(dot);
+            }
+        }
+        
         checkbox.addEventListener('change', () => {
           item.classList.toggle('completed', checkbox.checked);
           updateProgress();
           saveProgress();
         });
+
         if (weightInput) {
           weightInput.addEventListener('input', saveProgress);
         }
@@ -978,12 +1095,16 @@
             if (weightInput) {
               weightInput.value = '';
             }
+            item.querySelectorAll('.series-dot').forEach(dot => {
+              dot.classList.remove('completed');
+            });
             item.classList.remove('completed');
           });
           localStorage.removeItem(storageKey);
           updateProgress();
         }
       });
+
       loadProgress();
     });
 
