@@ -243,6 +243,65 @@
       font-weight: 600;
     }
 
+    /* NOVOS ESTILOS PARA O CARDÁPIO DE BEBIDAS */
+    .drinks-routine {
+      margin-top: 40px;
+      border-top: 2px solid var(--primary-color);
+      padding-top: 20px;
+    }
+
+    .drinks-routine h2 {
+      color: var(--primary-color);
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .drinks-routine .time-block {
+      background-color: #2c2c2c;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-left: 5px solid var(--primary-color);
+    }
+
+    .drinks-routine h3 {
+      font-size: 1.5em;
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .drinks-routine h4 {
+      font-size: 1.2em;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 5px;
+    }
+
+    .drinks-routine p,
+    .drinks-routine ul {
+      line-height: 1.7;
+      color: #e0e0e0;
+    }
+
+    .drinks-routine ul {
+      padding-left: 20px;
+    }
+
+    .drinks-routine .caffeine-warning {
+      background-color: #c62828;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    /* FIM DOS NOVOS ESTILOS */
+
     /* --- ESTILOS DA SEÇÃO TREINO (INTERATIVO) --- */
     #treino-section {
       --cor-superficie: #1e1e1e;
@@ -393,108 +452,110 @@
       color: var(--cor-texto-principal);
       text-align: center;
     }
-    
+
     /* --- NOVOS ESTILOS DA SEÇÃO BEM-ESTAR --- */
     #bem-estar-section {
-        --cor-superficie: #1e1e1e;
-        --cor-borda: #333;
-        --cor-texto-principal: #e0e0e0;
-        --cor-texto-secundario: #a0a0a0;
-        --cor-destaque: #f39c12; /* Cor laranja para destaque */
+      --cor-superficie: #1e1e1e;
+      --cor-borda: #333;
+      --cor-texto-principal: #e0e0e0;
+      --cor-texto-secundario: #a0a0a0;
+      --cor-destaque: #f39c12;
+      /* Cor laranja para destaque */
     }
 
     #bem-estar-section .container {
-        max-width: 900px;
-        margin: 0 auto;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     #bem-estar-section h2 {
-        color: var(--cor-destaque);
-        border-bottom: 2px solid var(--cor-destaque);
-        padding-bottom: 10px;
-        margin-top: 40px;
-        margin-bottom: 20px;
-        font-size: 1.8em;
+      color: var(--cor-destaque);
+      border-bottom: 2px solid var(--cor-destaque);
+      padding-bottom: 10px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-size: 1.8em;
     }
 
     #bem-estar-section h3 {
-        color: var(--cor-texto-principal);
-        border-left: 4px solid var(--cor-destaque);
-        padding-left: 10px;
-        margin-top: 30px;
-        margin-bottom: 15px;
-        font-size: 1.4em;
+      color: var(--cor-texto-principal);
+      border-left: 4px solid var(--cor-destaque);
+      padding-left: 10px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 1.4em;
     }
 
     #bem-estar-section ul {
-        list-style-type: '» ';
-        padding-left: 25px;
-        line-height: 1.8;
+      list-style-type: '» ';
+      padding-left: 25px;
+      line-height: 1.8;
     }
-    
+
     #bem-estar-section .table-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        border: 1px solid var(--cor-borda);
-        border-radius: 8px;
-        margin-top: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--cor-borda);
+      border-radius: 8px;
+      margin-top: 20px;
     }
 
     #bem-estar-section table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 600px;
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
     }
 
-    #bem-estar-section th, #bem-estar-section td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid var(--cor-borda);
+    #bem-estar-section th,
+    #bem-estar-section td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid var(--cor-borda);
     }
 
     #bem-estar-section th {
-        background-color: #333;
-        color: var(--cor-destaque);
-        font-size: 1.1em;
+      background-color: #333;
+      color: var(--cor-destaque);
+      font-size: 1.1em;
     }
 
     #bem-estar-section tr:nth-child(even) {
-        background-color: var(--cor-superficie);
+      background-color: var(--cor-superficie);
     }
 
     #bem-estar-section .notes-area textarea {
-        width: 100%;
-        min-height: 200px;
-        background-color: var(--cor-superficie);
-        border: 1px solid var(--cor-borda);
-        border-radius: 8px;
-        padding: 15px;
-        color: var(--cor-texto-principal);
-        font-size: 1em;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        box-sizing: border-box;
-        resize: vertical;
+      width: 100%;
+      min-height: 200px;
+      background-color: var(--cor-superficie);
+      border: 1px solid var(--cor-borda);
+      border-radius: 8px;
+      padding: 15px;
+      color: var(--cor-texto-principal);
+      font-size: 1em;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-sizing: border-box;
+      resize: vertical;
     }
 
     #bem-estar-section .save-notes-btn {
-        display: block;
-        margin-top: 15px;
-        padding: 12px 25px;
-        background-color: var(--cor-destaque);
-        color: #121212;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1.1em;
-        font-weight: bold;
-        transition: background-color 0.3s, transform 0.2s;
+      display: block;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: var(--cor-destaque);
+      color: #121212;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
     }
 
     #bem-estar-section .save-notes-btn:hover {
-        background-color: #ffb84d;
-        transform: translateY(-2px);
+      background-color: #ffb84d;
+      transform: translateY(-2px);
     }
-    
+
     /* =============================================== */
     /* === REGRAS PARA SMARTPHONES (RESPONSIVIDADE) === */
     /* =============================================== */
@@ -502,7 +563,7 @@
       .content-section {
         padding: 10px;
       }
-      
+
       #agenda-section,
       #dieta-section,
       #treino-section,
@@ -529,103 +590,181 @@
 
   <main>
     <section id="agenda-section" class="content-section active">
-        <div class="container">
-            <div class="agenda-container-wrapper">
-                <div class="agenda-container" id="agenda"></div>
-            </div>
+      <div class="container">
+        <div class="agenda-container-wrapper">
+          <div class="agenda-container" id="agenda"></div>
         </div>
+      </div>
     </section>
 
     <section id="dieta-section" class="content-section">
-        <div class="container">
-            <header>
-                <h1>🥗 Dieta Hiperproteica</h1>
-                <p>Perda de gordura + Revolade às 22h</p>
-                <p><strong>(~2.200–2.350 kcal, proteína muito alta, jejum a partir das 18h)</strong></p>
-            </header>
-            <div class="meal-plan-wrapper">
-                <table class="meal-plan">
-                    <thead>
-                        <tr>
-                            <th>Refeição / Horário</th>
-                            <th>Alimentos</th>
-                            <th>Totais Aproximados</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="meal-time">Café da manhã <br>(8h–9h)</td>
-                            <td class="meal-details">
-                                <ul>
-                                    <li>3 ovos inteiros</li>
-                                    <li>50g queijo cottage ou minas</li>
-                                    <li>1 pão francês ou 2 fatias de pão integral</li>
-                                    <li>Café com até 1 colher de chá de açúcar</li>
-                                    <li>Fruta (100g mamão ou melão)</li>
-                                </ul>
-                            </td>
-                            <td>~450 kcal | 28g proteína</td>
-                        </tr>
-                        <tr>
-                            <td class="meal-time">Lanche da manhã <br>(11h)</td>
-                            <td class="meal-details"><strong>Opções:</strong>
-                                <ul>
-                                    <li><strong>Sanduíche de Frango:</strong> 2 fatias de pão, 60g frango desfiado, 30g queijo cottage</li>
-                                    <li><strong>Sanduíche de Atum:</strong> 2 fatias de pão, 1 lata de atum em água</li>
-                                    <li><strong>Shake:</strong> 1.5 dose whey concentrado + 250 ml água</li>
-                                    <li><strong>Iogurte Grego:</strong> 1 pote (150g) de iogurte grego natural + 20g de nozes</li>
-                                    <li><strong>Queijo Cottage:</strong> 100g de queijo cottage + mel ou frutas vermelhas</li>
-                                </ul>
-                            </td>
-                            <td>~280–350 kcal | 25–35g proteína</td>
-                        </tr>
-                        <tr>
-                            <td class="meal-time">Almoço / Pré-treino <br>(12h30)</td>
-                            <td class="meal-details">
-                                <ul>
-                                    <li>180g carne magra (frango, patinho, tilápia)</li>
-                                    <li>150g de carboidrato cozido (arroz, batata doce)</li>
-                                    <li>100g feijão ou lentilha</li>
-                                    <li>Salada grande + 1 colher de azeite</li>
-                                </ul>
-                            </td>
-                            <td>~600–650 kcal | 45–50g proteína</td>
-                        </tr>
-                        <tr>
-                            <td class="meal-time">Pós-treino <br>(15h–15h30)</td>
-                            <td class="meal-details"><strong>Opções:</strong>
-                                <ul>
-                                    <li><strong>Líquido:</strong> 1.5 dose whey concentrado + 1 banana média</li>
-                                    <li><strong>Sólido:</strong> 120g frango desfiado + 150g batata doce cozida</li>
-                                </ul>
-                            </td>
-                            <td>~350 kcal | 30-35g proteína</td>
-                        </tr>
-                        <tr>
-                            <td class="meal-time">Última refeição <br>(17h30)</td>
-                            <td class="meal-details">
-                                <ul>
-                                    <li>150g carne magra (frango, peixe)</li>
-                                    <li>100g carboidrato cozido (arroz, mandioquinha)</li>
-                                    <li>80g queijo cottage</li>
-                                    <li>Vegetais fibrosos à vontade (brócolis, couve-flor)</li>
-                                </ul>
-                            </td>
-                            <td>~400 kcal | 35g proteína</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="summary">
-                <h2>📊 Resumo Diário</h2>
-                <ul>
-                    <li>Calorias: <span>~2.200–2.350 kcal</span></li>
-                    <li>Proteínas: <span>~160–180 g</span></li>
-                    <li>Carboidratos: <span>~180–200 g</span></li>
-                    <li>Gorduras: <span>~60–65 g</span></li>
-                </ul>
-            </div>
+      <div class="container">
+        <header>
+          <h1>🥗 Dieta Hiperproteica</h1>
+          <p>Perda de gordura + Revolade às 22h</p>
+          <p><strong>(~2.200–2.350 kcal, proteína muito alta, jejum a partir das 18h)</strong></p>
+        </header>
+        <div class="meal-plan-wrapper">
+          <table class="meal-plan">
+            <thead>
+              <tr>
+                <th>Refeição / Horário</th>
+                <th>Alimentos</th>
+                <th>Totais Aproximados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="meal-time">Café da manhã <br>(8h–9h)</td>
+                <td class="meal-details">
+                  <ul>
+                    <li>3 ovos inteiros</li>
+                    <li>50g queijo cottage ou minas</li>
+                    <li>1 pão francês ou 2 fatias de pão integral</li>
+                    <li>Café com até 1 colher de chá de açúcar</li>
+                    <li>Fruta (100g mamão ou melão)</li>
+                  </ul>
+                </td>
+                <td>~450 kcal | 28g proteína</td>
+              </tr>
+              <tr>
+                <td class="meal-time">Lanche da manhã <br>(11h)</td>
+                <td class="meal-details"><strong>Opções:</strong>
+                  <ul>
+                    <li><strong>Sanduíche de Frango:</strong> 2 fatias de pão, 60g frango desfiado, 30g queijo cottage</li>
+                    <li><strong>Sanduíche de Atum:</strong> 2 fatias de pão, 1 lata de atum em água</li>
+                    <li><strong>Shake:</strong> 1.5 dose whey concentrado + 250 ml água</li>
+                    <li><strong>Iogurte Grego:</strong> 1 pote (150g) de iogurte grego natural + 20g de nozes</li>
+                    <li><strong>Queijo Cottage:</strong> 100g de queijo cottage + mel ou frutas vermelhas</li>
+                  </ul>
+                </td>
+                <td>~280–350 kcal | 25–35g proteína</td>
+              </tr>
+              <tr>
+                <td class="meal-time">Almoço / Pré-treino <br>(12h30)</td>
+                <td class="meal-details">
+                  <ul>
+                    <li>180g carne magra (frango, patinho, tilápia)</li>
+                    <li>150g de carboidrato cozido (arroz, batata doce)</li>
+                    <li>100g feijão ou lentilha</li>
+                    <li>Salada grande + 1 colher de azeite</li>
+                  </ul>
+                </td>
+                <td>~600–650 kcal | 45–50g proteína</td>
+              </tr>
+              <tr>
+                <td class="meal-time">Pós-treino <br>(15h–15h30)</td>
+                <td class="meal-details"><strong>Opções:</strong>
+                  <ul>
+                    <li><strong>Líquido:</strong> 1.5 dose whey concentrado + 1 banana média</li>
+                    <li><strong>Sólido:</strong> 120g frango desfiado + 150g batata doce cozida</li>
+                  </ul>
+                </td>
+                <td>~350 kcal | 30-35g proteína</td>
+              </tr>
+              <tr>
+                <td class="meal-time">Última refeição <br>(17h30)</td>
+                <td class="meal-details">
+                  <ul>
+                    <li>150g carne magra (frango, peixe)</li>
+                    <li>100g carboidrato cozido (arroz, mandioquinha)</li>
+                    <li>80g queijo cottage</li>
+                    <li>Vegetais fibrosos à vontade (brócolis, couve-flor)</li>
+                  </ul>
+                </td>
+                <td>~400 kcal | 35g proteína</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <div class="summary">
+          <h2>📊 Resumo Diário</h2>
+          <ul>
+            <li>Calorias: <span>~2.200–2.350 kcal</span></li>
+            <li>Proteínas: <span>~160–180 g</span></li>
+            <li>Carboidratos: <span>~180–200 g</span></li>
+            <li>Gorduras: <span>~60–65 g</span></li>
+          </ul>
+        </div>
+
+        <div class="drinks-routine">
+          <h2>Cardápio e Rotina de Bebidas para Foco e Sono</h2>
+
+          <div class="time-block">
+            <h3>☀️ Manhã: O Início com Energia Controlada</h3>
+            <h4>Ao Acordar (Ex: 07h00)</h4>
+            <p><strong>Bebida:</strong> 1 copo de água para hidratar + 1 xícara de café preto (seu ritual essencial).</p>
+            <p><strong>Observação:</strong> Tomar o café após a água ajuda a proteger o estômago e a garantir a hidratação inicial, que por si só já combate a fadiga.</p>
+
+            <h4>Café da Manhã (Ex: 07h30)</h4>
+            <p><strong>Foco:</strong> Proteína e carboidratos complexos para energia duradoura.</p>
+            <ul>
+              <li><strong>Opção 1:</strong> Ovos mexidos com 1 fatia de pão integral e 1 fruta (mamão ou banana).</li>
+              <li><strong>Opção 2:</strong> Iogurte natural integral com aveia, frutas vermelhas e um punhado de castanhas.</li>
+            </ul>
+
+            <h4>Meio da Manhã (Ex: 10h00 - 10h30)</h4>
+            <p><strong>Bebida:</strong> 1 xícara de Matcha.</p>
+            <p><strong>Melhor horário por quê?</strong> A L-teanina do matcha vai te dar um foco calmo e sustentado para o restante da manhã, sem a agitação do café. É o seu segundo e último grande estímulo do dia.</p>
+            <p><strong>Lanche (se sentir fome):</strong> 1 maçã ou pera.</p>
+          </div>
+
+          <div class="time-block">
+            <h3>☀️ Tarde: Transição para o Modo "Sem Cafeína"</h3>
+            <h4>Almoço (Ex: 12h30 - 13h00)</h4>
+            <p><strong>Foco:</strong> Refeição completa e nutritiva, mas sem exageros para não causar sonolência.</p>
+            <p><strong>Sugestão:</strong> Frango ou peixe grelhado + arroz integral + feijão + salada de folhas verdes e legumes coloridos.</p>
+            <p><strong>Bebida:</strong> Água ou água com gás e limão.</p>
+
+            <h4>Início da Tarde (Ex: 14h30)</h4>
+            <p><strong>Janela de Oportunidade Final (Opcional):</strong> Se sentir uma leve queda de energia, aqui é sua última chance para algo com cafeína.</p>
+            <p><strong>Bebida Sugerida:</strong> 1 xícara de Chá Verde ou Chá Preto. Eles têm menos cafeína que o café/matcha, servindo como uma "ponte" mais suave.</p>
+
+            <p class="caffeine-warning">🚫 HORÁRIO LIMITE PARA CAFEÍNA: 15h00 🚫</p>
+            <p>A partir deste ponto, qualquer bebida consumida deve ser 100% livre de cafeína para não interferir com a quetiapina.</p>
+          </div>
+
+          <div class="time-block">
+            <h3>🌙 Tarde/Noite: Foco Natural e Preparação para o Descanso</h3>
+            <h4>Pausa Crítica dos Estudos (17h00 - 18h00)</h4>
+            <p><strong>Foco:</strong> Ritual para renovar a energia sem usar estimulantes químicos.</p>
+            <p><strong>Bebida do Ritual (escolha uma):</strong></p>
+            <ul>
+              <li><strong>Opção 1 (Estimulante Natural):</strong> Caneca de Chá de Gengibre com Limão e Canela.</li>
+              <li><strong>Opção 2 (Foco Refrescante):</strong> Caneca de Chá de Hortelã ou Alecrim.</li>
+              <li><strong>Opção 3 (Hidratação Desperta):</strong> Copo grande de Água Super Gelada com Gás e rodelas de laranja.</li>
+            </ul>
+            <p><strong>Ação Complementar:</strong> Levante-se, alongue o corpo por 3 minutos. Olhe pela janela.</p>
+
+            <h4>Jantar (Ex: 19h30 - 20h00)</h4>
+            <p><strong>Foco:</strong> Refeição mais leve para facilitar a digestão e o sono.</p>
+            <ul>
+              <li><strong>Sugestão 1:</strong> Sopa de legumes com frango desfiado.</li>
+              <li><strong>Sugestão 2:</strong> Omelete com queijo branco, tomate e uma salada de acompanhamento.</li>
+              <li><strong>Sugestão 3:</strong> Salada completa com atum, ovo cozido, grão de bico e folhas.</li>
+            </ul>
+
+            <h4>Ceia / Rotina de Desaceleração (Ex: 21h30 em diante)</h4>
+            <p><strong>Foco:</strong> Sinalizar para o cérebro que é hora de desligar.</p>
+            <p><strong>Bebida Calmante (escolha uma):</strong></p>
+            <ul>
+              <li>Chá de Camomila, Erva-Cidreira ou Mulungu (excelente relaxante natural).</li>
+              <li>Golden Milk (leite vegetal morno com cúrcuma e especiarias), muito reconfortante e anti-inflamatório.</li>
+            </ul>
+            <p><strong>Lanche Leve (se necessário):</strong> Meia banana (rica em magnésio e triptofano, que ajudam no sono).</p>
+          </div>
+
+          <div class="time-block">
+            <h3>Resumo dos Horários de Consumo (Cafeína):</h3>
+            <ul>
+              <li><strong>Café:</strong> Idealmente apenas 1 xícara, logo pela manhã.</li>
+              <li><strong>Matcha:</strong> Perfeito para o meio da manhã (entre 10h e 11h) para um segundo pico de foco.</li>
+              <li><strong>Chá Verde/Preto:</strong> Apenas se for muito necessário e, no máximo, até as 14h30/15h00.</li>
+              <li><strong>Após as 15h00:</strong> Tolerância zero para cafeína.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="treino-section" class="content-section">
@@ -740,7 +879,7 @@
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="tue-abs2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas na Barra Fixa</strong><br><small>4 séries de 8-12</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Infra no Chão</strong><br><small>4 séries de 8-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -777,7 +916,6 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-
           <li class="exercise-item" data-exercise-id="d3ex4">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cadeira Extensora</strong><br><small>4 séries de 10-15</small></label></div>
             <div class="exercise-controls">
@@ -801,11 +939,6 @@
           </li>
         </ul>
       </div>
-          <li class="exercise-item" data-exercise-id="d3cd">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Pós-Treino</strong><br><small>20-30 min caminhada</small></label></div>
-          </li>
-        </ul>
-      </div>
       <div class="workout-day">
         <div class="workout-day-header">
           <h3>Quinta-feira: Descanso Ativo (Cardio & Abdômen Hipertrofia)</h3>
@@ -816,9 +949,9 @@
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Moderado</strong><br><small>30-45 minutos</small></label></div>
           </li>
           <li class="exercise-item" data-exercise-id="d4abs1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Roda Abdominal (Ab Wheel)</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal na Máquina</strong><br><small>4 séries de 8-12</small></label></div>
             <div class="exercise-controls">
-              <div class="series-counter"></div>
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="d4abs3">
@@ -962,6 +1095,18 @@
           <li class="exercise-item" data-exercise-id="sun-cardio">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Cardio Leve</strong><br><small>30-45 minutos</small></label></div>
           </li>
+          <li class="exercise-item" data-exercise-id="sun-abs-wheel">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Roda Abdominal (Ab Wheel)</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="sun-abs-infra">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Infra no Chão</strong><br><small>3 séries de 15-20</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
           <li class="exercise-item" data-exercise-id="d7abs2">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha no chão (normal)</strong><br><small>4 séries até a falha</small></label></div>
             <div class="exercise-controls">
@@ -1018,13 +1163,13 @@
         </ul>
       </div>
     </section>
-    
+
     <section id="bem-estar-section" class="content-section">
       <div class="container">
-        
+
         <h2>SEÇÃO 1: Cardápio Anti-Tédio (Sua Lista de Ouro)</h2>
         <p>Esta é sua lista mestra de atividades para consultar sempre que precisar.</p>
-        
+
         <h3>Atividades de Emergência (5-10 minutos):</h3>
         <ul>
           <li>Ouvir 2 músicas animadas</li>
@@ -1032,7 +1177,7 @@
           <li>Organizar a mesa de trabalho</li>
           <li>Beber um copo de água gelada lentamente</li>
         </ul>
-        
+
         <h3>Atividades Curtas (20-40 minutos):</h3>
         <ul>
           <li>Caminhar no quarteirão ouvindo um podcast</li>
@@ -1040,7 +1185,7 @@
           <li>Fazer uma aula rápida de algo novo no YouTube (yoga, desenho)</li>
           <li>Ler um capítulo de um livro</li>
         </ul>
-        
+
         <h3>Atividades Longas (1+ hora):</h3>
         <ul>
           <li>Assistir a um filme da sua lista</li>
@@ -1048,10 +1193,10 @@
           <li>Fazer um treino completo</li>
           <li>Organizar um armário ou estante</li>
         </ul>
-        
+
         <h2>SEÇÃO 2: Planejamento Semanal Anti-Tédio</h2>
         <p>Preencha isso todo domingo para se antecipar aos momentos de risco.</p>
-        
+
         <div class="table-wrapper">
           <table>
             <thead>
@@ -1100,7 +1245,7 @@
             </tbody>
           </table>
         </div>
-        
+
         <h2>Anotações</h2>
         <div class="notes-area">
           <textarea id="wellness-notes" placeholder="Como estou me sentindo hoje? Quais foram as pequenas vitórias? O que posso fazer para melhorar amanhã?"></textarea>
@@ -1123,88 +1268,88 @@
 
     // --- SCRIPT DA AGENDA DINÂMICA ---
     document.addEventListener('DOMContentLoaded', function () {
-        if (!document.getElementById('agenda')) return;
-        const agenda = document.getElementById('agenda');
-        const HORA_INICIO_AGENDA = 7, HORA_FIM_AGENDA = 24, ALTURA_HORA = 60;
-        function gerarGrade() { agenda.innerHTML = ''; const t = document.createElement("div"); t.className = "grid-item", t.style.borderLeft = "none", t.style.borderBottom = "1px solid #333", agenda.appendChild(t);['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'].forEach(e => { const o = document.createElement("div"); o.className = "grid-item header-dia", o.textContent = e, agenda.appendChild(o) }); for (let o = HORA_INICIO_AGENDA; o < HORA_FIM_AGENDA; o++) { const e = document.createElement("div"); e.className = "grid-item celula-hora", e.textContent = `${o.toString().padStart(2, "0")}:00`, e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`, agenda.appendChild(e) } for (let e = 0; e < 7; e++) { const o = document.createElement("div"); o.className = "coluna-dia", o.dataset.diaIndex = e + 1, o.style.gridColumn = `${e + 2}`, o.style.gridRow = "2 / span 17", agenda.appendChild(o) } }
-        function adicionarAtividade(t, e, o, i, n) { const [d, a] = o.split(":").map(Number), [r, s] = i.split(":").map(Number); if (isNaN(d)) return; const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60, c = (r * 60 + s - (d * 60 + a)) / 60, h = document.createElement("div"); h.className = "atividade-bloco", h.style.top = `${l * ALTURA_HORA}px`, h.style.height = `${c * ALTURA_HORA}px`, h.style.backgroundColor = n, h.style.borderLeftColor = ajustarCor(n, -40), h.innerHTML = `<strong>${t}</strong> ${o} - ${i}`, agenda.querySelector(`.coluna-dia[data-dia-index='${e}']`)?.appendChild(h) }
-        function ajustarCor(t, e) { let o = parseInt(t.slice(1, 3), 16), i = parseInt(t.slice(3, 5), 16), n = parseInt(t.slice(5, 7), 16); return `#${Math.max(0, Math.min(255, o + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, i + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, n + e)).toString(16).padStart(2, "0")}` }
-        gerarGrade();
+      if (!document.getElementById('agenda')) return;
+      const agenda = document.getElementById('agenda');
+      const HORA_INICIO_AGENDA = 7, HORA_FIM_AGENDA = 24, ALTURA_HORA = 60;
+      function gerarGrade() { agenda.innerHTML = ''; const t = document.createElement("div"); t.className = "grid-item", t.style.borderLeft = "none", t.style.borderBottom = "1px solid #333", agenda.appendChild(t);['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'].forEach(e => { const o = document.createElement("div"); o.className = "grid-item header-dia", o.textContent = e, agenda.appendChild(o) }); for (let o = HORA_INICIO_AGENDA; o < HORA_FIM_AGENDA; o++) { const e = document.createElement("div"); e.className = "grid-item celula-hora", e.textContent = `${o.toString().padStart(2, "0")}:00`, e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`, agenda.appendChild(e) } for (let e = 0; e < 7; e++) { const o = document.createElement("div"); o.className = "coluna-dia", o.dataset.diaIndex = e + 1, o.style.gridColumn = `${e + 2}`, o.style.gridRow = "2 / span 17", agenda.appendChild(o) } }
+      function adicionarAtividade(t, e, o, i, n) { const [d, a] = o.split(":").map(Number), [r, s] = i.split(":").map(Number); if (isNaN(d)) return; const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60, c = (r * 60 + s - (d * 60 + a)) / 60, h = document.createElement("div"); h.className = "atividade-bloco", h.style.top = `${l * ALTURA_HORA}px`, h.style.height = `${c * ALTURA_HORA}px`, h.style.backgroundColor = n, h.style.borderLeftColor = ajustarCor(n, -40), h.innerHTML = `<strong>${t}</strong> ${o} - ${i}`, agenda.querySelector(`.coluna-dia[data-dia-index='${e}']`)?.appendChild(h) }
+      function ajustarCor(t, e) { let o = parseInt(t.slice(1, 3), 16), i = parseInt(t.slice(3, 5), 16), n = parseInt(t.slice(5, 7), 16); return `#${Math.max(0, Math.min(255, o + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, i + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, n + e)).toString(16).padStart(2, "0")}` }
+      gerarGrade();
 
-        const corEstatistica = '#f39c12',
-            corLinguagens = '#27ae60',
-            corPython = '#5856d6',
-            corAcademia = '#e74c3c',
-            corEstudoConcurso = '#D9027D',
-            corEstudosInd = '#7ed321',
-            corDomestico = '#1abc9c',
-            corDescanso = '#6c757d',
-            corRevisao = '#8B4513';
+      const corEstatistica = '#f39c12',
+        corLinguagens = '#27ae60',
+        corPython = '#5856d6',
+        corAcademia = '#e74c3c',
+        corEstudoConcurso = '#D9027D',
+        corEstudosInd = '#7ed321',
+        corDomestico = '#1abc9c',
+        corDescanso = '#6c757d',
+        corRevisao = '#8B4513';
 
-        // Segunda
-        adicionarAtividade('Estudos Indep.', 1, '10:00', '12:00', corEstudosInd);
-        adicionarAtividade('Almoço', 1, '12:00', '13:00', corDescanso);
-        adicionarAtividade('Academia', 1, '13:00', '15:00', corAcademia);
-        adicionarAtividade('Estudo Concurso (Aulas)', 1, '15:00', '17:00', corEstudoConcurso);
-        adicionarAtividade('Descanso', 1, '17:00', '18:00', corDescanso);
-        adicionarAtividade('Estudo Concurso (Aulas)', 1, '18:00', '20:00', corEstudoConcurso);
-        adicionarAtividade('Revisão Concurso', 1, '20:00', '22:00', corRevisao);
-        adicionarAtividade('Descanso', 1, '22:00', '23:00', corDescanso);
+      // Segunda
+      adicionarAtividade('Estudos Indep.', 1, '10:00', '12:00', corEstudosInd);
+      adicionarAtividade('Almoço', 1, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 1, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Estudo Concurso (Aulas)', 1, '15:00', '17:00', corEstudoConcurso);
+      adicionarAtividade('Descanso', 1, '17:00', '18:00', corDescanso);
+      adicionarAtividade('Estudo Concurso (Aulas)', 1, '18:00', '20:00', corEstudoConcurso);
+      adicionarAtividade('Revisão Concurso', 1, '20:00', '22:00', corRevisao);
+      adicionarAtividade('Descanso', 1, '22:00', '23:00', corDescanso);
 
-        // Terça
-        adicionarAtividade('Estudos Indep.', 2, '10:00', '12:00', corEstudosInd);
-        adicionarAtividade('Almoço', 2, '12:00', '13:00', corDescanso);
-        adicionarAtividade('Academia', 2, '13:00', '15:00', corAcademia);
-        adicionarAtividade('Python (Online)', 2, '15:40', '17:40', corPython);
-        adicionarAtividade('Estudo Concurso (Aulas)', 2, '18:00', '20:00', corEstudoConcurso);
-        adicionarAtividade('Ativ. Domésticas', 2, '20:00', '21:00', corDomestico);
-        adicionarAtividade('Estudo Concurso (Aulas)', 2, '21:00', '23:00', corEstudoConcurso);
+      // Terça
+      adicionarAtividade('Estudos Indep.', 2, '10:00', '12:00', corEstudosInd);
+      adicionarAtividade('Almoço', 2, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 2, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Python (Online)', 2, '15:40', '17:40', corPython);
+      adicionarAtividade('Estudo Concurso (Aulas)', 2, '18:00', '20:00', corEstudoConcurso);
+      adicionarAtividade('Ativ. Domésticas', 2, '20:00', '21:00', corDomestico);
+      adicionarAtividade('Estudo Concurso (Aulas)', 2, '21:00', '23:00', corEstudoConcurso);
 
-        // Quarta
-        adicionarAtividade('Estatística p/ Comp.', 3, '07:30', '11:05', corEstatistica);
-        adicionarAtividade('Almoço', 3, '12:00', '13:00', corDescanso);
-        adicionarAtividade('Academia', 3, '13:00', '15:00', corAcademia);
-        adicionarAtividade('Estudo Concurso (Aulas)', 3, '15:00', '17:00', corEstudoConcurso);
-        adicionarAtividade('Descanso', 3, '17:00', '18:00', corDescanso);
-        adicionarAtividade('Estudo Concurso (Aulas)', 3, '18:00', '20:00', corEstudoConcurso);
-        adicionarAtividade('Revisão Concurso', 3, '20:00', '22:00', corRevisao);
-        adicionarAtividade('Descanso', 3, '22:00', '23:00', corDescanso);
+      // Quarta
+      adicionarAtividade('Estatística p/ Comp.', 3, '07:30', '11:05', corEstatistica);
+      adicionarAtividade('Almoço', 3, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 3, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Estudo Concurso (Aulas)', 3, '15:00', '17:00', corEstudoConcurso);
+      adicionarAtividade('Descanso', 3, '17:00', '18:00', corDescanso);
+      adicionarAtividade('Estudo Concurso (Aulas)', 3, '18:00', '20:00', corEstudoConcurso);
+      adicionarAtividade('Revisão Concurso', 3, '20:00', '22:00', corRevisao);
+      adicionarAtividade('Descanso', 3, '22:00', '23:00', corDescanso);
 
-        // Quinta
-        adicionarAtividade('Estudos Indep.', 4, '10:00', '12:00', corEstudosInd);
-        adicionarAtividade('Almoço', 4, '12:00', '13:00', corDescanso);
-        adicionarAtividade('Academia', 4, '13:00', '15:00', corAcademia);
-        adicionarAtividade('Python (Online)', 4, '15:40', '17:40', corPython);
-        adicionarAtividade('Estudo Concurso (Aulas)', 4, '18:00', '20:00', corEstudoConcurso);
-        adicionarAtividade('Ativ. Domésticas', 4, '20:00', '21:00', corDomestico);
-        adicionarAtividade('Estudo Concurso (Aulas)', 4, '21:00', '23:00', corEstudoConcurso);
+      // Quinta
+      adicionarAtividade('Estudos Indep.', 4, '10:00', '12:00', corEstudosInd);
+      adicionarAtividade('Almoço', 4, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Academia', 4, '13:00', '15:00', corAcademia);
+      adicionarAtividade('Python (Online)', 4, '15:40', '17:40', corPython);
+      adicionarAtividade('Estudo Concurso (Aulas)', 4, '18:00', '20:00', corEstudoConcurso);
+      adicionarAtividade('Ativ. Domésticas', 4, '20:00', '21:00', corDomestico);
+      adicionarAtividade('Estudo Concurso (Aulas)', 4, '21:00', '23:00', corEstudoConcurso);
 
-        // Sexta
-        adicionarAtividade('Linguagens Formais', 5, '09:25', '12:50', corLinguagens);
-        adicionarAtividade('Almoço', 5, '13:00', '14:00', corDescanso);
-        adicionarAtividade('Academia', 5, '14:00', '16:00', corAcademia);
-        adicionarAtividade('Estudo Concurso (Aulas)', 5, '16:00', '18:00', corEstudoConcurso);
-        adicionarAtividade('Estudo Concurso (Aulas)', 5, '18:30', '20:30', corEstudoConcurso);
-        adicionarAtividade('Descanso', 5, '20:30', '21:30', corDescanso);
-        adicionarAtividade('Revisão Concurso', 5, '21:30', '23:00', corRevisao);
+      // Sexta
+      adicionarAtividade('Linguagens Formais', 5, '09:25', '12:50', corLinguagens);
+      adicionarAtividade('Almoço', 5, '13:00', '14:00', corDescanso);
+      adicionarAtividade('Academia', 5, '14:00', '16:00', corAcademia);
+      adicionarAtividade('Estudo Concurso (Aulas)', 5, '16:00', '18:00', corEstudoConcurso);
+      adicionarAtividade('Estudo Concurso (Aulas)', 5, '18:30', '20:30', corEstudoConcurso);
+      adicionarAtividade('Descanso', 5, '20:30', '21:30', corDescanso);
+      adicionarAtividade('Revisão Concurso', 5, '21:30', '23:00', corRevisao);
 
-        // Sábado
-        adicionarAtividade('Estudos Indep.', 6, '10:00', '12:00', corEstudosInd);
-        adicionarAtividade('Almoço', 6, '12:00', '13:00', corDescanso);
-        adicionarAtividade('Estudo Concurso (Aulas)', 6, '13:00', '15:00', corEstudoConcurso);
-        adicionarAtividade('Academia', 6, '15:00', '17:00', corAcademia);
-        adicionarAtividade('Descanso', 6, '17:00', '18:00', corDescanso);
-        adicionarAtividade('Estudo Concurso (Aulas)', 6, '18:00', '20:00', corEstudoConcurso);
-        adicionarAtividade('Ativ. Domésticas', 6, '20:00', '22:00', corDomestico);
-        adicionarAtividade('Descanso', 6, '22:00', '23:00', corDescanso);
+      // Sábado
+      adicionarAtividade('Estudos Indep.', 6, '10:00', '12:00', corEstudosInd);
+      adicionarAtividade('Almoço', 6, '12:00', '13:00', corDescanso);
+      adicionarAtividade('Estudo Concurso (Aulas)', 6, '13:00', '15:00', corEstudoConcurso);
+      adicionarAtividade('Academia', 6, '15:00', '17:00', corAcademia);
+      adicionarAtividade('Descanso', 6, '17:00', '18:00', corDescanso);
+      adicionarAtividade('Estudo Concurso (Aulas)', 6, '18:00', '20:00', corEstudoConcurso);
+      adicionarAtividade('Ativ. Domésticas', 6, '20:00', '22:00', corDomestico);
+      adicionarAtividade('Descanso', 6, '22:00', '23:00', corDescanso);
 
-        // Domingo
-        adicionarAtividade('Academia', 7, '12:00', '14:00', corAcademia);
-        adicionarAtividade('Almoço', 7, '14:00', '15:00', corDescanso);
-        adicionarAtividade('Estudos Indep.', 7, '15:00', '17:00', corEstudosInd);
-        adicionarAtividade('Descanso', 7, '17:00', '18:00', corDescanso);
-        adicionarAtividade('Revisão e Questões (Concurso)', 7, '18:00', '21:00', corRevisao);
-        adicionarAtividade('Descanso', 7, '21:00', '23:00', corDescanso);
+      // Domingo
+      adicionarAtividade('Academia', 7, '12:00', '14:00', corAcademia);
+      adicionarAtividade('Almoço', 7, '14:00', '15:00', corDescanso);
+      adicionarAtividade('Estudos Indep.', 7, '15:00', '17:00', corEstudosInd);
+      adicionarAtividade('Descanso', 7, '17:00', '18:00', corDescanso);
+      adicionarAtividade('Revisão e Questões (Concurso)', 7, '18:00', '21:00', corRevisao);
+      adicionarAtividade('Descanso', 7, '21:00', '23:00', corDescanso);
     });
 
 
@@ -1218,35 +1363,35 @@
         exerciseItems.forEach(item => { const checkbox = item.querySelector('.exercise-checkbox'); const weightInput = item.querySelector('.weight-input'); const seriesCounter = item.querySelector('.series-counter'); const smallText = item.querySelector('small')?.textContent || ''; if (seriesCounter) { let seriesCount = 0; const seriesMatch = smallText.match(/(\d+)\s*séries/); if (seriesMatch) { seriesCount = parseInt(seriesMatch[1], 10); } else if (smallText.includes('até a falha')) { seriesCount = 3; } for (let i = 0; i < seriesCount; i++) { const dot = document.createElement('div'); dot.className = 'series-dot'; dot.addEventListener('click', () => { dot.classList.toggle('completed'); saveProgress(); }); seriesCounter.appendChild(dot); } } checkbox.addEventListener('change', () => { item.classList.toggle('completed', checkbox.checked); saveProgress(); }); if (weightInput) { weightInput.addEventListener('input', saveProgress); } });
         loadProgress();
         const resetButtons = document.querySelectorAll('.reset-button');
-        resetButtons.forEach(button => { button.addEventListener('click', function() { const workoutDay = this.closest('.workout-day'); if (workoutDay) { const itemsToReset = workoutDay.querySelectorAll('.exercise-item'); itemsToReset.forEach(item => { const checkbox = item.querySelector('.exercise-checkbox'); if (checkbox) { checkbox.checked = false; } item.classList.remove('completed'); const seriesDots = item.querySelectorAll('.series-dot'); seriesDots.forEach(dot => { dot.classList.remove('completed'); }); }); saveProgress(); } }); });
+        resetButtons.forEach(button => { button.addEventListener('click', function () { const workoutDay = this.closest('.workout-day'); if (workoutDay) { const itemsToReset = workoutDay.querySelectorAll('.exercise-item'); itemsToReset.forEach(item => { const checkbox = item.querySelector('.exercise-checkbox'); if (checkbox) { checkbox.checked = false; } item.classList.remove('completed'); const seriesDots = item.querySelectorAll('.series-dot'); seriesDots.forEach(dot => { dot.classList.remove('completed'); }); }); saveProgress(); } }); });
       }
     });
-    
+
     // --- NOVO SCRIPT DA SEÇÃO BEM-ESTAR (ANOTAÇÕES) ---
     document.addEventListener('DOMContentLoaded', function () {
-        if (document.getElementById('bem-estar-section')) {
-            const notesTextarea = document.getElementById('wellness-notes');
-            const saveButton = document.getElementById('save-notes-button');
-            const notesStorageKey = 'wellnessNotes';
+      if (document.getElementById('bem-estar-section')) {
+        const notesTextarea = document.getElementById('wellness-notes');
+        const saveButton = document.getElementById('save-notes-button');
+        const notesStorageKey = 'wellnessNotes';
 
-            function loadNotes() {
-                const savedNotes = localStorage.getItem(notesStorageKey);
-                if (savedNotes) {
-                    notesTextarea.value = savedNotes;
-                }
-            }
-
-            function saveNotes() {
-                localStorage.setItem(notesStorageKey, notesTextarea.value);
-                saveButton.textContent = 'Salvo!';
-                setTimeout(() => {
-                    saveButton.textContent = 'Salvar Anotações';
-                }, 1500);
-            }
-
-            saveButton.addEventListener('click', saveNotes);
-            loadNotes();
+        function loadNotes() {
+          const savedNotes = localStorage.getItem(notesStorageKey);
+          if (savedNotes) {
+            notesTextarea.value = savedNotes;
+          }
         }
+
+        function saveNotes() {
+          localStorage.setItem(notesStorageKey, notesTextarea.value);
+          saveButton.textContent = 'Salvo!';
+          setTimeout(() => {
+            saveButton.textContent = 'Salvar Anotações';
+          }, 1500);
+        }
+
+        saveButton.addEventListener('click', saveNotes);
+        loadNotes();
+      }
     });
 
     // --- SCRIPT DO SERVICE WORKER (PWA) ---
@@ -1261,4 +1406,3 @@
 </body>
 
 </html>
-
