@@ -206,6 +206,12 @@
     #agenda-section .atividade-bloco strong {
       display: block;
       font-size: 1.1em;
+      line-height: 1.2;
+    }
+
+    #agenda-section .atividade-bloco small {
+      font-size: 0.9em;
+      opacity: 0.8;
     }
 
     /* --- ESTILOS DA SEÇÃO DIETA --- */
@@ -581,23 +587,47 @@
       background-color: var(--cor-superficie);
     }
 
-    #bem-estar-section .notes-area textarea {
-      width: 100%;
-      min-height: 200px;
+    /* Novos estilos para o diário de anotações */
+    #bem-estar-section .journal-entry-form {
       background-color: var(--cor-superficie);
-      border: 1px solid var(--cor-borda);
+      padding: 20px;
       border-radius: 8px;
-      padding: 15px;
+      border: 1px solid var(--cor-borda);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #bem-estar-section .journal-entry-form .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    #bem-estar-section .journal-entry-form label {
+      font-weight: bold;
+      color: var(--cor-destaque);
+    }
+
+    #bem-estar-section .journal-entry-form input[type="date"],
+    #bem-estar-section .journal-entry-form textarea {
+      width: 100%;
+      background-color: #121212;
+      border: 1px solid var(--cor-borda);
+      border-radius: 5px;
+      padding: 12px;
       color: var(--cor-texto-principal);
-      font-size: 1em;
       font-family: 'JetBrains Mono', monospace;
+      font-size: 1em;
       box-sizing: border-box;
+    }
+
+    #bem-estar-section .journal-entry-form textarea {
+      min-height: 150px;
       resize: vertical;
     }
 
-    #bem-estar-section .save-notes-btn {
-      display: block;
-      margin-top: 15px;
+    #bem-estar-section .journal-entry-form .add-note-btn {
       padding: 12px 25px;
       background-color: var(--cor-destaque);
       color: #121212;
@@ -608,12 +638,67 @@
       font-weight: bold;
       transition: background-color 0.3s, transform 0.2s;
       font-family: 'JetBrains Mono', monospace;
+      align-self: flex-start;
     }
 
-    #bem-estar-section .save-notes-btn:hover {
+    #bem-estar-section .journal-entry-form .add-note-btn:hover {
       background-color: #4dafff;
       transform: translateY(-2px);
     }
+
+    #bem-estar-section .journal-history {
+      margin-top: 30px;
+    }
+
+    #bem-estar-section .journal-entry {
+      background-color: var(--cor-superficie);
+      border: 1px solid var(--cor-borda);
+      border-left: 5px solid var(--cor-destaque);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      word-wrap: break-word;
+    }
+
+    #bem-estar-section .journal-entry .entry-header {
+      overflow: auto;
+      /* Clearfix para conter os floats */
+    }
+
+    #bem-estar-section .journal-entry .entry-date {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #ffffff;
+      margin: 0 0 10px 0;
+      float: left;
+    }
+
+    #bem-estar-section .journal-entry .delete-note-btn {
+      float: right;
+      background-color: #c0392b;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-family: 'JetBrains Mono', monospace;
+      transition: background-color 0.2s ease;
+    }
+
+    #bem-estar-section .journal-entry .delete-note-btn:hover {
+      background-color: #e74c3c;
+    }
+
+    #bem-estar-section .journal-entry .entry-text {
+      clear: both;
+      /* Garante que o texto fique abaixo do header */
+      white-space: pre-wrap;
+      /* Preserva quebras de linha */
+      line-height: 1.6;
+      color: var(--cor-texto-principal);
+    }
+
 
     /* =============================================== */
     /* === REGRAS PARA SMARTPHONES (RESPONSIVIDADE) === */
@@ -653,15 +738,15 @@
         <div class="deadlines-container">
           <div class="deadline-box">
             <h3>Provas</h3>
-            <textarea placeholder="Ex: 15/09 - Prova de Estatística..."></textarea>
+            <textarea id="provas-textarea" placeholder="Ex: 15/09 - Prova de Estatística..."></textarea>
           </div>
           <div class="deadline-box">
             <h3>Atividades</h3>
-            <textarea placeholder="Ex: 10/09 - Entregar lista de Python..."></textarea>
+            <textarea id="atividades-textarea" placeholder="Ex: 10/09 - Entregar lista de Python..."></textarea>
           </div>
           <div class="deadline-box">
             <h3>Consultas Médicas</h3>
-            <textarea placeholder="Ex: 20/09 - 14h - Dr. Silva..."></textarea>
+            <textarea id="consultas-textarea" placeholder="Ex: 20/09 - 14h - Dr. Silva..."></textarea>
           </div>
         </div>
 
@@ -842,7 +927,7 @@
     </section>
 
     <section id="treino-section" class="content-section">
-      <h1>Plano de Treino - Foco nos Pontos Fracos</h1>
+      <h1>Plano de Treino</h1>
 
       <h2>Detalhes dos Treinos</h2>
       <div class="workout-day">
@@ -1344,10 +1429,21 @@
           </table>
         </div>
 
-        <h2>Anotações</h2>
-        <div class="notes-area">
-          <textarea id="wellness-notes" placeholder="Como estou me sentindo hoje? Quais foram as pequenas vitórias? O que posso fazer para melhorar amanhã?"></textarea>
-          <button id="save-notes-button" class="save-notes-btn">Salvar Anotações</button>
+        <h2>Diário de Anotações</h2>
+        <div class="journal-entry-form">
+          <div class="form-group">
+            <label for="journal-date">Data:</label>
+            <input type="date" id="journal-date">
+          </div>
+          <div class="form-group">
+            <label for="journal-text">Como estou me sentindo hoje?</label>
+            <textarea id="journal-text" placeholder="Quais foram as pequenas vitórias? O que posso fazer para melhorar amanhã?"></textarea>
+          </div>
+          <button id="add-note-button" class="add-note-btn">Adicionar Anotação</button>
+        </div>
+
+        <div class="journal-history" id="journal-history-container">
+          <h3>Histórico</h3>
         </div>
 
       </div>
@@ -1364,103 +1460,116 @@
       document.querySelector(`.tab-button[onclick="showSection('${sectionId}')"]`).classList.add('active');
     }
 
-    // --- SCRIPT DA AGENDA DINÂMICA ---
     document.addEventListener('DOMContentLoaded', function () {
-      if (!document.getElementById('agenda')) return;
-      const agenda = document.getElementById('agenda');
-      const HORA_INICIO_AGENDA = 6, HORA_FIM_AGENDA = 24, ALTURA_HORA = 60;
-      function gerarGrade() { agenda.innerHTML = ''; const t = document.createElement("div"); t.className = "grid-item", t.style.borderLeft = "none", t.style.borderBottom = "1px solid #333", agenda.appendChild(t);['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'].forEach(e => { const o = document.createElement("div"); o.className = "grid-item header-dia", o.textContent = e, agenda.appendChild(o) }); for (let o = HORA_INICIO_AGENDA; o < HORA_FIM_AGENDA; o++) { const e = document.createElement("div"); e.className = "grid-item celula-hora", e.textContent = `${o.toString().padStart(2, "0")}:00`, e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`, agenda.appendChild(e) } for (let e = 0; e < 7; e++) { const o = document.createElement("div"); o.className = "coluna-dia", o.dataset.diaIndex = e + 1, o.style.gridColumn = `${e + 2}`, o.style.gridRow = `2 / span ${HORA_FIM_AGENDA - HORA_INICIO_AGENDA}`, agenda.appendChild(o) } }
-      function adicionarAtividade(t, e, o, i, n) { const [d, a] = o.split(":").map(Number), [r, s] = i.split(":").map(Number); if (isNaN(d)) return; const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60, c = (r * 60 + s - (d * 60 + a)) / 60, h = document.createElement("div"); h.className = "atividade-bloco", h.style.top = `${l * ALTURA_HORA}px`, h.style.height = `${c * ALTURA_HORA}px`, h.style.backgroundColor = n, h.style.borderLeftColor = ajustarCor(n, -40), h.innerHTML = `<strong>${t}</strong> ${o} - ${i}`, agenda.querySelector(`.coluna-dia[data-dia-index='${e}']`)?.appendChild(h) }
-      function ajustarCor(t, e) { let o = parseInt(t.slice(1, 3), 16), i = parseInt(t.slice(3, 5), 16), n = parseInt(t.slice(5, 7), 16); return `#${Math.max(0, Math.min(255, o + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, i + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, n + e)).toString(16).padStart(2, "0")}` }
-      gerarGrade();
 
-      const corEstatistica = '#f39c12',
-        corLinguagens = '#27ae60',
-        corPython = '#5856d6',
-        corAcademia = '#e74c3c',
-        corCrossfit = '#c0392b', // Novo tom de vermelho para o Crossfit
-        corEstudoConcurso = '#3498db',
-        corRevisao = '#aed6f1', // Tom de rosa mais claro para Revisão
-        corEstudosInd = '#7ed321',
-        corDomestico = '#1abc9c',
-        corDescanso = '#6c757d';
+      // --- SCRIPT DA AGENDA DINÂMICA ---
+      if (document.getElementById('agenda')) {
+        const agenda = document.getElementById('agenda');
+        const HORA_INICIO_AGENDA = 6, HORA_FIM_AGENDA = 24, ALTURA_HORA = 60;
+        function gerarGrade() { agenda.innerHTML = ''; const t = document.createElement("div"); t.className = "grid-item", t.style.borderLeft = "none", t.style.borderBottom = "1px solid #333", agenda.appendChild(t);['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'].forEach(e => { const o = document.createElement("div"); o.className = "grid-item header-dia", o.textContent = e, agenda.appendChild(o) }); for (let o = HORA_INICIO_AGENDA; o < HORA_FIM_AGENDA; o++) { const e = document.createElement("div"); e.className = "grid-item celula-hora", e.textContent = `${o.toString().padStart(2, "0")}:00`, e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`, agenda.appendChild(e) } for (let e = 0; e < 7; e++) { const o = document.createElement("div"); o.className = "coluna-dia", o.dataset.diaIndex = e + 1, o.style.gridColumn = `${e + 2}`, o.style.gridRow = `2 / span ${HORA_FIM_AGENDA - HORA_INICIO_AGENDA}`, agenda.appendChild(o) } }
+        function adicionarAtividade(t, e, o, i, n) { const [d, a] = o.split(":").map(Number), [r, s] = i.split(":").map(Number); if (isNaN(d)) return; const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60, c = (r * 60 + s - (d * 60 + a)) / 60, h = document.createElement("div"); h.className = "atividade-bloco", h.style.top = `${l * ALTURA_HORA}px`, h.style.height = `${c * ALTURA_HORA}px`, h.style.backgroundColor = n, h.style.borderLeftColor = ajustarCor(n, -40), h.innerHTML = `${t} <br>${o} - ${i}`, agenda.querySelector(`.coluna-dia[data-dia-index='${e}']`)?.appendChild(h) }
+        function ajustarCor(t, e) { let o = parseInt(t.slice(1, 3), 16), i = parseInt(t.slice(3, 5), 16), n = parseInt(t.slice(5, 7), 16); return `#${Math.max(0, Math.min(255, o + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, i + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, n + e)).toString(16).padStart(2, "0")}` }
+        gerarGrade();
 
-      // Segunda
-      adicionarAtividade('Crossfit', 1, '06:15', '07:30', corCrossfit);
-      adicionarAtividade('Ativ. Domésticas', 1, '08:00', '10:00', corDomestico);
-      adicionarAtividade('Estudos Indep.', 1, '10:00', '12:00', corEstudosInd);
-      adicionarAtividade('Almoço', 1, '12:00', '13:00', corDescanso);
-      adicionarAtividade('Academia', 1, '13:00', '15:00', corAcademia);
-      adicionarAtividade('Estudo Concurso (Aulas)', 1, '15:00', '17:00', corEstudoConcurso);
-      adicionarAtividade('Descanso', 1, '17:00', '18:00', corDescanso);
-      adicionarAtividade('Estudo Concurso (Aulas)', 1, '18:00', '20:00', corEstudoConcurso);
-      adicionarAtividade('Revisão Concurso', 1, '20:00', '22:00', corRevisao);
-      adicionarAtividade('Descanso', 1, '22:00', '23:00', corDescanso);
+        const corEstatistica = '#f39c12',
+          corLinguagens = '#27ae60',
+          corPython = '#5856d6',
+          corAcademia = '#e74c3c',
+          corCrossfit = '#c0392b',
+          corEstudoConcurso = '#3498db',
+          corRevisao = '#aed6f1',
+          corEstudosInd = '#7ed321',
+          corDomestico = '#1abc9c',
+          corDescanso = '#6c757d';
 
-      // Terça
-      adicionarAtividade('Crossfit', 2, '06:15', '07:30', corCrossfit);
-      adicionarAtividade('Ativ. Domésticas', 2, '08:00', '10:00', corDomestico);
-      adicionarAtividade('Estudos Indep.', 2, '10:00', '12:00', corEstudosInd);
-      adicionarAtividade('Almoço', 2, '12:00', '13:00', corDescanso);
-      adicionarAtividade('Academia', 2, '13:00', '15:00', corAcademia);
-      adicionarAtividade('Python (Online)', 2, '15:40', '17:40', corPython);
-      adicionarAtividade('Estudo Concurso (Aulas)', 2, '18:00', '20:00', corEstudoConcurso);
-      adicionarAtividade('Descanso', 2, '20:00', '21:00', corDescanso);
-      adicionarAtividade('Estudo Concurso (Aulas)', 2, '21:00', '23:00', corEstudoConcurso);
+        // Segunda
+        adicionarAtividade('<strong>Crossfit</strong>', 1, '06:15', '07:30', corCrossfit);
+        adicionarAtividade('<strong>Ativ. Domésticas</strong>', 1, '08:00', '10:00', corDomestico);
+        adicionarAtividade('<strong>Estudos Indep.</strong>', 1, '10:00', '12:00', corEstudosInd);
+        adicionarAtividade('<strong>Almoço</strong>', 1, '12:00', '13:00', corDescanso);
+        adicionarAtividade('<strong>Academia</strong>', 1, '13:00', '15:00', corAcademia);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 1, '15:00', '17:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Descanso</strong>', 1, '17:00', '18:00', corDescanso);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 1, '18:00', '20:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 1, '20:00', '22:00', corRevisao);
+        adicionarAtividade('<strong>Descanso</strong>', 1, '22:00', '23:00', corDescanso);
 
-      // Quarta
-      adicionarAtividade('Estatística p/ Comp.', 3, '07:30', '11:05', corEstatistica);
-      adicionarAtividade('Almoço', 3, '12:00', '13:00', corDescanso);
-      adicionarAtividade('Academia', 3, '13:00', '15:00', corAcademia);
-      adicionarAtividade('Estudo Concurso (Aulas)', 3, '15:00', '17:00', corEstudoConcurso);
-      adicionarAtividade('Descanso', 3, '17:00', '18:00', corDescanso);
-      adicionarAtividade('Estudo Concurso (Aulas)', 3, '18:00', '20:00', corEstudoConcurso);
-      adicionarAtividade('Revisão Concurso', 3, '20:00', '22:00', corRevisao);
-      adicionarAtividade('Descanso', 3, '22:00', '23:00', corDescanso);
+        // Terça
+        adicionarAtividade('<strong>Crossfit</strong>', 2, '06:15', '07:30', corCrossfit);
+        adicionarAtividade('<strong>Ativ. Domésticas</strong>', 2, '08:00', '10:00', corDomestico);
+        adicionarAtividade('<strong>Estudos Indep.</strong>', 2, '10:00', '12:00', corEstudosInd);
+        adicionarAtividade('<strong>Almoço</strong>', 2, '12:00', '13:00', corDescanso);
+        adicionarAtividade('<strong>Academia</strong>', 2, '13:00', '15:00', corAcademia);
+        adicionarAtividade('<strong>Python (Online)</strong>', 2, '15:40', '17:40', corPython);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 2, '18:00', '20:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Descanso</strong>', 2, '20:00', '21:00', corDescanso);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 2, '21:00', '23:00', corEstudoConcurso);
 
-      // Quinta
-      adicionarAtividade('Crossfit', 4, '06:15', '07:30', corCrossfit);
-      adicionarAtividade('Ativ. Domésticas', 4, '08:00', '10:00', corDomestico);
-      adicionarAtividade('Estudos Indep.', 4, '10:00', '12:00', corEstudosInd);
-      adicionarAtividade('Almoço', 4, '12:00', '13:00', corDescanso);
-      adicionarAtividade('Academia', 4, '13:00', '15:00', corAcademia);
-      adicionarAtividade('Python (Online)', 4, '15:40', '17:40', corPython);
-      adicionarAtividade('Estudo Concurso (Aulas)', 4, '18:00', '20:00', corEstudoConcurso);
-      adicionarAtividade('Descanso', 4, '20:00', '21:00', corDescanso);
-      adicionarAtividade('Estudo Concurso (Aulas)', 4, '21:00', '23:00', corEstudoConcurso);
+        // Quarta
+        const textoEstatistica = `<strong>ESTATISTICA PARA COMPUTAÇAO</strong><br><small>UNIDADE PARALELA - PRÉDIO I NíVEL 7 - 702</small>`;
+        adicionarAtividade(textoEstatistica, 3, '07:30', '11:05', corEstatistica);
+        adicionarAtividade('<strong>Almoço</strong>', 3, '12:00', '13:00', corDescanso);
+        adicionarAtividade('<strong>Academia</strong>', 3, '13:00', '15:00', corAcademia);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 3, '15:00', '17:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Descanso</strong>', 3, '17:00', '18:00', corDescanso);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 3, '18:00', '20:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 3, '20:00', '22:00', corRevisao);
+        adicionarAtividade('<strong>Descanso</strong>', 3, '22:00', '23:00', corDescanso);
 
-      // Sexta
-      adicionarAtividade('Crossfit', 5, '06:15', '07:30', corCrossfit);
-      adicionarAtividade('Linguagens Formais', 5, '09:25', '12:50', corLinguagens);
-      adicionarAtividade('Almoço', 5, '13:00', '14:00', corDescanso);
-      adicionarAtividade('Academia', 5, '14:00', '16:00', corAcademia);
-      adicionarAtividade('Estudo Concurso (Aulas)', 5, '16:00', '18:00', corEstudoConcurso);
-      adicionarAtividade('Estudo Concurso (Aulas)', 5, '18:30', '20:30', corEstudoConcurso);
-      adicionarAtividade('Descanso', 5, '20:30', '21:30', corDescanso);
-      adicionarAtividade('Revisão Concurso', 5, '21:30', '23:00', corRevisao);
+        // Quinta
+        adicionarAtividade('<strong>Crossfit</strong>', 4, '06:15', '07:30', corCrossfit);
+        adicionarAtividade('<strong>Ativ. Domésticas</strong>', 4, '08:00', '10:00', corDomestico);
+        adicionarAtividade('<strong>Estudos Indep.</strong>', 4, '10:00', '12:00', corEstudosInd);
+        adicionarAtividade('<strong>Almoço</strong>', 4, '12:00', '13:00', corDescanso);
+        adicionarAtividade('<strong>Academia</strong>', 4, '13:00', '15:00', corAcademia);
+        adicionarAtividade('<strong>Python (Online)</strong>', 4, '15:40', '17:40', corPython);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 4, '18:00', '20:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Descanso</strong>', 4, '20:00', '21:00', corDescanso);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 4, '21:00', '23:00', corEstudoConcurso);
 
-      // Sábado
-      adicionarAtividade('Estudos Indep.', 6, '10:00', '12:00', corEstudosInd);
-      adicionarAtividade('Almoço', 6, '12:00', '13:00', corDescanso);
-      adicionarAtividade('Estudo Concurso (Aulas)', 6, '13:00', '15:00', corEstudoConcurso);
-      adicionarAtividade('Academia', 6, '15:00', '17:00', corAcademia);
-      adicionarAtividade('Descanso', 6, '17:00', '18:00', corDescanso);
-      adicionarAtividade('Estudo Concurso (Aulas)', 6, '18:00', '20:00', corEstudoConcurso);
-      adicionarAtividade('Ativ. Domésticas', 6, '20:00', '22:00', corDomestico);
-      adicionarAtividade('Descanso', 6, '22:00', '23:00', corDescanso);
+        // Sexta
+        const textoLinguagens = `<strong>LINGUAGENS FORMAIS E AUTÔMATOS</strong><br><small>UNIDADE PARALELA - PRÉDIO I NíVEL 6 - 608</small>`;
+        adicionarAtividade('<strong>Crossfit</strong>', 5, '06:15', '07:30', corCrossfit);
+        adicionarAtividade(textoLinguagens, 5, '09:25', '12:50', corLinguagens);
+        adicionarAtividade('<strong>Almoço</strong>', 5, '13:00', '14:00', corDescanso);
+        adicionarAtividade('<strong>Academia</strong>', 5, '14:00', '16:00', corAcademia);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 5, '16:00', '18:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 5, '18:30', '20:30', corEstudoConcurso);
+        adicionarAtividade('<strong>Descanso</strong>', 5, '20:30', '21:30', corDescanso);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 5, '21:30', '23:00', corRevisao);
 
-      // Domingo
-      adicionarAtividade('Academia', 7, '12:00', '14:00', corAcademia);
-      adicionarAtividade('Almoço', 7, '14:00', '15:00', corDescanso);
-      adicionarAtividade('Estudos Indep.', 7, '15:00', '17:00', corEstudosInd);
-      adicionarAtividade('Descanso', 7, '17:00', '18:00', corDescanso);
-      adicionarAtividade('Revisão e Questões (Concurso)', 7, '18:00', '21:00', corRevisao);
-      adicionarAtividade('Descanso', 7, '21:00', '23:00', corDescanso);
-    });
+        // Sábado
+        adicionarAtividade('<strong>Estudos Indep.</strong>', 6, '10:00', '12:00', corEstudosInd);
+        adicionarAtividade('<strong>Almoço</strong>', 6, '12:00', '13:00', corDescanso);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 6, '13:00', '15:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Academia</strong>', 6, '15:00', '17:00', corAcademia);
+        adicionarAtividade('<strong>Descanso</strong>', 6, '17:00', '18:00', corDescanso);
+        adicionarAtividade('<strong>Estudo Concurso (Aulas)</strong>', 6, '18:00', '20:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Ativ. Domésticas</strong>', 6, '20:00', '22:00', corDomestico);
+        adicionarAtividade('<strong>Descanso</strong>', 6, '22:00', '23:00', corDescanso);
 
+        // Domingo
+        adicionarAtividade('<strong>Academia</strong>', 7, '12:00', '14:00', corAcademia);
+        adicionarAtividade('<strong>Almoço</strong>', 7, '14:00', '15:00', corDescanso);
+        adicionarAtividade('<strong>Estudos Indep.</strong>', 7, '15:00', '17:00', corEstudosInd);
+        adicionarAtividade('<strong>Descanso</strong>', 7, '17:00', '18:00', corDescanso);
+        adicionarAtividade('<strong>Revisão e Questões (Concurso)</strong>', 7, '18:00', '21:00', corRevisao);
+        adicionarAtividade('<strong>Descanso</strong>', 7, '21:00', '23:00', corDescanso);
+      }
 
-    // --- SCRIPT DO TREINO INTERATIVO ---
-    document.addEventListener('DOMContentLoaded', function () {
+      // --- SCRIPT PARA PERSISTIR TEXTO NAS CAIXAS DA AGENDA ---
+      const textareasToSave = ['provas-textarea', 'atividades-textarea', 'consultas-textarea'];
+      textareasToSave.forEach(id => {
+        const textarea = document.getElementById(id);
+        if (textarea) {
+          textarea.value = localStorage.getItem(id) || '';
+          textarea.addEventListener('input', () => {
+            localStorage.setItem(id, textarea.value);
+          });
+        }
+      });
+
+      // --- SCRIPT DO TREINO INTERATIVO ---
       if (document.getElementById('treino-section')) {
         const exerciseItems = document.querySelectorAll('.exercise-item');
         const storageKey = 'workoutProgress';
@@ -1471,33 +1580,96 @@
         const resetButtons = document.querySelectorAll('.reset-button');
         resetButtons.forEach(button => { button.addEventListener('click', function () { const workoutDay = this.closest('.workout-day'); if (workoutDay) { const itemsToReset = workoutDay.querySelectorAll('.exercise-item'); itemsToReset.forEach(item => { const checkbox = item.querySelector('.exercise-checkbox'); if (checkbox) { checkbox.checked = false; } item.classList.remove('completed'); const seriesDots = item.querySelectorAll('.series-dot'); seriesDots.forEach(dot => { dot.classList.remove('completed'); }); }); saveProgress(); } }); });
       }
-    });
 
-    // --- SCRIPT DA SEÇÃO BEM-ESTAR (ANOTAÇÕES) ---
-    document.addEventListener('DOMContentLoaded', function () {
+      // --- SCRIPT DA SEÇÃO BEM-ESTAR (DIÁRIO DE ANOTAÇÕES) ---
       if (document.getElementById('bem-estar-section')) {
-        const notesTextarea = document.getElementById('wellness-notes');
-        const saveButton = document.getElementById('save-notes-button');
-        const notesStorageKey = 'wellnessNotes';
+        const dateInput = document.getElementById('journal-date');
+        const textInput = document.getElementById('journal-text');
+        const addButton = document.getElementById('add-note-button');
+        const historyContainer = document.getElementById('journal-history-container');
+        const journalStorageKey = 'datedWellnessJournal';
 
-        function loadNotes() {
-          const savedNotes = localStorage.getItem(notesStorageKey);
-          if (savedNotes) {
-            notesTextarea.value = savedNotes;
+        dateInput.value = new Date().toISOString().slice(0, 10);
+
+        function deleteJournalEntry(event) {
+          const entryId = event.target.dataset.id;
+          let entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
+
+          // CORREÇÃO FINAL: Usar comparação não-estrita (!=) para ser compatível
+          // com anotações antigas (com ID numérico) e novas (com ID de texto).
+          entries = entries.filter(entry => entry.id != entryId);
+
+          localStorage.setItem(journalStorageKey, JSON.stringify(entries));
+          loadJournalEntries();
+        }
+
+        function loadJournalEntries() {
+          historyContainer.innerHTML = '<h3>Histórico</h3>';
+          const entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
+
+          entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          if (entries.length === 0) {
+            const noEntryMessage = document.createElement('p');
+            noEntryMessage.textContent = 'Nenhuma anotação encontrada.';
+            noEntryMessage.style.color = '#a0a0a0';
+            historyContainer.appendChild(noEntryMessage);
+            return;
           }
+
+          entries.forEach(entry => {
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'journal-entry';
+
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'entry-header';
+
+            const entryDate = document.createElement('p');
+            entryDate.className = 'entry-date';
+            const [year, month, day] = entry.date.split('-');
+            entryDate.textContent = `${day}/${month}/${year}`;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-note-btn';
+            deleteButton.textContent = 'Remover';
+            deleteButton.dataset.id = entry.id;
+            deleteButton.addEventListener('click', deleteJournalEntry);
+
+            headerDiv.appendChild(entryDate);
+            headerDiv.appendChild(deleteButton);
+
+            const entryText = document.createElement('p');
+            entryText.className = 'entry-text';
+            entryText.textContent = entry.text;
+
+            entryDiv.appendChild(headerDiv);
+            entryDiv.appendChild(entryText);
+            historyContainer.appendChild(entryDiv);
+          });
         }
 
-        function saveNotes() {
-          localStorage.setItem(notesStorageKey, notesTextarea.value);
-          saveButton.textContent = 'Salvo!';
-          setTimeout(() => {
-            saveButton.textContent = 'Salvar Anotações';
-          }, 1500);
+        function addJournalEntry() {
+          const date = dateInput.value;
+          const text = textInput.value.trim();
+
+          if (!date || !text) {
+            alert('Por favor, preencha a data e a anotação.');
+            return;
+          }
+
+          const newEntry = { id: Date.now().toString(), date, text };
+          let entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
+          entries.push(newEntry);
+          localStorage.setItem(journalStorageKey, JSON.stringify(entries));
+
+          textInput.value = '';
+          loadJournalEntries();
         }
 
-        saveButton.addEventListener('click', saveNotes);
-        loadNotes();
+        addButton.addEventListener('click', addJournalEntry);
+        loadJournalEntries();
       }
+
     });
 
     // --- SCRIPT DO SERVICE WORKER (PWA) ---
