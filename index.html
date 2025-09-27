@@ -59,8 +59,8 @@
     }
 
     .tab-button[onclick*="aerobico-core"].active {
-      border-bottom-color: #9b59b6;
-      /* Nova cor roxa para a aba */
+      border-bottom-color: #c0392b;
+      /* Vermelho escuro */
     }
 
     .tab-button[onclick*="dieta"].active {
@@ -586,8 +586,8 @@
 
     /* --- ESTILOS ESPECÍFICOS DA SEÇÃO AERÓBICO & CORE --- */
     #aerobico-core-section {
-      --cor-destaque: #9b59b6;
-      /* Cor roxa da aba */
+      --cor-destaque: #c0392b;
+      /* Cor Vermelha do AEJ */
     }
 
     #aerobico-core-section h1,
@@ -1268,14 +1268,14 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="fri-crucifix">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Crucifixo Inclinado com Halteres</strong><br><small>4 séries de 12-15</small></label></div>
+          <li class="exercise-item" data-exercise-id="new-supino-reto-halteres">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Reto com Halter</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="new-supino-reto-halteres">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Supino Reto com Halter</strong><br><small>4 séries de 10-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="fri-crossover">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Peitoral no Cross Over (polia alta)</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -1286,8 +1286,8 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="d5ex4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Lateral com Halteres</strong><br><small>4 séries de 12-15</small></label></div>
+          <li class="exercise-item" data-exercise-id="fri-latraise-polia">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação Lateral na Polia</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -1310,8 +1310,20 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
+          <li class="exercise-item" data-exercise-id="fri-biceps3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rosca Scott com Halteres</strong><br><small>3 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
           <li class="exercise-item" data-exercise-id="d5ex7">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Tríceps Corda</strong><br><small>3 séries de 10-15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="fri-triceps2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Tríceps Francês (sentado)</strong><br><small>3 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -1400,7 +1412,7 @@
       <h2>Rotina de Abdômen</h2>
       <div class="workout-day">
         <div class="workout-day-header">
-          <h3>Segunda e Sexta: Foco Força & Oblíquos</h3>
+          <h3>Segunda: Foco Força & Oblíquos</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -1432,7 +1444,7 @@
       </div>
       <div class="workout-day">
         <div class="workout-day-header">
-          <h3>Terça e Sábado: Foco Hipertrofia</h3>
+          <h3>Quinta: Foco Hipertrofia</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -1464,7 +1476,7 @@
       </div>
       <div class="workout-day">
         <div class="workout-day-header">
-          <h3>Quarta e Domingo: Foco Estabilidade & Core</h3>
+          <h3>Domingo: Foco Estabilidade & Core</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -1659,81 +1671,67 @@
         function ajustarCor(t, e) { let o = parseInt(t.slice(1, 3), 16), i = parseInt(t.slice(3, 5), 16), n = parseInt(t.slice(5, 7), 16); return `#${Math.max(0, Math.min(255, o + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, i + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, n + e)).toString(16).padStart(2, "0")}` }
         gerarGrade();
 
-        const corAej = '#3498db',
+        const corAej = '#c0392b',
           corPython = '#5856d6',
           corAcademia = '#e74c3c',
-          corEstudoConcurso = '#8e44ad',
-          corRevisao = '#9b59b6',
-          corEstudosInd = '#2ecc71',
-          corLinguagens = '#27ae60',
+          corEstudoConcurso = '#2ecc71',
+          corRevisao = '#58d68d',
+          corProgramacao = '#f39c12',
+          corParadigmas = '#4169E1',
           corDescanso = '#6c757d';
 
         const classePequena = 'bloco-pequeno';
 
+        // Textos das Aulas
+        const textoProgramacao = `<strong>BASES DE PROGRAMAÇÃO</strong><br><small>UNIDADE PARALELA - Sala Indeterminada</small>`;
+        const textoParadigmas = `<strong>PARADIGMAS DE LING. DE PROGRAMAÇÃO</strong><br><small>UNIDADE PARALELA - Sala Indeterminada</small>`;
+
+
         // Segunda
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 1, '08:30', '09:30', corAej);
+        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 1, '07:30', '08:30', corAej);
         adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 1, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Almoço</strong>', 1, '12:00', '13:00', corDescanso, classePequena);
-        adicionarAtividade('<strong>Academia</strong>', 1, '13:00', '15:00', corAcademia);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 1, '15:00', '17:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Descanso</strong>', 1, '17:00', '18:00', corDescanso, classePequena);
-        adicionarAtividade('<strong>Estudos Independentes</strong>', 1, '18:00', '20:00', corEstudosInd);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 1, '20:00', '22:00', corRevisao);
-        adicionarAtividade('<strong>Descanso</strong>', 1, '22:00', '23:00', corDescanso, classePequena);
+        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 1, '13:00', '15:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Academia</strong>', 1, '15:00', '17:00', corAcademia);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 1, '18:00', '20:00', corRevisao);
 
         // Terça
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 2, '08:30', '09:30', corAej);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 2, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Almoço</strong>', 2, '12:00', '13:00', corDescanso, classePequena);
+        adicionarAtividade(textoProgramacao, 2, '07:30', '10:15', corProgramacao);
         adicionarAtividade('<strong>Academia</strong>', 2, '13:00', '15:00', corAcademia);
         adicionarAtividade('<strong>Python (Online)</strong>', 2, '15:40', '17:40', corPython);
-        adicionarAtividade('<strong>Estudos Independentes</strong>', 2, '18:00', '20:00', corEstudosInd);
-        adicionarAtividade('<strong>Descanso</strong>', 2, '20:00', '21:00', corDescanso, classePequena);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 2, '21:00', '23:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 2, '19:00', '21:00', corEstudoConcurso);
 
         // Quarta
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 3, '08:30', '09:30', corAej);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 3, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Almoço</strong>', 3, '12:00', '13:00', corDescanso, classePequena);
+        adicionarAtividade(textoParadigmas, 3, '07:30', '09:10', corParadigmas);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 3, '10:00', '12:00', corRevisao);
         adicionarAtividade('<strong>Academia</strong>', 3, '13:00', '15:00', corAcademia);
         adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 3, '15:00', '17:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Descanso</strong>', 3, '17:00', '18:00', corDescanso, classePequena);
-        adicionarAtividade('<strong>Estudos Independentes</strong>', 3, '18:00', '20:00', corEstudosInd);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 3, '20:00', '22:00', corRevisao);
-        adicionarAtividade('<strong>Descanso</strong>', 3, '22:00', '23:00', corDescanso, classePequena);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 3, '18:00', '20:00', corRevisao);
 
         // Quinta
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 4, '08:30', '09:30', corAej);
+        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 4, '07:30', '08:30', corAej);
         adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 4, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Almoço</strong>', 4, '12:00', '13:00', corDescanso, classePequena);
+        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 4, '13:00', '15:00', corEstudoConcurso);
         adicionarAtividade('<strong>Python (Online)</strong>', 4, '15:40', '17:40', corPython);
-        adicionarAtividade('<strong>Estudos Independentes</strong>', 4, '18:00', '20:00', corEstudosInd);
-        adicionarAtividade('<strong>Descanso</strong>', 4, '20:00', '21:00', corDescanso, classePequena);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 4, '21:00', '23:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 4, '18:00', '20:00', corRevisao);
 
         // Sexta
-        const textoLinguagens = `<strong>LINGUAGENS FORMAIS E AUTÔMATOS</strong><br><small>UNIDADE PARALELA - PRÉDIO I NíVEL 6 - 608</small>`;
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 5, '07:30', '08:30', corAej);
-        adicionarAtividade(textoLinguagens, 5, '09:25', '12:50', corLinguagens);
-        adicionarAtividade('<strong>Almoço</strong>', 5, '13:00', '14:00', corDescanso, classePequena);
-        adicionarAtividade('<strong>Academia</strong>', 5, '14:00', '16:00', corAcademia);
+        adicionarAtividade(textoParadigmas, 5, '07:30', '09:10', corParadigmas);
+        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 5, '11:00', '13:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Academia</strong>', 5, '13:00', '16:00', corAcademia);
         adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 5, '16:00', '18:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Estudos Independentes</strong>', 5, '18:30', '20:30', corEstudosInd);
-        adicionarAtividade('<strong>Descanso</strong>', 5, '20:30', '21:30', corDescanso, classePequena);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 5, '21:30', '23:00', corRevisao);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 5, '19:00', '21:00', corRevisao);
 
         // Sábado
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 6, '08:30', '09:30', corAej);
         adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 6, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Almoço</strong>', 6, '12:00', '13:00', corDescanso, classePequena);
         adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 6, '13:00', '15:00', corEstudoConcurso);
         adicionarAtividade('<strong>Academia</strong>', 6, '15:00', '17:00', corAcademia);
-        adicionarAtividade('<strong>Descanso</strong>', 6, '17:00', '18:00', corDescanso, classePequena);
-        adicionarAtividade('<strong>Estudos Independentes</strong>', 6, '18:00', '20:00', corEstudosInd);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 6, '18:00', '20:00', corRevisao);
 
         // Domingo
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 7, '12:00', '14:00', corAej);
-        adicionarAtividade('<strong>Almoço</strong>', 7, '14:00', '15:00', corDescanso, classePequena);
+        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 7, '08:00', '09:30', corAej);
+        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 7, '10:00', '12:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 7, '13:00', '15:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Revisão Concurso</strong>', 7, '18:00', '20:00', corRevisao);
       }
 
       // --- SCRIPT PARA PERSISTIR TEXTO NAS CAIXAS DA AGENDA ---
