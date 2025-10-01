@@ -202,13 +202,18 @@
       padding: 5px;
       box-sizing: border-box;
       color: white;
-      font-size: 0.7em;
+      font-size: 0.55em;
       overflow: hidden;
       transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
     }
 
-    #agenda-section .atividade-bloco.bloco-pequeno {
-      font-size: 0.48em;
+    /* Classe específica para fonte ainda menor */
+    #agenda-section .atividade-bloco.bloco-muito-pequeno {
+      font-size: 0.5em;
     }
 
 
@@ -823,7 +828,7 @@
   <nav class="nav-tabs">
     <button class="tab-button active" onclick="showSection('agenda-section')">📅 Agenda</button>
     <button class="tab-button" onclick="showSection('treino-section')">💪 Treino</button>
-    <button class="tab-button" onclick="showSection('aerobico-core-section')">🏃‍♂️ Aeróbico & Core</button>
+    <button class="tab-button" onclick="showSection('aerobico-core-section')">🏃‍♂️ Cardio & Abdominal</button>
     <button class="tab-button" onclick="showSection('dieta-section')">🥗 Dieta</button>
     <button class="tab-button" onclick="showSection('bem-estar-section')">🧘 Bem-estar</button>
   </nav>
@@ -857,8 +862,19 @@
         <header>
           <h1>🥗 Dieta Hiperproteica</h1>
           <p>Perda de gordura + Revolade às 22h</p>
-          <p><strong>(~2.200–2.350 kcal, proteína muito alta, jejum a partir das 18h)</strong></p>
+          <p><strong>Jejum Intermitente 16:8 (Janela de alimentação: 09h30 - 17h30)</strong></p>
         </header>
+
+        <div class="summary" style="background-color: #1e1e1e; border-left-color: #fd7e14; margin-bottom: 20px;">
+          <h2 style="color: #fd7e14;">Jejum Intermitente 16:8 - Como Funciona</h2>
+          <ul>
+            <li>Sua **janela de alimentação** é de 8 horas: das <strong>09h30 às 17h30</strong>.</li>
+            <li>Seu **período de jejum** é de 16 horas: das <strong>17h30 de um dia até as 09h30 do dia seguinte</strong>.</li>
+            <li>Durante o jejum, consuma livremente: <strong>água, café puro (sem açúcar) e chás (sem açúcar)</strong>.</li>
+          </ul>
+        </div>
+
+
         <div class="meal-plan-wrapper">
           <table class="meal-plan">
             <thead>
@@ -870,11 +886,11 @@
             </thead>
             <tbody>
               <tr>
-                <td class="meal-time">Café da manhã <br>(~9h30)</td>
+                <td class="meal-time">Café da manhã / Quebra do Jejum <br>(~9h30)</td>
                 <td class="meal-details">
                   <ul>
                     <li>3 ovos inteiros</li>
-                    <li>50g queijo cottage ou minas</li>
+                    <li>50g queijo minas ou ricota</li>
                     <li>1 pão francês ou 2 fatias de pão integral</li>
                     <li>Café com até 1 colher de chá de açúcar</li>
                     <li>Fruta (100g melancia ou melão)</li>
@@ -883,33 +899,20 @@
                 <td>~450 kcal | 28g proteína</td>
               </tr>
               <tr>
-                <td class="meal-time">Lanche da manhã <br>(11h)</td>
-                <td class="meal-details"><strong>Opções:</strong>
-                  <ul>
-                    <li><strong>Sanduíche de Frango:</strong> 2 fatias de pão, 60g frango desfiado, 30g queijo cottage</li>
-                    <li><strong>Sanduíche de Atum:</strong> 2 fatias de pão, 1 lata de atum em água</li>
-                    <li><strong>Shake:</strong> 1.5 dose whey concentrado + 250 ml água</li>
-                    <li><strong>Iogurte Grego:</strong> 1 pote (150g) de iogurte grego natural + 20g de nozes</li>
-                    <li><strong>Queijo Cottage:</strong> 100g de queijo cottage + mel ou frutas vermelhas</li>
-                  </ul>
-                </td>
-                <td>~280–350 kcal | 25–35g proteína</td>
-              </tr>
-              <tr>
-                <td class="meal-time">Almoço / Pré-treino <br>(12h30)</td>
+                <td class="meal-time">Almoço / Pré-treino <br>(~12h30)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>180g carne magra (frango, patinho, tilápia, lombo suíno)</li>
+                    <li>200g carne magra (frango, patinho, tilápia, lombo suíno)</li>
                     <li>150g de carboidrato cozido (arroz, batata doce)</li>
                     <li>100g feijão ou lentilha</li>
-                    <li>Salada grande + 1 colher de azeite</li>
+                    <li>Salada grande + 1 colher de azeite (veja sugestões abaixo)</li>
                   </ul>
                 </td>
-                <td>~600–650 kcal | 45–50g proteína</td>
+                <td>~650-700 kcal | 55-60g proteína</td>
               </tr>
               <tr>
-                <td class="meal-time">Pós-treino <br>(15h–15h30)</td>
-                <td class="meal-details"><strong>Opções:</strong>
+                <td class="meal-time">Pós-treino <br>(~15h–15h30)</td>
+                <td class="meal-details"><strong>Opções (apenas nos dias de treino):</strong>
                   <ul>
                     <li><strong>Líquido:</strong> 1.5 dose whey concentrado + 1 banana média</li>
                     <li><strong>Sólido:</strong> 120g frango desfiado + 150g batata doce cozida</li>
@@ -918,16 +921,16 @@
                 <td>~350 kcal | 30-35g proteína</td>
               </tr>
               <tr>
-                <td class="meal-time">Última refeição <br>(17h30)</td>
+                <td class="meal-time">Última refeição <br>(~17h30)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>150g carne magra (frango, peixe, lombo suíno)</li>
+                    <li>200g carne magra (frango, peixe, lombo suíno)</li>
                     <li>100g carboidrato cozido (arroz, mandioquinha)</li>
-                    <li>80g queijo cottage</li>
+                    <li>80g queijo minas ou ricota</li>
                     <li>Vegetais fibrosos à vontade (brócolis, couve-flor)</li>
                   </ul>
                 </td>
-                <td>~400 kcal | 35g proteína</td>
+                <td>~450 kcal | 45g proteína</td>
               </tr>
             </tbody>
           </table>
@@ -937,102 +940,114 @@
           <div class="shopping-list">
             <h2>Lista de Compras Semanal</h2>
             <ul>
-              <li><span>Ovos:</span> ~21 unidades</li>
-              <li><span>Queijo Cottage/Minas:</span> ~910g</li>
-              <li><span>Pães (Francês ou Integral):</span> 7 unidades ou 14 fatias</li>
-              <li><span>Frutas (Melancia, Melão):</span> ~700g</li>
-              <li><span>Bananas:</span> 7 unidades</li>
-              <li><span>Carnes Magras (Frango, Patinho, Tilápia):</span> ~2.3kg</li>
-              <li><span>Carboidratos (Arroz, Batata Doce, etc):</span> ~1.8kg (peso cozido)</li>
-              <li><span>Feijão ou Lentilha:</span> ~700g (peso cozido)</li>
-              <li><span>Whey Protein:</span> ~21 doses</li>
-              <li><span>Itens Gerais:</span> Azeite, vegetais fibrosos, salada, café, etc.</li>
+              <li><strong>Proteínas</strong>
+                <ul>
+                  <li>Ovos: 21 unidades</li>
+                  <li>Queijo Minas Frescal ou Ricota: ~910g</li>
+                  <li>Carnes Magras (frango, patinho, etc.): ~2.8 kg</li>
+                  <li>Feijão ou Lentilha: ~700g (peso cozido)</li>
+                  <li>Whey Protein: ~8 doses (para 5 treinos)</li>
+                </ul>
+              </li>
+              <li><strong>Carboidratos</strong>
+                <ul>
+                  <li>Pães (Francês ou Integral): 7 unidades ou 14 fatias</li>
+                  <li>Arroz, Batata Doce, Mandioquinha, etc.: ~1.8 kg (peso cozido)</li>
+                </ul>
+              </li>
+              <li><strong>Hortifrúti</strong>
+                <ul>
+                  <li>Frutas para o café (melão, melancia): ~700g</li>
+                  <li>Bananas (pós-treino): 5 unidades</li>
+                  <li>Folhas para salada (alface, rúcula)</li>
+                  <li>Legumes e vegetais variados para salada e acompanhamentos</li>
+                </ul>
+              </li>
+              <li><strong>Gerais e Temperos</strong>
+                <ul>
+                  <li>Azeite extra virgem</li>
+                  <li>Café, Chás (Matcha, Camomila, etc.)</li>
+                  <li>Sal, pimenta, alho, cebola e outros temperos de preferência</li>
+                </ul>
+              </li>
             </ul>
           </div>
           <div class="shopping-list">
             <h2>Estimativa de Compras Mensal</h2>
             <ul>
-              <li><span>Ovos:</span> ~7 dúzias (84 unidades)</li>
-              <li><span>Queijo Cottage/Minas:</span> ~3.6kg</li>
-              <li><span>Pães (Francês ou Integral):</span> 28 unidades ou 56 fatias</li>
-              <li><span>Frutas (Melancia, Melão):</span> ~2.8kg</li>
-              <li><span>Bananas:</span> 28 unidades</li>
-              <li><span>Carnes Magras (Frango, Patinho, Tilápia):</span> ~9.2kg</li>
-              <li><span>Carboidratos (Arroz, Batata Doce, etc):</span> ~7.2kg (peso cozido)</li>
-              <li><span>Feijão ou Lentilha:</span> ~2.8kg (peso cozido)</li>
-              <li><span>Whey Protein:</span> ~84 doses (verificar tamanho do pote)</li>
-              <li><span>Itens Gerais:</span> Comprar conforme necessidade.</li>
+              <li><strong>Proteínas</strong>
+                <ul>
+                  <li>Ovos: ~7 dúzias (84 unidades)</li>
+                  <li>Queijo Minas Frescal ou Ricota: ~3.6 kg</li>
+                  <li>Carnes Magras (frango, patinho, etc.): ~11.2 kg</li>
+                  <li>Feijão ou Lentilha: ~2.8 kg (peso cozido)</li>
+                  <li>Whey Protein: ~32 doses (verificar tamanho do pote)</li>
+                </ul>
+              </li>
+              <li><strong>Carboidratos</strong>
+                <ul>
+                  <li>Pães (Francês ou Integral): 28 unidades ou 56 fatias</li>
+                  <li>Arroz, Batata Doce, etc.: ~7.2 kg (peso cozido)</li>
+                </ul>
+              </li>
+              <li><strong>Hortifrúti</strong>
+                <ul>
+                  <li>Frutas para o café (melão, melancia): ~2.8kg</li>
+                  <li>Bananas (pós-treino): 20 unidades</li>
+                  <li>Legumes e vegetais: Comprar semanalmente para manter o frescor.</li>
+                </ul>
+              </li>
+              <li><strong>Gerais e Temperos</strong>
+                <ul>
+                  <li>Comprar conforme necessidade (azeite, café, chás, temperos).</li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
 
         <div class="summary">
-          <h2>📊 Resumo Diário</h2>
+          <h2>📊 Resumo Diário (Ajustado)</h2>
           <ul>
-            <li>Calorias: <span>~2.200–2.350 kcal</span></li>
-            <li>Proteínas: <span>~160–180 g</span></li>
-            <li>Carboidratos: <span>~180–200 g</span></li>
-            <li>Gorduras: <span>~60–65 g</span></li>
+            <li>Calorias: <span>~2.050–2.200 kcal</span></li>
+            <li>Proteínas: <span>~170–190 g</span></li>
+            <li>Carboidratos: <span>~150–170 g</span></li>
+            <li>Gorduras: <span>~60–70 g</span></li>
           </ul>
         </div>
 
         <div class="drinks-routine">
-          <h2>Rotina de Bebidas para Foco e Sono</h2>
-
+          <h2>Rotina de Bebidas Ajustada (Foco e Sono)</h2>
           <div class="time-block">
-            <h3>☀️ Manhã: O Início com Energia Controlada</h3>
-            <h4>Ao Acordar (Ex: 08h00)</h4>
-            <p><strong>Bebida:</strong> 1 copo de água para hidratar + 1 xícara de café preto (seu ritual essencial).</p>
-            <p><strong>Observação:</strong> Tomar o café após a água ajuda a proteger o estômago e a garantir a hidratação inicial, que por si só já combate a fadiga.</p>
-
-            <h4>Café da Manhã (Ex: 09h30)</h4>
-            <h4>Meio da Manhã (Ex: 10h00 - 10h30)</h4>
-            <p><strong>Bebida:</strong> 1 xícara de Matcha.</p>
-            <p><strong>Melhor horário por quê?</strong> A L-teanina do matcha vai te dar um foco calmo e sustentado para o restante da manhã, sem a agitação do café. É o seu segundo e último grande estímulo do dia.</p>
+            <h3>☀️ Manhã: Jejum, Hidratação e Primeiro Estímulo</h3>
+            <h4>Ao Acordar (~07h00 - 09h30)</h4>
+            <p><strong>Bebidas:</strong> Água para hidratar + 1 xícara de café preto puro (sem açúcar) para ajudar na queima de gordura e no foco inicial para os estudos da manhã (Ex: aulas de Paradigmas/Programação).</p>
+            <h4>Meio da Manhã (10h00 - 11h00)</h4>
+            <p><strong>Bebida:</strong> 1 xícara de Matcha ou Chá Verde.</p>
+            <p><strong>Estratégia:</strong> Consumir após sua primeira refeição. A L-teanina lhe dará um foco calmo e sustentado para as longas sessões de estudo (Ex: Português, Conh. Bancários), sem a agitação do café.</p>
           </div>
-
           <div class="time-block">
-            <h3>☀️ Tarde: Transição para o Modo "Sem Cafeína"</h3>
-            <h4>Almoço (Ex: 12h30 - 13h00)</h4>
-            <p><strong>Bebida:</strong> Água ou água com gás e limão.</p>
-
-            <h4>Início da Tarde (Ex: 14h30)</h4>
-            <p><strong>Janela de Oportunidade Final (Opcional):</strong> Se sentir uma leve queda de energia, aqui é sua última chance para algo com cafeína.</p>
-            <p><strong>Bebida Sugerida:</strong> 1 xícara de Chá Verde ou Chá Preto. Eles têm menos cafeína que o café/matcha, servindo como uma "ponte" mais suave.</p>
-
-            <p class="caffeine-warning">🚫 HORÁRIO LIMITE PARA CAFEÍNA: 15h00 🚫</p>
-            <p>A partir deste ponto, qualquer bebida consumida deve ser 100% livre de cafeína para não interferir com a quetiapina.</p>
+            <h3>💪 Tarde: Pré-Treino e Limite de Cafeína</h3>
+            <h4>Almoço / Pré-Treino (~12h30)</h4>
+            <p><strong>Bebida:</strong> Apenas água ou água com gás e limão para garantir a hidratação máxima antes do treino da tarde (~13h00-15h00).</p>
+            <p class="caffeine-warning">🚫 HORÁRIO LIMITE PARA CAFEÍna: 15h00 🚫</p>
+            <p>A partir daqui, qualquer bebida deve ser 100% livre de cafeína para garantir um sono de qualidade.</p>
           </div>
-
           <div class="time-block">
-            <h3>🌙 Tarde/Noite: Foco Natural e Preparação para o Descanso</h3>
-            <h4>Pausa Crítica dos Estudos (17h00 - 18h00)</h4>
-            <p><strong>Foco:</strong> Ritual para renovar a energia sem usar estimulantes químicos.</p>
+            <h3>🌙 Fim de Tarde e Noite: Foco Natural e Preparo para o Sono</h3>
+            <h4>Pós-Treino / Estudos da Tarde (16h00 - 18h30)</h4>
+            <p><strong>Foco:</strong> Manter a concentração para a última sessão de estudos (Ex: Matemática, Informática) sem usar estimulantes.</p>
             <p><strong>Bebida do Ritual (escolha uma):</strong></p>
             <ul>
-              <li><strong>Opção 1 (Estimulante Natural):</strong> Caneca de Chá de Gengibre com Limão e Canela.</li>
-              <li><strong>Opção 2 (Foco Refrescante):</strong> Caneca de Chá de Hortelã ou Alecrim.</li>
-              <li><strong>Opção 3 (Hidratação Desperta):</strong> Copo grande de Água Super Gelada com Gás e rodelas de laranja.</li>
+              <li><strong>Chá de Gengibre com Limão e Canela:</strong> Estimulante natural e anti-inflamatório.</li>
+              <li><strong>Chá de Hortelã ou Alecrim:</strong> Para um foco mais refrescante e claro.</li>
             </ul>
-            <p><strong>Ação Complementar:</strong> Levante-se, alongue o corpo por 3 minutos. Olhe pela janela.</p>
-
-            <h4>Jantar (Ex: 19h30 - 20h00)</h4>
-            <h4>Ceia / Rotina de Desaceleração (Ex: 21h30 em diante)</h4>
-            <p><strong>Foco:</strong> Sinalizar para o cérebro que é hora de desligar.</p>
+            <h4>Rotina de Desaceleração (A partir das 21h00)</h4>
+            <p><strong>Foco:</strong> Sinalizar para o cérebro que é hora de desligar e se preparar para o sono.</p>
             <p><strong>Bebida Calmante (escolha uma):</strong></p>
             <ul>
               <li>Chá de Camomila, Erva-Cidreira ou Mulungu (excelente relaxante natural).</li>
-              <li>Golden Milk (leite vegetal morno com cúrcuma e especiarias), muito reconfortante e anti-inflamatório.</li>
-            </ul>
-          </div>
-
-          <div class="time-block">
-            <h3>Resumo dos Horários de Consumo (Cafeína):</h3>
-            <ul>
-              <li><strong>Café:</strong> Idealmente apenas 1 xícara, logo pela manhã.</li>
-              <li><strong>Matcha:</strong> Perfeito para o meio da manhã (entre 10h30 e 11h) para um segundo pico de foco.</li>
-              <li><strong>Chá Verde/Preto:</strong> Apenas se for muito necessário e, no máximo, até as 14h30/15h00.</li>
-              <li><strong>Após as 15h00:</strong> Tolerância zero para cafeína.</li>
+              <li>Golden Milk (leite vegetal morno com cúrcuma), reconfortante e anti-inflamatório.</li>
             </ul>
           </div>
         </div>
@@ -1110,12 +1125,6 @@
               <div class="series-counter"></div>
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="cardio-mon">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>Cardio Pós-Treino</strong><br><small>20 a 30 minutos (moderado)</small></label>
-            </div>
-          </li>
         </ul>
       </div>
 
@@ -1173,12 +1182,6 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="cardio-tue">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>Cardio Pós-Treino</strong><br><small>20 a 30 minutos (moderado)</small></label>
-            </div>
-          </li>
         </ul>
       </div>
 
@@ -1225,15 +1228,9 @@
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="wed-calf">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha sentado</strong><br><small>5 séries de 15-25</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha em pé</strong><br><small>5 séries de 15-25</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="cardio-wed">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>Cardio Pós-Treino</strong><br><small>20 a 30 minutos (moderado)</small></label>
             </div>
           </li>
         </ul>
@@ -1242,10 +1239,11 @@
       <div class="workout-day">
         <div class="workout-day-header">
           <h3>Quinta-feira: Descanso Ativo</h3>
+          <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
           <li class="exercise-item">
-            <div class="exercise-info"><label><strong>Descanso Ativo</strong><br><small>Seguir o plano de Cardio e Core na aba "Aeróbico & Core".</small></label></div>
+            <div class="exercise-info"><label><strong>Descanso Ativo</strong><br><small>Seguir o plano de Cardio e Core na aba "Cardio & Abs".</small></label></div>
           </li>
         </ul>
       </div>
@@ -1328,12 +1326,6 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="cardio-fri">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>Cardio Pós-Treino</strong><br><small>20 a 30 minutos (moderado)</small></label>
-            </div>
-          </li>
         </ul>
       </div>
 
@@ -1379,16 +1371,10 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="d7ex5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha sentado</strong><br><small>5 séries de 15-25</small></label></div>
+          <li class="exercise-item" data-exercise-id="wed-calf">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha em pé</strong><br><small>5 séries de 15-25</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="cardio-sat">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>Cardio Pós-Treino</strong><br><small>20 a 30 minutos (moderado)</small></label>
             </div>
           </li>
         </ul>
@@ -1397,115 +1383,136 @@
       <div class="workout-day">
         <div class="workout-day-header">
           <h3>Domingo: Descanso Ativo</h3>
+          <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
           <li class="exercise-item">
-            <div class="exercise-info"><label><strong>Descanso Ativo</strong><br><small>Seguir o plano de Cardio e Core na aba "Aeróbico & Core".</small></label></div>
+            <div class="exercise-info"><label><strong>Descanso Ativo</strong><br><small>Seguir o plano de Cardio e Core na aba "Cardio & Abs".</small></label></div>
           </li>
         </ul>
       </div>
     </section>
 
     <section id="aerobico-core-section" class="content-section">
-      <h1>Aeróbico, Core & Mobilidade</h1>
+      <h1>Aeróbico, Abdominal & Mobilidade</h1>
 
-      <h2>Rotina de Abdômen</h2>
       <div class="workout-day">
         <div class="workout-day-header">
-          <h3>Segunda: Foco Força & Oblíquos</h3>
+          <h3>Rotina de Cardio</h3>
+        </div>
+        <ul>
+          <li class="exercise-item">
+            <div class="exercise-info"><label><strong>Duração: 30 a 45 minutos</strong></label></div>
+          </li>
+          <li class="exercise-item">
+            <div class="exercise-info"><label><strong>Intensidade: Moderada a Intensa</strong><br><small>Você deve conseguir conversar, mas com dificuldade.</small></label></div>
+          </li>
+          <li class="exercise-item">
+            <div class="exercise-info"><label><strong>Opções:</strong><br><small>Esteira, Elíptico, Bicicleta, Simulador de Escada, Simulador de Remada.</small></label></div>
+          </li>
+        </ul>
+      </div>
+
+      <h2>Nova Rotina de Abdômen (Revezamento A, B, C, D)</h2>
+
+      <div class="workout-day">
+        <div class="workout-day-header">
+          <h3>Treino A (Foco Reto Abdominal/Superior)</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
-          <li class="exercise-item" data-exercise-id="aej-group1">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>AEJ</strong><br><small>30 a 45 min</small></label>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="abs-force-1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Declinado com Anilha</strong><br><small>4 séries de 8-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="abs-a1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal com carga (máquina ou anilha)</strong><br><small>3 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="abs-force-2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas na Barra Fixa</strong><br><small>4 séries até a falha</small></label></div>
+          <li class="exercise-item" data-exercise-id="abs-a2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas (paralela ou barra)</strong><br><small>3 séries até a falha</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="abs-force-3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação de Tronco na Polia (Woodchopper)</strong><br><small>4 séries de 10-12 (cada lado)</small></label></div>
+          <li class="exercise-item" data-exercise-id="abs-a3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Ventral</strong><br><small>3 séries até a falha</small></label></div>
             <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+              <div class="series-counter"></div>
             </div>
           </li>
         </ul>
       </div>
       <div class="workout-day">
         <div class="workout-day-header">
-          <h3>Quinta: Foco Hipertrofia</h3>
+          <h3>Treino B (Foco Oblíquos)</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
-          <li class="exercise-item" data-exercise-id="aej-group2">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>AEJ</strong><br><small>30 a 45 min</small></label>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="abs-hyper-1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal na Máquina</strong><br><small>4 séries de 12-15</small></label></div>
+          <li class="exercise-item" data-exercise-id="abs-b1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Rotação de Tronco na Polia (Woodchopper)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="abs-hyper-2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Infra Declinado</strong><br><small>4 séries de 15-20</small></label></div>
+          <li class="exercise-item" data-exercise-id="abs-b2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Bicicleta no chão</strong><br><small>3 séries de 20-30 (total)</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="abs-hyper-3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Supra com anilha no peito</strong><br><small>4 séries de 15-20</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="workout-day">
-        <div class="workout-day-header">
-          <h3>Domingo: Foco Estabilidade & Core</h3>
-          <button class="reset-button">Resetar Dia</button>
-        </div>
-        <ul>
-          <li class="exercise-item" data-exercise-id="aej-group3">
-            <div class="exercise-info">
-              <input type="checkbox" class="exercise-checkbox">
-              <label><strong>AEJ</strong><br><small>30 a 45 min</small></label>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="abs-stab-1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Ventral</strong><br><small>4 séries até a falha</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="abs-stab-2">
+          <li class="exercise-item" data-exercise-id="abs-b3">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Lateral</strong><br><small>3 séries até a falha (cada lado)</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="abs-stab-3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-Dog)</strong><br><small>4 séries de 12-15 (cada lado)</small></label></div>
+        </ul>
+      </div>
+      <div class="workout-day">
+        <div class="workout-day-header">
+          <h3>Treino C (Foco Infra e Core)</h3>
+          <button class="reset-button">Resetar Dia</button>
+        </div>
+        <ul>
+          <li class="exercise-item" data-exercise-id="abs-c1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal Infra Reverso (no chão)</strong><br><small>3 séries até a falha</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="abs-stab-4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Roda Abdominal (Ab Wheel)</strong><br><small>3 séries até a falha</small></label></div>
+          <li class="exercise-item" data-exercise-id="abs-c2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Roda Abdominal (Ab Wheel) ou Remador</strong><br><small>3 séries de 10-15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="abs-c3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="workout-day">
+        <div class="workout-day-header">
+          <h3>Treino D (Foco Core e Estabilidade)</h3>
+          <button class="reset-button">Resetar Dia</button>
+        </div>
+        <ul>
+          <li class="exercise-item" data-exercise-id="abs-d1-new">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Ventral</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="abs-d2-new">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="abs-d3-new">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Ponte de Glúteos (Glute Bridge)</strong><br><small>3 séries de 15-20</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
@@ -1671,70 +1678,74 @@
         function ajustarCor(t, e) { let o = parseInt(t.slice(1, 3), 16), i = parseInt(t.slice(3, 5), 16), n = parseInt(t.slice(5, 7), 16); return `#${Math.max(0, Math.min(255, o + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, i + e)).toString(16).padStart(2, "0")}${Math.max(0, Math.min(255, n + e)).toString(16).padStart(2, "0")}` }
         gerarGrade();
 
-        const corAej = '#c0392b',
+        // CORES DAS ATIVIDADES
+        const corAerobico = '#c0392b',
           corPython = '#5856d6',
           corAcademia = '#e74c3c',
-          corEstudoConcurso = '#2ecc71',
-          corRevisao = '#58d68d',
           corProgramacao = '#f39c12',
-          corParadigmas = '#4169E1',
-          corDescanso = '#6c757d';
+          corParadigmas = '#4169E1';
 
-        const classePequena = 'bloco-pequeno';
+        // NOVAS CORES PARA O CONCURSO
+        const corPortugues = '#007bff';
+        const corMatematica = '#28a745';
+        const corBancarios = '#20c997';
+        const corInformatica = '#6c757d';
+        const corAtendimento = '#17a2b8';
+        const corAtualidades = '#fd7e14';
+        const corProbabilidade = '#e83e8c';
+        const corRevisaoGeral = '#ffc107';
 
         // Textos das Aulas
         const textoProgramacao = `<strong>BASES DE PROGRAMAÇÃO</strong><br><small>UNIDADE PARALELA - Sala Indeterminada</small>`;
         const textoParadigmas = `<strong>PARADIGMAS DE LING. DE PROGRAMAÇÃO</strong><br><small>UNIDADE PARALELA - Sala Indeterminada</small>`;
 
+        // --- ROTINA AJUSTADA ---
 
         // Segunda
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 1, '07:30', '08:30', corAej);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 1, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 1, '13:00', '15:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Academia</strong>', 1, '15:00', '17:00', corAcademia);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 1, '18:00', '20:00', corRevisao);
+        adicionarAtividade('<strong>Língua Portuguesa</strong>', 1, '10:00', '12:30', corPortugues);
+        adicionarAtividade('<strong>Academia</strong>', 1, '13:00', '15:00', corAcademia);
+        adicionarAtividade('<strong>Matemática Financeira</strong>', 1, '16:00', '18:30', corMatematica);
+        adicionarAtividade('<strong>Cardio (Escada) + Abs (A)</strong>', 1, '19:30', '20:30', corAerobico);
 
         // Terça
         adicionarAtividade(textoProgramacao, 2, '07:30', '10:15', corProgramacao);
         adicionarAtividade('<strong>Academia</strong>', 2, '13:00', '15:00', corAcademia);
         adicionarAtividade('<strong>Python (Online)</strong>', 2, '15:40', '17:40', corPython);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 2, '19:00', '21:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Cardio (Remada) + Abs (B)</strong>', 2, '19:30', '20:30', corAerobico);
 
         // Quarta
-        adicionarAtividade(textoParadigmas, 3, '07:30', '09:10', corParadigmas);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 3, '11:00', '13:00', corEstudoConcurso);
+        adicionarAtividade(textoParadigmas, 3, '07:30', '09:10', corParadigmas, 'bloco-muito-pequeno');
+        adicionarAtividade('<strong>Conhecimentos Bancários</strong>', 3, '10:00', '12:30', corBancarios);
         adicionarAtividade('<strong>Academia</strong>', 3, '13:00', '15:00', corAcademia);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 3, '15:00', '17:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 3, '18:00', '20:00', corRevisao);
+        adicionarAtividade('<strong>Conhecimentos de Informática</strong>', 3, '16:00', '18:30', corInformatica);
+        adicionarAtividade('<strong>Cardio (Esteira) + Abs (C)</strong>', 3, '19:30', '20:30', corAerobico);
 
         // Quinta
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 4, '07:30', '08:30', corAej);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 4, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 4, '13:00', '15:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Língua Portuguesa</strong>', 4, '10:00', '12:30', corPortugues);
+        adicionarAtividade('<strong>Cardio (Escada) + Abs (D)</strong>', 4, '13:00', '14:00', corAerobico);
         adicionarAtividade('<strong>Python (Online)</strong>', 4, '15:40', '17:40', corPython);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 4, '18:00', '20:00', corRevisao);
+        adicionarAtividade('<strong>Matemática Financeira</strong>', 4, '18:30', '21:00', corMatematica);
 
         // Sexta
-        adicionarAtividade(textoParadigmas, 5, '07:30', '09:10', corParadigmas);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 5, '11:00', '13:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Academia</strong>', 5, '13:00', '16:00', corAcademia);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 5, '16:00', '18:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 5, '19:00', '21:00', corRevisao);
+        adicionarAtividade(textoParadigmas, 5, '07:30', '09:10', corParadigmas, 'bloco-muito-pequeno');
+        adicionarAtividade('<strong>Conhecimentos Bancários</strong>', 5, '11:00', '13:30', corBancarios);
+        adicionarAtividade('<strong>Academia</strong>', 5, '14:00', '16:00', corAcademia);
+        adicionarAtividade('<strong>Noções de Probabilidade e Estatística</strong>', 5, '17:00', '19:30', corProbabilidade);
+        adicionarAtividade('<strong>Cardio (Remada) + Abs (A)</strong>', 5, '20:00', '21:00', corAerobico);
 
         // Sábado
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 6, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 6, '13:00', '15:00', corEstudoConcurso);
+        adicionarAtividade('<strong>Cardio (Esteira) + Abs (C)</strong>', 6, '09:00', '10:30', corAerobico);
+        adicionarAtividade('<strong>Atendimento Bancário</strong>', 6, '11:00', '13:30', corAtendimento);
         adicionarAtividade('<strong>Academia</strong>', 6, '15:00', '17:00', corAcademia);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 6, '18:00', '20:00', corRevisao);
+        adicionarAtividade('<strong>Conhecimentos de Informática</strong>', 6, '18:00', '20:30', corInformatica);
+        adicionarAtividade('<strong>Atualidades do Mercado Financeiro</strong>', 6, '21:00', '23:00', corAtualidades);
+
 
         // Domingo
-        adicionarAtividade('<strong>Aeróbico em Jejum</strong>', 7, '08:00', '09:30', corAej);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 7, '10:00', '12:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Estudo Concurso Aulas</strong>', 7, '13:00', '15:00', corEstudoConcurso);
-        adicionarAtividade('<strong>Revisão Concurso</strong>', 7, '18:00', '20:00', corRevisao);
+        adicionarAtividade('<strong>Cardio (Remada) + Abs (D)</strong>', 7, '10:00', '11:00', corAerobico);
+        adicionarAtividade('<strong>Revisão Geral + Simulados</strong>', 7, '14:00', '18:00', corRevisaoGeral);
       }
 
-      // --- SCRIPT PARA PERSISTIR TEXTO NAS CAIXAS DA AGENDA ---
       const textareasToSave = ['provas-textarea', 'atividades-textarea', 'consultas-textarea'];
       textareasToSave.forEach(id => {
         const textarea = document.getElementById(id);
@@ -1746,7 +1757,6 @@
         }
       });
 
-      // --- SCRIPT DO TREINO INTERATIVO (AGORA NAS DUAS ABAS) ---
       if (document.getElementById('treino-section') || document.getElementById('aerobico-core-section')) {
         const exerciseItems = document.querySelectorAll('.exercise-item');
         const storageKey = 'workoutProgress';
@@ -1808,13 +1818,13 @@
           const smallText = item.querySelector('small')?.textContent || '';
 
           if (seriesCounter) {
-            seriesCounter.innerHTML = ''; // Limpa pontos existentes para evitar duplicação
+            seriesCounter.innerHTML = '';
             let seriesCount = 0;
             const seriesMatch = smallText.match(/(\d+)\s*séries/);
             if (seriesMatch) {
               seriesCount = parseInt(seriesMatch[1], 10);
             } else if (smallText.includes('até a falha')) {
-              seriesCount = 3; // Default para "até a falha"
+              seriesCount = 3;
             }
             for (let i = 0; i < seriesCount; i++) {
               const dot = document.createElement('div');
@@ -1864,7 +1874,6 @@
         });
       }
 
-      // --- SCRIPT DA SEÇÃO BEM-ESTAR (DIÁRIO DE ANOTAÇÕES) ---
       if (document.getElementById('bem-estar-section')) {
         const dateInput = document.getElementById('journal-date');
         const textInput = document.getElementById('journal-text');
@@ -1927,7 +1936,11 @@
             alert('Por favor, preencha a data e a anotação.');
             return;
           }
-          const newEntry = { id: Date.now().toString(), date, text };
+          const newEntry = {
+            id: Date.now().toString(),
+            date,
+            text
+          };
           let entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
           entries.push(newEntry);
           localStorage.setItem(journalStorageKey, JSON.stringify(entries));
@@ -1941,7 +1954,6 @@
 
     });
 
-    // --- SCRIPT DO SERVICE WORKER (PWA) ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
@@ -1953,4 +1965,3 @@
 </body>
 
 </html>
-
