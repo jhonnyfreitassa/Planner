@@ -303,6 +303,18 @@
       margin: 0;
     }
 
+    #dieta-section .meal-details ul li ul {
+      /* Estilo para sublistas (Opções) */
+      padding-left: 15px;
+      margin-top: 5px;
+    }
+
+    #dieta-section .meal-details ul li ul li::marker {
+      /* Remove marcador padrão da sublista se necessário */
+      content: '- ';
+    }
+
+
     #dieta-section .summary {
       background-color: #2e7d32;
       border-left: 5px solid var(--primary-color);
@@ -846,8 +858,9 @@
     <section id="dieta-section" class="content-section">
       <div class="container">
         <header>
-          <h1>🥗 Dieta Hiperproteica</h1>
+          <h1>🥗 Dieta Hiperproteica </h1>
         </header>
+
         <div class="meal-plan-wrapper">
           <table class="meal-plan">
             <thead>
@@ -858,42 +871,62 @@
             </thead>
             <tbody>
               <tr>
-                <td class="meal-time">Primeira Refeição <br>(~12:00)</td>
+                <td class="meal-time">Refeição 1 (Quebra-Jejum)<br>(~09:30)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>4 ovos inteiros</li>
-                    <li>50g queijo minas</li>
-                    <li>2 fatias de pão integral</li>
-                    <li>1 Fruta (ex: maçã, pera ou banana)</li>
+                    <li>2 doses de Whey Protein</li>
+                    <li>40g de Aveia (fina, para misturar)</li>
+                    <li>1 Fruta (ex: 1 banana pequena amassada ou 1/2 maçã batida)</li>
+                    <li>(Misturar tudo com água ou leite desnatado, aprox. 200ml)</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Almoço / Pré-treino <br>(~14:00)</td>
+                <td class="meal-time">Refeição 2 (Almoço / Pré-treino)<br>(~12:30)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>250g de carne magra (frango, patinho, tilápia)</li>
-                    <li>200g de carboidrato cozido (arroz, batata doce)</li>
-                    <li>100g feijão ou lentilha</li>
-                    <li>Salada grande + 1 colher de azeite</li>
+                    <li>130g de carne magra (frango, patinho, tilápia)</li>
+                    <li>120g de carboidrato cozido (arroz branco, batata inglesa/doce)</li>
+                    <li>50g de Feijão ou Lentilha (cozido)</li>
+                    <li>Vegetais cozidos (ex: abobrinha, cenoura) em pouco volume</li>
+                    <li>1 colher de sobremesa de azeite</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Pós-treino <br>(~17:30)</td>
-                <td class="meal-details"><strong>Opções:</strong>
+                <td class="meal-time">Refeição 3 (Pós-treino)<br>(~16:30)</td>
+                <td class="meal-details">
+                  <strong>Opções de Proteína:</strong>
                   <ul>
-                    <li><strong>Líquido:</strong> 2 doses de Whey Protein + 1 banana média + 50g de aveia</li>
-                    <li><strong>Sólido:</strong> 220g de carne magra + 250g de batata inglesa ou arroz</li>
+                    <li>150g de Frango Desfiado ou Grelhado</li>
+                    <li>150g de Tilápia Grelhada</li>
+                    <li>130g de Carne Magra Moída (Patinho) Refogada</li>
+                  </ul>
+                  <strong>Acompanhamentos:</strong>
+                  <ul>
+                    <li>100g de Batata Doce Cozida ou Mandioca Cozida</li>
+                    <li>Vegetais (ex: tomate cereja, pepino, alface)</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Última refeição <br>(~19:30)</td>
+                <td class="meal-time">Refeição 4 (Jantar)<br>(~19:30)</td>
                 <td class="meal-details">
                   <ul>
-                    <li>250g de carne magra (peixe branco, frango)</li>
-                    <li>Vegetais fibrosos à vontade (brócolis, couve-flor, abobrinha, espinafre, vagem) com 1 colher de azeite</li>
+                    <li>130g de carne magra (peixe branco, frango)</li>
+                    <li>100g de carboidrato cozido (batata inglesa/doce)</li>
+                    <li>50g de Feijão ou Lentilha (cozido)</li>
+                    <li>Vegetais cozidos (ex: brócolis, couve-flor) em pouco volume</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td class="meal-time">Refeição 5 (Ceia)<br>(~21:15)</td>
+                <td class="meal-details">
+                  <strong>Opções:</strong>
+                  <ul>
+                    <li>3 Ovos Mexidos</li>
+                    <li>1 pote (aprox. 150g) de Iogurte Grego Natural Desnatado + 1/2 dose de Whey Protein</li>
                   </ul>
                 </td>
               </tr>
@@ -901,44 +934,55 @@
           </table>
         </div>
 
+        <div class="summary" style="background-color: #1c2a4d; border-left: 5px solid #007bff; color: #e0e0e0; margin-top: 30px;">
+          <h2 style="color: #007bff;">💊 Protocolo Medicamento (Revolade)</h2>
+          <p style="color: #e0e0e0;">Este é o protocolo mais importante do seu dia e define sua janela de jejum.</p>
+          <ul>
+            <li><strong>05:30:</strong> Tomar Revolade (Eltrombopag).</li>
+            <li><strong>Jejum ANTES:</strong> Mínimo 4h (ideal >8h com esta dieta - Última refeição ~21:15).</li>
+            <li><strong>Jejum DEPOIS:</strong> 4 horas (Próxima refeição somente às 09:30).</li>
+          </ul>
+        </div>
         <div class="shopping-lists-container">
           <div class="shopping-list">
             <h2>Lista de Compras Semanal</h2>
             <ul>
-              <li><span>Ovos:</span> ~28 unidades</li>
-              <li><span>Queijo Minas:</span> ~350g</li>
-              <li><span>Pão Integral:</span> 14 fatias</li>
-              <li><span>Frutas (Maçã, Banana, etc):</span> ~7 unidades</li>
-              <li><span>Carnes Magras (Frango, Patinho, Tilápia):</span> ~4.3kg</li>
-              <li><span>Carboidratos (Arroz, Batata):</span> ~3.2kg (peso cozido)</li>
-              <li><span>Feijão ou Lentilha:</span> ~700g (peso cozido)</li>
-              <li><span>Whey Protein:</span> ~14 doses</li>
-              <li><span>Aveia:</span> ~350g</li>
-              <li><span>Itens Gerais:</span> Azeite, vegetais fibrosos, salada, etc.</li>
+              <li><span>Whey Protein:</span> ~17-18 doses (Refeição 1 + opcional Ceia)</li>
+              <li><span>Ovos:</span> ~21 unidades (opcional Ceia)</li>
+              <li><span>Iogurte Grego Natural Desnatado:</span> ~7 potes (opcional Ceia)</li>
+              <li><span>Frutas (Banana, Maçã, Pera, etc):</span> ~7 unidades (apenas para Refeição 1)</li>
+              <li><span>Vegetais (Variados):</span> Comprar variedade</li>
+              <li><span>Carnes Magras (Frango, Peixe, Patinho):</span> ~2.8kg (incluindo pós-treino e almoço/jantar)</li>
+              <li><span>Carboidratos (Arroz branco, Batata, Mandioca):</span> ~1.8kg (peso cozido)</li>
+              <li><span>Feijão ou Lentilha:</span> ~700g (peso cozido - almoço e jantar)</li>
+              <li><span>Aveia:</span> ~280g</li>
+              <li><span>Itens Gerais:</span> Azeite, leite.</li>
             </ul>
           </div>
           <div class="shopping-list">
             <h2>Estimativa de Compras Mensal</h2>
             <ul>
-              <li><span>Ovos:</span> ~10 dúzias (120 unidades)</li>
-              <li><span>Queijo Minas:</span> ~1.4kg</li>
-              <li><span>Pão Integral:</span> 56 fatias</li>
+              <li><span>Whey Protein:</span> Comprar pote grande (~70 doses)</li>
+              <li><span>Ovos:</span> ~7 dúzias (se usar na ceia)</li>
+              <li><span>Iogurte Grego:</span> ~28-30 potes (se usar na ceia)</li>
               <li><span>Frutas:</span> ~28 unidades</li>
-              <li><span>Carnes Magras (Frango, Patinho, Tilápia):</span> ~17.2kg</li>
-              <li><span>Carboidratos (Arroz, Batata):</span> ~12.8kg (peso cozido)</li>
+              <li><span>Vegetais:</span> Comprar semanalmente</li>
+              <li><span>Carnes Magras (Frango, Peixe, Patinho):</span> ~11.2kg</li>
+              <li><span>Carboidratos (Arroz, Batata, Mandioca):</span> ~7.2kg (peso cozido)</li>
               <li><span>Feijão ou Lentilha:</span> ~2.8kg (peso cozido)</li>
-              <li><span>Whey Protein & Aveia:</span> Comprar potes maiores conforme o uso</li>
+              <li><span>Aveia:</span> Comprar pacote maior</li>
             </ul>
           </div>
         </div>
 
         <div class="summary">
           <h2>📊 Resumo Diário (Aproximado)</h2>
+          <p>Macros recalculados (Proteína > Carboidrato).</p>
           <ul>
-            <li>Calorias: <span>~2.400–2.500 kcal</span></li>
-            <li>Proteínas: <span>~220-230 g</span></li>
-            <li>Carboidratos: <span>~160-170 g</span></li>
-            <li>Gorduras: <span>~70-75 g</span></li>
+            <li>Calorias: <span>~1.850–2.000 kcal</span></li>
+            <li>Proteínas: <span>~180-195 g</span></li>
+            <li>Carboidratos: <span>~155-170 g</span></li>
+            <li>Gorduras: <span>~55-70 g</span></li>
           </ul>
         </div>
 
@@ -1067,30 +1111,6 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="mon_abs_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal com carga (máquina ou anilha)</strong><br><small>3 séries de 12-15</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="mon_abs_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas (paralela ou barra)</strong><br><small>3 séries até a falha</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="mon_abs_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Ventral</strong><br><small>3 séries até a falha</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="mon_abs_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div>
-            </div>
-          </li>
         </ul>
       </div>
 
@@ -1145,6 +1165,30 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
+          <li class="exercise-item" data-exercise-id="tue_abs_1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal com carga (máquina ou anilha)</strong><br><small>3 séries de 12-15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="tue_abs_2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas (paralela ou barra)</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="tue_abs_3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Ventral</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="tue_abs_4">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
         </ul>
       </div>
 
@@ -1191,30 +1235,6 @@
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Panturrilha em pé</strong><br><small>5 séries de 15-25</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="wed_abs_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal com carga (máquina ou anilha)</strong><br><small>3 séries de 12-15</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="wed_abs_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas (paralela ou barra)</strong><br><small>3 séries até a falha</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="wed_abs_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Ventral</strong><br><small>3 séries até a falha</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div>
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="wed_abs_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div>
             </div>
           </li>
         </ul>
@@ -1362,7 +1382,7 @@
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="fri_abs_4">
-            <div class="exercise-info"><input type="checkbox" class->"exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
@@ -1420,12 +1440,33 @@
 
       <div class="workout-day">
         <div class="workout-day-header">
-          <h3>Domingo: Recuperação Ativa</h3>
+          <h3>Domingo: Core & Abdômen</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
-          <li class="exercise-item">
-            <div class="exercise-info"><label><strong>Descanso e Foco</strong><br><small>Dia para o Treino de Core & Abdômen e a Revisão Geral com Simulados, conforme a sua agenda.</small></label></div>
+          <li class="exercise-item" data-exercise-id="sun_abs_1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Abdominal com carga (máquina ou anilha)</strong><br><small>3 séries de 12-15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="sun_abs_2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Elevação de Pernas (paralela ou barra)</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="sun_abs_3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Prancha Ventral</strong><br><small>3 séries até a falha</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="sun_abs_4">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>Perdigueiro (Bird-dog)</strong><br><small>3 séries de 12-15 (cada lado)</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div>
+            </div>
           </li>
         </ul>
       </div>
