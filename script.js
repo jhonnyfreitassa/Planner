@@ -129,57 +129,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- ROTINA COM HORÁRIOS DE TREINO CORRIGIDOS ---
 
-    // Segunda (Manhã Livre / Academia 15:00)
+    // Segunda (Manhã Livre / Academia 13:30)
+    adicionarAtividade(
+      "<strong>CrossFit</strong>",
+      1,
+      "06:30",
+      "07:30",
+      corCrossfit
+    );
     adicionarAtividade(
       "<strong>Revisão: Português</strong>",
       1,
-      "10:00",
-      "10:30",
+      "08:00",
+      "08:30",
       corRevisaoGeral
-    );
+    ); // (REVISÃO DO DIA)
     adicionarAtividade(
       "<strong>Língua Portuguesa</strong>",
       1,
+      "08:30",
       "10:30",
-      "12:30",
       corPortugues
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Atendimento Bancário</strong>",
+      1,
+      "11:00",
+      "13:00",
+      corAtendimento
     );
     adicionarAtividade(
       "<strong>Academia</strong>",
       1,
-      "15:00",
-      "17:00",
+      "13:30",
+      "15:30",
       corAcademia
-    ); // MOVIDO
-    adicionarAtividade(
-      "<strong>CrossFit</strong>",
-      1,
-      "18:35",
-      "19:05",
-      corCrossfit
     );
-    adicionarAtividade(
-      "<strong>Atendimento Bancário</strong>",
-      1,
-      "20:30",
-      "22:30",
-      corAtendimento
-    );
+    // (NOITE LIVRE)
 
     // Terça (Manhã Livre / Academia 13:30 - JEJUM)
     adicionarAtividade(
+      "<strong>CrossFit</strong>",
+      2,
+      "06:30",
+      "07:30",
+      corCrossfit
+    );
+    adicionarAtividade(
       "<strong>Revisão: C. Bancários</strong>",
       2,
-      "10:00",
-      "10:30",
+      "08:00",
+      "08:30",
       corRevisaoGeral
-    );
+    ); // (REVISÃO DO DIA)
     adicionarAtividade(
       "<strong>Conhecimentos Bancários</strong>",
       2,
+      "08:30",
       "10:30",
-      "12:30",
       corBancarios
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Probabilidade e Estatística</strong>",
+      2,
+      "11:00",
+      "13:00",
+      corProbabilidade
     );
     adicionarAtividade(
       "<strong>Academia</strong>",
@@ -196,59 +213,76 @@ document.addEventListener("DOMContentLoaded", function () {
       corPython
     );
     adicionarAtividade(textoCienciaDados, 2, "18:00", "22:00", corCienciaDados);
-    adicionarAtividade(
-      "<strong>Probabilidade e Estatística</strong>",
-      2,
-      "23:00",
-      "01:00",
-      corProbabilidade
-    );
 
-    // Quarta (Manhã Ocupada / Academia 15:00)
+    // Quarta (Manhã Ocupada / Academia 13:30)
+    adicionarAtividade(
+      "<strong>CrossFit</strong>",
+      3,
+      "06:30",
+      "07:30",
+      corCrossfit
+    );
+    adicionarAtividade(
+      "<strong>Revisão: Matemática</strong>",
+      3,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA)
+    adicionarAtividade(
+      "<strong>Matemática Financeira</strong>",
+      3,
+      "08:30",
+      "10:30",
+      corMatematica
+    );
     adicionarAtividade(textoParadigmas, 3, "11:10", "12:50", corParadigmas);
     adicionarAtividade(
       "<strong>Academia</strong>",
       3,
-      "15:00",
-      "17:00",
+      "13:30",
+      "15:30",
       corAcademia
-    ); // MOVIDO
-    adicionarAtividade(
-      "<strong>CrossFit</strong>",
-      3,
-      "18:35",
-      "19:05",
-      corCrossfit
     );
+    // 15:30 - 16:00 -> DESCANSO PÓS-ACADEMIA (30 min)
     adicionarAtividade(
-      "<strong>Revisão: Prob. e Estatística</strong>",
+      "<strong>Atendimento Bancário (Bloco 2)</strong>",
       3,
-      "20:30",
-      "21:00",
-      corRevisaoGeral
-    ); // CORRIGIDO
-    adicionarAtividade(
-      "<strong>Matemática Financeira</strong>",
-      3,
-      "21:00",
-      "23:00",
-      corMatematica
+      "16:00",
+      "18:00",
+      corAtendimento
     );
-    adicionarAtividade(
-      "<strong>Probabilidade e Estatística (Bloco 2)</strong>",
-      3,
-      "23:30",
-      "01:30",
-      corProbabilidade
-    );
+    // (NOITE LIVRE)
 
     // Quinta (Manhã Livre / Academia 13:30 - JEJUM)
     adicionarAtividade(
+      "<strong>CrossFit</strong>",
+      4,
+      "06:30",
+      "07:30",
+      corCrossfit
+    );
+    adicionarAtividade(
+      "<strong>Revisão: Prob. e Est.</strong>",
+      4,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA / BALANCEADO)
+    adicionarAtividade(
       "<strong>Língua Portuguesa (Bloco 2)</strong>",
       4,
-      "10:00",
-      "12:00",
+      "08:30",
+      "10:30",
       corPortugues
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Probabilidade e Estatística (Bloco 2)</strong>",
+      4,
+      "11:00",
+      "13:00",
+      corProbabilidade
     );
     adicionarAtividade(
       "<strong>Academia</strong>",
@@ -265,20 +299,6 @@ document.addEventListener("DOMContentLoaded", function () {
       corPython
     );
     adicionarAtividade(textoCienciaDados, 4, "18:00", "22:00", corCienciaDados);
-    adicionarAtividade(
-      "<strong>Revisão: Matemática</strong>",
-      4,
-      "23:00",
-      "23:30",
-      corRevisaoGeral
-    ); // RESTAURADO (1h break)
-    adicionarAtividade(
-      "<strong>Matemática Financeira (Bloco 2)</strong>",
-      4,
-      "23:30",
-      "01:30",
-      corMatematica
-    );
 
     // Sexta (SÓ REVISÃO / Academia 15:00)
     adicionarAtividade(textoProgramacao, 5, "07:30", "11:05", corProgramacao);
@@ -289,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "15:00",
       "17:00",
       corAcademia
-    ); // MOVIDO
+    );
     adicionarAtividade(
       "<strong>CrossFit</strong>",
       5,
@@ -303,9 +323,31 @@ document.addEventListener("DOMContentLoaded", function () {
       "20:30",
       "22:30",
       corRevisaoGeral
-    );
+    ); // (REVISÃO DO DIA)
 
-    // Sábado (Tarde Livre / Academia 15:00)
+    // Sábado (Estudos pela manhã / Academia 15:00)
+    adicionarAtividade(
+      "<strong>Revisão: Informática</strong>",
+      6,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA)
+    adicionarAtividade(
+      "<strong>Conhecimentos de Informática</strong>",
+      6,
+      "08:30",
+      "10:30",
+      corInformatica
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Atualidades Mercado Financeiro</strong>",
+      6,
+      "11:00",
+      "13:00",
+      corAtualidades
+    );
     adicionarAtividade(
       "<strong>Academia</strong>",
       6,
@@ -313,27 +355,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "17:00",
       corAcademia
     );
-    adicionarAtividade(
-      "<strong>Revisão: Informática</strong>",
-      6,
-      "18:00",
-      "18:30",
-      corRevisaoGeral
-    );
-    adicionarAtividade(
-      "<strong>Conhecimentos de Informática</strong>",
-      6,
-      "18:30",
-      "20:30",
-      corInformatica
-    );
-    adicionarAtividade(
-      "<strong>Atualidades Mercado Financeiro</strong>",
-      6,
-      "21:30",
-      "23:30",
-      corAtualidades
-    ); // 1h break
 
     // Domingo (ACADEMIA 12H - JEJUM / ESTUDO À TARDE)
     adicionarAtividade(
@@ -343,13 +364,14 @@ document.addEventListener("DOMContentLoaded", function () {
       "14:00",
       corAcademia
     ); // Em jejum
+    // 14:00 - 14:30 -> DESCANSO (30 min)
     adicionarAtividade(
       "<strong>Revisão: Atendimento</strong>",
       7,
       "14:30",
       "15:00",
       corRevisaoGeral
-    ); // CORRIGIDO
+    ); // (REVISÃO DO DIA / BALANCEADO)
     adicionarAtividade(
       "<strong>Conhecimentos Bancários (Bloco 2)</strong>",
       7,
@@ -357,13 +379,14 @@ document.addEventListener("DOMContentLoaded", function () {
       "17:00",
       corBancarios
     );
+    // 17:00 - 17:30 -> DESCANSO (30 min)
     adicionarAtividade(
-      "<strong>Atendimento Bancário (Bloco 2)</strong>",
+      "<strong>Matemática Financeira (Bloco 2)</strong>",
       7,
-      "18:00",
-      "20:00",
-      corAtendimento
-    ); // 1h break
+      "17:30",
+      "19:30",
+      corMatematica
+    );
   }
 
   const textareasToSave = [
@@ -381,10 +404,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  if (
-    document.getElementById("treino-section") ||
-    document.getElementById("aerobico-core-section")
-  ) {
+  // Condição simplificada para checar apenas por 'treino-section'
+  if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
     const storageKey = "workoutProgress";
 
