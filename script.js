@@ -1,770 +1,671 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap");
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "JetBrains Mono", monospace;
-  background-color: #121212;
-  color: #e0e0e0;
-  overscroll-behavior-x: none;
+// --- SCRIPT DE NAVEGAÇÃO POR ABAS ---
+function showSection(sectionId) {
+  document
+    .querySelectorAll(".content-section")
+    .forEach((s) => s.classList.remove("active"));
+  document
+    .querySelectorAll(".tab-button")
+    .forEach((b) => b.classList.remove("active"));
+  document.getElementById(sectionId).classList.add("active");
+  document
+    .querySelector(`.tab-button[onclick="showSection('${sectionId}')"]`)
+    .classList.add("active");
 }
 
-/* --- NAVEGAÇÃO POR ABAS --- */
-.nav-tabs {
-  display: flex;
-  background-color: #1e1e1e;
-  padding: 10px 20px 0 20px;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+document.addEventListener("DOMContentLoaded", function () {
+  // --- SCRIPT DA AGENDA DINÂMICA ---
+  if (document.getElementById("agenda")) {
+    const agenda = document.getElementById("agenda");
 
-.tab-button {
-  padding: 12px 20px;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  color: #a0a0a0;
-  font-size: 1.1em;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-  font-family: "JetBrains Mono", monospace;
-}
+    // Grade de 5h até 3h da manhã (total 22 células de altura)
+    const HORA_INICIO_AGENDA = 5,
+      HORA_FIM_AGENDA = 27,
+      ALTURA_HORA = 60;
 
-.tab-button.active {
-  color: #ffffff;
-}
+    function gerarGrade() {
+      agenda.innerHTML = "";
+      const t = document.createElement("div");
+      (t.className = "grid-item"),
+        (t.style.borderLeft = "none"),
+        (t.style.borderBottom = "1px solid #333"),
+        agenda.appendChild(t);
 
-/* Cores específicas para abas ativas */
-.tab-button[onclick*="agenda"].active {
-  border-bottom-color: #007bff;
-}
+      ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].forEach((e) => {
+        const o = document.createElement("div");
+        (o.className = "grid-item header-dia"),
+          (o.textContent = e),
+          agenda.appendChild(o);
+      });
 
-.tab-button[onclick*="treino"].active {
-  border-bottom-color: #e74c3c;
-}
+      for (let o = HORA_INICIO_AGENDA; o < HORA_FIM_AGENDA; o++) {
+        const e = document.createElement("div");
+        e.className = "grid-item celula-hora";
+        const horaMostrada = o % 24;
+        e.textContent = `${horaMostrada.toString().padStart(2, "0")}:00`;
+        (e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`),
+          agenda.appendChild(e);
+      }
 
-.tab-button[onclick*="dieta"].active {
-  border-bottom-color: #4caf50;
-}
+      for (let e = 0; e < 7; e++) {
+        const o = document.createElement("div");
+        (o.className = "coluna-dia"),
+          (o.dataset.diaIndex = e + 1),
+          (o.style.gridColumn = `${e + 2}`);
+        (o.style.gridRow = `2 / span ${HORA_FIM_AGENDA - HORA_INICIO_AGENDA}`),
+          agenda.appendChild(o);
+      }
+    }
 
-.tab-button[onclick*="bem-estar"].active {
-  border-bottom-color: #007bff;
-}
+    function adicionarAtividade(t, e, o, i, n, customClass) {
+      let [d, a] = o.split(":").map(Number);
+      let [r, s] = i.split(":").map(Number);
 
-.content-section {
-  display: none;
-  padding: 20px;
-  animation: fadeIn 0.5s;
-}
+      // Lógica para eventos que cruzam a meia-noite (ex: 23:00 -> 01:00)
+      if (r < d && r < HORA_INICIO_AGENDA) {
+        r += 24; // Converte 1 para 25
+      }
 
-.content-section.active {
-  display: block;
-}
+      // Lógica para eventos que começam na madrugada (ex: 01:00)
+      if (d >= 0 && d < HORA_INICIO_AGENDA) {
+        d += 24; // Converte 1 para 25
+        if (r < d) r += 24; // Converte 3 para 27
+      }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+      const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60;
+      const c = (r * 60 + s - (d * 60 + a)) / 60;
+
+      if (d < HORA_INICIO_AGENDA && r < HORA_INICIO_AGENDA) return;
+
+      const h = document.createElement("div");
+      h.className = "atividade-bloco";
+      if (customClass) h.classList.add(customClass);
+      (h.style.top = `${l * ALTURA_HORA}px`),
+        (h.style.height = `${c * ALTURA_HORA}px`),
+        (h.style.backgroundColor = n),
+        (h.style.borderLeftColor = ajustarCor(n, -40)),
+        (h.innerHTML = `${t} <br><small>${o} - ${i}</small>`),
+        agenda
+          .querySelector(`.coluna-dia[data-dia-index='${e}']`)
+          ?.appendChild(h);
+    }
+
+    function ajustarCor(t, e) {
+      let o = parseInt(t.slice(1, 3), 16),
+        i = parseInt(t.slice(3, 5), 16),
+        n = parseInt(t.slice(5, 7), 16);
+      return `#${Math.max(0, Math.min(255, o + e))
+        .toString(16)
+        .padStart(2, "0")}${Math.max(0, Math.min(255, i + e))
+        .toString(16)
+        .padStart(2, "0")}${Math.max(0, Math.min(255, n + e))
+        .toString(16)
+        .padStart(2, "0")}`;
+    }
+
+    gerarGrade();
+
+    // CORES DAS ATIVIDADES
+    const corCrossfit = "#FF4500";
+    const corPython = "#5856d6";
+    const corCienciaDados = "#8e44ad"; // Roxo
+    const corAcademia = "#e74c3c";
+    const corProgramacao = "#f39c12";
+    const corParadigmas = "#4169E1";
+
+    // CORES PARA O CONCURSO
+    const corPortugues = "#007bff";
+    const corMatematica = "#28a745";
+    const corBancarios = "#20c997";
+    const corInformatica = "#6c757d";
+    const corAtendimento = "#17a2b8";
+    const corAtualidades = "#fd7e14";
+    const corProbabilidade = "#e83e8c";
+    const corRevisaoGeral = "#ffc107";
+
+    // Textos das Aulas
+    const textoProgramacao = `<strong>BASES DE PROGRAMAÇÃO</strong><br><small>SALA 2013 (prédio ll. Nível 2)</small>`;
+    const textoParadigmas = `<strong>PARADIGMAS DE LING. DE PROGRAMAÇÃO</strong><br><small>SALA 2013 (prédio ll. Nível 2)</small>`;
+    const textoCienciaDados = `<strong>CURSO CIÊNCIA DE DADOS</strong><br><small>Online (Google Meet)</small>`;
+
+    // --- ROTINA COM HORÁRIOS DE TREINO CORRIGIDOS ---
+
+    // Segunda (Manhã Livre / Academia 13:30)
+    adicionarAtividade(
+      "<strong>Revisão: Português</strong>",
+      1,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA)
+    adicionarAtividade(
+      "<strong>Língua Portuguesa</strong>",
+      1,
+      "08:30",
+      "10:30",
+      corPortugues
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Atendimento Bancário</strong>",
+      1,
+      "11:00",
+      "13:00",
+      corAtendimento
+    );
+    adicionarAtividade(
+      "<strong>Academia</strong>",
+      1,
+      "13:30",
+      "15:30",
+      corAcademia
+    );
+    adicionarAtividade(
+      "<strong>CrossFit</strong>",
+      1,
+      "18:35",
+      "19:05",
+      corCrossfit
+    );
+
+    // Terça (Manhã Livre / Academia 13:30 - JEJUM)
+    adicionarAtividade(
+      "<strong>Revisão: C. Bancários</strong>",
+      2,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA)
+    adicionarAtividade(
+      "<strong>Conhecimentos Bancários</strong>",
+      2,
+      "08:30",
+      "10:30",
+      corBancarios
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Probabilidade e Estatística</strong>",
+      2,
+      "11:00",
+      "13:00",
+      corProbabilidade
+    );
+    adicionarAtividade(
+      "<strong>Academia</strong>",
+      2,
+      "13:30",
+      "15:30",
+      corAcademia
+    ); // Em jejum
+    adicionarAtividade(textoCienciaDados, 2, "18:00", "22:00", corCienciaDados);
+
+    // Quarta (Manhã Ocupada / Academia 13:30)
+    adicionarAtividade(
+      "<strong>Revisão: Matemática</strong>",
+      3,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA)
+    adicionarAtividade(
+      "<strong>Matemática Financeira</strong>",
+      3,
+      "08:30",
+      "10:30",
+      corMatematica
+    );
+    adicionarAtividade(textoParadigmas, 3, "11:10", "12:50", corParadigmas);
+    adicionarAtividade(
+      "<strong>Academia</strong>",
+      3,
+      "13:30",
+      "15:30",
+      corAcademia
+    );
+    // 15:30 - 16:00 -> DESCANSO PÓS-ACADEMIA (30 min)
+    adicionarAtividade(
+      "<strong>Atendimento Bancário (Bloco 2)</strong>",
+      3,
+      "16:00",
+      "18:00",
+      corAtendimento
+    );
+    adicionarAtividade(
+      "<strong>CrossFit</strong>",
+      3,
+      "18:35",
+      "19:05",
+      corCrossfit
+    );
+
+    // Quinta (Manhã Livre / Academia 13:30 - JEJUM)
+    adicionarAtividade(
+      "<strong>Revisão: Prob. e Est.</strong>",
+      4,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA / BALANCEADO)
+    adicionarAtividade(
+      "<strong>Língua Portuguesa (Bloco 2)</strong>",
+      4,
+      "08:30",
+      "10:30",
+      corPortugues
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Probabilidade e Estatística (Bloco 2)</strong>",
+      4,
+      "11:00",
+      "13:00",
+      corProbabilidade
+    );
+    adicionarAtividade(
+      "<strong>Academia</strong>",
+      4,
+      "13:30",
+      "15:30",
+      corAcademia
+    ); // Em jejum
+    adicionarAtividade(textoCienciaDados, 4, "18:00", "22:00", corCienciaDados);
+
+    // Sexta (SÓ REVISÃO / Academia 15:00)
+    adicionarAtividade(textoProgramacao, 5, "07:30", "11:05", corProgramacao);
+    adicionarAtividade(textoParadigmas, 5, "11:10", "12:50", corParadigmas);
+    adicionarAtividade(
+      "<strong>Academia</strong>",
+      5,
+      "15:00",
+      "17:00",
+      corAcademia
+    );
+    adicionarAtividade(
+      "<strong>CrossFit</strong>",
+      5,
+      "18:35",
+      "19:05",
+      corCrossfit
+    );
+    adicionarAtividade(
+      "<strong>Revisão Geral + Simulados</strong>",
+      5,
+      "20:30",
+      "22:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA)
+
+    // Sábado (Estudos pela manhã / Academia 15:00)
+    adicionarAtividade(
+      "<strong>Revisão: Informática</strong>",
+      6,
+      "08:00",
+      "08:30",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA)
+    adicionarAtividade(
+      "<strong>Conhecimentos de Informática</strong>",
+      6,
+      "08:30",
+      "10:30",
+      corInformatica
+    );
+    // 10:30 - 11:00 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Atualidades Mercado Financeiro</strong>",
+      6,
+      "11:00",
+      "13:00",
+      corAtualidades
+    );
+    adicionarAtividade(
+      "<strong>Academia</strong>",
+      6,
+      "15:00",
+      "17:00",
+      corAcademia
+    );
+
+    // Domingo (ACADEMIA 12H - JEJUM / ESTUDO À TARDE)
+    adicionarAtividade(
+      "<strong>Academia</strong>",
+      7,
+      "12:00",
+      "14:00",
+      corAcademia
+    ); // Em jejum
+    // 14:00 - 14:30 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Revisão: Atendimento</strong>",
+      7,
+      "14:30",
+      "15:00",
+      corRevisaoGeral
+    ); // (REVISÃO DO DIA / BALANCEADO)
+    adicionarAtividade(
+      "<strong>Conhecimentos Bancários (Bloco 2)</strong>",
+      7,
+      "15:00",
+      "17:00",
+      corBancarios
+    );
+    // 17:00 - 17:30 -> DESCANSO (30 min)
+    adicionarAtividade(
+      "<strong>Matemática Financeira (Bloco 2)</strong>",
+      7,
+      "17:30",
+      "19:30",
+      corMatematica
+    );
   }
 
-  to {
-    opacity: 1;
-  }
-}
-
-/* --- ESTILOS DA SEÇÃO AGENDA --- */
-#agenda-section {
-  --cor-fundo: #121212;
-  --cor-superficie: #1e1e1e;
-  --cor-borda: #333;
-  --cor-texto-principal: #e0e0e0;
-  --cor-texto-secundario: #a0a0a0;
-  --hora-altura: 60px;
-  padding: 20px;
-}
-
-#agenda-section .container {
-  display: flex;
-  width: 100%;
-  box-sizing: border-box;
-  flex-direction: column;
-}
-
-/* ESTILOS PARA CAIXAS DE PRAZOS */
-.deadlines-container {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
-}
-
-.deadline-box {
-  flex: 1;
-  min-width: 250px;
-  background-color: var(--cor-superficie);
-  border-radius: 8px;
-  padding: 15px;
-  border: 1px solid var(--cor-borda);
-}
-
-.deadline-box h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #ffffff;
-  border-bottom: 1px solid var(--cor-borda);
-  padding-bottom: 8px;
-  font-size: 1.2em;
-}
-
-.deadline-box textarea {
-  width: 100%;
-  height: 150px;
-  background-color: #121212;
-  border: 1px solid var(--cor-borda);
-  border-radius: 5px;
-  color: var(--cor-texto-principal);
-  padding: 10px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.95em;
-  resize: vertical;
-  box-sizing: border-box;
-}
-
-#agenda-section .agenda-container-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 1px solid var(--cor-borda);
-  border-radius: 8px;
-}
-
-#agenda-section .agenda-container {
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: 50px repeat(7, 1fr);
-  grid-template-rows: 50px repeat(19, var(--hora-altura));
-  background-color: var(--cor-superficie);
-  min-width: 700px;
-}
-
-#agenda-section .grid-item {
-  text-align: center;
-  padding: 10px 5px;
-  border-bottom: 1px solid var(--cor-borda);
-  border-left: 1px solid var(--cor-borda);
-  box-sizing: border-box;
-}
-
-#agenda-section .header-dia {
-  font-weight: bold;
-}
-
-#agenda-section .celula-hora {
-  font-size: 0.8em;
-  color: var(--cor-texto-secundario);
-}
-
-#agenda-section .coluna-dia {
-  position: relative;
-  border-left: none;
-  border-bottom: none;
-  padding: 0;
-  background-image: linear-gradient(var(--cor-borda) 1px, transparent 1px);
-  background-size: 100% var(--hora-altura);
-}
-
-#agenda-section .atividade-bloco {
-  position: absolute;
-  left: 5px;
-  right: 5px;
-  border-left: 3px solid #0056b3;
-  border-radius: 4px;
-  padding: 5px;
-  box-sizing: border-box;
-  color: white;
-  font-size: 0.55em;
-  overflow: hidden;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Classe específica para fonte ainda menor */
-#agenda-section .atividade-bloco.bloco-muito-pequeno {
-  font-size: 0.5em;
-}
-
-#agenda-section .atividade-bloco strong {
-  display: block;
-  font-size: 1.1em;
-  line-height: 1.2;
-}
-
-#agenda-section .atividade-bloco small {
-  font-size: 0.9em;
-  opacity: 0.8;
-}
-
-/* --- ESTILOS DA SEÇÃO DIETA --- */
-#dieta-section {
-  --primary-color: #4caf50;
-  --secondary-color: #2c2c2c;
-  --text-color: #e0e0e0;
-  --container-bg: #1e1e1e;
-  --border-radius: 15px;
-  background-color: #121212;
-  color: var(--text-color);
-  padding: 20px;
-}
-
-#dieta-section .container {
-  max-width: 900px;
-  margin: 0 auto;
-  background-color: var(--container-bg);
-  padding: 20px;
-  border-radius: var(--border-radius);
-}
-
-#dieta-section header h1 {
-  color: var(--primary-color);
-  font-size: 2em;
-  margin: 0;
-  text-align: center;
-}
-
-#dieta-section header p {
-  font-size: 1em;
-  color: #a0a0a0;
-  text-align: center;
-}
-
-#dieta-section .meal-plan-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-#dieta-section .meal-plan {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  min-width: 600px;
-}
-
-#dieta-section .meal-plan th,
-#dieta-section .meal-plan td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #333;
-}
-
-#dieta-section .meal-plan th {
-  background-color: var(--primary-color);
-  color: white;
-  font-weight: 600;
-  font-size: 1.2em;
-}
-
-#dieta-section .meal-plan tr:nth-child(even) {
-  background-color: #2c2c2c;
-}
-
-#dieta-section .meal-time {
-  font-weight: 700;
-  color: var(--primary-color);
-  min-width: 150px;
-}
-
-#dieta-section .meal-details ul {
-  padding-left: 20px;
-  margin: 0;
-}
-
-#dieta-section .meal-details ul li ul {
-  /* Estilo para sublistas (Opções) */
-  padding-left: 15px;
-  margin-top: 5px;
-}
-
-#dieta-section .meal-details ul li ul li::marker {
-  /* Remove marcador padrão da sublista se necessário */
-  content: "- ";
-}
-
-#dieta-section .summary {
-  background-color: #2e7d32;
-  border-left: 5px solid var(--primary-color);
-  padding: 20px;
-  margin-top: 30px;
-  border-radius: 10px;
-  color: white;
-}
-
-#dieta-section .summary h2 {
-  margin-top: 0;
-  color: white;
-}
-
-#dieta-section .summary span {
-  font-weight: 600;
-}
-
-/* NOVOS ESTILOS PARA LISTA DE COMPRAS */
-.shopping-lists-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
-
-.shopping-list {
-  flex: 1;
-  min-width: 300px;
-  background-color: #2e7d32;
-  border-left: 5px solid var(--primary-color);
-  padding: 20px;
-  border-radius: 10px;
-  color: white;
-}
-
-.shopping-list h2 {
-  margin-top: 0;
-  color: white;
-  border-bottom: 1px solid var(--primary-color);
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-.shopping-list ul {
-  padding-left: 25px;
-  list-style-type: "🛒 ";
-  line-height: 1.8;
-}
-
-.shopping-list span {
-  font-weight: 600;
-}
-
-.drinks-routine {
-  margin-top: 40px;
-  border-top: 2px solid var(--primary-color);
-  padding-top: 20px;
-}
-
-.drinks-routine h2 {
-  color: var(--primary-color);
-  font-size: 1.8em;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.drinks-routine .time-block {
-  background-color: #2c2c2c;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 25px;
-  border-left: 5px solid var(--primary-color);
-}
-
-.drinks-routine h3 {
-  font-size: 1.5em;
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: white;
-}
-
-.drinks-routine h4 {
-  font-size: 1.2em;
-  color: var(--primary-color);
-  margin-bottom: 10px;
-  border-bottom: 1px solid #444;
-  padding-bottom: 5px;
-}
-
-.drinks-routine p,
-.drinks-routine ul {
-  line-height: 1.7;
-  color: #e0e0e0;
-}
-
-.drinks-routine ul {
-  padding-left: 20px;
-}
-
-/* --- ESTILOS GLOBAIS DE TREINO (USADO NAS DUAS ABAS) --- */
-#treino-section {
-  --cor-superficie: #1e1e1e;
-  --cor-borda: #333;
-  --cor-texto-principal: #e0e0e0;
-  --cor-texto-secundario: #a0a0a0;
-}
-
-#treino-section h1,
-#treino-section h2 {
-  border-bottom: 1px solid var(--cor-borda);
-  padding-bottom: 10px;
-}
-
-#treino-section h1 {
-  text-align: center;
-  font-size: 2em;
-  border-bottom: none;
-}
-
-#treino-section h2 {
-  font-size: 1.5em;
-  margin-top: 40px;
-}
-
-.workout-day {
-  background-color: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 25px;
-}
-
-.workout-day-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--cor-borda);
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-.workout-day-header h3 {
-  margin: 0;
-  border-bottom: none;
-  padding-bottom: 0;
-  font-size: 1.3em;
-}
-
-.reset-button {
-  background-color: #333;
-  color: #e0e0e0;
-  border: 1px solid #555;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.3s;
-  font-family: "JetBrains Mono", monospace;
-}
-
-.reset-button:hover {
-  background-color: #444;
-}
-
-.exercise-item {
-  padding: 15px 5px;
-  border-bottom: 1px solid var(--cor-borda);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-#treino-section ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.exercise-item:last-child {
-  border-bottom: none;
-}
-
-.exercise-item.completed label {
-  text-decoration: line-through;
-  color: var(--cor-texto-secundario);
-}
-
-.exercise-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex-grow: 1;
-}
-
-.exercise-checkbox {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.exercise-info label {
-  line-height: 1.4;
-  cursor: pointer;
-}
-
-.exercise-info small {
-  color: var(--cor-texto-secundario);
-  font-style: italic;
-}
-
-.exercise-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.series-counter {
-  display: flex;
-  gap: 5px;
-}
-
-.series-dot {
-  width: 18px;
-  height: 18px;
-  background-color: #333;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.series-dot.completed {
-  background-color: var(--cor-destaque);
-}
-
-.weight-input {
-  width: 60px;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid var(--cor-borda);
-  background-color: #121212;
-  color: var(--cor-texto-principal);
-  text-align: center;
-  font-family: "JetBrains Mono", monospace;
-}
-
-/* --- ESTILOS ESPECÍFICOS DA SEÇÃO TREINO --- */
-#treino-section {
-  --cor-destaque: #e74c3c;
-  /* Cor da academia */
-}
-
-#treino-section h1,
-#treino-section h2,
-#treino-section .workout-day-header h3 {
-  color: var(--cor-destaque);
-}
-
-#treino-section .workout-day {
-  border-left: 5px solid var(--cor-destaque);
-}
-
-#treino-section .series-dot.completed {
-  background-color: var(--cor-destaque);
-}
-
-/* --- ESTILOS DA SEÇÃO BEM-ESTAR --- */
-#bem-estar-section {
-  --cor-superficie: #1e1e1e;
-  --cor-borda: #333;
-  --cor-texto-principal: #e0e0e0;
-  --cor-texto-secundario: #a0a0a0;
-  --cor-destaque: #007bff;
-  /* Azul da aba Agenda */
-}
-
-#bem-estar-section .container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-#bem-estar-section h2 {
-  color: var(--cor-destaque);
-  border-bottom: 2px solid var(--cor-destaque);
-  padding-bottom: 10px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  font-size: 1.8em;
-}
-
-#bem-estar-section h3 {
-  color: var(--cor-texto-principal);
-  border-left: 4px solid var(--cor-destaque);
-  padding-left: 10px;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-size: 1.4em;
-}
-
-#bem-estar-section ul {
-  list-style-type: "» ";
-  padding-left: 25px;
-  line-height: 1.8;
-}
-
-.table-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 1px solid var(--cor-borda);
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-}
-
-th,
-td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid var(--cor-borda);
-}
-
-th {
-  background-color: #333;
-  font-size: 1.1em;
-}
-
-#bem-estar-section th,
-#dieta-section th {
-  color: var(--cor-destaque);
-}
-
-tr:nth-child(even) {
-  background-color: var(--cor-superficie);
-}
-
-/* Novos estilos para o diário de anotações */
-#bem-estar-section .journal-entry-form {
-  background-color: var(--cor-superficie);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--cor-borda);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-#bem-estar-section .journal-entry-form .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#bem-estar-section .journal-entry-form label {
-  font-weight: bold;
-  color: var(--cor-destaque);
-}
-
-#bem-estar-section .journal-entry-form input[type="date"],
-#bem-estar-section .journal-entry-form textarea {
-  width: 100%;
-  background-color: #121212;
-  border: 1px solid var(--cor-borda);
-  border-radius: 5px;
-  padding: 12px;
-  color: var(--cor-texto-principal);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 1em;
-  box-sizing: border-box;
-}
-
-#bem-estar-section .journal-entry-form textarea {
-  min-height: 150px;
-  resize: vertical;
-}
-
-#bem-estar-section .journal-entry-form .add-note-btn {
-  padding: 12px 25px;
-  background-color: var(--cor-destaque);
-  color: #121212;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.1em;
-  font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
-  font-family: "JetBrains Mono", monospace;
-  align-self: flex-start;
-}
-
-#bem-estar-section .journal-entry-form .add-note-btn:hover {
-  background-color: #4dafff;
-  transform: translateY(-2px);
-}
-
-#bem-estar-section .journal-history {
-  margin-top: 30px;
-}
-
-#bem-estar-section .journal-entry {
-  background-color: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-left: 5px solid var(--cor-destaque);
-  border-radius: 8px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  word-wrap: break-word;
-}
-
-#bem-estar-section .journal-entry .entry-header {
-  overflow: auto;
-  /* Clearfix para conter os floats */
-}
-
-#bem-estar-section .journal-entry .entry-date {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #ffffff;
-  margin: 0 0 10px 0;
-  float: left;
-}
-
-#bem-estar-section .journal-entry .delete-note-btn {
-  float: right;
-  background-color: #c0392b;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-family: "JetBrains Mono", monospace;
-  transition: background-color 0.2s ease;
-}
-
-#bem-estar-section .journal-entry .delete-note-btn:hover {
-  background-color: #e74c3c;
-}
-
-#bem-estar-section .journal-entry .entry-text {
-  clear: both;
-  /* Garante que o texto fique abaixo do header */
-  white-space: pre-wrap;
-  /* Preserva quebras de linha */
-  line-height: 1.6;
-  color: var(--cor-texto-principal);
-}
-
-/* =============================================== */
-/* === REGRAS PARA SMARTPHONES (RESPONSIVIDADE) === */
-/* =============================================== */
-@media (max-width: 768px) {
-  .content-section {
-    padding: 10px;
+  const textareasToSave = [
+    "provas-textarea",
+    "atividades-textarea",
+    "consultas-textarea",
+  ];
+  textareasToSave.forEach((id) => {
+    const textarea = document.getElementById(id);
+    if (textarea) {
+      textarea.value = localStorage.getItem(id) || "";
+      textarea.addEventListener("input", () => {
+        localStorage.setItem(id, textarea.value);
+      });
+    }
+  });
+
+  // Condição simplificada para checar apenas por 'treino-section'
+  if (document.getElementById("treino-section")) {
+    const exerciseItems = document.querySelectorAll(".exercise-item");
+    const storageKey = "workoutProgress";
+
+    function saveProgress() {
+      const progressData = {};
+      exerciseItems.forEach((item) => {
+        const id = item.dataset.exerciseId;
+        if (id) {
+          const seriesDots = item.querySelectorAll(".series-dot");
+          const completedSeries = [];
+          seriesDots.forEach((dot, index) => {
+            if (dot.classList.contains("completed")) {
+              completedSeries.push(index);
+            }
+          });
+          progressData[id] = {
+            completed:
+              item.querySelector(".exercise-checkbox")?.checked ?? false,
+            weight: item.querySelector(".weight-input")?.value ?? null,
+            series: completedSeries,
+          };
+        }
+      });
+      localStorage.setItem(storageKey, JSON.stringify(progressData));
+    }
+
+    function loadProgress() {
+      const savedData = JSON.parse(localStorage.getItem(storageKey));
+      if (savedData) {
+        exerciseItems.forEach((item) => {
+          const id = item.dataset.exerciseId;
+          if (id && savedData[id]) {
+            const checkbox = item.querySelector(".exercise-checkbox");
+            const weightInput = item.querySelector(".weight-input");
+            if (checkbox) {
+              checkbox.checked = savedData[id].completed;
+              item.classList.toggle("completed", checkbox.checked);
+            }
+            if (weightInput) {
+              weightInput.value = savedData[id].weight;
+            }
+            if (savedData[id].series) {
+              const seriesDots = item.querySelectorAll(".series-dot");
+              seriesDots.forEach((dot, index) => {
+                if (savedData[id].series.includes(index)) {
+                  dot.classList.add("completed");
+                }
+              });
+            }
+          }
+        });
+      }
+    }
+
+    exerciseItems.forEach((item) => {
+      const checkbox = item.querySelector(".exercise-checkbox");
+      const weightInput = item.querySelector(".weight-input");
+      const seriesCounter = item.querySelector(".series-counter");
+      const smallText = item.querySelector("small")?.textContent || "";
+
+      if (seriesCounter) {
+        seriesCounter.innerHTML = "";
+        let seriesCount = 0;
+        const seriesMatch = smallText.match(/(\d+)\s*séries/);
+        if (seriesMatch) {
+          seriesCount = parseInt(seriesMatch[1], 10);
+        } else if (smallText.includes("até a falha")) {
+          seriesCount = 3;
+        }
+        for (let i = 0; i < seriesCount; i++) {
+          const dot = document.createElement("div");
+          dot.className = "series-dot";
+          dot.addEventListener("click", () => {
+            dot.classList.toggle("completed");
+            saveProgress();
+          });
+          seriesCounter.appendChild(dot);
+        }
+      }
+
+      if (checkbox) {
+        checkbox.addEventListener("change", () => {
+          item.classList.toggle("completed", checkbox.checked);
+          saveProgress();
+        });
+      }
+
+      if (weightInput) {
+        weightInput.addEventListener("input", saveProgress);
+      }
+    });
+
+    loadProgress();
+
+    const resetButtons = document.querySelectorAll(".reset-button");
+    resetButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const workoutDay = this.closest(".workout-day");
+        if (workoutDay) {
+          const itemsToReset = workoutDay.querySelectorAll(".exercise-item");
+          itemsToReset.forEach((item) => {
+            const checkbox = item.querySelector(".exercise-checkbox");
+            if (checkbox) {
+              checkbox.checked = false;
+            }
+            item.classList.remove("completed");
+            const seriesDots = item.querySelectorAll(".series-dot");
+            seriesDots.forEach((dot) => {
+              dot.classList.remove("completed");
+            });
+          });
+          saveProgress();
+        }
+      });
+    });
   }
 
-  #agenda-section,
-  #dieta-section,
-  #treino-section,
-  #bem-estar-section {
-    padding: 10px;
-  }
+  if (document.getElementById("bem-estar-section")) {
+    // --- SCRIPT PARA DIÁRIO DE ANOTAÇÕES ---
+    const dateInput = document.getElementById("journal-date");
+    const textInput = document.getElementById("journal-text");
+    const addButton = document.getElementById("add-note-button");
+    const historyContainer = document.getElementById(
+      "journal-history-container"
+    );
+    const journalStorageKey = "datedWellnessJournal";
 
-  #agenda-section .container {
-    flex-direction: column;
-    gap: 25px;
+    dateInput.value = new Date().toISOString().slice(0, 10);
+
+    function deleteJournalEntry(event) {
+      const entryId = event.target.dataset.id;
+      let entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
+      entries = entries.filter((entry) => entry.id != entryId);
+      localStorage.setItem(journalStorageKey, JSON.stringify(entries));
+      loadJournalEntries();
+    }
+
+    function loadJournalEntries() {
+      historyContainer.innerHTML = "<h3>Histórico</h3>";
+      const entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
+      entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (entries.length === 0) {
+        const noEntryMessage = document.createElement("p");
+        noEntryMessage.textContent = "Nenhuma anotação encontrada.";
+        noEntryMessage.style.color = "#a0a0a0";
+        historyContainer.appendChild(noEntryMessage);
+        return;
+      }
+
+      entries.forEach((entry) => {
+        const entryDiv = document.createElement("div");
+        entryDiv.className = "journal-entry";
+        const headerDiv = document.createElement("div");
+        headerDiv.className = "entry-header";
+        const entryDate = document.createElement("p");
+        entryDate.className = "entry-date";
+        const [year, month, day] = entry.date.split("-");
+        entryDate.textContent = `${day}/${month}/${year}`;
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-note-btn";
+        deleteButton.textContent = "Remover";
+        deleteButton.dataset.id = entry.id;
+        deleteButton.addEventListener("click", deleteJournalEntry);
+        headerDiv.appendChild(entryDate);
+        headerDiv.appendChild(deleteButton);
+        const entryText = document.createElement("p");
+        entryText.className = "entry-text";
+        entryText.textContent = entry.text;
+        entryDiv.appendChild(headerDiv);
+        entryDiv.appendChild(entryText);
+        historyContainer.appendChild(entryDiv);
+      });
+    }
+
+    function addJournalEntry() {
+      const date = dateInput.value;
+      const text = textInput.value.trim();
+      if (!date || !text) {
+        alert("Por favor, preencha a data e a anotação.");
+        return;
+      }
+      const newEntry = {
+        id: Date.now().toString(),
+        date,
+        text,
+      };
+      let entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
+      entries.push(newEntry);
+      localStorage.setItem(journalStorageKey, JSON.stringify(entries));
+      textInput.value = "";
+      loadJournalEntries();
+    }
+
+    addButton.addEventListener("click", addJournalEntry);
+    loadJournalEntries();
+
+    // --- SCRIPT PARA DIÁRIO DOS SONHOS ---
+    const dreamDateInput = document.getElementById("dream-journal-date");
+    const dreamTextInput = document.getElementById("dream-journal-text");
+    const dreamAddButton = document.getElementById("add-dream-button");
+    const dreamHistoryContainer = document.getElementById(
+      "dream-history-container"
+    );
+    const dreamJournalStorageKey = "datedWellnessDreamJournal";
+
+    dreamDateInput.value = new Date().toISOString().slice(0, 10);
+
+    function deleteDreamEntry(event) {
+      const entryId = event.target.dataset.id;
+      let entries =
+        JSON.parse(localStorage.getItem(dreamJournalStorageKey)) || [];
+      entries = entries.filter((entry) => entry.id != entryId);
+      localStorage.setItem(dreamJournalStorageKey, JSON.stringify(entries));
+      loadDreamEntries();
+    }
+
+    function loadDreamEntries() {
+      dreamHistoryContainer.innerHTML = "<h3>Histórico</h3>";
+      const entries =
+        JSON.parse(localStorage.getItem(dreamJournalStorageKey)) || [];
+      entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (entries.length === 0) {
+        const noEntryMessage = document.createElement("p");
+        noEntryMessage.textContent = "Nenhum sonho encontrado.";
+        noEntryMessage.style.color = "#a0a0a0";
+        dreamHistoryContainer.appendChild(noEntryMessage);
+        return;
+      }
+
+      entries.forEach((entry) => {
+        const entryDiv = document.createElement("div");
+        entryDiv.className = "journal-entry";
+        const headerDiv = document.createElement("div");
+        headerDiv.className = "entry-header";
+        const entryDate = document.createElement("p");
+        entryDate.className = "entry-date";
+        const [year, month, day] = entry.date.split("-");
+        entryDate.textContent = `${day}/${month}/${year}`;
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-note-btn";
+        deleteButton.textContent = "Remover";
+        deleteButton.dataset.id = entry.id;
+        deleteButton.addEventListener("click", deleteDreamEntry);
+        headerDiv.appendChild(entryDate);
+        headerDiv.appendChild(deleteButton);
+        const entryText = document.createElement("p");
+        entryText.className = "entry-text";
+        entryText.textContent = entry.text;
+        entryDiv.appendChild(headerDiv);
+        entryDiv.appendChild(entryText);
+        dreamHistoryContainer.appendChild(entryDiv);
+      });
+    }
+
+    function addDreamEntry() {
+      const date = dreamDateInput.value;
+      const text = dreamTextInput.value.trim();
+      if (!date || !text) {
+        alert("Por favor, preencha a data e o sonho.");
+        return;
+      }
+      const newEntry = {
+        id: Date.now().toString(),
+        date,
+        text,
+      };
+      let entries =
+        JSON.parse(localStorage.getItem(dreamJournalStorageKey)) || [];
+      entries.push(newEntry);
+      localStorage.setItem(dreamJournalStorageKey, JSON.stringify(entries));
+      dreamTextInput.value = "";
+      loadDreamEntries();
+    }
+
+    dreamAddButton.addEventListener("click", addDreamEntry);
+    loadDreamEntries();
   }
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then((registration) =>
+        console.log("Service Worker registrado com sucesso.")
+      )
+      .catch((error) =>
+        console.log("Falha ao registrar o Service Worker:", error)
+      );
+  });
 }
