@@ -131,13 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Segunda (Manhã Livre / Academia 13:30)
     adicionarAtividade(
-      "<strong>CrossFit</strong>",
-      1,
-      "06:30",
-      "07:30",
-      corCrossfit
-    );
-    adicionarAtividade(
       "<strong>Revisão: Português</strong>",
       1,
       "08:00",
@@ -166,16 +159,15 @@ document.addEventListener("DOMContentLoaded", function () {
       "15:30",
       corAcademia
     );
-    // (NOITE LIVRE)
-
-    // Terça (Manhã Livre / Academia 13:30 - JEJUM)
     adicionarAtividade(
       "<strong>CrossFit</strong>",
-      2,
-      "06:30",
-      "07:30",
+      1,
+      "18:35",
+      "19:05",
       corCrossfit
     );
+
+    // Terça (Manhã Livre / Academia 13:30 - JEJUM)
     adicionarAtividade(
       "<strong>Revisão: C. Bancários</strong>",
       2,
@@ -205,23 +197,9 @@ document.addEventListener("DOMContentLoaded", function () {
       "15:30",
       corAcademia
     ); // Em jejum
-    adicionarAtividade(
-      "<strong>Python (Online)</strong>",
-      2,
-      "15:40",
-      "17:40",
-      corPython
-    );
     adicionarAtividade(textoCienciaDados, 2, "18:00", "22:00", corCienciaDados);
 
     // Quarta (Manhã Ocupada / Academia 13:30)
-    adicionarAtividade(
-      "<strong>CrossFit</strong>",
-      3,
-      "06:30",
-      "07:30",
-      corCrossfit
-    );
     adicionarAtividade(
       "<strong>Revisão: Matemática</strong>",
       3,
@@ -252,16 +230,15 @@ document.addEventListener("DOMContentLoaded", function () {
       "18:00",
       corAtendimento
     );
-    // (NOITE LIVRE)
-
-    // Quinta (Manhã Livre / Academia 13:30 - JEJUM)
     adicionarAtividade(
       "<strong>CrossFit</strong>",
-      4,
-      "06:30",
-      "07:30",
+      3,
+      "18:35",
+      "19:05",
       corCrossfit
     );
+
+    // Quinta (Manhã Livre / Academia 13:30 - JEJUM)
     adicionarAtividade(
       "<strong>Revisão: Prob. e Est.</strong>",
       4,
@@ -291,13 +268,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "15:30",
       corAcademia
     ); // Em jejum
-    adicionarAtividade(
-      "<strong>Python (Online)</strong>",
-      4,
-      "15:40",
-      "17:40",
-      corPython
-    );
     adicionarAtividade(textoCienciaDados, 4, "18:00", "22:00", corCienciaDados);
 
     // Sexta (SÓ REVISÃO / Academia 15:00)
