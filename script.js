@@ -13,11 +13,53 @@ function showSection(sectionId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // --- SCRIPT DA AGENDA DINÂMICA ---
+  // ========================================================
+  // SCRIPT DO ROADMAP PROFISSIONAL
+  // ========================================================
+  if (document.getElementById("carreira-section")) {
+    const roadmapCheckboxes = document.querySelectorAll(".roadmap-check");
+    const roadmapProgressBar = document.getElementById("roadmapProgressBar");
+
+    function updateRoadmapProgress() {
+      const totalItems = roadmapCheckboxes.length;
+      const checkedItems = document.querySelectorAll(
+        ".roadmap-check:checked"
+      ).length;
+      const percentage =
+        totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
+
+      if (roadmapProgressBar) {
+        roadmapProgressBar.style.width = percentage + "%";
+        roadmapProgressBar.textContent = percentage + "%";
+      }
+
+      // Salvar no LocalStorage
+      roadmapCheckboxes.forEach((box) => {
+        localStorage.setItem(box.id, box.checked);
+      });
+    }
+
+    function loadRoadmapProgress() {
+      roadmapCheckboxes.forEach((box) => {
+        const isChecked = localStorage.getItem(box.id) === "true";
+        box.checked = isChecked;
+      });
+      updateRoadmapProgress();
+    }
+
+    // Listeners
+    roadmapCheckboxes.forEach((box) => {
+      box.addEventListener("change", updateRoadmapProgress);
+    });
+
+    loadRoadmapProgress();
+  }
+
+  // ========================================================
+  // SCRIPT DA AGENDA DINÂMICA
+  // ========================================================
   if (document.getElementById("agenda")) {
     const agenda = document.getElementById("agenda");
-
-    // Grade de 5h até 3h da manhã (total 22 células de altura)
     const HORA_INICIO_AGENDA = 5,
       HORA_FIM_AGENDA = 27,
       ALTURA_HORA = 60;
@@ -60,15 +102,10 @@ document.addEventListener("DOMContentLoaded", function () {
       let [d, a] = o.split(":").map(Number);
       let [r, s] = i.split(":").map(Number);
 
-      // Lógica para eventos que cruzam a meia-noite (ex: 23:00 -> 01:00)
-      if (r < d && r < HORA_INICIO_AGENDA) {
-        r += 24; // Converte 1 para 25
-      }
-
-      // Lógica para eventos que começam na madrugada (ex: 01:00)
+      if (r < d && r < HORA_INICIO_AGENDA) r += 24;
       if (d >= 0 && d < HORA_INICIO_AGENDA) {
-        d += 24; // Converte 1 para 25
-        if (r < d) r += 24; // Converte 3 para 27
+        d += 24;
+        if (r < d) r += 24;
       }
 
       const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60;
@@ -104,258 +141,204 @@ document.addEventListener("DOMContentLoaded", function () {
 
     gerarGrade();
 
-    // CORES DAS ATIVIDADES
-    const corCrossfit = "#FF4500";
-    const corPython = "#5856d6";
-    const corCienciaDados = "#8e44ad"; // Roxo
-    const corAcademia = "#e74c3c";
-    const corProgramacao = "#f39c12";
-    const corParadigmas = "#4169E1";
+    // --- PALETA DE CORES ---
+    const corCardio = "#00ced1"; // Ciano
+    const corAcademia = "#e74c3c"; // Vermelho
+    const corCrossfit = "#FF4500"; // Laranja
 
-    // CORES PARA O CONCURSO
-    const corPortugues = "#007bff";
-    const corMatematica = "#28a745";
-    const corBancarios = "#20c997";
-    const corInformatica = "#6c757d";
-    const corAtendimento = "#17a2b8";
-    const corAtualidades = "#fd7e14";
-    const corProbabilidade = "#e83e8c";
-    const corRevisaoGeral = "#ffc107";
+    // Cores Estudos
+    const corPortugues = "#3498db"; // Azul
+    const corBancarios = "#27ae60"; // Verde
+    const corVendas = "#f1c40f"; // Amarelo
+    const corInformatica = "#8e44ad"; // Roxo
+    const corMatematica = "#d63384"; // Rosa
+    const corIngles = "#4b4b8f"; // Indigo
+    const corSimulado = "#636e72"; // Cinza
+    const corRoadmap = "#00b894"; // MINT
 
-    // Textos das Aulas
-    const textoProgramacao = `<strong>BASES DE PROGRAMAÇÃO</strong><br><small>SALA 2013 (prédio ll. Nível 2)</small>`;
-    const textoParadigmas = `<strong>PARADIGMAS DE LING. DE PROGRAMAÇÃO</strong><br><small>SALA 2013 (prédio ll. Nível 2)</small>`;
-    const textoCienciaDados = `<strong>CURSO CIÊNCIA DE DADOS</strong><br><small>Online (Google Meet)</small>`;
+    // --- ROTINA SEMANAL (SEG-SEX) ---
+    for (let dia = 1; dia <= 5; dia++) {
+      adicionarAtividade(
+        "<strong>🏃 Cardio + Core</strong>",
+        dia,
+        "08:00",
+        "09:00",
+        corCardio
+      );
+      adicionarAtividade(
+        "<strong>💪 Academia</strong>",
+        dia,
+        "13:00",
+        "15:00",
+        corAcademia
+      );
+      adicionarAtividade(
+        "<strong>🏋️ CrossFit</strong>",
+        dia,
+        "18:35",
+        "19:05",
+        corCrossfit
+      );
+      adicionarAtividade(
+        "<strong>🚀 Estudos Roadmap</strong><br><small>Novo Conteúdo</small>",
+        dia,
+        "20:00",
+        "22:00",
+        corRoadmap
+      );
+    }
 
-    // --- ROTINA COM HORÁRIOS DE TREINO CORRIGIDOS ---
-
-    // Segunda (Manhã Livre / Academia 13:30)
+    // --- MATÉRIAS BANCO DO BRASIL (SEG-SEX) ---
     adicionarAtividade(
-      "<strong>Revisão: Português</strong>",
+      "<strong>📚 Português</strong><br><small>Gramática/Texto</small>",
       1,
-      "08:00",
-      "08:30",
-      corRevisaoGeral
-    ); // (REVISÃO DO DIA)
-    adicionarAtividade(
-      "<strong>Língua Portuguesa</strong>",
-      1,
-      "08:30",
-      "10:30",
+      "10:00",
+      "12:00",
       corPortugues
     );
-    // 10:30 - 11:00 -> DESCANSO (30 min)
     adicionarAtividade(
-      "<strong>Atendimento Bancário</strong>",
+      "<strong>🏦 C. Bancários</strong><br><small>Sistema Financeiro</small>",
       1,
-      "11:00",
-      "13:00",
-      corAtendimento
-    );
-    adicionarAtividade(
-      "<strong>Academia</strong>",
-      1,
-      "13:30",
-      "15:30",
-      corAcademia
-    );
-    adicionarAtividade(
-      "<strong>CrossFit</strong>",
-      1,
-      "18:35",
-      "19:05",
-      corCrossfit
-    );
-
-    // Terça (Manhã Livre / Academia 13:30 - JEJUM)
-    adicionarAtividade(
-      "<strong>Revisão: C. Bancários</strong>",
-      2,
-      "08:00",
-      "08:30",
-      corRevisaoGeral
-    ); // (REVISÃO DO DIA)
-    adicionarAtividade(
-      "<strong>Conhecimentos Bancários</strong>",
-      2,
-      "08:30",
-      "10:30",
+      "16:00",
+      "18:00",
       corBancarios
     );
-    // 10:30 - 11:00 -> DESCANSO (30 min)
-    adicionarAtividade(
-      "<strong>Probabilidade e Estatística</strong>",
-      2,
-      "11:00",
-      "13:00",
-      corProbabilidade
-    );
-    adicionarAtividade(
-      "<strong>Academia</strong>",
-      2,
-      "13:30",
-      "15:30",
-      corAcademia
-    ); // Em jejum
-    adicionarAtividade(textoCienciaDados, 2, "18:00", "22:00", corCienciaDados);
 
-    // Quarta (Manhã Ocupada / Academia 13:30)
     adicionarAtividade(
-      "<strong>Revisão: Matemática</strong>",
-      3,
-      "08:00",
-      "08:30",
-      corRevisaoGeral
-    ); // (REVISÃO DO DIA)
-    adicionarAtividade(
-      "<strong>Matemática Financeira</strong>",
-      3,
-      "08:30",
-      "10:30",
+      "<strong>📐 Matemática</strong><br><small>Lógica/Probabilidade</small>",
+      2,
+      "10:00",
+      "12:00",
       corMatematica
     );
-    adicionarAtividade(textoParadigmas, 3, "11:10", "12:50", corParadigmas);
     adicionarAtividade(
-      "<strong>Academia</strong>",
-      3,
-      "13:30",
-      "15:30",
-      corAcademia
+      "<strong>💼 Vendas e Negociação</strong><br><small>Técnicas/CDC</small>",
+      2,
+      "16:00",
+      "18:00",
+      corVendas
     );
-    // 15:30 - 16:00 -> DESCANSO PÓS-ACADEMIA (30 min)
+
     adicionarAtividade(
-      "<strong>Atendimento Bancário (Bloco 2)</strong>",
+      "<strong>💻 Informática</strong><br><small>Segurança/Office</small>",
+      3,
+      "10:00",
+      "12:00",
+      corInformatica
+    );
+    adicionarAtividade(
+      "<strong>📐 Matemática</strong><br><small>Lógica/Probabilidade</small>",
       3,
       "16:00",
       "18:00",
-      corAtendimento
-    );
-    adicionarAtividade(
-      "<strong>CrossFit</strong>",
-      3,
-      "18:35",
-      "19:05",
-      corCrossfit
+      corMatematica
     );
 
-    // Quinta (Manhã Livre / Academia 13:30 - JEJUM)
     adicionarAtividade(
-      "<strong>Revisão: Prob. e Est.</strong>",
+      "<strong>📈 Mat. Financeira</strong><br><small>Juros/Taxas</small>",
       4,
-      "08:00",
-      "08:30",
-      corRevisaoGeral
-    ); // (REVISÃO DO DIA / BALANCEADO)
-    adicionarAtividade(
-      "<strong>Língua Portuguesa (Bloco 2)</strong>",
-      4,
-      "08:30",
-      "10:30",
-      corPortugues
-    );
-    // 10:30 - 11:00 -> DESCANSO (30 min)
-    adicionarAtividade(
-      "<strong>Probabilidade e Estatística (Bloco 2)</strong>",
-      4,
-      "11:00",
-      "13:00",
-      corProbabilidade
-    );
-    adicionarAtividade(
-      "<strong>Academia</strong>",
-      4,
-      "13:30",
-      "15:30",
-      corAcademia
-    ); // Em jejum
-    adicionarAtividade(textoCienciaDados, 4, "18:00", "22:00", corCienciaDados);
-
-    // Sexta (SÓ REVISÃO / Academia 15:00)
-    adicionarAtividade(textoProgramacao, 5, "07:30", "11:05", corProgramacao);
-    adicionarAtividade(textoParadigmas, 5, "11:10", "12:50", corParadigmas);
-    adicionarAtividade(
-      "<strong>Academia</strong>",
-      5,
-      "15:00",
-      "17:00",
-      corAcademia
-    );
-    adicionarAtividade(
-      "<strong>CrossFit</strong>",
-      5,
-      "18:35",
-      "19:05",
-      corCrossfit
-    );
-    adicionarAtividade(
-      "<strong>Revisão Geral + Simulados</strong>",
-      5,
-      "20:30",
-      "22:30",
-      corRevisaoGeral
-    ); // (REVISÃO DO DIA)
-
-    // Sábado (Estudos pela manhã / Academia 15:00)
-    adicionarAtividade(
-      "<strong>Revisão: Informática</strong>",
-      6,
-      "08:00",
-      "08:30",
-      corRevisaoGeral
-    ); // (REVISÃO DO DIA)
-    adicionarAtividade(
-      "<strong>Conhecimentos de Informática</strong>",
-      6,
-      "08:30",
-      "10:30",
-      corInformatica
-    );
-    // 10:30 - 11:00 -> DESCANSO (30 min)
-    adicionarAtividade(
-      "<strong>Atualidades Mercado Financeiro</strong>",
-      6,
-      "11:00",
-      "13:00",
-      corAtualidades
-    );
-    adicionarAtividade(
-      "<strong>Academia</strong>",
-      6,
-      "15:00",
-      "17:00",
-      corAcademia
-    );
-
-    // Domingo (ACADEMIA 12H - JEJUM / ESTUDO À TARDE)
-    adicionarAtividade(
-      "<strong>Academia</strong>",
-      7,
+      "10:00",
       "12:00",
-      "14:00",
-      corAcademia
-    ); // Em jejum
-    // 14:00 - 14:30 -> DESCANSO (30 min)
+      corMatematica
+    );
     adicionarAtividade(
-      "<strong>Revisão: Atendimento</strong>",
-      7,
-      "14:30",
-      "15:00",
-      corRevisaoGeral
-    ); // (REVISÃO DO DIA / BALANCEADO)
-    adicionarAtividade(
-      "<strong>Conhecimentos Bancários (Bloco 2)</strong>",
-      7,
-      "15:00",
-      "17:00",
+      "<strong>🏦 C. Bancários</strong><br><small>Produtos/Serviços</small>",
+      4,
+      "16:00",
+      "18:00",
       corBancarios
     );
-    // 17:00 - 17:30 -> DESCANSO (30 min)
+
     adicionarAtividade(
-      "<strong>Matemática Financeira (Bloco 2)</strong>",
-      7,
-      "17:30",
-      "19:30",
+      "<strong>💻 Informática</strong><br><small>Teoria + Questões</small>",
+      5,
+      "10:00",
+      "12:00",
+      corInformatica
+    );
+    adicionarAtividade(
+      "<strong>💼 Vendas e Negociação</strong><br><small>Teoria + Questões</small>",
+      5,
+      "16:00",
+      "18:00",
+      corVendas
+    );
+
+    // --- FIM DE SEMANA ---
+    // Sábado
+    adicionarAtividade(
+      "<strong>📚 Português</strong><br><small>Foco Total</small>",
+      6,
+      "10:00",
+      "12:00",
+      corPortugues
+    );
+    adicionarAtividade(
+      "<strong>📐 Matemática</strong><br><small>Foco Total</small>",
+      6,
+      "13:00",
+      "15:00",
       corMatematica
+    );
+    adicionarAtividade(
+      "<strong>💪 Academia</strong>",
+      6,
+      "16:00",
+      "18:00",
+      corAcademia
+    );
+    adicionarAtividade(
+      "<strong>📰 Atualidades Mercado</strong><br><small>Mundo Financeiro</small>",
+      6,
+      "19:00",
+      "20:00",
+      corBancarios
+    );
+
+    // Domingo
+    // Academia 10-12 (Novo Horário)
+    adicionarAtividade(
+      "<strong>💪 Academia</strong>",
+      7,
+      "10:00",
+      "12:00",
+      corAcademia
+    );
+
+    // Inglês 13-14 (Novo Horário)
+    adicionarAtividade(
+      "<strong>🇺🇸 Inglês</strong><br><small>Interpretação</small>",
+      7,
+      "13:00",
+      "14:00",
+      corIngles
+    );
+
+    // Revisão 15-16 (1h Intervalo)
+    adicionarAtividade(
+      "<strong>🔄 Revisão Geral</strong><br><small>Antes do Simulado</small>",
+      7,
+      "15:00",
+      "16:00",
+      corSimulado
+    );
+
+    // Simulado 17-19:30 (1h Intervalo)
+    adicionarAtividade(
+      "<strong>📝 SIMULADÃO</strong><br><small>Prova Completa</small>",
+      7,
+      "17:00",
+      "19:30",
+      corSimulado
+    );
+
+    // Redação 20:30-21:30 (1h Intervalo)
+    adicionarAtividade(
+      "<strong>✍️ Redação + Correção</strong><br><small>Pós-Simulado</small>",
+      7,
+      "20:30",
+      "21:30",
+      corPortugues
     );
   }
 
@@ -368,13 +351,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const textarea = document.getElementById(id);
     if (textarea) {
       textarea.value = localStorage.getItem(id) || "";
-      textarea.addEventListener("input", () => {
-        localStorage.setItem(id, textarea.value);
-      });
+      textarea.addEventListener("input", () =>
+        localStorage.setItem(id, textarea.value)
+      );
     }
   });
 
-  // Condição simplificada para checar apenas por 'treino-section'
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
     const storageKey = "workoutProgress";
@@ -493,8 +475,243 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ========================================================
+  // SCRIPT DO RASTREADOR DE ÁGUA (ATUALIZADO PARA VERDE + LOGICA)
+  // ========================================================
+  if (document.getElementById("dieta-section")) {
+    const waterCheckboxes = document.querySelectorAll(".water-check");
+    const waterProgressBar = document.getElementById("water-progress-bar");
+    const resetWaterBtn = document.getElementById("reset-water-btn");
+    const TOTAL_GOAL = 4500; // Meta Diária Exata
+
+    function updateWaterProgress() {
+      let currentMl = 0;
+      waterCheckboxes.forEach((box) => {
+        if (box.checked) {
+          // Converte o valor de data-ml para número e soma
+          currentMl += parseInt(box.dataset.ml);
+        }
+        // Salvar estado no localStorage
+        localStorage.setItem(box.id, box.checked);
+      });
+
+      // Calcula a porcentagem (limitada a 100% visualmente)
+      const percentage = Math.min(
+        100,
+        Math.round((currentMl / TOTAL_GOAL) * 100)
+      );
+
+      if (waterProgressBar) {
+        waterProgressBar.style.width = percentage + "%";
+        waterProgressBar.textContent = `${percentage}% (${currentMl}ml)`;
+
+        // Cor Verde mais escura quando completa a meta
+        if (currentMl >= TOTAL_GOAL) {
+          waterProgressBar.style.backgroundColor = "#2e7d32";
+          waterProgressBar.textContent = `META BATIDA! (${currentMl}ml)`;
+        } else {
+          waterProgressBar.style.backgroundColor = "#4caf50";
+        }
+      }
+    }
+
+    function loadWaterProgress() {
+      waterCheckboxes.forEach((box) => {
+        const isChecked = localStorage.getItem(box.id) === "true";
+        box.checked = isChecked;
+      });
+      updateWaterProgress();
+    }
+
+    // Evento de Reset
+    if (resetWaterBtn) {
+      resetWaterBtn.addEventListener("click", function () {
+        if (confirm("Deseja resetar o contador de água de hoje?")) {
+          waterCheckboxes.forEach((box) => {
+            box.checked = false;
+            localStorage.setItem(box.id, false);
+          });
+          updateWaterProgress();
+        }
+      });
+    }
+
+    // Listeners para cada checkbox
+    waterCheckboxes.forEach((box) => {
+      box.addEventListener("change", updateWaterProgress);
+    });
+
+    // Carregar ao iniciar
+    loadWaterProgress();
+  }
+
   if (document.getElementById("bem-estar-section")) {
-    // --- SCRIPT PARA DIÁRIO DE ANOTAÇÕES ---
+    const identityInput = document.getElementById("identity-input");
+    const identityDisplay = document.getElementById("identity-display");
+    const saveIdentityBtn = document.getElementById("save-identity-btn");
+    const deleteIdentityBtn = document.getElementById("delete-identity-btn");
+    const identityInputContainer = document.getElementById(
+      "identity-input-container"
+    );
+    const identityDisplayContainer = document.getElementById(
+      "identity-display-container"
+    );
+
+    function saveIdentity() {
+      const text = identityInput.value.trim();
+      if (text) {
+        localStorage.setItem("antiSabotageIdentity", text);
+        identityDisplay.textContent = text;
+        identityInputContainer.style.display = "none";
+        identityDisplayContainer.style.display = "flex";
+      }
+    }
+
+    function deleteIdentity() {
+      if (confirm("Deseja apagar sua frase de identidade e criar uma nova?")) {
+        localStorage.removeItem("antiSabotageIdentity");
+        identityInput.value = "";
+        identityDisplayContainer.style.display = "none";
+        identityInputContainer.style.display = "flex";
+      }
+    }
+
+    if (identityInput && identityDisplay) {
+      const savedIdentity = localStorage.getItem("antiSabotageIdentity");
+      if (savedIdentity) {
+        identityDisplay.textContent = savedIdentity;
+        identityInputContainer.style.display = "none";
+        identityDisplayContainer.style.display = "flex";
+      } else {
+        identityInputContainer.style.display = "flex";
+        identityDisplayContainer.style.display = "none";
+      }
+
+      saveIdentityBtn.addEventListener("click", saveIdentity);
+      identityInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") saveIdentity();
+      });
+      deleteIdentityBtn.addEventListener("click", deleteIdentity);
+    }
+
+    const microInput = document.getElementById("micro-win-input");
+    const microBtn = document.getElementById("add-micro-win-btn");
+    const microList = document.getElementById("micro-wins-list");
+
+    function loadMicroWins() {
+      const wins = JSON.parse(localStorage.getItem("microWins")) || [];
+      microList.innerHTML = "";
+      wins.forEach((win, index) => {
+        const li = document.createElement("li");
+        li.style.padding = "8px";
+        li.style.borderBottom = "1px solid #333";
+        li.innerHTML = `✅ ${win} <span style="float:right; cursor:pointer; color:#e74c3c;" onclick="removeMicroWin(${index})">✕</span>`;
+        microList.appendChild(li);
+      });
+    }
+
+    window.removeMicroWin = function (index) {
+      let wins = JSON.parse(localStorage.getItem("microWins")) || [];
+      wins.splice(index, 1);
+      localStorage.setItem("microWins", JSON.stringify(wins));
+      loadMicroWins();
+    };
+
+    if (microBtn) {
+      microBtn.addEventListener("click", () => {
+        const text = microInput.value.trim();
+        if (text) {
+          let wins = JSON.parse(localStorage.getItem("microWins")) || [];
+          wins.unshift(
+            `${new Date().toLocaleTimeString().slice(0, 5)} - ${text}`
+          );
+          if (wins.length > 5) wins.pop();
+          localStorage.setItem("microWins", JSON.stringify(wins));
+          microInput.value = "";
+          loadMicroWins();
+        }
+      });
+      loadMicroWins();
+    }
+
+    const sabTask = document.getElementById("sabotage-task");
+    const sabAction = document.getElementById("sabotage-action");
+    const sabFeeling = document.getElementById("sabotage-feeling");
+    const sabBtn = document.getElementById("add-sabotage-btn");
+    const sabHistory = document.getElementById("sabotage-history");
+
+    function loadSabotageHistory() {
+      const history = JSON.parse(localStorage.getItem("sabotageMap")) || [];
+      sabHistory.innerHTML = "";
+      history.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.style.backgroundColor = "#2c2c2c";
+        div.style.borderLeft = "3px solid #e74c3c";
+        div.style.padding = "10px";
+        div.style.borderRadius = "5px";
+        div.style.marginBottom = "10px";
+        div.style.position = "relative";
+        div.innerHTML = `
+          <span style="position:absolute; right:10px; top:10px; cursor:pointer; color:#e74c3c; font-weight:bold;" onclick="removeSabotageEntry(${index})">✕</span>
+          <small style="color:#a0a0a0">${item.date}</small><br>
+          <strong>Deveria:</strong> ${item.task}<br>
+          <strong>Fugi fazendo:</strong> ${item.action}<br>
+          <strong>Senti:</strong> ${item.feeling}
+        `;
+        sabHistory.appendChild(div);
+      });
+    }
+
+    window.removeSabotageEntry = function (index) {
+      let history = JSON.parse(localStorage.getItem("sabotageMap")) || [];
+      history.splice(index, 1);
+      localStorage.setItem("sabotageMap", JSON.stringify(history));
+      loadSabotageHistory();
+    };
+
+    if (sabBtn) {
+      sabBtn.addEventListener("click", () => {
+        if (sabTask.value && sabAction.value && sabFeeling.value) {
+          const entry = {
+            date:
+              new Date().toLocaleDateString() +
+              " " +
+              new Date().toLocaleTimeString().slice(0, 5),
+            task: sabTask.value,
+            action: sabAction.value,
+            feeling: sabFeeling.value,
+          };
+          let history = JSON.parse(localStorage.getItem("sabotageMap")) || [];
+          history.unshift(entry);
+          localStorage.setItem("sabotageMap", JSON.stringify(history));
+
+          sabTask.value = "";
+          sabAction.value = "";
+          sabFeeling.value = "";
+          loadSabotageHistory();
+        } else {
+          alert("Preencha os 3 campos para mapear a sabotagem.");
+        }
+      });
+      loadSabotageHistory();
+    }
+
+    const voiceCheckboxes = document.querySelectorAll(".voice-check");
+
+    function loadVoiceProgress() {
+      voiceCheckboxes.forEach((box) => {
+        const isChecked = localStorage.getItem(box.id) === "true";
+        box.checked = isChecked;
+      });
+    }
+
+    voiceCheckboxes.forEach((box) => {
+      box.addEventListener("change", () => {
+        localStorage.setItem(box.id, box.checked);
+      });
+    });
+    loadVoiceProgress();
+
     const dateInput = document.getElementById("journal-date");
     const textInput = document.getElementById("journal-text");
     const addButton = document.getElementById("add-note-button");
@@ -573,7 +790,6 @@ document.addEventListener("DOMContentLoaded", function () {
     addButton.addEventListener("click", addJournalEntry);
     loadJournalEntries();
 
-    // --- SCRIPT PARA DIÁRIO DOS SONHOS ---
     const dreamDateInput = document.getElementById("dream-journal-date");
     const dreamTextInput = document.getElementById("dream-journal-text");
     const dreamAddButton = document.getElementById("add-dream-button");
