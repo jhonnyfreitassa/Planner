@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const corCardio = "#00ced1"; // Ciano
     const corAcademia = "#e74c3c"; // Vermelho
     const corCrossfit = "#FF4500"; // Laranja
+    const corCore = "#007bff"; // Azul para CORE
 
     // Cores Estudos
     const corPortugues = "#3498db"; // Azul
@@ -159,12 +160,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- ROTINA SEMANAL (SEG-SEX) ---
     for (let dia = 1; dia <= 5; dia++) {
       adicionarAtividade(
-        "<strong>🏃 Cardio + Core</strong>",
+        "<strong>🏃 Cardio</strong>",
         dia,
         "08:00",
         "09:00",
         corCardio
       );
+      // CORRIGIDO: Removida a entrada duplicada de Core Matinal da agenda.
       adicionarAtividade(
         "<strong>💪 Academia</strong>",
         dia,
