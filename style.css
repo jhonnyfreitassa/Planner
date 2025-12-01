@@ -368,6 +368,9 @@ body {
   --cor-destaque: #e74c3c;
 }
 
+/* Removido o seletor .workout-day.core-matinal para não interferir nas cores.
+   Agora, a cor vermelha correta é herdada de .workout-day e .workout-day-header h3. */
+
 #treino-section h1,
 #treino-section h2 {
   border-bottom: 1px solid var(--cor-borda);
@@ -400,6 +403,7 @@ body {
 }
 
 .workout-day-header h3 {
+  /* Corrigido para garantir que o h3 herde a cor de destaque (vermelho) de #treino-section */
   color: var(--cor-destaque);
   margin: 0;
 }
