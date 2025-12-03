@@ -6,10 +6,10 @@ function showSection(sectionId) {
   document
     .querySelectorAll(".tab-button")
     .forEach((b) => b.classList.remove("active"));
-  document.getElementById(sectionId).classList.add("active");
   document
     .querySelector(`.tab-button[onclick="showSection('${sectionId}')"]`)
     .classList.add("active");
+  document.getElementById(sectionId).classList.add("active");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -155,10 +155,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const corMatematica = "#d63384"; // Rosa
     const corIngles = "#4b4b8f"; // Indigo
     const corSimulado = "#636e72"; // Cinza
-    const corRoadmap = "#00b894"; // MINT
+    const corRoadmap = "#00b899"; // MINT/Ciano Claro
 
-    // --- ROTINA SEMANAL (SEG-SEX) ---
+    // --- ROTINA SEMANAL (SEG-SEX) - REVISADA ---
     for (let dia = 1; dia <= 5; dia++) {
+      // Cardio 08:00 - 09:00 (MANTIDO)
       adicionarAtividade(
         "<strong>🏃 Cardio</strong>",
         dia,
@@ -166,14 +167,17 @@ document.addEventListener("DOMContentLoaded", function () {
         "09:00",
         corCardio
       );
-      // CORRIGIDO: Removida a entrada duplicada de Core Matinal da agenda.
+
+      // Academia 15:00 - 17:00 (AJUSTADO)
       adicionarAtividade(
         "<strong>💪 Academia</strong>",
         dia,
-        "13:00",
         "15:00",
+        "17:00",
         corAcademia
       );
+
+      // CrossFit 18:35 - 19:05 (MANTIDO)
       adicionarAtividade(
         "<strong>🏋️ CrossFit</strong>",
         dia,
@@ -181,92 +185,100 @@ document.addEventListener("DOMContentLoaded", function () {
         "19:05",
         corCrossfit
       );
+
+      // Estudo Roadmap 22:00 - 00:00 (NOVO BLOCO 3)
       adicionarAtividade(
         "<strong>🚀 Estudos Roadmap</strong><br><small>Novo Conteúdo</small>",
         dia,
-        "20:00",
         "22:00",
+        "00:00", // 00:00 é 24:00 (ou 27 na agenda), que o script trata como o final do dia
         corRoadmap
       );
     }
 
-    // --- MATÉRIAS BANCO DO BRASIL (SEG-SEX) ---
+    // --- MATÉRIAS BANCO DO BRASIL (SEG-SEX) - REVISADA ---
+
+    // SEGUNDA-FEIRA (Dia 1)
     adicionarAtividade(
       "<strong>📚 Português</strong><br><small>Gramática/Texto</small>",
       1,
       "10:00",
-      "12:00",
+      "12:00", // Bloco 1 (Manhã)
       corPortugues
     );
     adicionarAtividade(
       "<strong>🏦 C. Bancários</strong><br><small>Sistema Financeiro</small>",
       1,
-      "16:00",
-      "18:00",
+      "19:30",
+      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
       corBancarios
     );
 
+    // TERÇA-FEIRA (Dia 2)
     adicionarAtividade(
       "<strong>📐 Matemática</strong><br><small>Lógica/Probabilidade</small>",
       2,
       "10:00",
-      "12:00",
+      "12:00", // Bloco 1 (Manhã)
       corMatematica
     );
     adicionarAtividade(
       "<strong>💼 Vendas e Negociação</strong><br><small>Técnicas/CDC</small>",
       2,
-      "16:00",
-      "18:00",
+      "19:30",
+      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
       corVendas
     );
 
+    // QUARTA-FEIRA (Dia 3)
     adicionarAtividade(
       "<strong>💻 Informática</strong><br><small>Segurança/Office</small>",
       3,
       "10:00",
-      "12:00",
+      "12:00", // Bloco 1 (Manhã)
       corInformatica
     );
     adicionarAtividade(
       "<strong>📐 Matemática</strong><br><small>Lógica/Probabilidade</small>",
       3,
-      "16:00",
-      "18:00",
+      "19:30",
+      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
       corMatematica
     );
 
+    // QUINTA-FEIRA (Dia 4)
     adicionarAtividade(
       "<strong>📈 Mat. Financeira</strong><br><small>Juros/Taxas</small>",
       4,
       "10:00",
-      "12:00",
+      "12:00", // Bloco 1 (Manhã)
       corMatematica
     );
     adicionarAtividade(
       "<strong>🏦 C. Bancários</strong><br><small>Produtos/Serviços</small>",
       4,
-      "16:00",
-      "18:00",
+      "19:30",
+      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
       corBancarios
     );
 
+    // SEXTA-FEIRA (Dia 5)
     adicionarAtividade(
       "<strong>💻 Informática</strong><br><small>Teoria + Questões</small>",
       5,
       "10:00",
-      "12:00",
+      "12:00", // Bloco 1 (Manhã)
       corInformatica
     );
     adicionarAtividade(
       "<strong>💼 Vendas e Negociação</strong><br><small>Teoria + Questões</small>",
       5,
-      "16:00",
-      "18:00",
+      "19:30",
+      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
       corVendas
     );
 
-    // --- FIM DE SEMANA ---
+    // --- FIM DE SEMANA (MANTIDO) ---
     // Sábado
     adicionarAtividade(
       "<strong>📚 Português</strong><br><small>Foco Total</small>",
@@ -298,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     // Domingo
-    // Academia 10-12 (Novo Horário)
+    // Academia 10-12
     adicionarAtividade(
       "<strong>💪 Academia</strong>",
       7,
@@ -307,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corAcademia
     );
 
-    // Inglês 13-14 (Novo Horário)
+    // Inglês 13-14
     adicionarAtividade(
       "<strong>🇺🇸 Inglês</strong><br><small>Interpretação</small>",
       7,
@@ -316,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corIngles
     );
 
-    // Revisão 15-16 (1h Intervalo)
+    // Revisão 15-16
     adicionarAtividade(
       "<strong>🔄 Revisão Geral</strong><br><small>Antes do Simulado</small>",
       7,
@@ -325,7 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corSimulado
     );
 
-    // Simulado 17-19:30 (1h Intervalo)
+    // Simulado 17-19:30
     adicionarAtividade(
       "<strong>📝 SIMULADÃO</strong><br><small>Prova Completa</small>",
       7,
@@ -334,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corSimulado
     );
 
-    // Redação 20:30-21:30 (1h Intervalo)
+    // Redação 20:30-21:30
     adicionarAtividade(
       "<strong>✍️ Redação + Correção</strong><br><small>Pós-Simulado</small>",
       7,
@@ -624,9 +636,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const text = microInput.value.trim();
         if (text) {
           let wins = JSON.parse(localStorage.getItem("microWins")) || [];
-          wins.unshift(
-            `${new Date().toLocaleTimeString().slice(0, 5)} - ${text}`
-          );
+          // CORREÇÃO: Usar a data local em vez de apenas o horário
+          wins.unshift(`${new Date().toLocaleDateString()} - ${text}`);
           if (wins.length > 5) wins.pop();
           localStorage.setItem("microWins", JSON.stringify(wins));
           microInput.value = "";
