@@ -25,8 +25,7 @@
 
     /* Destaque para o item de treino */
     .water-grid .checklist-item.workout-water {
-      grid-column: 1 / -1;
-      /* Ocupa a linha toda */
+      /* REMOVIDO: grid-column: 1 / -1; */
       background-color: rgba(231, 76, 60, 0.2);
       /* Fundo avermelhado leve */
       border: 1px solid #e74c3c;
@@ -671,28 +670,23 @@
 
           <div class="water-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
 
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-1" data-ml="250"><label for="wat-1">Copo 1 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-2" data-ml="250"><label for="wat-2">Copo 2 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-3" data-ml="250"><label for="wat-3">Copo 3 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-4" data-ml="250"><label for="wat-4">Copo 4 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-5" data-ml="250"><label for="wat-5">Copo 5 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-6" data-ml="250"><label for="wat-6">Copo 6 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-7" data-ml="250"><label for="wat-7">Copo 7 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-8" data-ml="250"><label for="wat-8">Copo 8 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-9" data-ml="250"><label for="wat-9">Copo 9 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-10" data-ml="250"><label for="wat-10">Copo 10 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-1" data-ml="500"><label for="wat-1">Garrafa 1 (500ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-2" data-ml="500"><label for="wat-2">Garrafa 2 (500ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-3" data-ml="500"><label for="wat-3">Garrafa 3 (500ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-4" data-ml="500"><label for="wat-4">Garrafa 4 (500ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-5" data-ml="500"><label for="wat-5">Garrafa 5 (500ml)</label></div>
 
-            <div class="checklist-item workout-water">
-              <input type="checkbox" class="water-check" id="wat-treino-1" data-ml="1000">
-              <label for="wat-treino-1"><strong>🏋️‍♂️ Treino: Garrafa 1 (1 Litro)</strong></label>
-            </div>
-            <div class="checklist-item workout-water">
-              <input type="checkbox" class="water-check" id="wat-treino-2" data-ml="1000">
-              <label for="wat-treino-2"><strong>🏋️‍♂️ Treino: Garrafa 2 (1 Litro)</strong></label>
+            <div class="checklist-item workout-water" style="grid-column: span 1;"><input type="checkbox" class="water-check" id="wat-treino-1" data-ml="1000"><label for="wat-treino-1"><strong>🏋️‍♂️ Treino: Garrafa 1 (1 Litro)</strong></label></div>
+            <div class="checklist-item workout-water" style="grid-column: span 1;"><input type="checkbox" class="water-check" id="wat-treino-2" data-ml="1000"><label for="wat-treino-2"><strong>🏋️‍♂️ Treino: Garrafa 2 (1 Litro)</strong></label></div>
+
+            <div style="grid-column: 1 / -1; margin-top: 10px;">
+              <small style="display:block; color:#a0a0a0; text-align:center;">
+                **Total Diário: 4.500ml (5 x 500ml + 2 x 1000ml)**<br>
+                ⛔ Pausa estratégica perto das refeições sólidas.
+              </small>
             </div>
 
           </div>
-          <small style="display:block; margin-top:10px; color:#a0a0a0; text-align:center;">⛔ Pausa estratégica perto das refeições sólidas.</small>
         </div>
 
         <h2 style="color: var(--primary-color); text-align: center; margin-top: 40px;">Sugestões de Bebidas para Foco e Relaxamento</h2>
@@ -742,6 +736,23 @@
       <div class="container">
 
         <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
+          <h2 style="color: #007bff; margin-top: 0;">🧠 10 Dicas: Lidando com a Raiva e o Incômodo</h2>
+          <p style="color: #a0a0a0; font-size: 0.9em; margin-bottom: 15px;">Resumo das dicas para desenvolver a inteligência emocional.</p>
+
+          <ol style="padding-left: 20px;">
+            <li style="margin-bottom: 5px;"><strong>Reação é Escolha:</strong> A raiva vem de como você interpreta, não do fato em si.</li>
+            <li style="margin-bottom: 5px;"><strong>Não Personalize:</strong> As pessoas agem por suas histórias e limitações, não sobre você.</li>
+            <li style="margin-bottom: 5px;"><strong>Escolha a Paz:</strong> Às vezes, ter razão desgasta. A força está em escolher a tranquilidade.</li>
+            <li style="margin-bottom: 5px;"><strong>Autoestima Interna:</strong> Sua validação deve vir de dentro, e não da aprovação externa.</li>
+            <li style="margin-bottom: 5px;"><strong>Coloque Limites:</strong> Definir "não" de forma clara é uma forma essencial de autocuidado emocional.</li>
+            <li style="margin-bottom: 5px;"><strong>Liberdade Emocional:</strong> Pare de viver em função da opinião dos outros. Viva de acordo com quem você é.</li>
+            <li style="margin-bottom: 5px;"><strong>Silêncio é Ouro:</strong> Nem tudo merece resposta. O silêncio desarma e preserva sua energia.</li>
+            <li style="margin-bottom: 5px;"><strong>Pratique a Gratidão:</strong> Focar no positivo reconfigura sua mente, reduzindo o estresse e a agressividade.</li>
+            <li style="margin-bottom: 5px;"><strong>Cresça com Críticas:</strong> Filtre o útil e descarte o inútil, vendo a crítica como aprendizado.</li>
+            <li style="margin-bottom: 5px;"><strong>Perdão e Desapego:</strong> Ressentimento é "beber veneno". Perdoar é se libertar para viver o presente com leveza.</li>
+          </ol>
+        </div>
+        <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
           <h2 style="color: #007bff; margin-top: 0;">🛡️ Protocolo Anti-Autossabotagem</h2>
 
           <div style="margin-top: 20px; margin-bottom: 30px;">
@@ -780,14 +791,14 @@
                 <label style="color: #007bff;">O Gatilho:</label>
                 <input type="text" id="sabotage-feeling">
               </div>
-              <button id="add-sabotage-btn" class="add-note-btn" style="background-color: #e74c3c; width: 100%; margin-top: 10px;">Mapear Sabotagem</button>
+              <button id="add-sabotage-btn" class="add-note-btn" style="background-color: #007bff; width: 100%; margin-top: 10px;">Mapear Sabotagem</button>
             </div>
             <div id="sabotage-history" style="margin-top: 20px;"></div>
           </div>
         </div>
 
-        <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #17a2b8; margin-bottom: 40px;">
-          <h2 style="color: #17a2b8; margin-top: 0;">🗣️ Protocolo Voz de Respeito</h2>
+        <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
+          <h2 style="color: #007bff; margin-top: 0;">🗣️ Protocolo Voz de Respeito</h2>
           <p style="color: #a0a0a0; font-size: 0.9em;">Exercícios diários para projetar sua voz e impor respeito.</p>
 
           <div style="margin-top: 20px;">
@@ -806,19 +817,19 @@
           </div>
         </div>
 
-        <h2>Diário de Anotações</h2>
+        <h2 style="color: #007bff; border-bottom: 2px solid #007bff;">Diário de Anotações</h2>
         <div class="journal-entry-form">
           <input type="date" id="journal-date">
           <textarea id="journal-text" placeholder="Escreva aqui..."></textarea>
-          <button id="add-note-button" class="add-note-btn">Salvar</button>
+          <button id="add-note-button" class="add-note-btn" style="background-color: #007bff;">Salvar</button>
         </div>
         <div class="journal-history" id="journal-history-container"></div>
 
-        <h2>Diário dos Sonhos</h2>
+        <h2 style="color: #007bff; border-bottom: 2px solid #007bff;">Diário dos Sonhos</h2>
         <div class="journal-entry-form">
           <input type="date" id="dream-journal-date">
           <textarea id="dream-journal-text" placeholder="Sonho..."></textarea>
-          <button id="add-dream-button" class="add-note-btn">Salvar</button>
+          <button id="add-dream-button" class="add-note-btn" style="background-color: #007bff;">Salvar</button>
         </div>
         <div class="journal-history" id="dream-history-container"></div>
 
@@ -886,6 +897,12 @@
             <h4 class="topic-header">Estatística & Visualização</h4>
             <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-stat"><label for="rm-stat">Estatística Descritiva</label></div>
             <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-pbi"><label for="rm-pbi">Power BI (Dashboards)</label></div>
+
+            <h4 class="topic-header" style="color: #fbbf24;">Excel (Visão Analítica)</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-excel-basics"><label for="rm-excel-basics">Fórmulas Essenciais (SOMA, MÉDIA, CONT.SE, SE)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-excel-lookups"><label for="rm-excel-lookups">PROCV/PROCH & Funções Lógicas Combinadas</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-excel-indexmatch"><label for="rm-excel-indexmatch">ÍNDICE + CORRESP (Substitui PROCV)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-excel-charts"><label for="rm-excel-charts">Gráficos Avançados & Formatação Condicional</label></div>
           </div>
 
           <div class="roadmap-card red">
@@ -903,6 +920,11 @@
             <h4 class="topic-header">Infra & Cloud</h4>
             <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-docker"><label for="rm-docker">Docker (Containers)</label></div>
             <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-cloud"><label for="rm-cloud">Cloud (AWS/GCP Básica)</label></div>
+
+            <h4 class="topic-header" style="color: #fbbf24;">Excel (Integração e Volume)</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-excel-pivot"><label for="rm-excel-pivot">Tabelas Dinâmicas (Data Transformation)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-excel-powerquery"><label for="rm-excel-powerquery">Power Query (Importação, Limpeza e Transformação)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-excel-vba"><label for="rm-excel-vba">Noções de VBA/Macros (Opcional p/ Automação)</label></div>
           </div>
 
           <div class="roadmap-card amber">
