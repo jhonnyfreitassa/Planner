@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ========================================================
-  // SCRIPT DA AGENDA DINÂMICA
+  // SCRIPT DA AGENDA DINÂMICA (AJUSTADO: REMOÇÃO CROSSFIT E ACADEMIA DOMINGO)
   // ========================================================
   if (document.getElementById("agenda")) {
     const agenda = document.getElementById("agenda");
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- PALETA DE CORES ---
     const corCardio = "#00ced1"; // Ciano
     const corAcademia = "#e74c3c"; // Vermelho
-    const corCrossfit = "#FF4500"; // Laranja
+    // const corCrossfit = "#FF4500"; // REMOVIDO
     const corCore = "#007bff"; // Azul para CORE
 
     // Cores Estudos
@@ -159,44 +159,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- ROTINA SEMANAL (SEG-SEX) - REVISADA ---
     for (let dia = 1; dia <= 5; dia++) {
-      // Cardio 08:00 - 09:00 (MANTIDO)
+      // Cardio + Core 08:00 - 09:00
       adicionarAtividade(
-        "<strong>🏃 Cardio</strong>",
+        "<strong>🏃 Cardio (AEJ) + Core</strong>",
         dia,
         "08:00",
         "09:00",
         corCardio
       );
 
-      // Academia 15:00 - 17:00 (AJUSTADO)
+      // Academia 15:00 - 17:00 (PPL)
       adicionarAtividade(
-        "<strong>💪 Academia</strong>",
+        "<strong>💪 Academia (PPL)</strong>",
         dia,
         "15:00",
         "17:00",
         corAcademia
       );
 
-      // CrossFit 18:35 - 19:05 (MANTIDO)
-      adicionarAtividade(
-        "<strong>🏋️ CrossFit</strong>",
-        dia,
-        "18:35",
-        "19:05",
-        corCrossfit
-      );
-
-      // Estudo Roadmap 22:00 - 00:00 (NOVO BLOCO 3)
+      // Estudos Roadmap 22:00 - 00:00 (MANTIDO)
       adicionarAtividade(
         "<strong>🚀 Estudos Roadmap</strong><br><small>Novo Conteúdo</small>",
         dia,
         "22:00",
-        "00:00", // 00:00 é 24:00 (ou 27 na agenda), que o script trata como o final do dia
+        "00:00", // 00:00 é 24:00 (ou 27 na agenda)
         corRoadmap
       );
     }
 
-    // --- MATÉRIAS BANCO DO BRASIL (SEG-SEX) - REVISADA ---
+    // --- MATÉRIAS BANCO DO BRASIL (SEG-SEX) - MANTIDO ---
 
     // SEGUNDA-FEIRA (Dia 1)
     adicionarAtividade(
@@ -210,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "<strong>🏦 C. Bancários</strong><br><small>Sistema Financeiro</small>",
       1,
       "19:30",
-      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
+      "21:30", // Bloco 2 (Noite)
       corBancarios
     );
 
@@ -226,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "<strong>💼 Vendas e Negociação</strong><br><small>Técnicas/CDC</small>",
       2,
       "19:30",
-      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
+      "21:30", // Bloco 2 (Noite)
       corVendas
     );
 
@@ -242,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "<strong>📐 Matemática</strong><br><small>Lógica/Probabilidade</small>",
       3,
       "19:30",
-      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
+      "21:30", // Bloco 2 (Noite)
       corMatematica
     );
 
@@ -258,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "<strong>🏦 C. Bancários</strong><br><small>Produtos/Serviços</small>",
       4,
       "19:30",
-      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
+      "21:30", // Bloco 2 (Noite)
       corBancarios
     );
 
@@ -274,11 +265,11 @@ document.addEventListener("DOMContentLoaded", function () {
       "<strong>💼 Vendas e Negociação</strong><br><small>Teoria + Questões</small>",
       5,
       "19:30",
-      "21:30", // Bloco 2 (Noite) - ANTES DO INTERVALO
+      "21:30", // Bloco 2 (Noite)
       corVendas
     );
 
-    // --- FIM DE SEMANA (MANTIDO) ---
+    // --- FIM DE SEMANA (AJUSTADO) ---
     // Sábado
     adicionarAtividade(
       "<strong>📚 Português</strong><br><small>Foco Total</small>",
@@ -295,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corMatematica
     );
     adicionarAtividade(
-      "<strong>💪 Academia</strong>",
+      "<strong>💪 Academia (LEGS 2)</strong>",
       6,
       "16:00",
       "18:00",
@@ -309,16 +300,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corBancarios
     );
 
-    // Domingo
-    // Academia 10-12
-    adicionarAtividade(
-      "<strong>💪 Academia</strong>",
-      7,
-      "10:00",
-      "12:00",
-      corAcademia
-    );
-
+    // Domingo (APENAS ESTUDO E DESCANSO TOTAL - ACADEMIA REMOVIDA)
     // Inglês 13-14
     adicionarAtividade(
       "<strong>🇺🇸 Inglês</strong><br><small>Interpretação</small>",
