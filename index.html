@@ -25,7 +25,8 @@
 
     /* Destaque para o item de treino */
     .water-grid .checklist-item.workout-water {
-      /* REMOVIDO: grid-column: 1 / -1; */
+      grid-column: 1 / -1;
+      /* Ocupa a linha toda */
       background-color: rgba(231, 76, 60, 0.2);
       /* Fundo avermelhado leve */
       border: 1px solid #e74c3c;
@@ -67,13 +68,12 @@
     </section>
 
     <section id="treino-section" class="content-section">
-      <h1 style="color: #e74c3c; text-align: center;">Plano de Treino PPL PPL (6x)</h1>
+      <h1 style="color: #e74c3c; text-align: center;">Plano de Treino PPL</h1>
 
       <div class="workout-day" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
           <div>
             <h3 style="color: #e74c3c;">🧘 Rotina Diária: Mobilidade & Postura</h3>
-            <small style="color: #a0a0a0;">Realizar pela manhã ou pré-treino</small>
           </div>
           <button class="reset-button">Resetar</button>
         </div>
@@ -99,93 +99,91 @@
       <div class="workout-day core-matinal" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
           <div>
-            <h3 style="color: #e74c3c;">🔥 Rotina Diária: Core Pós-Cardio (5x Semana)</h3>
-            <small style="color: #a0a0a0;">15-20 min - Após Cardio em Jejum</small>
+            <h3 style="color: #e74c3c;">🔥 Rotina Diária: Core Pós-Cardio</h3>
           </div>
           <button class="reset-button">Resetar</button>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="core_mat_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>1. Prancha Abdominal (Isometria)</strong><br><small>3 séries de 45-60 segundos</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>1. Prancha Abdominal</strong><br><small>3 séries de 45-60s</small></label></div>
           </li>
           <li class="exercise-item" data-exercise-id="core_mat_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>2. Abdominal Bicicleta</strong><br><small>3 séries de 20 (10 por lado) - Gire o tronco</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>2. Abdominal Bicicleta</strong><br><small>3 séries de 20</small></label></div>
           </li>
           <li class="exercise-item" data-exercise-id="core_mat_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>3. Elevação de Pernas (Infra)</strong><br><small>3 séries de 15-20 (Lombar colada)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>3. Elevação de Pernas</strong><br><small>3 séries de 15-20</small></label></div>
           </li>
           <li class="exercise-item" data-exercise-id="core_mat_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>4. Mountain Climber (Escalador)</strong><br><small>3 séries de 45 segundos (Ritmo rápido)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>4. Mountain Climber</strong><br><small>3 séries de 45s</small></label></div>
           </li>
           <li class="exercise-item" data-exercise-id="core_mat_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>5. Prancha Lateral (Side Plank)</strong><br><small>3 séries de 30 segundos (cada lado)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>5. Prancha Lateral</strong><br><small>3 séries de 30s</small></label></div>
           </li>
         </ul>
       </div>
-      
+
       <div class="workout-day" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Segunda: PUSH 1 (Ênfase: Peito Forte e Ombro)</h3>
-          <small style="color: #a0a0a0;">Foco na Força e Carga</small>
+          <h3 style="color: #e74c3c;">Segunda: PUSH 1</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="treino_seg_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Inclinado (Halteres)</strong><br><small>5 séries de 6-8 (Força e Peito Superior)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Inclinado (Halteres)</strong><br><small>5 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_2_novo">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⚔️ Crucifixo Inclinado (Halteres)</strong><br><small>4 séries de 10-12 (Isolamento de Peito Superior)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⚔️ Crucifixo Inclinado (Halteres)</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Reto (Halteres)</strong><br><small>4 séries de 8-10 (Peito Total)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Reto (Halteres)</strong><br><small>4 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_sup_sentado">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>👍 Supino na Máquina Sentado</strong><br><small>4 séries de 10-12 (Pré-exaustão Máquina)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>👍 Supino na Máquina Sentado</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_4_novo">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⚔️ Crucifixo Máquina</strong><br><small>4 séries de 12-15 (Contração/Finalizador Peito)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⚔️ Crucifixo Máquina</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🆙 Desenvolvimento (Halteres - Sentado)</strong><br><small>5 séries de 8-12 (Ombro Força)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🆙 Desenvolvimento (Halteres)</strong><br><small>5 séries de 8-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>✈️ Elevação Lateral (Halteres)</strong><br><small>4 séries de 15-20 (Ombro Largura)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>✈️ Elevação Lateral (Halteres)</strong><br><small>4 séries de 15-20</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔭 Elevação Frontal (Polia/Halteres)</strong><br><small>3 séries de 12-15 (Ombro Anterior)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔭 Elevação Frontal</strong><br><small>3 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_7">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>💪 Tríceps Corda (Extensão)</strong><br><small>3 séries de 12-15 (Foco Lateral/Medial)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>💪 Tríceps Corda</strong><br><small>3 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_8">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🇫🇷 Tríceps Francês na Corda (Acima da Cabeça)</strong><br><small>3 séries de 10-12 (Cadeia Longa - Alongamento)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🇫🇷 Tríceps Francês na Corda</strong><br><small>3 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -195,165 +193,162 @@
 
       <div class="workout-day" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Terça: LEGS 1 (Quadríceps e Glúteos)</h3>
-          <small style="color: #a0a0a0;">Foco no Quadríceps e Volume</small>
-          <button class="reset-button">Resetar Dia</button>
-        </div>
-        <ul>
-          <li class="exercise-item" data-exercise-id="treino_ter_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏋️‍♂️ Agachamento Livre (Barra)</strong><br><small>5 séries de 6-10 (Força/Volume)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="treino_ter_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦵 Leg Press 45º</strong><br><small>4 séries de 10-12 (Amplitude máx)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="treino_ter_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🇧🇬 Agachamento Búlgaro (Halteres)</strong><br><small>4 séries de 10-12 (Cada lado - Foco Glúteo/Quad)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="treino_ter_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪑 Cadeira Extensora</strong><br><small>4 séries de 15-20 (Pré-exaustão - Segurar 1s)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="treino_ter_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🐴 Panturrilha no Leg Press</strong><br><small>5 séries de 15-20 (Amplitude máx)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="treino_ter_6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>👐 Cadeira Abdutora</strong><br><small>3 séries de 20 (Glúteo Médio)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="workout-day" style="border-left-color: #e74c3c;">
-        <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Quarta: PULL 1 (Largura e Espessura de Costas)</h3>
-          <small style="color: #a0a0a0;">Foco na Largura e Amplitude</small>
+          <h3 style="color: #e74c3c;">Terça: PULL 1</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="treino_qua_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Barra Fixa (Graviton/Máquina)</strong><br><small>3 séries de 8-10 (Aquecimento/Força)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Barra Fixa</strong><br><small>3 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qua_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Puxada Alta (Pegada Aberta)</strong><br><small>4 séries de 8-10 (Largura e Amplitude)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Puxada Alta</strong><br><small>4 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qua_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚣 Remada Baixa (Triângulo)</strong><br><small>4 séries de 10-12 (Espessura)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚣 Remada Baixa</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qua_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⛷️ Pulldown (Braços estendidos)</strong><br><small>3 séries de 15 (Isolamento Dorsal)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⛷️ Pulldown</strong><br><small>3 séries de 15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qua_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪚 Remada Serrote Unilateral</strong><br><small>3 séries de 10 (Cada lado - Foco no alongamento)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪚 Remada Serrote</strong><br><small>3 séries de 10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qua_6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦾 Rosca Direta (Barra W)</strong><br><small>4 séries de 10-12 (Progressão de Carga)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦾 Rosca Direta</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qua_7">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔨 Rosca Alternada (Martelo)</strong><br><small>3 séries de 12 (Cada braço - Braquial)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔨 Rosca Martelo</strong><br><small>3 séries de 12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
         </ul>
       </div>
-      
+
       <div class="workout-day" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Quinta: PUSH 2 (Ênfase: Volume de Ombro e Peito)</h3>
-          <small style="color: #a0a0a0;">Foco no Volume (4 Ombros / 3 Peito / 3 Tríceps)</small>
+          <h3 style="color: #e74c3c;">Quarta: LEGS 1</h3>
+          <button class="reset-button">Resetar Dia</button>
+        </div>
+        <ul>
+          <li class="exercise-item" data-exercise-id="treino_a_0">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏋️‍♂️ Agachamento Livre</strong><br><small>4 séries de 8-10</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="treino_a_1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪑 Cadeira Extensora</strong><br><small>4 séries de 15-20</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="treino_a_2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦵 Leg Press 45º</strong><br><small>4 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="treino_a_3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🇧🇬 Agachamento Búlgaro</strong><br><small>3 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="treino_a_5">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🐴 Panturrilha no Leg Press</strong><br><small>5 séries de 15-20</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="treino_a_4">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>👐 Cadeira Abdutora</strong><br><small>3 séries de 15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="workout-day" style="border-left-color: #e74c3c;">
+        <div class="workout-day-header">
+          <h3 style="color: #e74c3c;">Quinta: PUSH 2</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="treino_qui_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🆙 Desenvolvimento Militar (Barra)</strong><br><small>4 séries de 6-8 (Ombro Força)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🆙 Desenvolvimento Militar</strong><br><small>4 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qui_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚠 Elevação Lateral (Polia)</strong><br><small>5 séries de 15-20 (Volume Ombro Medial)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚠 Elevação Lateral (Polia)</strong><br><small>5 séries de 15-20</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qui_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦅 Crucifixo Inverso (Máquina)</strong><br><small>5 séries de 15-20 (Volume Ombro Posterior)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦅 Crucifixo Inverso</strong><br><small>5 séries de 15-20</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="treino_qui_4_novo">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔭 Elevação Frontal (Polia/Halteres)</strong><br><small>3 séries de 12-15 (Ombro Anterior)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="treino_qui_5_novo_inclinado">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Inclinado (Halteres/Máquina)</strong><br><small>4 séries de 12-15 (Volume Peito Superior)</small></label></div>
+          <li class="exercise-item" data-exercise-id="treino_qui_4">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔭 Elevação Frontal</strong><br><small>3 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qui_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Reto (Halteres)</strong><br><small>4 séries de 12-15 (Volume Peito)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Inclinado</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="treino_qui_crucifixo_maq">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⚔️ Crucifixo Máquina</strong><br><small>4 séries de 12-15 (Contração Peito)</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="treino_qui_testa">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔨 Tríceps Testa (Barra W ou Halter)</strong><br><small>3 séries de 10-12 (Cadeia Longa)</small></label></div>
+          <li class="exercise-item" data-exercise-id="treino_qui_6">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🏆 Supino Reto</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qui_7">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>💪 Tríceps Corda (Extensão)</strong><br><small>3 séries de 15 (Volume de Manutenção)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>⚔️ Crucifixo Máquina</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="treino_qui_mergulho">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪜 Mergulho (Graviton ou Paralelas)</strong><br><small>3 séries de 10-12 (Finalizador Tríceps)</small></label></div>
+          <li class="exercise-item" data-exercise-id="treino_qui_8">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔨 Tríceps Testa</strong><br><small>3 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="treino_qui_9">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>💪 Tríceps Corda</strong><br><small>3 séries de 15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="treino_qui_10">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪜 Mergulho</strong><br><small>3 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -363,49 +358,48 @@
 
       <div class="workout-day" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Sexta: PULL 2 (Espessura de Costas e Bíceps)</h3>
-          <small style="color: #a0a0a0;">Foco na Densidade e Força</small>
+          <h3 style="color: #e74c3c;">Sexta: PULL 2</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="treino_sex_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Barra Fixa (Graviton/Máquina)</strong><br><small>3 séries de 8-10 (Aquecimento/Força)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Barra Fixa</strong><br><small>3 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sex_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚣 Remada Curvada (Barra)</strong><br><small>5 séries de 8-10 (Força e Espessura)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚣 Remada Curvada</strong><br><small>5 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sex_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪚 Remada Serrote Unilateral</strong><br><small>4 séries de 10 (Cada lado - Foco alongamento)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🪚 Remada Serrote</strong><br><small>4 séries de 10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sex_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚣 Remada Baixa (Triângulo)</strong><br><small>4 séries de 12-15 (Escápulas apertadas)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🚣 Remada Baixa</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sex_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Puxada Frente (Neutro, Fechado)</strong><br><small>3 séries de 12-15 (Largura e Alongamento)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🧗‍♂️ Puxada Frente</strong><br><small>3 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sex_6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦾 Rosca Scott (Barra W)</strong><br><small>4 séries de 10-12 (Isolamento)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦾 Rosca Scott</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sex_7">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔥 Rosca Concentrada (Halteres)</strong><br><small>3 séries de 12 (Cada braço - Foco no Pico)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔥 Rosca Concentrada</strong><br><small>3 séries de 12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -415,43 +409,42 @@
 
       <div class="workout-day" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Sábado: LEGS 2 (Posterior e Glúteos)</h3>
-          <small style="color: #a0a0a0;">Foco na Cadeia Posterior e Contração de Glúteo</small>
+          <h3 style="color: #e74c3c;">Sábado: LEGS 2</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="treino_sab_1">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦖 Levantamento Terra (Convencional)</strong><br><small>4 séries de 6-8 (Força Total)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦖 Levantamento Terra</strong><br><small>4 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sab_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🍑 Elevação Pélvica (Hip Thrust)</strong><br><small>5 séries de 10-15 (Segure 2-3s no pico)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🍑 Elevação Pélvica</strong><br><small>5 séries de 10-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sab_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>📏 Stiff com Halteres</strong><br><small>4 séries de 10-12 (Alongamento máximo)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>📏 Stiff com Halteres</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sab_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🛌 Mesa Flexora</strong><br><small>4 séries de 12-15 (Contração Posterior)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🛌 Mesa Flexora</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sab_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦵 Cadeira Flexora (Sentada)</strong><br><small>3 séries de 15 (Volume final)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🦵 Cadeira Flexora</strong><br><small>3 séries de 15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_sab_6">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🐴 Panturrilha Sentado (Solear)</strong><br><small>5 séries de 15-20 (Até queimar)</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🐴 Panturrilha Sentado</strong><br><small>5 séries de 15-20</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -464,128 +457,342 @@
     <section id="dieta-section" class="content-section">
       <div class="container">
         <header>
-          <h1>🥗 Dieta & Nutrição</h1>
-          <p>Acompanhe suas metas de hidratação e plano alimentar.</p>
+          <h1>🥗 Dieta Hiperproteica</h1>
         </header>
 
-        <div class="drinks-routine">
-          <h2>💧 Rastreador de Água (Meta: 4500ml)</h2>
-          <div class="progress-container">
-            <div class="progress-bar-bg">
-              <div class="progress-bar-fill" id="water-progress-bar" style="width: 0%; background-color: #4caf50;">0% (0ml)</div>
+        <div class="meal-plan-wrapper">
+          <table class="meal-plan">
+            <thead>
+              <tr>
+                <th>Refeição / Horário</th>
+                <th>Alimentos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="meal-time">Refeição 1 (Pré-treino)<br>(~12:00)</td>
+                <td class="meal-details">
+                  <p><strong>Shake Líquido (Fácil Digestão)</strong></p>
+                  <ul>
+                    <li>2 scoops de Whey Protein</li>
+                    <li><strong>Frutas:</strong> 1 Banana ou 1 fatia de Melão/Melancia (Batido ou à parte)</li>
+                    <li>30g de Aveia ou Granola sem açúcar</li>
+                    <li>5g Creatina (Mistura no shake)</li>
+                  </ul>
+                  <small><strong>💡 Ideal para quem não tem fome ao acordar. Passa rápido no estômago.</strong></small>
+                </td>
+              </tr>
+              <tr>
+                <td class="meal-time">Refeição 2 (Pós-treino)<br>(~15:45)</td>
+                <td class="meal-details">
+                  <p><strong>Almoço Sólido (Matar a fome)</strong></p>
+                  <ul>
+                    <li>150g Frango Grelhado (Filé/Cubos) ou Patinho Moido</li>
+                    <li>100g Arroz, Batata ou Mandioca (Cozidos)</li>
+                    <li>Vegetais Crus ou Cozidos (Salada, tomate, brócolis)</li>
+                    <li>1 fio de Azeite de Oliva</li>
+                  </ul>
+                  <small><strong>💡 Coma devagar. É sua principal refeição sólida.</strong></small>
+                </td>
+              </tr>
+              <tr>
+                <td class="meal-time">Refeição 3 (Jantar)<br>(~19:00)</td>
+                <td class="meal-details">
+                  <p>Refeição sólida principal. Volume controlado.</p>
+                  <ul>
+                    <li>150g Filé de Peixe, Frango ou Carne Magra</li>
+                    <li>Vegetais Refogados (Brócolis, Couve-flor, Vagem)</li>
+                    <li>100g Carboidrato de sua escolha (Batata ou Arroz)</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td class="meal-time">Refeição 4 (Ceia)<br>(~21:30)</td>
+                <td class="meal-details">
+                  <p>Leve, proteica e com gordura boa.</p>
+                  <ul>
+                    <li>3 Ovos inteiros (mexidos, cozidos ou omelete)</li>
+                    <li>50g Queijo Minas Frescal ou Branco (Picado)</li>
+                    <li>Opcional: 1 Pera ou Maçã (sobremesa)</li>
+                  </ul>
+                  <small><strong>💡 Combinação perfeita de Proteína + Gordura para a noite.</strong></small>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="summary" style="background-color: #2e7d32; border-left: 5px solid #4caf50; color: #ffffff; margin-top: 30px;">
+          <h2 style="color: #ffffff;">💊 Protocolo Medicamento</h2>
+          <ul>
+            <li><strong>08:00:</strong> Revolade (Eltrombopag) - Jejum total.</li>
+            <li><strong>Polivitamínico:</strong> Essencial para manutenção pós-bariátrica tardia.</li>
+            <li><strong>Hidratação:</strong> Mínimo 4.5L a 5L de água (Cálculo p/ 130kg).</li>
+          </ul>
+        </div>
+
+        <div class="shopping-lists-container">
+
+          <div class="shopping-list">
+            <h2>🛒 Lista de Compras Semanal</h2>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-ovos">
+              <label for="shop-week-ovos"><strong>Ovos:</strong> 1 Cartela (30 unidades)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-queijo">
+              <label for="shop-week-queijo"><strong>Queijo Minas/Branco:</strong> ~350g (P/ Omeletes)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-banana">
+              <label for="shop-week-banana"><strong>Frutas (Banana):</strong> ~7 unidades (P/ Shake)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-melao">
+              <label for="shop-week-melao"><strong>Frutas (Melão/Melancia):</strong> 1 Melão ou 1/4 Melancia</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-veg">
+              <label for="shop-week-veg"><strong>Vegetais:</strong> Variados (Brócolis, Tomate, Folhas)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-carnes">
+              <label for="shop-week-carnes"><strong>Carnes Magras (Cru):</strong> ~2.8kg (Considera perda)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-carb">
+              <label for="shop-week-carb"><strong>Batata/Mandioca (Crua):</strong> ~2kg OU <strong>Arroz (Cru):</strong> 500g</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-aveia">
+              <label for="shop-week-aveia"><strong>Aveia:</strong> ~250g</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-week-geral">
+              <label for="shop-week-geral"><strong>Gerais:</strong> Azeite, Café, Chás.</label>
             </div>
           </div>
-          <button id="reset-water-btn" class="reset-button" style="margin-top: 15px; background-color: #c0392b;">Resetar Água de Hoje</button>
 
-          <div class="water-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 25px;">
+          <div class="shopping-list">
+            <h2>📅 Estimativa de Compras Mensal</h2>
             <div class="checklist-item">
-              <input type="checkbox" class="water-check" id="water_1" data-ml="500">
-              <label for="water_1">500ml (Ao Acordar)</label>
+              <input type="checkbox" class="shopping-check" id="shop-month-whey">
+              <label for="shop-month-whey"><strong>Whey Protein:</strong> 1kg ou 2kg (Durar o mês todo)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-month-ovos">
+              <label for="shop-month-ovos"><strong>Ovos:</strong> 120 unidades (4 cartelas de 30)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-month-frutas">
+              <label for="shop-month-frutas"><strong>Frutas:</strong> ~30 Bananas + 4 Melões/Melancias</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-month-veg">
+              <label for="shop-month-veg"><strong>Vegetais:</strong> Comprar semanalmente (frescor)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-month-carnes">
+              <label for="shop-month-carnes"><strong>Carnes Magras (Cru):</strong> ~11kg a 12kg</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-month-carb">
+              <label for="shop-month-carb"><strong>Batatas/Raízes (Cru):</strong> ~8kg (Se for base da dieta)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-month-aveia">
+              <label for="shop-month-aveia"><strong>Aveia:</strong> ~1kg (1cx grande ou 4 pequenas)</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="shopping-check" id="shop-month-marmita">
+              <label for="shop-month-marmita"><strong>Sacos/Potes Marmita:</strong> Estoque mensal</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="summary" style="margin-top: 20px;">
+          <h2>📊 Resumo Diário (Aproximado)</h2>
+          <p><strong>Calorias:</strong> ~1.950 kcal</p>
+          <ul>
+            <li>Proteínas: <strong>185g</strong> (Alta prioridade - Hipertrofia)</li>
+            <li>Carboidratos: <strong>150g</strong> (Energia p/ Treino)</li>
+            <li>Gorduras: <strong>65g</strong> (Saúde Hormonal)</li>
+          </ul>
+        </div>
+
+        <div class="summary" style="margin-top: 20px; background-color: #2e7d32; border-left: 5px solid #4caf50; color: #ffffff;">
+          <h2 style="color: #ffffff;">🥗 Opções Recomendadas (Variedade)</h2>
+          <ul>
+            <li><strong>Vegetais (Cozidos/Vapor):</strong> Brócolis, Couve-Flor, Vagem, Abobrinha, Cenoura, Chuchu.</li>
+            <li><strong>Folhas (Saladas):</strong> Alface, Rúcula, Espinafre.</li>
+            <li><strong>Frutas:</strong> Melão, Melancia, Banana, Maçã, Pera.</li>
+          </ul>
+        </div>
+
+        <div class="water-tracker-box" style="margin-top: 30px; background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #4caf50;">
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="color: #4caf50; margin: 0;">💧 Meta Diária: 4.500ml</h3>
+            <button id="reset-water-btn" class="reset-button" style="font-size: 0.8em;">Resetar Dia</button>
+          </div>
+
+          <div style="background-color: #333; border-radius: 15px; height: 25px; width: 100%; margin-bottom: 20px; overflow: hidden;">
+            <div id="water-progress-bar" style="width: 0%; height: 100%; background-color: #4caf50; text-align: center; line-height: 25px; color: #121212; font-weight: bold; transition: width 0.5s;">0%</div>
+          </div>
+
+          <div class="water-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
+
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-1" data-ml="250"><label for="wat-1">Copo 1 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-2" data-ml="250"><label for="wat-2">Copo 2 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-3" data-ml="250"><label for="wat-3">Copo 3 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-4" data-ml="250"><label for="wat-4">Copo 4 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-5" data-ml="250"><label for="wat-5">Copo 5 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-6" data-ml="250"><label for="wat-6">Copo 6 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-7" data-ml="250"><label for="wat-7">Copo 7 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-8" data-ml="250"><label for="wat-8">Copo 8 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-9" data-ml="250"><label for="wat-9">Copo 9 (250ml)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-10" data-ml="250"><label for="wat-10">Copo 10 (250ml)</label></div>
+
+            <div class="checklist-item workout-water">
+              <input type="checkbox" class="water-check" id="wat-treino-1" data-ml="1000">
+              <label for="wat-treino-1"><strong>🏋️‍♂️ Treino: Garrafa 1 (1 Litro)</strong></label>
             </div>
             <div class="checklist-item workout-water">
-              <input type="checkbox" class="water-check" id="water_2" data-ml="1000">
-              <label for="water_2">1000ml (Pré/Intra/Pós Treino)</label>
+              <input type="checkbox" class="water-check" id="wat-treino-2" data-ml="1000">
+              <label for="wat-treino-2"><strong>🏋️‍♂️ Treino: Garrafa 2 (1 Litro)</strong></label>
             </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="water-check" id="water_3" data-ml="500">
-              <label for="water_3">500ml (Manhã)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="water-check" id="water_4" data-ml="500">
-              <label for="water_4">500ml (Almoço)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="water-check" id="water_5" data-ml="500">
-              <label for="water_5">500ml (Tarde)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="water-check" id="water_6" data-ml="500">
-              <label for="water_6">500ml (Jantar)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="water-check" id="water_7" data-ml="500">
-              <label for="water_7">500ml (Antes de Dormir)</label>
-            </div>
+
           </div>
+          <small style="display:block; margin-top:10px; color:#a0a0a0; text-align:center;">⛔ Pausa estratégica perto das refeições sólidas.</small>
         </div>
+
+        <h2 style="color: var(--primary-color); text-align: center; margin-top: 40px;">Sugestões de Bebidas para Foco e Relaxamento</h2>
+        <div class="table-wrapper">
+          <table style="margin-top: 0;">
+            <thead>
+              <tr>
+                <th>Momento / Objetivo</th>
+                <th>Sugestão de Bebida</th>
+                <th>Benefícios</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Manhã (Foco Intenso)</strong></td>
+                <td>Café Preto</td>
+                <td>Aumenta o estado de alerta e a concentração.</td>
+              </tr>
+              <tr>
+                <td><strong>Meio da Manhã (Foco Calmo)</strong></td>
+                <td>Chá de Matcha</td>
+                <td>Fornece energia sustentada sem a agitação do café.</td>
+              </tr>
+              <tr>
+                <td><strong>Início da Tarde (Energia Suave)</strong></td>
+                <td>Chá Verde ou Chá Preto</td>
+                <td>Energia branda sem impactar o sono.</td>
+              </tr>
+              <tr>
+                <td><strong>Noite (Relaxamento)</strong></td>
+                <td>Chá de Camomila ou Erva-Cidreira</td>
+                <td>Propriedades calmantes.</td>
+              </tr>
+              <tr>
+                <td><strong>Noite (Conforto)</strong></td>
+                <td>Golden Milk (Leite com Cúrcuma)</td>
+                <td>Reconfortante e anti-inflamatória.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </section>
 
     <section id="bem-estar-section" class="content-section">
       <div class="container">
-        <h2>🧘 Bem-Estar & Mente</h2>
 
-        <div class="journal-entry-form" style="margin-bottom: 30px;">
-          <h3>💎 Identidade Antissabotagem</h3>
-          <p style="color: #a0a0a0;">O que você é hoje? (Será salvo no navegador)</p>
-          
-          <div id="identity-input-container" style="display: none; gap: 10px;">
-            <input type="text" id="identity-input" placeholder="Ex: Eu sou um indivíduo focado e disciplinado.">
-            <button id="save-identity-btn" class="add-note-btn">Salvar</button>
+        <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
+          <h2 style="color: #007bff; margin-top: 0;">🛡️ Protocolo Anti-Autossabotagem</h2>
+
+          <div style="margin-top: 20px; margin-bottom: 30px;">
+            <h3 style="color: #ffffff; font-size: 1.2em;">1. Reprogramação de Identidade</h3>
+            <div id="identity-input-container" style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <input type="text" id="identity-input" placeholder="Digite sua nova identidade..." style="flex-grow: 1; padding: 10px; background: #121212; border: 1px solid #333; color: #fff; border-radius: 5px; font-family: 'JetBrains Mono', monospace;">
+              <button id="save-identity-btn" class="add-note-btn" style="background-color: #007bff; padding: 10px 20px;">Salvar</button>
+            </div>
+            <div id="identity-display-container" style="display: none; align-items: center; gap: 10px; margin-top: 15px;">
+              <div id="identity-display" style="flex-grow: 1; padding: 15px; background-color: #007bff; color: #fff; font-weight: bold; font-size: 1.2em; text-align: center; border-radius: 5px;"></div>
+              <button id="delete-identity-btn" class="add-note-btn" style="background-color: #c0392b; padding: 15px; display: flex; align-items: center; justify-content: center;">🗑️</button>
+            </div>
           </div>
-          
-          <div id="identity-display-container" style="display: none; align-items: center; justify-content: space-between; padding: 10px; background-color: #333; border-radius: 5px;">
-            <p id="identity-display" style="margin: 0; font-size: 1.1em; color: #fff; font-style: italic;"></p>
-            <button id="delete-identity-btn" class="delete-note-btn">Apagar</button>
+
+          <div style="margin-top: 20px; margin-bottom: 30px;">
+            <h3 style="color: #ffffff; font-size: 1.2em;">2. Micro-Vitórias</h3>
+            <div class="journal-entry-form">
+              <input type="text" id="micro-win-input" placeholder="Ex: Li 1 página..." style="width: 100%; padding: 10px; background: #121212; border: 1px solid #333; color: #fff; border-radius: 5px; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace;">
+              <button id="add-micro-win-btn" class="add-note-btn" style="width: 100%; background-color: #007bff;">Registrar Vitória</button>
+            </div>
+            <ul id="micro-wins-list" style="list-style: none; padding: 0; margin-top: 15px;"></ul>
+          </div>
+
+          <div style="margin-top: 20px;">
+            <h3 style="color: #ffffff; font-size: 1.2em;">3. Mapeamento de Fugas</h3>
+            <div class="journal-entry-form" style="background: #1e1e1e; border: none; padding: 0;">
+              <div class="form-group">
+                <label style="color: #007bff;">Tarefa Importante:</label>
+                <input type="text" id="sabotage-task">
+              </div>
+              <div class="form-group">
+                <label style="color: #007bff;">A Fuga:</label>
+                <input type="text" id="sabotage-action">
+              </div>
+              <div class="form-group">
+                <label style="color: #007bff;">O Gatilho:</label>
+                <input type="text" id="sabotage-feeling">
+              </div>
+              <button id="add-sabotage-btn" class="add-note-btn" style="background-color: #e74c3c; width: 100%; margin-top: 10px;">Mapear Sabotagem</button>
+            </div>
+            <div id="sabotage-history" style="margin-top: 20px;"></div>
           </div>
         </div>
 
-        <div class="journal-entry-form" style="margin-bottom: 30px;">
-          <h3>🌟 Micro Vitórias do Dia</h3>
-          <p style="color: #a0a0a0;">Mapeie 5 pequenas vitórias para manter o momentum.</p>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="micro-win-input" placeholder="Ex: Terminei a leitura de 1 capítulo.">
-            <button id="add-micro-win-btn" class="add-note-btn">Adicionar</button>
+        <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #17a2b8; margin-bottom: 40px;">
+          <h2 style="color: #17a2b8; margin-top: 0;">🗣️ Protocolo Voz de Respeito</h2>
+          <p style="color: #a0a0a0; font-size: 0.9em;">Exercícios diários para projetar sua voz e impor respeito.</p>
+
+          <div style="margin-top: 20px;">
+            <div class="checklist-item">
+              <input type="checkbox" class="voice-check" id="voz-potencia">
+              <label for="voz-potencia"><strong>1. Potência (Emocional):</strong> Som de "S" longo -> "SÁ" explosivo.</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="voice-check" id="voz-relax">
+              <label for="voz-relax"><strong>2. Relaxamento (Tensão):</strong> Vibração de lábios com dedos na bochecha.</label>
+            </div>
+            <div class="checklist-item">
+              <input type="checkbox" class="voice-check" id="voz-ressonancia">
+              <label for="voz-ressonancia"><strong>3. Ressonância (Peito):</strong> Mão no peito + "Ei/Oi" grave.</label>
+            </div>
           </div>
-          <ul id="micro-wins-list" style="list-style: none; padding: 0;"></ul>
         </div>
 
-        <div class="journal-entry-form" style="margin-bottom: 30px; border-left-color: #e74c3c;">
-          <h3>🚫 Mapeamento de Autossabotagem</h3>
-          <label for="sabotage-task">Deveria fazer:</label>
-          <input type="text" id="sabotage-task" placeholder="Ex: Estudar Matemática Financeira">
-          <label for="sabotage-action">Me sabotei fazendo:</label>
-          <input type="text" id="sabotage-action" placeholder="Ex: Fiquei 2 horas rolando o feed.">
-          <label for="sabotage-feeling">O que senti:</label>
-          <input type="text" id="sabotage-feeling" placeholder="Ex: Ansiedade, depois frustração.">
-          <button id="add-sabotage-btn" class="add-note-btn" style="background-color: #e74c3c;">Mapear Sabotagem</button>
-          
-          <div id="sabotage-history" style="margin-top: 20px;"></div>
-        </div>
-
-        <div class="journal-entry-form" style="margin-bottom: 30px;">
-          <h3>✍️ Diário de Bem-Estar</h3>
-          <label for="journal-date">Data:</label>
-          <input type="date" id="journal-date">
-          <label for="journal-text">Anotação:</label>
-          <textarea id="journal-text" placeholder="Reflexões, gratidão, humor..."></textarea>
-          <button id="add-note-button" class="add-note-btn">Adicionar Anotação</button>
-          <div id="journal-history-container" class="history-container"></div>
-        </div>
-
-        <div class="journal-entry-form" style="margin-bottom: 30px;">
-          <h3>🌙 Diário de Sonhos</h3>
-          <p style="color: #a0a0a0;">Seu deck Lenormand: Baralho Cigano 36 Cartas Os Caminhos Da Floresta.</p>
-          <label for="dream-journal-date">Data do Sonho:</label>
-          <input type="date" id="dream-journal-date">
-          <label for="dream-journal-text">Descrição do Sonho:</label>
-          <textarea id="dream-journal-text" placeholder="Descreva o sonho e possíveis símbolos..."></textarea>
-          <button id="add-dream-button" class="add-note-btn">Adicionar Sonho</button>
-          <div id="dream-history-container" class="history-container"></div>
-        </div>
-
+        <h2>Diário de Anotações</h2>
         <div class="journal-entry-form">
-          <h3>🧠 Mapeamento de Vozes Internas</h3>
-          <p style="color: #a0a0a0;">Marque as vozes que dominaram hoje (será salvo).</p>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-            <div class="checklist-item"><input type="checkbox" class="voice-check" id="voice_1"><label for="voice_1">Crítico Interno</label></div>
-            <div class="checklist-item"><input type="checkbox" class="voice-check" id="voice_2"><label for="voice_2">Perfeccionista</label></div>
-            <div class="checklist-item"><input type="checkbox" class="voice-check" id="voice_3"><label for="voice_3">Vítima</label></div>
-            <div class="checklist-item"><input type="checkbox" class="voice-check" id="voice_4"><label for="voice_4">Sábio</label></div>
-            <div class="checklist-item"><input type="checkbox" class="voice-check" id="voice_5"><label for="voice_5">Agressor</label></div>
-            <div class="checklist-item"><input type="checkbox" class="voice-check" id="voice_6"><label for="voice_6">Amante</label></div>
-          </div>
+          <input type="date" id="journal-date">
+          <textarea id="journal-text" placeholder="Escreva aqui..."></textarea>
+          <button id="add-note-button" class="add-note-btn">Salvar</button>
         </div>
+        <div class="journal-history" id="journal-history-container"></div>
+
+        <h2>Diário dos Sonhos</h2>
+        <div class="journal-entry-form">
+          <input type="date" id="dream-journal-date">
+          <textarea id="dream-journal-text" placeholder="Sonho..."></textarea>
+          <button id="add-dream-button" class="add-note-btn">Salvar</button>
+        </div>
+        <div class="journal-history" id="dream-history-container"></div>
 
       </div>
     </section>
@@ -593,83 +800,93 @@
     <section id="carreira-section" class="content-section">
       <div class="container">
         <div class="roadmap-header">
-          <h1>🚀 Roadmap & Metas 2026</h1>
-          <p style="color: #a0a0a0;">Acompanhamento de progresso de estudo e leitura.</p>
-        </div>
-    
-        <div class="progress-container">
-          <p style="margin-bottom: 5px;">Progresso de Metas:</p>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="roadmapProgressBar">0%</div>
+          <h1 style="color: #9b59b6;">Roadmap: Ciência & Engenharia de Dados</h1>
+          <p style="color: #9ca3af;">Foco: Python, SQL, Cloud & Pipelines</p>
+
+          <div class="progress-container">
+            <h3 style="margin-bottom: 10px;">Progresso do Roadmap</h3>
+            <div class="progress-bar-bg">
+              <div id="roadmapProgressBar" class="progress-bar-fill" style="background-color: #9b59b6;">0%</div>
+            </div>
           </div>
         </div>
-    
+
         <div class="roadmap-grid">
-    
-          <div class="roadmap-card green">
-            <h3 class="card-title green-text">🎯 Metas Diárias (2026)</h3>
-            <p class="card-subtitle">Foco em consistência básica.</p>
-            <ul class="roadmap-list">
-              <div class="topic-header">Estudos Básicos</div>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="meta_portugues">
-                <label for="meta_portugues">Estudar um pouco de português todos os dias (começando do básico).</label>
-              </li>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="meta_matematica">
-                <label for="meta_matematica">Estudar um pouco de matemática todos os dias (começando do básico).</label>
-              </li>
-            </ul>
-            <div class="card-highlight">
-              Estudo consistente é mais importante que maratonas.
-            </div>
-          </div>
-    
+
           <div class="roadmap-card blue">
-            <h3 class="card-title blue-text">📚 Metas de Leitura</h3>
-            <p class="card-subtitle">Manter o equilíbrio entre técnico e pessoal.</p>
+            <h2 class="card-title blue-text">1. 🎯 A Profissão Ideal</h2>
+            <p class="card-subtitle">Perfil: Analítico, Persistente e Adaptável</p>
             <ul class="roadmap-list">
-              <div class="topic-header">Leitura Técnica (Alta)</div>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="meta_livro_tecnico">
-                <label for="meta_livro_tecnico">Ler pelo menos um livro técnico do meu curso a cada mês (meta mais alta).</label>
-              </li>
-              <div class="topic-header">Leitura Mínima (Trimestral)</div>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="meta_livro_tecnico_min">
-                <label for="meta_livro_tecnico_min">Ler pelo menos um livro técnico a cada 3 meses.</label>
-              </li>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="meta_livro_nao_tecnico">
-                <label for="meta_livro_nao_tecnico">Ler pelo menos um livro não técnico a cada 3 meses.</label>
-              </li>
+              <li>Cientista / Analista de Dados</li>
+              <li>Não precisa codar como um Dev Hardcore</li>
+              <li>Salários e Concursos com demanda</li>
+              <li>Aprende fazendo (prática real)</li>
             </ul>
-            <div class="card-highlight">
-              Meta Mínima: 2 livros por trimestre (1 técnico e 1 não técnico).
-            </div>
+
+            <h4 class="topic-header" style="border-color: #3b82f6; color: #f87171; margin-top: 25px;">❌ O Que Evitar (Sabotadores)</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="avoid-compare"><label for="avoid-compare">Comparar velocidade com outros</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="avoid-nopractice"><label for="avoid-nopractice">Estudar sem prática (Tutorial Hell)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="avoid-late"><label for="avoid-late">Achar que está atrasado</label></div>
           </div>
-    
+
+          <div class="roadmap-card green">
+            <h2 class="card-title green-text">2. ⚡ Fundamentos Sólidos</h2>
+            <p class="card-subtitle">Base para Ciência e Engenharia</p>
+
+            <h4 class="topic-header">Python & Lógica</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-py-logic"><label for="rm-py-logic">Lógica (Variáveis, Loops, Funções)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-py-struct"><label for="rm-py-struct">Estruturas (Listas, Dicionários)</label></div>
+
+            <h4 class="topic-header">SQL & Banco de Dados</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-sql-essencial"><label for="rm-sql-essencial">SQL Essencial (SELECT, JOIN, GROUP BY)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-sql-adv"><label for="rm-sql-adv">SQL Avançado (Window Functions)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-db-model"><label for="rm-db-model">Modelagem & Normalização</label></div>
+
+            <h4 class="topic-header">Ferramentas</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-git"><label for="rm-git">Git & GitHub</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-shell"><label for="rm-shell">Shell Script / Terminal</label></div>
+          </div>
+
           <div class="roadmap-card purple">
-            <h3 class="card-title purple-text">💡 Foco de Estudo (Próx. 3 Meses)</h3>
-            <p class="card-subtitle">Prioridade para as matérias do concurso.</p>
-            <ul class="roadmap-list">
-              <div class="topic-header">Concurso BB</div>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="foco_bancarios">
-                <label for="foco_bancarios">Conhecimentos Bancários (Revisão)</label>
-              </li>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="foco_vendas">
-                <label for="foco_vendas">Vendas e Negociação (Leis e Código)</label>
-              </li>
-              <div class="topic-header">Desenvolvimento Pessoal</div>
-              <li class="checklist-item">
-                <input type="checkbox" class="roadmap-check" id="foco_ingles">
-                <label for="foco_ingles">Inglês (Interpretação e Gramática)</label>
-              </li>
-            </ul>
+            <h2 class="card-title purple-text">3. 📊 Ciência de Dados</h2>
+            <p class="card-subtitle">Manipulação e Transformação</p>
+
+            <h4 class="topic-header">Python para Dados</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-pd-manip"><label for="rm-pd-manip">Pandas (Limpeza/Transformação)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-etl-py"><label for="rm-etl-py">ETL com Python</label></div>
+
+            <h4 class="topic-header">Estatística & Visualização</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-stat"><label for="rm-stat">Estatística Descritiva</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-pbi"><label for="rm-pbi">Power BI (Dashboards)</label></div>
           </div>
-    
+
+          <div class="roadmap-card red">
+            <h2 class="card-title red-text">4. 🛠️ Engenharia de Dados</h2>
+            <p class="card-subtitle">Pipelines, Big Data e Cloud</p>
+
+            <h4 class="topic-header">Big Data</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-spark"><label for="rm-spark">PySpark & Databricks</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-delta"><label for="rm-delta">Delta Lake (Bronze/Silver/Gold)</label></div>
+
+            <h4 class="topic-header">Orquestração & Modern Stack</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-airflow"><label for="rm-airflow">Apache Airflow (Orquestração)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-dbt"><label for="rm-dbt">dbt (Transformação)</label></div>
+
+            <h4 class="topic-header">Infra & Cloud</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-docker"><label for="rm-docker">Docker (Containers)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-cloud"><label for="rm-cloud">Cloud (AWS/GCP Básica)</label></div>
+          </div>
+
+          <div class="roadmap-card amber">
+            <h2 class="card-title amber-text">5. 🚀 Projetos (Portfólio)</h2>
+            <p class="card-subtitle">Combinando Ciência e Engenharia</p>
+
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-proj-etl"><label for="rm-proj-etl">1. ETL de Vendas (Python + SQL)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-proj-airflow"><label for="rm-proj-airflow">2. Pipeline Automatizado (Airflow)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-proj-lake"><label for="rm-proj-lake">3. Data Lake no Databricks</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-proj-dash"><label for="rm-proj-dash">4. Dashboard Final</label></div>
+          </div>
+
         </div>
       </div>
     </section>
