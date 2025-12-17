@@ -13,8 +13,7 @@
 
   <link rel="stylesheet" href="style.css">
   <style>
-    .shopping-check,
-    .water-check {
+    .shopping-check {
       width: 20px;
       height: 20px;
       margin-right: 10px;
@@ -30,6 +29,24 @@
       background-color: rgba(231, 76, 60, 0.2);
       /* Fundo avermelhado leve */
       border: 1px solid #e74c3c;
+    }
+
+    /* Adicionado para esconder o Core nos dias que não se aplica */
+    .hidden-workout {
+      display: none !important;
+    }
+
+    /* Cores de Core para o dia de treino - AGORA TUDO VERMELHO */
+    .core-day-1 {
+      border-left-color: #e74c3c !important;
+    }
+
+    .core-day-3 {
+      border-left-color: #e74c3c !important;
+    }
+
+    .core-day-5 {
+      border-left-color: #e74c3c !important;
     }
   </style>
 </head>
@@ -96,33 +113,36 @@
         </ul>
       </div>
 
-      <div class="workout-day core-matinal" style="border-left-color: #e74c3c;">
+      <div style="text-align: center; margin: 20px 0;">
+        <button id="toggle-all-workouts-btn" class="add-note-btn" style="background-color: #e74c3c; padding: 10px 20px; font-size: 1.1em; border-radius: 8px;">
+          Ver Todos os Treinos
+        </button>
+      </div>
+
+      <div class="workout-day core-day-1 hidden-workout" data-day-name="Core-Segunda" data-day-index="1" style="border-left-color: #e74c3c;">
         <div class="workout-day-header">
           <div>
-            <h3 style="color: #e74c3c;">🔥 Rotina Diária: Core Pós-Cardio</h3>
+            <h3 style="color: #e74c3c;">🔥 Rotina Segunda: Core Superior</h3>
           </div>
           <button class="reset-button">Resetar</button>
         </div>
         <ul>
-          <li class="exercise-item" data-exercise-id="core_mat_1">
+          <li class="exercise-item" data-exercise-id="core_seg_1">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>1. Prancha Abdominal</strong><br><small>3 séries de 45-60s</small></label></div>
           </li>
-          <li class="exercise-item" data-exercise-id="core_mat_2">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>2. Abdominal Bicicleta</strong><br><small>3 séries de 20</small></label></div>
+          <li class="exercise-item" data-exercise-id="core_seg_2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>2. Abdominal Canivete (Alternado)</strong><br><small>3 séries de 15</small></label></div>
           </li>
-          <li class="exercise-item" data-exercise-id="core_mat_3">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>3. Elevação de Pernas</strong><br><small>3 séries de 15-20</small></label></div>
+          <li class="exercise-item" data-exercise-id="core_seg_3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>3. Abdominal Crunch</strong><br><small>3 séries de 20</small></label></div>
           </li>
-          <li class="exercise-item" data-exercise-id="core_mat_4">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>4. Mountain Climber</strong><br><small>3 séries de 45s</small></label></div>
-          </li>
-          <li class="exercise-item" data-exercise-id="core_mat_5">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>5. Prancha Lateral</strong><br><small>3 séries de 30s</small></label></div>
+          <li class="exercise-item" data-exercise-id="core_seg_4">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>4. Abdominal Bicicleta</strong><br><small>3 séries de 20</small></label></div>
           </li>
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;">
+      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Segunda" data-day-index="1">
         <div class="workout-day-header">
           <h3 style="color: #e74c3c;">Segunda: PUSH 1</h3>
           <button class="reset-button">Resetar Dia</button>
@@ -177,7 +197,7 @@
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_seg_7">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>💪 Tríceps Corda</strong><br><small>3 séries de 12-15</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>💪 Tríceps Corda</strong><br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -191,7 +211,7 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;">
+      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Terça" data-day-index="2">
         <div class="workout-day-header">
           <h3 style="color: #e74c3c;">Terça: PULL 1</h3>
           <button class="reset-button">Resetar Dia</button>
@@ -239,10 +259,39 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
+          <li class="exercise-item" data-exercise-id="treino_qua_8_novo">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔥 Rosca Concentrada</strong><br><small>3 séries de 12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;">
+      <div class="workout-day core-day-3 hidden-workout" data-day-name="Core-Quarta" data-day-index="3" style="border-left-color: #e74c3c;">
+        <div class="workout-day-header">
+          <div>
+            <h3 style="color: #e74c3c;">🔥 Rotina Quarta: Core Inferior</h3>
+          </div>
+          <button class="reset-button">Resetar</button>
+        </div>
+        <ul>
+          <li class="exercise-item" data-exercise-id="core_qua_1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>1. Elevação de Pernas</strong><br><small>3 séries de 15-20</small></label></div>
+          </li>
+          <li class="exercise-item" data-exercise-id="core_qua_2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>2. Tesoura no Chão</strong><br><small>3 séries de 45s</small></label></div>
+          </li>
+          <li class="exercise-item" data-exercise-id="core_qua_3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>3. Abdominal Invertido</strong><br><small>3 séries de 15</small></label></div>
+          </li>
+          <li class="exercise-item" data-exercise-id="core_qua_4">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>4. Hollow Hold/Rock</strong><br><small>3 séries de 30s</small></label></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Quarta" data-day-index="3">
         <div class="workout-day-header">
           <h3 style="color: #e74c3c;">Quarta: LEGS 1</h3>
           <button class="reset-button">Resetar Dia</button>
@@ -287,7 +336,7 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;">
+      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Quinta" data-day-index="4">
         <div class="workout-day-header">
           <h3 style="color: #e74c3c;">Quinta: PUSH 2</h3>
           <button class="reset-button">Resetar Dia</button>
@@ -336,7 +385,7 @@
             </div>
           </li>
           <li class="exercise-item" data-exercise-id="treino_qui_8">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔨 Tríceps Testa</strong><br><small>3 séries de 10-12</small></label></div>
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔨 Tríceps Testa</strong><br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -356,7 +405,30 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;">
+      <div class="workout-day core-day-5 hidden-workout" data-day-name="Core-Sexta" data-day-index="5" style="border-left-color: #e74c3c;">
+        <div class="workout-day-header">
+          <div>
+            <h3 style="color: #e74c3c;">🔥 Rotina Sexta: Core Geral</h3>
+          </div>
+          <button class="reset-button">Resetar</button>
+        </div>
+        <ul>
+          <li class="exercise-item" data-exercise-id="core_sex_1">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>1. Prancha Lateral (Cada Lado)</strong><br><small>3 séries de 30s</small></label></div>
+          </li>
+          <li class="exercise-item" data-exercise-id="core_sex_2">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>2. Mountain Climber</strong><br><small>3 séries de 45s</small></label></div>
+          </li>
+          <li class="exercise-item" data-exercise-id="core_sex_3">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>3. Superman Alternado</strong><br><small>3 séries de 15</small></label></div>
+          </li>
+          <li class="exercise-item" data-exercise-id="core_sex_4">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>4. Russian Twist (Peso)</strong><br><small>3 séries de 20</small></label></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Sexta" data-day-index="5">
         <div class="workout-day-header">
           <h3 style="color: #e74c3c;">Sexta: PULL 2</h3>
           <button class="reset-button">Resetar Dia</button>
@@ -404,10 +476,16 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
+          <li class="exercise-item" data-exercise-id="treino_sex_8_novo">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label><strong>🔨 Rosca Martelo</strong><br><small>3 séries de 12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;">
+      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Sábado" data-day-index="6">
         <div class="workout-day-header">
           <h3 style="color: #e74c3c;">Sábado: LEGS 2</h3>
           <button class="reset-button">Resetar Dia</button>
@@ -470,39 +548,39 @@
             </thead>
             <tbody>
               <tr>
-                <td class="meal-time">Refeição 1 (Pré-treino)<br>(~12:00)</td>
+                <td class="meal-time">Refeição 1 (Almoço)<br>(~12:00)</td>
                 <td class="meal-details">
-                  <p><strong>Shake Líquido (Fácil Digestão)</strong></p>
+                  <p><strong>Refeição Sólida Principal (Pré-Treino)</strong></p>
                   <ul>
-                    <li>2 scoops de Whey Protein</li>
-                    <li><strong>Frutas:</strong> 1 Banana ou 1 fatia de Melão/Melancia (Batido ou à parte)</li>
-                    <li>30g de Aveia ou Granola sem açúcar</li>
-                    <li>5g Creatina (Mistura no shake)</li>
-                  </ul>
-                  <small><strong>💡 Ideal para quem não tem fome ao acordar. Passa rápido no estômago.</strong></small>
-                </td>
-              </tr>
-              <tr>
-                <td class="meal-time">Refeição 2 (Pós-treino)<br>(~15:45)</td>
-                <td class="meal-details">
-                  <p><strong>Almoço Sólido (Matar a fome)</strong></p>
-                  <ul>
-                    <li>150g Frango Grelhado (Filé/Cubos) ou Patinho Moido</li>
+                    <li>150g Frango Grelhado, Tilápia ou Patinho Moido</li>
                     <li>100g Arroz, Batata ou Mandioca (Cozidos)</li>
+                    <li>Feijão (Opcional): 1 Concha Média</li>
                     <li>Vegetais Crus ou Cozidos (Salada, tomate, brócolis)</li>
                     <li>1 fio de Azeite de Oliva</li>
                   </ul>
-                  <small><strong>💡 Coma devagar. É sua principal refeição sólida.</strong></small>
+                </td>
+              </tr>
+              <tr>
+                <td class="meal-time">Refeição 2 (Pós-Treino)<br>(~15:45)</td>
+                <td class="meal-details">
+                  <p><strong>Shake Líquido (Rápida Absorção)</strong></p>
+                  <ul>
+                    <li>1 dose de Whey Protein</li>
+                    <li>Frutas: 1 Banana ou 1 fatia de Melão/Melancia (Batido ou à parte)</li>
+                    <li>30g de Aveia ou Granola sem açúcar</li>
+                    <li>5g Creatina (Mistura no shake)</li>
+                  </ul>
                 </td>
               </tr>
               <tr>
                 <td class="meal-time">Refeição 3 (Jantar)<br>(~19:00)</td>
                 <td class="meal-details">
-                  <p>Refeição sólida principal. Volume controlado.</p>
+                  <p>Refeição sólida (Volume Controlado)</p>
                   <ul>
                     <li>150g Filé de Peixe, Frango ou Carne Magra</li>
                     <li>Vegetais Refogados (Brócolis, Couve-flor, Vagem)</li>
                     <li>100g Carboidrato de sua escolha (Batata ou Arroz)</li>
+                    <li>Feijão (Opcional): 1 Concha Média</li>
                   </ul>
                 </td>
               </tr>
@@ -515,7 +593,6 @@
                     <li>50g Queijo Minas Frescal ou Branco (Picado)</li>
                     <li>Opcional: 1 Pera ou Maçã (sobremesa)</li>
                   </ul>
-                  <small><strong>💡 Combinação perfeita de Proteína + Gordura para a noite.</strong></small>
                 </td>
               </tr>
             </tbody>
@@ -630,43 +707,6 @@
           </ul>
         </div>
 
-        <div class="water-tracker-box" style="margin-top: 30px; background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #4caf50;">
-
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h3 style="color: #4caf50; margin: 0;">💧 Meta Diária: 4.500ml</h3>
-            <button id="reset-water-btn" class="reset-button" style="font-size: 0.8em;">Resetar Dia</button>
-          </div>
-
-          <div style="background-color: #333; border-radius: 15px; height: 25px; width: 100%; margin-bottom: 20px; overflow: hidden;">
-            <div id="water-progress-bar" style="width: 0%; height: 100%; background-color: #4caf50; text-align: center; line-height: 25px; color: #121212; font-weight: bold; transition: width 0.5s;">0%</div>
-          </div>
-
-          <div class="water-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
-
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-1" data-ml="250"><label for="wat-1">Copo 1 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-2" data-ml="250"><label for="wat-2">Copo 2 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-3" data-ml="250"><label for="wat-3">Copo 3 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-4" data-ml="250"><label for="wat-4">Copo 4 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-5" data-ml="250"><label for="wat-5">Copo 5 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-6" data-ml="250"><label for="wat-6">Copo 6 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-7" data-ml="250"><label for="wat-7">Copo 7 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-8" data-ml="250"><label for="wat-8">Copo 8 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-9" data-ml="250"><label for="wat-9">Copo 9 (250ml)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="water-check" id="wat-10" data-ml="250"><label for="wat-10">Copo 10 (250ml)</label></div>
-
-            <div class="checklist-item workout-water">
-              <input type="checkbox" class="water-check" id="wat-treino-1" data-ml="1000">
-              <label for="wat-treino-1"><strong>🏋️‍♂️ Treino: Garrafa 1 (1 Litro)</strong></label>
-            </div>
-            <div class="checklist-item workout-water">
-              <input type="checkbox" class="water-check" id="wat-treino-2" data-ml="1000">
-              <label for="wat-treino-2"><strong>🏋️‍♂️ Treino: Garrafa 2 (1 Litro)</strong></label>
-            </div>
-
-          </div>
-          <small style="display:block; margin-top:10px; color:#a0a0a0; text-align:center;">⛔ Pausa estratégica perto das refeições sólidas.</small>
-        </div>
-
         <h2 style="color: var(--primary-color); text-align: center; margin-top: 40px;">Sugestões de Bebidas para Foco e Relaxamento</h2>
         <div class="table-wrapper">
           <table style="margin-top: 0;">
@@ -686,7 +726,7 @@
               <tr>
                 <td><strong>Meio da Manhã (Foco Calmo)</strong></td>
                 <td>Chá de Matcha</td>
-                <td>Fornece energia sustentada sem a agitação do café.</td>
+                <td>Fornece energia sustentada sem o agito do café.</td>
               </tr>
               <tr>
                 <td><strong>Início da Tarde (Energia Suave)</strong></td>
@@ -712,6 +752,24 @@
 
     <section id="bem-estar-section" class="content-section">
       <div class="container">
+
+        <div id="raiva-protocolo" style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
+          <h2 style="color: #007bff; margin-top: 0;">🧠 10 Passos para Lidar com a Raiva</h2>
+          <p style="color: #a0a0a0; font-size: 0.9em;">(Baseado em didatics: Como NUNCA MAIS SENTIR RAIVA)</p>
+          <ol style="list-style-type: decimal; padding-left: 20px; margin-top: 15px;">
+            <li><strong>Sua Reação é uma Escolha:</strong> A raiva não é causada pelo que acontece, mas sim pela sua interpretação do evento. Escolha responder com consciência.</li>
+            <li><strong>Saiba o que Esperar dos Outros:</strong> Não espere que os outros tenham o mesmo nível de consciência ou educação que você. Pare de personalizar comportamentos alheios.</li>
+            <li><strong>Você Também Erra:</strong> A insistência em ter razão alimenta a vaidade e o desgaste. Escolha a paz, mesmo que você tenha razão.</li>
+            <li><strong>Autoestima é Interna:</strong> A verdadeira autoestima vem da autonomia e competência, e não da busca incessante por validação externa ou aprovação dos outros.</li>
+            <li><strong>Saber Colocar Limites:</strong> Criar limites claros é uma forma de autocuidado emocional. Saber dizer "não" de forma assertiva aumenta seu bem-estar.</li>
+            <li><strong>Liberte-se da Opinião Alheia:</strong> Viver de acordo com quem os outros esperam que você seja é incongruente. Viva de acordo com seus valores e quem você é.</li>
+            <li><strong>O Silêncio é de Ouro:</strong> Nem tudo merece resposta. O silêncio desarma, desconcerta e preserva sua energia mental.</li>
+            <li><strong>Pratique a Gratidão:</strong> Mude o foco do negativo para o positivo, reconfigurando sua mente para reduzir estresse, ansiedade e agressividade.</li>
+            <li><strong>Cresça com as Críticas:</strong> Veja a crítica como uma oportunidade de aprendizado (mindset de crescimento), filtrando o que é útil para crescer.</li>
+            <li><strong>A Arte do Perdão e Desapego:</strong> Guardar ressentimento é beber veneno. Perdoar é abrir mão de carregar aquela dor, escolhendo sua própria paz.</li>
+          </ol>
+        </div>
+
 
         <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
           <h2 style="color: #007bff; margin-top: 0;">🛡️ Protocolo Anti-Autossabotagem</h2>
