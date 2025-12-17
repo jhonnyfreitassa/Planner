@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ========================================================
-  // SCRIPT DA AGENDA DINÂMICA (AJUSTADO: REMOÇÃO CROSSFIT E ACADEMIA DOMINGO)
+  // SCRIPT DA AGENDA DINÂMICA (MANTIDO)
   // ========================================================
   if (document.getElementById("agenda")) {
     const agenda = document.getElementById("agenda");
@@ -144,8 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- PALETA DE CORES ---
     const corCardio = "#00ced1"; // Ciano
     const corAcademia = "#e74c3c"; // Vermelho
-    // const corCrossfit = "#FF4500"; // REMOVIDO
-    const corCore = "#007bff"; // Azul para CORE
+    const corCore = "#007bff"; // Azul para CORE (No agendamento)
 
     // Cores Estudos
     const corPortugues = "#3498db"; // Azul
@@ -157,11 +156,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const corSimulado = "#636e72"; // Cinza
     const corRoadmap = "#00b899"; // MINT/Ciano Claro
 
-    // --- ROTINA SEMANAL (SEG-SEX) - REVISADA ---
+    // --- ROTINA SEMANAL (SEG-SEX) - MANTIDO ---
     for (let dia = 1; dia <= 5; dia++) {
-      // Cardio + Core 08:00 - 09:00
+      // Cardio AEJ 08:00 - 09:00
       adicionarAtividade(
-        "<strong>🏃 Cardio (AEJ) + Core</strong>",
+        "<strong>🏃 Cardio (AEJ)</strong>",
         dia,
         "08:00",
         "09:00",
@@ -187,8 +186,36 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    // --- MATÉRIAS BANCO DO BRASIL (SEG-SEX) - MANTIDO ---
+    // --- ROTINA DE CORE SEGMENTADA (SEGUNDA, QUARTA, SEXTA) ---
+    // SEGUNDA-FEIRA (Dia 1) - Core Superior
+    adicionarAtividade(
+      "<strong>🔥 CORE Superior</strong><br><small>Pós-Cardio</small>",
+      1,
+      "09:00",
+      "09:30",
+      corCore
+    );
 
+    // QUARTA-FEIRA (Dia 3) - Core Inferior
+    adicionarAtividade(
+      "<strong>🔥 CORE Inferior</strong><br><small>Pós-Cardio</small>",
+      3,
+      "09:00",
+      "09:30",
+      corCore
+    );
+
+    // SEXTA-FEIRA (Dia 5) - Core Geral
+    adicionarAtividade(
+      "<strong>🔥 CORE Geral</strong><br><small>Pós-Cardio</small>",
+      5,
+      "09:00",
+      "09:30",
+      corCore
+    );
+
+    // --- MATÉRIAS BANCO DO BRASIL (SEG-DOM) - MANTIDO ---
+    // (Lógica de agendamento das matérias mantida)
     // SEGUNDA-FEIRA (Dia 1)
     adicionarAtividade(
       "<strong>📚 Português</strong><br><small>Gramática/Texto</small>",
@@ -269,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corVendas
     );
 
-    // --- FIM DE SEMANA (AJUSTADO) ---
+    // --- FIM DE SEMANA (MANTIDO) ---
     // Sábado
     adicionarAtividade(
       "<strong>📚 Português</strong><br><small>Foco Total</small>",
@@ -300,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
       corBancarios
     );
 
-    // Domingo (APENAS ESTUDO E DESCANSO TOTAL - ACADEMIA REMOVIDA)
+    // Domingo (APENAS ESTUDO E DESCANSO TOTAL)
     // Inglês 13-14
     adicionarAtividade(
       "<strong>🇺🇸 Inglês</strong><br><small>Interpretação</small>",
@@ -355,7 +382,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
+    // Seleciona todos os blocos de treino PPL e os blocos de Core (que possuem data-day-index)
+    const allWorkoutBlocks = document.querySelectorAll(
+      ".workout-day[data-day-index]"
+    );
+    const toggleAllWorkoutsBtn = document.getElementById(
+      "toggle-all-workouts-btn"
+    );
+
+    // Variável de estado para controlar a visualização
+    let showAllWorkoutsMode = false;
+
     const storageKey = "workoutProgress";
+
+    // Obter o dia da semana atual (0=domingo, 1=segunda, 6=sábado)
+    const currentDayIndex = new Date().getDay();
+
+    // Função para mostrar apenas o treino do dia atual
+    function updateWorkoutVisibilityByDay() {
+      allWorkoutBlocks.forEach((dayBlock) => {
+        const dayIndex = parseInt(dayBlock.dataset.dayIndex, 10);
+
+        // Mostrar o bloco APENAS se o data-day-index for o dia atual.
+        if (dayIndex === currentDayIndex) {
+          dayBlock.classList.remove("hidden-workout");
+        } else {
+          dayBlock.classList.add("hidden-workout");
+        }
+      });
+    }
+
+    // NOVA FUNÇÃO: Alterna a visualização entre o dia e a semana completa
+    function toggleAllWorkouts() {
+      showAllWorkoutsMode = !showAllWorkoutsMode;
+
+      if (showAllWorkoutsMode) {
+        // Mostrar todos os blocos
+        allWorkoutBlocks.forEach((dayBlock) => {
+          dayBlock.classList.remove("hidden-workout");
+        });
+        toggleAllWorkoutsBtn.textContent = "Ver Treino do Dia";
+      } else {
+        // Voltar a mostrar apenas o treino do dia atual
+        updateWorkoutVisibilityByDay();
+        toggleAllWorkoutsBtn.textContent = "Ver Todos os Treinos";
+      }
+    }
+
+    // Adicionar listener ao botão de alternância
+    if (toggleAllWorkoutsBtn) {
+      toggleAllWorkoutsBtn.addEventListener("click", toggleAllWorkouts);
+    }
+
+    // Lógica de séries e peso (mantida)
 
     function saveProgress() {
       const progressData = {};
@@ -406,6 +485,9 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       }
+
+      // Aplica a visibilidade inicial: apenas o treino do dia
+      updateWorkoutVisibilityByDay();
     }
 
     exerciseItems.forEach((item) => {
@@ -469,402 +551,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
-  }
-
-  // ========================================================
-  // SCRIPT DO RASTREADOR DE ÁGUA (ATUALIZADO PARA VERDE + LOGICA)
-  // ========================================================
-  if (document.getElementById("dieta-section")) {
-    const waterCheckboxes = document.querySelectorAll(".water-check");
-    const waterProgressBar = document.getElementById("water-progress-bar");
-    const resetWaterBtn = document.getElementById("reset-water-btn");
-    const TOTAL_GOAL = 4500; // Meta Diária Exata
-
-    function updateWaterProgress() {
-      let currentMl = 0;
-      waterCheckboxes.forEach((box) => {
-        if (box.checked) {
-          // Converte o valor de data-ml para número e soma
-          currentMl += parseInt(box.dataset.ml);
-        }
-        // Salvar estado no localStorage
-        localStorage.setItem(box.id, box.checked);
-      });
-
-      // Calcula a porcentagem (limitada a 100% visualmente)
-      const percentage = Math.min(
-        100,
-        Math.round((currentMl / TOTAL_GOAL) * 100)
-      );
-
-      if (waterProgressBar) {
-        waterProgressBar.style.width = percentage + "%";
-        waterProgressBar.textContent = `${percentage}% (${currentMl}ml)`;
-
-        // Cor Verde mais escura quando completa a meta
-        if (currentMl >= TOTAL_GOAL) {
-          waterProgressBar.style.backgroundColor = "#2e7d32";
-          waterProgressBar.textContent = `META BATIDA! (${currentMl}ml)`;
-        } else {
-          waterProgressBar.style.backgroundColor = "#4caf50";
-        }
-      }
-    }
-
-    function loadWaterProgress() {
-      waterCheckboxes.forEach((box) => {
-        const isChecked = localStorage.getItem(box.id) === "true";
-        box.checked = isChecked;
-      });
-      updateWaterProgress();
-    }
-
-    // Evento de Reset
-    if (resetWaterBtn) {
-      resetWaterBtn.addEventListener("click", function () {
-        if (confirm("Deseja resetar o contador de água de hoje?")) {
-          waterCheckboxes.forEach((box) => {
-            box.checked = false;
-            localStorage.setItem(box.id, false);
-          });
-          updateWaterProgress();
-        }
-      });
-    }
-
-    // Listeners para cada checkbox
-    waterCheckboxes.forEach((box) => {
-      box.addEventListener("change", updateWaterProgress);
-    });
-
-    // Carregar ao iniciar
-    loadWaterProgress();
-  }
-
-  if (document.getElementById("bem-estar-section")) {
-    const identityInput = document.getElementById("identity-input");
-    const identityDisplay = document.getElementById("identity-display");
-    const saveIdentityBtn = document.getElementById("save-identity-btn");
-    const deleteIdentityBtn = document.getElementById("delete-identity-btn");
-    const identityInputContainer = document.getElementById(
-      "identity-input-container"
-    );
-    const identityDisplayContainer = document.getElementById(
-      "identity-display-container"
-    );
-
-    function saveIdentity() {
-      const text = identityInput.value.trim();
-      if (text) {
-        localStorage.setItem("antiSabotageIdentity", text);
-        identityDisplay.textContent = text;
-        identityInputContainer.style.display = "none";
-        identityDisplayContainer.style.display = "flex";
-      }
-    }
-
-    function deleteIdentity() {
-      if (confirm("Deseja apagar sua frase de identidade e criar uma nova?")) {
-        localStorage.removeItem("antiSabotageIdentity");
-        identityInput.value = "";
-        identityDisplayContainer.style.display = "none";
-        identityInputContainer.style.display = "flex";
-      }
-    }
-
-    if (identityInput && identityDisplay) {
-      const savedIdentity = localStorage.getItem("antiSabotageIdentity");
-      if (savedIdentity) {
-        identityDisplay.textContent = savedIdentity;
-        identityInputContainer.style.display = "none";
-        identityDisplayContainer.style.display = "flex";
-      } else {
-        identityInputContainer.style.display = "flex";
-        identityDisplayContainer.style.display = "none";
-      }
-
-      saveIdentityBtn.addEventListener("click", saveIdentity);
-      identityInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") saveIdentity();
-      });
-      deleteIdentityBtn.addEventListener("click", deleteIdentity);
-    }
-
-    const microInput = document.getElementById("micro-win-input");
-    const microBtn = document.getElementById("add-micro-win-btn");
-    const microList = document.getElementById("micro-wins-list");
-
-    function loadMicroWins() {
-      const wins = JSON.parse(localStorage.getItem("microWins")) || [];
-      microList.innerHTML = "";
-      wins.forEach((win, index) => {
-        const li = document.createElement("li");
-        li.style.padding = "8px";
-        li.style.borderBottom = "1px solid #333";
-        li.innerHTML = `✅ ${win} <span style="float:right; cursor:pointer; color:#e74c3c;" onclick="removeMicroWin(${index})">✕</span>`;
-        microList.appendChild(li);
-      });
-    }
-
-    window.removeMicroWin = function (index) {
-      let wins = JSON.parse(localStorage.getItem("microWins")) || [];
-      wins.splice(index, 1);
-      localStorage.setItem("microWins", JSON.stringify(wins));
-      loadMicroWins();
-    };
-
-    if (microBtn) {
-      microBtn.addEventListener("click", () => {
-        const text = microInput.value.trim();
-        if (text) {
-          let wins = JSON.parse(localStorage.getItem("microWins")) || [];
-          // CORREÇÃO: Usar a data local em vez de apenas o horário
-          wins.unshift(`${new Date().toLocaleDateString()} - ${text}`);
-          if (wins.length > 5) wins.pop();
-          localStorage.setItem("microWins", JSON.stringify(wins));
-          microInput.value = "";
-          loadMicroWins();
-        }
-      });
-      loadMicroWins();
-    }
-
-    const sabTask = document.getElementById("sabotage-task");
-    const sabAction = document.getElementById("sabotage-action");
-    const sabFeeling = document.getElementById("sabotage-feeling");
-    const sabBtn = document.getElementById("add-sabotage-btn");
-    const sabHistory = document.getElementById("sabotage-history");
-
-    function loadSabotageHistory() {
-      const history = JSON.parse(localStorage.getItem("sabotageMap")) || [];
-      sabHistory.innerHTML = "";
-      history.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.style.backgroundColor = "#2c2c2c";
-        div.style.borderLeft = "3px solid #e74c3c";
-        div.style.padding = "10px";
-        div.style.borderRadius = "5px";
-        div.style.marginBottom = "10px";
-        div.style.position = "relative";
-        div.innerHTML = `
-          <span style="position:absolute; right:10px; top:10px; cursor:pointer; color:#e74c3c; font-weight:bold;" onclick="removeSabotageEntry(${index})">✕</span>
-          <small style="color:#a0a0a0">${item.date}</small><br>
-          <strong>Deveria:</strong> ${item.task}<br>
-          <strong>Fugi fazendo:</strong> ${item.action}<br>
-          <strong>Senti:</strong> ${item.feeling}
-        `;
-        sabHistory.appendChild(div);
-      });
-    }
-
-    window.removeSabotageEntry = function (index) {
-      let history = JSON.parse(localStorage.getItem("sabotageMap")) || [];
-      history.splice(index, 1);
-      localStorage.setItem("sabotageMap", JSON.stringify(history));
-      loadSabotageHistory();
-    };
-
-    if (sabBtn) {
-      sabBtn.addEventListener("click", () => {
-        if (sabTask.value && sabAction.value && sabFeeling.value) {
-          const entry = {
-            date:
-              new Date().toLocaleDateString() +
-              " " +
-              new Date().toLocaleTimeString().slice(0, 5),
-            task: sabTask.value,
-            action: sabAction.value,
-            feeling: sabFeeling.value,
-          };
-          let history = JSON.parse(localStorage.getItem("sabotageMap")) || [];
-          history.unshift(entry);
-          localStorage.setItem("sabotageMap", JSON.stringify(history));
-
-          sabTask.value = "";
-          sabAction.value = "";
-          sabFeeling.value = "";
-          loadSabotageHistory();
-        } else {
-          alert("Preencha os 3 campos para mapear a sabotagem.");
-        }
-      });
-      loadSabotageHistory();
-    }
-
-    const voiceCheckboxes = document.querySelectorAll(".voice-check");
-
-    function loadVoiceProgress() {
-      voiceCheckboxes.forEach((box) => {
-        const isChecked = localStorage.getItem(box.id) === "true";
-        box.checked = isChecked;
-      });
-    }
-
-    voiceCheckboxes.forEach((box) => {
-      box.addEventListener("change", () => {
-        localStorage.setItem(box.id, box.checked);
-      });
-    });
-    loadVoiceProgress();
-
-    const dateInput = document.getElementById("journal-date");
-    const textInput = document.getElementById("journal-text");
-    const addButton = document.getElementById("add-note-button");
-    const historyContainer = document.getElementById(
-      "journal-history-container"
-    );
-    const journalStorageKey = "datedWellnessJournal";
-
-    dateInput.value = new Date().toISOString().slice(0, 10);
-
-    function deleteJournalEntry(event) {
-      const entryId = event.target.dataset.id;
-      let entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
-      entries = entries.filter((entry) => entry.id != entryId);
-      localStorage.setItem(journalStorageKey, JSON.stringify(entries));
-      loadJournalEntries();
-    }
-
-    function loadJournalEntries() {
-      historyContainer.innerHTML = "<h3>Histórico</h3>";
-      const entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
-      entries.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      if (entries.length === 0) {
-        const noEntryMessage = document.createElement("p");
-        noEntryMessage.textContent = "Nenhuma anotação encontrada.";
-        noEntryMessage.style.color = "#a0a0a0";
-        historyContainer.appendChild(noEntryMessage);
-        return;
-      }
-
-      entries.forEach((entry) => {
-        const entryDiv = document.createElement("div");
-        entryDiv.className = "journal-entry";
-        const headerDiv = document.createElement("div");
-        headerDiv.className = "entry-header";
-        const entryDate = document.createElement("p");
-        entryDate.className = "entry-date";
-        const [year, month, day] = entry.date.split("-");
-        entryDate.textContent = `${day}/${month}/${year}`;
-        const deleteButton = document.createElement("button");
-        deleteButton.className = "delete-note-btn";
-        deleteButton.textContent = "Remover";
-        deleteButton.dataset.id = entry.id;
-        deleteButton.addEventListener("click", deleteJournalEntry);
-        headerDiv.appendChild(entryDate);
-        headerDiv.appendChild(deleteButton);
-        const entryText = document.createElement("p");
-        entryText.className = "entry-text";
-        entryText.textContent = entry.text;
-        entryDiv.appendChild(headerDiv);
-        entryDiv.appendChild(entryText);
-        historyContainer.appendChild(entryDiv);
-      });
-    }
-
-    function addJournalEntry() {
-      const date = dateInput.value;
-      const text = textInput.value.trim();
-      if (!date || !text) {
-        alert("Por favor, preencha a data e a anotação.");
-        return;
-      }
-      const newEntry = {
-        id: Date.now().toString(),
-        date,
-        text,
-      };
-      let entries = JSON.parse(localStorage.getItem(journalStorageKey)) || [];
-      entries.push(newEntry);
-      localStorage.setItem(journalStorageKey, JSON.stringify(entries));
-      textInput.value = "";
-      loadJournalEntries();
-    }
-
-    addButton.addEventListener("click", addJournalEntry);
-    loadJournalEntries();
-
-    const dreamDateInput = document.getElementById("dream-journal-date");
-    const dreamTextInput = document.getElementById("dream-journal-text");
-    const dreamAddButton = document.getElementById("add-dream-button");
-    const dreamHistoryContainer = document.getElementById(
-      "dream-history-container"
-    );
-    const dreamJournalStorageKey = "datedWellnessDreamJournal";
-
-    dreamDateInput.value = new Date().toISOString().slice(0, 10);
-
-    function deleteDreamEntry(event) {
-      const entryId = event.target.dataset.id;
-      let entries =
-        JSON.parse(localStorage.getItem(dreamJournalStorageKey)) || [];
-      entries = entries.filter((entry) => entry.id != entryId);
-      localStorage.setItem(dreamJournalStorageKey, JSON.stringify(entries));
-      loadDreamEntries();
-    }
-
-    function loadDreamEntries() {
-      dreamHistoryContainer.innerHTML = "<h3>Histórico</h3>";
-      const entries =
-        JSON.parse(localStorage.getItem(dreamJournalStorageKey)) || [];
-      entries.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      if (entries.length === 0) {
-        const noEntryMessage = document.createElement("p");
-        noEntryMessage.textContent = "Nenhum sonho encontrado.";
-        noEntryMessage.style.color = "#a0a0a0";
-        dreamHistoryContainer.appendChild(noEntryMessage);
-        return;
-      }
-
-      entries.forEach((entry) => {
-        const entryDiv = document.createElement("div");
-        entryDiv.className = "journal-entry";
-        const headerDiv = document.createElement("div");
-        headerDiv.className = "entry-header";
-        const entryDate = document.createElement("p");
-        entryDate.className = "entry-date";
-        const [year, month, day] = entry.date.split("-");
-        entryDate.textContent = `${day}/${month}/${year}`;
-        const deleteButton = document.createElement("button");
-        deleteButton.className = "delete-note-btn";
-        deleteButton.textContent = "Remover";
-        deleteButton.dataset.id = entry.id;
-        deleteButton.addEventListener("click", deleteDreamEntry);
-        headerDiv.appendChild(entryDate);
-        headerDiv.appendChild(deleteButton);
-        const entryText = document.createElement("p");
-        entryText.className = "entry-text";
-        entryText.textContent = entry.text;
-        entryDiv.appendChild(headerDiv);
-        entryDiv.appendChild(entryText);
-        dreamHistoryContainer.appendChild(entryDiv);
-      });
-    }
-
-    function addDreamEntry() {
-      const date = dreamDateInput.value;
-      const text = dreamTextInput.value.trim();
-      if (!date || !text) {
-        alert("Por favor, preencha a data e o sonho.");
-        return;
-      }
-      const newEntry = {
-        id: Date.now().toString(),
-        date,
-        text,
-      };
-      let entries =
-        JSON.parse(localStorage.getItem(dreamJournalStorageKey)) || [];
-      entries.push(newEntry);
-      localStorage.setItem(dreamJournalStorageKey, JSON.stringify(entries));
-      dreamTextInput.value = "";
-      loadDreamEntries();
-    }
-
-    dreamAddButton.addEventListener("click", addDreamEntry);
-    loadDreamEntries();
   }
 });
 
