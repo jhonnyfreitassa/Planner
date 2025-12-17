@@ -340,22 +340,13 @@ body {
   border-left: 5px solid var(--primary-color);
 }
 
-/* ESTILOS DO CHECKBOX DA ÁGUA E COMPRAS */
-.water-check,
+/* ESTILOS DO CHECKBOX DE COMPRAS */
 .shopping-check {
   width: 18px;
   height: 18px;
   margin-right: 8px;
   cursor: pointer;
   accent-color: #4caf50; /* Verde */
-}
-
-.water-grid .checklist-item {
-  background-color: rgba(76, 175, 80, 0.1); /* Fundo verde bem leve */
-  border-radius: 5px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
 }
 
 /* --- ESTILOS GLOBAIS DE TREINO (COM VERMELHO) --- */
