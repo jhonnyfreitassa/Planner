@@ -159,8 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- ROTINA SEMANAL (SEG-SEX) - MANTIDO ---
     for (let dia = 1; dia <= 5; dia++) {
       // Cardio AEJ 08:00 - 09:00
+      // ALTERADO: Removido "(AEJ)" do nome.
       adicionarAtividade(
-        "<strong>🏃 Cardio (AEJ)</strong>",
+        "<strong>🏃 Cardio</strong>",
         dia,
         "08:00",
         "09:00",
@@ -186,33 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    // --- ROTINA DE CORE SEGMENTADA (SEGUNDA, QUARTA, SEXTA) ---
-    // SEGUNDA-FEIRA (Dia 1) - Core Superior
-    adicionarAtividade(
-      "<strong>🔥 CORE Superior</strong><br><small>Pós-Cardio</small>",
-      1,
-      "09:00",
-      "09:30",
-      corCore
-    );
-
-    // QUARTA-FEIRA (Dia 3) - Core Inferior
-    adicionarAtividade(
-      "<strong>🔥 CORE Inferior</strong><br><small>Pós-Cardio</small>",
-      3,
-      "09:00",
-      "09:30",
-      corCore
-    );
-
-    // SEXTA-FEIRA (Dia 5) - Core Geral
-    adicionarAtividade(
-      "<strong>🔥 CORE Geral</strong><br><small>Pós-Cardio</small>",
-      5,
-      "09:00",
-      "09:30",
-      corCore
-    );
+    // REMOVIDO: Blocos de Core da Agenda (Segunda, Quarta, Sexta)
 
     // --- MATÉRIAS BANCO DO BRASIL (SEG-DOM) - MANTIDO ---
     // (Lógica de agendamento das matérias mantida)
