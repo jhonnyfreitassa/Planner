@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Planner Pessoal</title>
+  <title>Meu Planner Pessoal 2026</title>
 
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#1e1e1e">
@@ -12,43 +12,6 @@
   <link rel="icon" type="image/png" href="./icon-192x192.png">
 
   <link rel="stylesheet" href="style.css">
-  <style>
-    .shopping-check {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-      cursor: pointer;
-      accent-color: #4caf50;
-      /* Cor verde quando marcado */
-    }
-
-    /* Destaque para o item de treino */
-    .water-grid .checklist-item.workout-water {
-      grid-column: 1 / -1;
-      /* Ocupa a linha toda */
-      background-color: rgba(231, 76, 60, 0.2);
-      /* Fundo avermelhado leve */
-      border: 1px solid #e74c3c;
-    }
-
-    /* Adicionado para esconder o Core nos dias que não se aplica */
-    .hidden-workout {
-      display: none !important;
-    }
-
-    /* Cores de Core para o dia de treino - AGORA TUDO VERMELHO */
-    .core-day-1 {
-      border-left-color: #e74c3c !important;
-    }
-
-    .core-day-3 {
-      border-left-color: #e74c3c !important;
-    }
-
-    .core-day-5 {
-      border-left-color: #e74c3c !important;
-    }
-  </style>
 </head>
 
 <body>
@@ -56,21 +19,22 @@
   <nav class="nav-tabs">
     <button class="tab-button active" onclick="showSection('agenda-section')">📅 Agenda</button>
     <button class="tab-button" onclick="showSection('treino-section')">💪 Treino</button>
-    <button class="tab-button" onclick="showSection('dieta-section')">🥗 Dieta</button>
+    <button class="tab-button" onclick="showSection('dieta-section')">🥗 Dieta (16:8)</button>
     <button class="tab-button" onclick="showSection('bem-estar-section')">🧘 Bem-estar</button>
     <button class="tab-button" onclick="showSection('carreira-section')">🚀 Carreira</button>
   </nav>
 
   <main>
+
     <section id="agenda-section" class="content-section active">
       <div class="container">
         <div class="deadlines-container">
           <div class="deadline-box">
-            <h3>Provas</h3>
-            <textarea id="provas-textarea" placeholder="Ex: 15/09 - Prova de Estatística..."></textarea>
+            <h3>Provas & Metas</h3>
+            <textarea id="provas-textarea" placeholder="Ex: 15/09 - Prova do Banco..."></textarea>
           </div>
           <div class="deadline-box">
-            <h3>Atividades</h3>
+            <h3>Atividades Pendentes</h3>
             <textarea id="atividades-textarea" placeholder="Anote suas atividades pendentes aqui..."></textarea>
           </div>
           <div class="deadline-box">
@@ -85,12 +49,12 @@
     </section>
 
     <section id="treino-section" class="content-section">
-      <h1 style="color: #e74c3c; text-align: center;">Plano de Treino PPL</h1>
+      <h1 class="treino-title">Plano de Treino PPL</h1>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;">
+      <div class="workout-day">
         <div class="workout-day-header">
           <div>
-            <h3 style="color: #e74c3c;">🧘 Rotina Diária: Mobilidade & Postura</h3>
+            <h3>🧘 Rotina Diária: Mobilidade & Postura</h3>
           </div>
           <button class="reset-button">Resetar</button>
         </div>
@@ -114,15 +78,13 @@
       </div>
 
       <div style="text-align: center; margin: 20px 0;">
-        <button id="toggle-all-workouts-btn" class="add-note-btn" style="background-color: #e74c3c; padding: 10px 20px; font-size: 1.1em; border-radius: 8px;">
-          Ver Todos os Treinos
-        </button>
+        <button id="toggle-all-workouts-btn" class="toggle-btn">Ver Todos os Treinos</button>
       </div>
 
-      <div class="workout-day core-day-1 hidden-workout" data-day-name="Core-Segunda" data-day-index="1" style="border-left-color: #e74c3c;">
+      <div class="workout-day core-day hidden-workout" data-day-name="Core-Segunda" data-day-index="1">
         <div class="workout-day-header">
           <div>
-            <h3 style="color: #e74c3c;">🔥 Rotina Segunda: Core Superior</h3>
+            <h3>🔥 Rotina Segunda: Core Superior</h3>
           </div>
           <button class="reset-button">Resetar</button>
         </div>
@@ -142,9 +104,9 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Segunda" data-day-index="1">
+      <div class="workout-day hidden-workout" data-day-name="Segunda" data-day-index="1">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Segunda: PUSH 1</h3>
+          <h3>Segunda: PUSH 1</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -211,9 +173,9 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Terça" data-day-index="2">
+      <div class="workout-day hidden-workout" data-day-name="Terça" data-day-index="2">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Terça: PULL 1</h3>
+          <h3>Terça: PULL 1</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -268,10 +230,10 @@
         </ul>
       </div>
 
-      <div class="workout-day core-day-3 hidden-workout" data-day-name="Core-Quarta" data-day-index="3" style="border-left-color: #e74c3c;">
+      <div class="workout-day core-day hidden-workout" data-day-name="Core-Quarta" data-day-index="3">
         <div class="workout-day-header">
           <div>
-            <h3 style="color: #e74c3c;">🔥 Rotina Quarta: Core Inferior</h3>
+            <h3>🔥 Rotina Quarta: Core Inferior</h3>
           </div>
           <button class="reset-button">Resetar</button>
         </div>
@@ -291,9 +253,9 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Quarta" data-day-index="3">
+      <div class="workout-day hidden-workout" data-day-name="Quarta" data-day-index="3">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Quarta: LEGS 1</h3>
+          <h3>Quarta: LEGS 1</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -336,9 +298,9 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Quinta" data-day-index="4">
+      <div class="workout-day hidden-workout" data-day-name="Quinta" data-day-index="4">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Quinta: PUSH 2</h3>
+          <h3>Quinta: PUSH 2</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -405,10 +367,10 @@
         </ul>
       </div>
 
-      <div class="workout-day core-day-5 hidden-workout" data-day-name="Core-Sexta" data-day-index="5" style="border-left-color: #e74c3c;">
+      <div class="workout-day core-day hidden-workout" data-day-name="Core-Sexta" data-day-index="5">
         <div class="workout-day-header">
           <div>
-            <h3 style="color: #e74c3c;">🔥 Rotina Sexta: Core Geral</h3>
+            <h3>🔥 Rotina Sexta: Core Geral</h3>
           </div>
           <button class="reset-button">Resetar</button>
         </div>
@@ -428,9 +390,9 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Sexta" data-day-index="5">
+      <div class="workout-day hidden-workout" data-day-name="Sexta" data-day-index="5">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Sexta: PULL 2</h3>
+          <h3>Sexta: PULL 2</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -485,9 +447,9 @@
         </ul>
       </div>
 
-      <div class="workout-day" style="border-left-color: #e74c3c;" data-day-name="Sábado" data-day-index="6">
+      <div class="workout-day hidden-workout" data-day-name="Sábado" data-day-index="6">
         <div class="workout-day-header">
-          <h3 style="color: #e74c3c;">Sábado: LEGS 2</h3>
+          <h3>Sábado: LEGS 2</h3>
           <button class="reset-button">Resetar Dia</button>
         </div>
         <ul>
@@ -535,63 +497,64 @@
     <section id="dieta-section" class="content-section">
       <div class="container">
         <header>
-          <h1>🥗 Dieta Hiperproteica</h1>
+          <h1>🥗 Dieta: Jejum Intermitente (16:8)</h1>
+          <p style="text-align: center; color: #a0a0a0;">Janela Alimentar: 13:00 às 21:00</p>
         </header>
 
         <div class="meal-plan-wrapper">
           <table class="meal-plan">
             <thead>
               <tr>
-                <th>Refeição / Horário</th>
-                <th>Alimentos</th>
+                <th>Horário / Fase</th>
+                <th>Protocolo & Alimentos</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="meal-time">Refeição 1 (Almoço)<br>(~12:00)</td>
+                <td class="meal-time">Jejum (Manhã)<br>(21:00 - 13:00)</td>
                 <td class="meal-details">
-                  <p><strong>Refeição Sólida Principal (Pré-Treino)</strong></p>
+                  <p><strong>💊 Fase de Jejum & Hidratação</strong></p>
+                  <ul style="color: #4caf50;">
+                    <li><strong>08:00:</strong> Tomar Eltrombopag (Jejum total).</li>
+                    <li><strong>10:00:</strong> Cardio em Jejum (Hidrate-se bem!).</li>
+                    <li><strong>Permitido:</strong> Água (muita), Café preto sem açúcar, Chá sem açúcar.</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td class="meal-time">Refeição 1 (13:00)<br>Quebra de Jejum</td>
+                <td class="meal-details">
+                  <p><strong>Pré-Treino Sólido (Energia)</strong></p>
                   <ul>
-                    <li>150g Frango Grelhado, Tilápia ou Patinho Moido</li>
-                    <li>100g Arroz, Batata ou Mandioca (Cozidos)</li>
-                    <li>Feijão (Opcional): 1 Concha Média</li>
-                    <li>Vegetais Crus ou Cozidos (Salada, tomate, brócolis)</li>
+                    <li>150g Frango Grelhado, Tilápia ou Patinho</li>
+                    <li>100g Carboidrato Complexo (Mandioca, Batata ou Arroz)</li>
+                    <li>Vegetais à vontade (Fibras)</li>
                     <li>1 fio de Azeite de Oliva</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Refeição 2 (Pós-Treino)<br>(~15:45)</td>
+                <td class="meal-time">Refeição 2 (17:00)<br>Pós-Treino</td>
                 <td class="meal-details">
-                  <p><strong>Shake Líquido (Rápida Absorção)</strong></p>
+                  <p><strong>Lanche Rápido (Recuperação)</strong></p>
                   <ul>
                     <li>1 dose de Whey Protein</li>
-                    <li>Frutas: 1 Banana ou 1 fatia de Melão/Melancia (Batido ou à parte)</li>
-                    <li>30g de Aveia ou Granola sem açúcar</li>
-                    <li>5g Creatina (Mistura no shake)</li>
+                    <li>1 Banana (ou outra fruta)</li>
+                    <li>30g de Aveia</li>
+                    <li>5g Creatina</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Refeição 3 (Jantar)<br>(~19:00)</td>
+                <td class="meal-time">Refeição 3 (20:30)<br>Super Jantar</td>
                 <td class="meal-details">
-                  <p>Refeição sólida (Volume Controlado)</p>
+                  <p><strong>Foco: Saciedade para o Estudo Noturno</strong></p>
                   <ul>
-                    <li>150g Filé de Peixe, Frango ou Carne Magra</li>
-                    <li>Vegetais Refogados (Brócolis, Couve-flor, Vagem)</li>
-                    <li>100g Carboidrato de sua escolha (Batata ou Arroz)</li>
-                    <li>Feijão (Opcional): 1 Concha Média</li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td class="meal-time">Refeição 4 (Ceia)<br>(~21:30)</td>
-                <td class="meal-details">
-                  <p>Leve, proteica e com gordura boa.</p>
-                  <ul>
-                    <li>3 Ovos inteiros (mexidos, cozidos ou omelete)</li>
-                    <li>50g Queijo Minas Frescal ou Branco (Picado)</li>
-                    <li>Opcional: 1 Pera ou Maçã (sobremesa)</li>
+                    <li>150g Proteína (Carne/Peixe/Frango)</li>
+                    <li>3 Ovos inteiros (Cozidos ou Omelete)</li>
+                    <li>Vegetais e Folhas (Volume)</li>
+                    <li>Fontes de Gordura: Azeite ou Abacate (p/ Cérebro)</li>
+                    <li><em>Evitar excesso de carboidrato simples para não dar sono.</em></li>
                   </ul>
                 </td>
               </tr>
@@ -599,149 +562,61 @@
           </table>
         </div>
 
-        <div class="summary" style="background-color: #2e7d32; border-left: 5px solid #4caf50; color: #ffffff; margin-top: 30px;">
-          <h2 style="color: #ffffff;">💊 Protocolo Medicamento</h2>
-          <ul>
-            <li><strong>08:00:</strong> Revolade (Eltrombopag) - Jejum total.</li>
-            <li><strong>Polivitamínico:</strong> Essencial para manutenção pós-bariátrica tardia.</li>
-            <li><strong>Hidratação:</strong> Mínimo 4.5L a 5L de água (Cálculo p/ 130kg).</li>
-          </ul>
-        </div>
-
         <div class="shopping-lists-container">
-
           <div class="shopping-list">
             <h2>🛒 Lista de Compras Semanal</h2>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-ovos">
-              <label for="shop-week-ovos"><strong>Ovos:</strong> 1 Cartela (30 unidades)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-queijo">
-              <label for="shop-week-queijo"><strong>Queijo Minas/Branco:</strong> ~350g (P/ Omeletes)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-banana">
-              <label for="shop-week-banana"><strong>Frutas (Banana):</strong> ~7 unidades (P/ Shake)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-melao">
-              <label for="shop-week-melao"><strong>Frutas (Melão/Melancia):</strong> 1 Melão ou 1/4 Melancia</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-veg">
-              <label for="shop-week-veg"><strong>Vegetais:</strong> Variados (Brócolis, Tomate, Folhas)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-carnes">
-              <label for="shop-week-carnes"><strong>Carnes Magras (Cru):</strong> ~2.8kg (Considera perda)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-carb">
-              <label for="shop-week-carb"><strong>Batata/Mandioca (Crua):</strong> ~2kg OU <strong>Arroz (Cru):</strong> 500g</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-aveia">
-              <label for="shop-week-aveia"><strong>Aveia:</strong> ~250g</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-week-geral">
-              <label for="shop-week-geral"><strong>Gerais:</strong> Azeite, Café, Chás.</label>
-            </div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-week-ovos"><label for="shop-week-ovos"><strong>Ovos:</strong> 1 Cartela (30 un) - Base do jantar.</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-week-banana"><label for="shop-week-banana"><strong>Frutas:</strong> ~7 un (Pós-treino).</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-week-veg"><label for="shop-week-veg"><strong>Vegetais:</strong> Brócolis, Couve, Salada (Essencial na 16:8).</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-week-carnes"><label for="shop-week-carnes"><strong>Carnes:</strong> ~2.5kg (Frango/Peixe/Carne).</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-week-carb"><label for="shop-week-carb"><strong>Raízes/Arroz:</strong> ~1.5kg.</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-week-aveia"><label for="shop-week-aveia"><strong>Aveia:</strong> ~250g.</label></div>
           </div>
 
           <div class="shopping-list">
-            <h2>📅 Estimativa de Compras Mensal</h2>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-whey">
-              <label for="shop-month-whey"><strong>Whey Protein:</strong> 1kg ou 2kg (Durar o mês todo)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-ovos">
-              <label for="shop-month-ovos"><strong>Ovos:</strong> 120 unidades (4 cartelas de 30)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-frutas">
-              <label for="shop-month-frutas"><strong>Frutas:</strong> ~30 Bananas + 4 Melões/Melancias</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-veg">
-              <label for="shop-month-veg"><strong>Vegetais:</strong> Comprar semanalmente (frescor)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-carnes">
-              <label for="shop-month-carnes"><strong>Carnes Magras (Cru):</strong> ~11kg a 12kg</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-carb">
-              <label for="shop-month-carb"><strong>Batatas/Raízes (Cru):</strong> ~8kg (Se for base da dieta)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-aveia">
-              <label for="shop-month-aveia"><strong>Aveia:</strong> ~1kg (1cx grande ou 4 pequenas)</label>
-            </div>
-            <div class="checklist-item">
-              <input type="checkbox" class="shopping-check" id="shop-month-marmita">
-              <label for="shop-month-marmita"><strong>Sacos/Potes Marmita:</strong> Estoque mensal</label>
-            </div>
+            <h2>📅 Estimativa Mensal</h2>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-month-whey"><label for="shop-month-whey"><strong>Whey Protein:</strong> 1kg a 2kg.</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-month-creatina"><label for="shop-month-creatina"><strong>Creatina:</strong> 1 Pote.</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-month-ovos"><label for="shop-month-ovos"><strong>Ovos:</strong> ~120 unidades.</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="shop-month-carnes"><label for="shop-month-carnes"><strong>Carnes:</strong> ~10kg a 11kg.</label></div>
           </div>
-
         </div>
 
-        <div class="summary" style="margin-top: 20px;">
-          <h2>📊 Resumo Diário (Aproximado)</h2>
-          <p><strong>Calorias:</strong> ~1.950 kcal</p>
+        <div class="summary protocol-box" style="margin-top: 20px;">
+          <h2>📊 Resumo Nutricional</h2>
+          <p><strong>Calorias:</strong> ~1.900 kcal (Manutenção/Deficit leve)</p>
           <ul>
-            <li>Proteínas: <strong>185g</strong> (Alta prioridade - Hipertrofia)</li>
-            <li>Carboidratos: <strong>150g</strong> (Energia p/ Treino)</li>
-            <li>Gorduras: <strong>65g</strong> (Saúde Hormonal)</li>
+            <li>Proteínas: <strong>Alto</strong> (Foco em bater 185g em 3 refs)</li>
+            <li>Janela de Jejum: <strong>16 Horas</strong> (21h às 13h)</li>
+            <li>Janela Alimentar: <strong>8 Horas</strong> (13h às 21h)</li>
           </ul>
         </div>
 
-        <div class="summary" style="margin-top: 20px; background-color: #2e7d32; border-left: 5px solid #4caf50; color: #ffffff;">
-          <h2 style="color: #ffffff;">🥗 Opções Recomendadas (Variedade)</h2>
-          <ul>
-            <li><strong>Vegetais (Cozidos/Vapor):</strong> Brócolis, Couve-Flor, Vagem, Abobrinha, Cenoura, Chuchu.</li>
-            <li><strong>Folhas (Saladas):</strong> Alface, Rúcula, Espinafre.</li>
-            <li><strong>Frutas:</strong> Melão, Melancia, Banana, Maçã, Pera.</li>
-          </ul>
-        </div>
-
-        <h2 style="color: var(--primary-color); text-align: center; margin-top: 40px;">Sugestões de Bebidas para Foco e Relaxamento</h2>
+        <h2 style="color: var(--primary-color); text-align: center; margin-top: 40px;">Bebidas Estratégicas (Jejum & Foco)</h2>
         <div class="table-wrapper">
           <table style="margin-top: 0;">
             <thead>
               <tr>
-                <th>Momento / Objetivo</th>
-                <th>Sugestão de Bebida</th>
-                <th>Benefícios</th>
+                <th>Momento</th>
+                <th>Bebida</th>
+                <th>Função</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Manhã (Foco Intenso)</strong></td>
-                <td>Café Preto</td>
-                <td>Aumenta o estado de alerta e a concentração.</td>
+                <td><strong>Manhã (Jejum)</strong></td>
+                <td>Café Preto / Chá Verde</td>
+                <td>Acelerar metabolismo e reduzir fome.</td>
               </tr>
               <tr>
-                <td><strong>Meio da Manhã (Foco Calmo)</strong></td>
-                <td>Chá de Matcha</td>
-                <td>Fornece energia sustentada sem o agito do café.</td>
+                <td><strong>Tarde (Estudo)</strong></td>
+                <td>Água com Gás / Limão</td>
+                <td>Saciedade sem quebrar jejum (se fora da janela).</td>
               </tr>
               <tr>
-                <td><strong>Início da Tarde (Energia Suave)</strong></td>
-                <td>Chá Verde ou Chá Preto</td>
-                <td>Energia branda sem impactar o sono.</td>
-              </tr>
-              <tr>
-                <td><strong>Noite (Relaxamento)</strong></td>
-                <td>Chá de Camomila ou Erva-Cidreira</td>
-                <td>Propriedades calmantes.</td>
-              </tr>
-              <tr>
-                <td><strong>Noite (Conforto)</strong></td>
-                <td>Golden Milk (Leite com Cúrcuma)</td>
-                <td>Reconfortante e anti-inflamatória.</td>
+                <td><strong>Noite (Relax)</strong></td>
+                <td>Chá de Camomila / Mulungu</td>
+                <td>Baixar adrenalina pós-estudo (00:00).</td>
               </tr>
             </tbody>
           </table>
@@ -753,9 +628,9 @@
     <section id="bem-estar-section" class="content-section">
       <div class="container">
 
-        <div id="raiva-protocolo" style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
-          <h2 style="color: #007bff; margin-top: 0;">🧠 10 Passos para Lidar com a Raiva</h2>
-          <ol style="list-style-type: decimal; padding-left: 20px; margin-top: 15px;">
+        <div class="protocol-card raiva-card">
+          <h2>🧠 10 Passos para Lidar com a Raiva</h2>
+          <ol>
             <li><strong>Sua Reação é uma Escolha:</strong> A raiva não é causada pelo que acontece, mas sim pela sua interpretação do evento. Escolha responder com consciência.</li>
             <li><strong>Saiba o que Esperar dos Outros:</strong> Não espere que os outros tenham o mesmo nível de consciência ou educação que você. Pare de personalizar comportamentos alheios.</li>
             <li><strong>Você Também Erra:</strong> A insistência em ter razão alimenta a vaidade e o desgaste. Escolha a paz, mesmo que você tenha razão.</li>
@@ -769,54 +644,53 @@
           </ol>
         </div>
 
-
-        <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 40px;">
-          <h2 style="color: #007bff; margin-top: 0;">🛡️ Protocolo Anti-Autossabotagem</h2>
+        <div class="protocol-card sabotage-card">
+          <h2>🛡️ Protocolo Anti-Autossabotagem</h2>
 
           <div style="margin-top: 20px; margin-bottom: 30px;">
-            <h3 style="color: #ffffff; font-size: 1.2em;">1. Reprogramação de Identidade</h3>
-            <div id="identity-input-container" style="display: flex; gap: 10px; flex-wrap: wrap;">
-              <input type="text" id="identity-input" placeholder="Digite sua nova identidade..." style="flex-grow: 1; padding: 10px; background: #121212; border: 1px solid #333; color: #fff; border-radius: 5px; font-family: 'JetBrains Mono', monospace;">
-              <button id="save-identity-btn" class="add-note-btn" style="background-color: #007bff; padding: 10px 20px;">Salvar</button>
+            <h3>1. Reprogramação de Identidade</h3>
+            <div id="identity-input-container" class="input-group">
+              <input type="text" id="identity-input" placeholder="Digite sua nova identidade...">
+              <button id="save-identity-btn" class="add-note-btn blue-btn">Salvar</button>
             </div>
-            <div id="identity-display-container" style="display: none; align-items: center; gap: 10px; margin-top: 15px;">
-              <div id="identity-display" style="flex-grow: 1; padding: 15px; background-color: #007bff; color: #fff; font-weight: bold; font-size: 1.2em; text-align: center; border-radius: 5px;"></div>
-              <button id="delete-identity-btn" class="add-note-btn" style="background-color: #c0392b; padding: 15px; display: flex; align-items: center; justify-content: center;">🗑️</button>
+            <div id="identity-display-container" class="display-container" style="display: none;">
+              <div id="identity-display"></div>
+              <button id="delete-identity-btn" class="add-note-btn red-btn">🗑️</button>
             </div>
           </div>
 
           <div style="margin-top: 20px; margin-bottom: 30px;">
-            <h3 style="color: #ffffff; font-size: 1.2em;">2. Micro-Vitórias</h3>
+            <h3>2. Micro-Vitórias</h3>
             <div class="journal-entry-form">
-              <input type="text" id="micro-win-input" placeholder="Ex: Li 1 página..." style="width: 100%; padding: 10px; background: #121212; border: 1px solid #333; color: #fff; border-radius: 5px; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace;">
-              <button id="add-micro-win-btn" class="add-note-btn" style="width: 100%; background-color: #007bff;">Registrar Vitória</button>
+              <input type="text" id="micro-win-input" placeholder="Ex: Li 1 página..." style="margin-bottom: 10px;">
+              <button id="add-micro-win-btn" class="add-note-btn blue-btn full-width">Registrar Vitória</button>
             </div>
-            <ul id="micro-wins-list" style="list-style: none; padding: 0; margin-top: 15px;"></ul>
+            <ul id="micro-wins-list" class="simple-list"></ul>
           </div>
 
           <div style="margin-top: 20px;">
-            <h3 style="color: #ffffff; font-size: 1.2em;">3. Mapeamento de Fugas</h3>
-            <div class="journal-entry-form" style="background: #1e1e1e; border: none; padding: 0;">
+            <h3>3. Mapeamento de Fugas</h3>
+            <div class="journal-entry-form no-border">
               <div class="form-group">
-                <label style="color: #007bff;">Tarefa Importante:</label>
+                <label>Tarefa Importante:</label>
                 <input type="text" id="sabotage-task">
               </div>
               <div class="form-group">
-                <label style="color: #007bff;">A Fuga:</label>
+                <label>A Fuga:</label>
                 <input type="text" id="sabotage-action">
               </div>
               <div class="form-group">
-                <label style="color: #007bff;">O Gatilho:</label>
+                <label>O Gatilho:</label>
                 <input type="text" id="sabotage-feeling">
               </div>
-              <button id="add-sabotage-btn" class="add-note-btn" style="background-color: #e74c3c; width: 100%; margin-top: 10px;">Mapear Sabotagem</button>
+              <button id="add-sabotage-btn" class="add-note-btn red-btn full-width" style="margin-top: 10px;">Mapear Sabotagem</button>
             </div>
             <div id="sabotage-history" style="margin-top: 20px;"></div>
           </div>
         </div>
 
-        <div style="background-color: #1e1e1e; padding: 20px; border-radius: 10px; border-left: 5px solid #17a2b8; margin-bottom: 40px;">
-          <h2 style="color: #17a2b8; margin-top: 0;">🗣️ Protocolo Voz de Respeito</h2>
+        <div class="protocol-card voice-card">
+          <h2>🗣️ Protocolo Voz de Respeito</h2>
           <p style="color: #a0a0a0; font-size: 0.9em;">Exercícios diários para projetar sua voz e impor respeito.</p>
 
           <div style="margin-top: 20px;">
@@ -879,7 +753,6 @@
               <li>Salários e Concursos com demanda</li>
               <li>Aprende fazendo (prática real)</li>
             </ul>
-
           </div>
 
           <div class="roadmap-card green">
