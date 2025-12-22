@@ -1,18 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap");
 
+:root {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --border-color: #333;
+
+  /* Cores de Seção */
+  --color-treino: #e74c3c; /* Vermelho */
+  --color-agenda: #007bff; /* Azul */
+  --color-dieta: #4caf50; /* Verde */
+  --color-bemestar: #17a2b8; /* Ciano/Azul */
+  --color-carreira: #9b59b6; /* Roxo */
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: "JetBrains Mono", monospace;
-  background-color: #121212;
-  color: #e0e0e0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
   overscroll-behavior-x: none;
 }
 
 /* --- NAVEGAÇÃO POR ABAS --- */
 .nav-tabs {
   display: flex;
-  background-color: #1e1e1e;
+  background-color: var(--surface-color);
   padding: 10px 20px 0 20px;
   justify-content: center;
   gap: 10px;
@@ -24,7 +39,7 @@ body {
   cursor: pointer;
   border: none;
   background-color: transparent;
-  color: #a0a0a0;
+  color: var(--text-secondary);
   font-size: 1.1em;
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
@@ -35,25 +50,21 @@ body {
   color: #ffffff;
 }
 
-/* CORES ESPECÍFICAS POR ABA */
+/* Cores ativas */
 .tab-button[onclick*="agenda"].active {
-  border-bottom-color: #007bff; /* Azul */
+  border-bottom-color: var(--color-agenda);
 }
-
 .tab-button[onclick*="treino"].active {
-  border-bottom-color: #e74c3c; /* Vermelho (TREINO) */
+  border-bottom-color: var(--color-treino);
 }
-
 .tab-button[onclick*="dieta"].active {
-  border-bottom-color: #4caf50; /* Verde */
+  border-bottom-color: var(--color-dieta);
 }
-
 .tab-button[onclick*="bem-estar"].active {
-  border-bottom-color: #007bff; /* Azul */
+  border-bottom-color: var(--color-bemestar);
 }
-
 .tab-button[onclick*="carreira"].active {
-  border-bottom-color: #9b59b6; /* Roxo (CARREIRA) */
+  border-bottom-color: var(--color-carreira);
 }
 
 .content-section {
@@ -75,21 +86,13 @@ body {
   }
 }
 
-/* --- ESTILOS DA SEÇÃO AGENDA --- */
+/* --- AGENDA --- */
 #agenda-section {
-  --cor-fundo: #121212;
-  --cor-superficie: #1e1e1e;
-  --cor-borda: #333;
-  --cor-texto-principal: #e0e0e0;
-  --cor-texto-secundario: #a0a0a0;
   --hora-altura: 60px;
-  padding: 20px;
 }
 
 #agenda-section .container {
   display: flex;
-  width: 100%;
-  box-sizing: border-box;
   flex-direction: column;
 }
 
@@ -103,79 +106,75 @@ body {
 .deadline-box {
   flex: 1;
   min-width: 250px;
-  background-color: #1e1e1e;
+  background-color: var(--surface-color);
   border-radius: 8px;
   padding: 15px;
-  border: 1px solid var(--cor-borda);
+  border: 1px solid var(--border-color);
 }
 
 .deadline-box h3 {
   margin-top: 0;
   margin-bottom: 10px;
-  color: #ffffff;
-  border-bottom: 1px solid var(--cor-borda);
+  color: #fff;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 8px;
-  font-size: 1.2em;
 }
 
 .deadline-box textarea {
   width: 100%;
   height: 150px;
-  background-color: #121212;
-  border: 1px solid var(--cor-borda);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  color: var(--cor-texto-principal);
+  color: var(--text-primary);
   padding: 10px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.95em;
   resize: vertical;
   box-sizing: border-box;
 }
 
-#agenda-section .agenda-container-wrapper {
+.agenda-container-wrapper {
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border: 1px solid var(--cor-borda);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
 }
 
-#agenda-section .agenda-container {
+.agenda-container {
   flex-grow: 1;
   display: grid;
   grid-template-columns: 50px repeat(7, 1fr);
   grid-template-rows: 50px repeat(22, var(--hora-altura));
-  background-color: var(--cor-superficie);
+  background-color: var(--surface-color);
   min-width: 700px;
 }
 
-#agenda-section .grid-item {
+.grid-item {
   text-align: center;
   padding: 10px 5px;
-  border-bottom: 1px solid var(--cor-borda);
-  border-left: 1px solid var(--cor-borda);
+  border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
   box-sizing: border-box;
 }
 
-#agenda-section .header-dia {
+.header-dia {
   font-weight: bold;
 }
-
-#agenda-section .celula-hora {
+.celula-hora {
   font-size: 0.8em;
-  color: var(--cor-texto-secundario);
+  color: var(--text-secondary);
 }
 
-#agenda-section .coluna-dia {
+.coluna-dia {
   position: relative;
   border-left: none;
   border-bottom: none;
   padding: 0;
-  background-image: linear-gradient(var(--cor-borda) 1px, transparent 1px);
+  background-image: linear-gradient(var(--border-color) 1px, transparent 1px);
   background-size: 100% var(--hora-altura);
 }
 
-#agenda-section .atividade-bloco {
+.atividade-bloco {
   position: absolute;
   left: 5px;
   right: 5px;
@@ -186,100 +185,193 @@ body {
   color: white;
   font-size: 0.55em;
   overflow: hidden;
-  transition: all 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 
-#agenda-section .atividade-bloco strong {
+.atividade-bloco strong {
   display: block;
   font-size: 1.1em;
   line-height: 1.2;
 }
-
-#agenda-section .atividade-bloco small {
+.atividade-bloco small {
   font-size: 0.9em;
   opacity: 0.8;
 }
 
-/* --- ESTILOS DA SEÇÃO DIETA --- */
-#dieta-section {
-  --primary-color: #4caf50;
-  --secondary-color: #2c2c2c;
-  --text-color: #e0e0e0;
-  --container-bg: #1e1e1e;
-  --border-radius: 15px;
-  background-color: #121212;
-  color: var(--text-color);
-  padding: 20px;
+/* --- TREINO --- */
+#treino-section {
+  --cor-destaque: #e74c3c;
 }
 
+#treino-section .treino-title {
+  color: var(--cor-destaque);
+  text-align: center;
+  border-bottom: none;
+  font-size: 2em;
+}
+
+.workout-day {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--cor-destaque); /* Sempre vermelho */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.hidden-workout {
+  display: none !important;
+}
+
+.workout-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.workout-day-header h3 {
+  color: var(--cor-destaque);
+  margin: 0;
+}
+
+.reset-button {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  background-color: var(--cor-destaque);
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+}
+
+.exercise-item {
+  padding: 15px 5px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.exercise-item ul {
+  list-style: none;
+  padding-left: 0;
+}
+.exercise-item.completed label {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.exercise-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-grow: 1;
+}
+.exercise-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--cor-destaque);
+}
+
+.exercise-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.series-counter {
+  display: flex;
+  gap: 5px;
+}
+.series-dot {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.series-dot.completed {
+  background-color: var(--cor-destaque);
+}
+
+.weight-input {
+  width: 60px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* --- DIETA --- */
 #dieta-section .container {
   max-width: 900px;
   margin: 0 auto;
-  background-color: var(--container-bg);
+  background-color: var(--surface-color);
   padding: 20px;
-  border-radius: var(--border-radius);
+  border-radius: 15px;
 }
 
-#dieta-section header h1 {
-  color: var(--primary-color);
-  font-size: 2em;
-  margin: 0;
+#dieta-section h1 {
+  color: var(--color-dieta);
   text-align: center;
 }
 
-#dieta-section header p {
-  font-size: 1em;
-  color: #a0a0a0;
-  text-align: center;
-}
-
-#dieta-section .meal-plan-wrapper {
+.meal-plan-wrapper {
   width: 100%;
   overflow-x: auto;
 }
-
-#dieta-section .meal-plan {
+.meal-plan {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
   min-width: 600px;
 }
-
-#dieta-section .meal-plan th,
-#dieta-section .meal-plan td {
+.meal-plan th,
+.meal-plan td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #333;
 }
-
-#dieta-section .meal-plan th {
-  background-color: var(--primary-color);
+.meal-plan th {
+  background-color: var(--color-dieta);
   color: white;
-  font-weight: 600;
 }
-
-#dieta-section .meal-plan tr:nth-child(even) {
+.meal-plan tr:nth-child(even) {
   background-color: #2c2c2c;
 }
-
-#dieta-section .meal-time {
+.meal-time {
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--color-dieta);
   min-width: 150px;
 }
 
-#dieta-section .meal-details ul {
-  padding-left: 20px;
-  margin: 0;
-}
-
-#dieta-section .summary {
+.protocol-box {
   background-color: #2e7d32;
-  border-left: 5px solid var(--primary-color);
+  border-left: 5px solid var(--color-dieta);
   padding: 20px;
   margin-top: 30px;
   border-radius: 10px;
@@ -297,350 +389,178 @@ body {
   flex: 1;
   min-width: 300px;
   background-color: #2e7d32;
-  border-left: 5px solid var(--primary-color);
+  border-left: 5px solid var(--color-dieta);
   padding: 20px;
   border-radius: 10px;
   color: white;
 }
 
 .shopping-list h2 {
-  margin-top: 0;
-  color: white;
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--color-dieta);
   padding-bottom: 10px;
 }
-
-.shopping-list ul {
-  padding-left: 25px;
-  list-style-type: "🛒 ";
-  line-height: 1.8;
-}
-
-.shopping-list span {
-  font-weight: 600;
-}
-
-.drinks-routine {
-  margin-top: 40px;
-  border-top: 2px solid var(--primary-color);
-  padding-top: 20px;
-}
-
-.drinks-routine h2 {
-  color: var(--primary-color);
-  font-size: 1.8em;
-  text-align: center;
-}
-
-.drinks-routine .time-block {
-  background-color: #2c2c2c;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 25px;
-  border-left: 5px solid var(--primary-color);
-}
-
-/* ESTILOS DO CHECKBOX DE COMPRAS */
 .shopping-check {
   width: 18px;
   height: 18px;
   margin-right: 8px;
   cursor: pointer;
-  accent-color: #4caf50; /* Verde */
+  accent-color: var(--color-dieta);
 }
 
-/* --- ESTILOS GLOBAIS DE TREINO (COM VERMELHO) --- */
-#treino-section {
-  --cor-superficie: #1e1e1e;
-  --cor-borda: #333;
-  --cor-texto-principal: #e0e0e0;
-  --cor-texto-secundario: #a0a0a0;
-  /* Cor Vermelha para Treino */
-  --cor-destaque: #e74c3c;
-}
-
-/* Removido o seletor .workout-day.core-matinal para não interferir nas cores.
-   Agora, a cor vermelha correta é herdada de .workout-day e .workout-day-header h3. */
-
-#treino-section h1,
-#treino-section h2 {
-  border-bottom: 1px solid var(--cor-borda);
-  padding-bottom: 10px;
-  color: var(--cor-destaque);
-}
-
-#treino-section h1 {
-  text-align: center;
-  font-size: 2em;
-  border-bottom: none;
-}
-
-.workout-day {
-  background-color: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-left: 5px solid var(--cor-destaque);
-  border-radius: 8px;
+/* --- BEM-ESTAR --- */
+.protocol-card {
+  background-color: var(--surface-color);
   padding: 20px;
-  margin-bottom: 25px;
+  border-radius: 10px;
+  border-left: 5px solid;
+  margin-bottom: 40px;
 }
 
-.workout-day-header {
+.raiva-card {
+  border-color: #007bff;
+}
+.raiva-card h2 {
+  color: #007bff;
+  margin-top: 0;
+}
+.sabotage-card {
+  border-color: #007bff;
+}
+.sabotage-card h2 {
+  color: #007bff;
+  margin-top: 0;
+}
+.voice-card {
+  border-color: #17a2b8;
+}
+.voice-card h2 {
+  color: #17a2b8;
+  margin-top: 0;
+}
+
+.input-group {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--cor-borda);
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-.workout-day-header h3 {
-  /* Corrigido para garantir que o h3 herde a cor de destaque (vermelho) de #treino-section */
-  color: var(--cor-destaque);
-  margin: 0;
-}
-
-.reset-button {
-  background-color: #333;
-  color: #e0e0e0;
-  border: 1px solid #555;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-family: "JetBrains Mono", monospace;
-}
-
-.reset-button:hover {
-  background-color: #444;
-}
-
-.exercise-item {
-  padding: 15px 5px;
-  border-bottom: 1px solid var(--cor-borda);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
 }
-
-#treino-section ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.exercise-item.completed label {
-  text-decoration: line-through;
-  color: var(--cor-texto-secundario);
-}
-
-.exercise-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.input-group input {
   flex-grow: 1;
-}
-
-.exercise-checkbox {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.exercise-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto;
-}
-
-.series-counter {
-  display: flex;
-  gap: 5px;
-}
-
-.series-dot {
-  width: 18px;
-  height: 18px;
-  background-color: #333;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.series-dot.completed {
-  background-color: var(--cor-destaque);
-}
-
-.weight-input {
-  width: 60px;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid var(--cor-borda);
-  background-color: #121212;
-  color: var(--cor-texto-principal);
-  text-align: center;
-}
-
-/* --- ESTILOS DA SEÇÃO BEM-ESTAR --- */
-#bem-estar-section {
-  --cor-superficie: #1e1e1e;
-  --cor-borda: #333;
-  --cor-texto-principal: #e0e0e0;
-  --cor-destaque: #007bff; /* Azul */
-}
-
-#bem-estar-section .container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-#bem-estar-section h2 {
-  color: var(--cor-destaque);
-  border-bottom: 2px solid var(--cor-destaque);
-  padding-bottom: 10px;
-  margin-top: 40px;
-}
-
-.table-wrapper {
-  overflow-x: auto;
-  border: 1px solid var(--cor-borda);
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-}
-
-th,
-td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid var(--cor-borda);
-}
-
-th {
-  background-color: #333;
-}
-
-#bem-estar-section th {
-  /* Corrigido para garantir que o th da tabela de bebidas use a cor de destaque (Azul) */
-  color: var(--cor-destaque);
-}
-
-tr:nth-child(even) {
-  background-color: var(--cor-superficie);
-}
-
-#bem-estar-section .journal-entry-form {
-  background-color: var(--cor-superficie);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid var(--cor-borda);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-#bem-estar-section .journal-entry-form label {
-  font-weight: bold;
-  color: var(--cor-destaque);
-}
-
-#bem-estar-section .journal-entry-form input,
-#bem-estar-section .journal-entry-form textarea {
-  width: 100%;
-  background-color: #121212;
-  border: 1px solid var(--cor-borda);
+  padding: 10px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: #fff;
   border-radius: 5px;
-  padding: 12px;
-  color: var(--cor-texto-principal);
-  font-family: "JetBrains Mono", monospace;
-  box-sizing: border-box;
+  font-family: inherit;
 }
 
-#bem-estar-section .add-note-btn {
-  padding: 12px 25px;
-  background-color: var(--cor-destaque);
-  color: #121212;
+.add-note-btn {
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  transition: transform 0.2s;
-  align-self: flex-start;
+  color: #121212;
 }
 
-#bem-estar-section .add-note-btn:hover {
-  transform: translateY(-2px);
+.blue-btn {
+  background-color: #007bff;
+  color: white;
+}
+.red-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+.full-width {
+  width: 100%;
 }
 
-#bem-estar-section .journal-entry {
-  background-color: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  /* Corrigido para usar o azul */
-  border-left: 5px solid var(--cor-destaque);
+.display-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+#identity-display {
+  flex-grow: 1;
+  padding: 15px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.journal-entry-form {
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.journal-entry-form.no-border {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.journal-entry-form input,
+.journal-entry-form textarea {
+  width: 100%;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.journal-entry {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--color-bemestar);
   border-radius: 8px;
   padding: 15px 20px;
   margin-bottom: 15px;
 }
 
-#bem-estar-section .journal-entry .entry-date {
+.journal-entry .entry-date {
   font-weight: bold;
   font-size: 1.2em;
-  color: #ffffff;
+  color: #fff;
 }
 
-#bem-estar-section .journal-entry .delete-note-btn {
-  float: right;
-  background-color: #c0392b;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* --- ESTILOS DO ROADMAP (SEÇÃO CARREIRA) --- */
-#carreira-section .roadmap-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
+/* --- CARREIRA (ROADMAP) --- */
 #carreira-section .progress-container {
   max-width: 600px;
   margin: 20px auto;
-  background-color: #1e1e1e;
+  background-color: var(--surface-color);
   padding: 15px;
   border-radius: 10px;
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
 }
 
-#carreira-section .progress-bar-bg {
+.progress-bar-bg {
   background-color: #374151;
-  border-radius: 9999px;
+  border-radius: 99px;
   height: 24px;
-  width: 100%;
   overflow: hidden;
 }
-
-#carreira-section .progress-bar-fill {
-  background-color: #9b59b6; /* Roxo */
+.progress-bar-fill {
+  background-color: var(--color-carreira);
   height: 100%;
   color: white;
-  font-size: 0.8em;
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: width 0.5s ease;
   width: 0%;
+  font-size: 0.8em;
 }
 
-#carreira-section .roadmap-grid {
+.roadmap-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
@@ -651,41 +571,35 @@ tr:nth-child(even) {
   border-radius: 12px;
   padding: 20px;
   border: 1px solid #374151;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Cores dos Cards */
 .roadmap-card.blue {
   border-color: #3b82f6;
 }
 .roadmap-card.blue .blue-text {
   color: #60a5fa;
 }
-
 .roadmap-card.red {
   border-color: #ef4444;
 }
 .roadmap-card.red .red-text {
   color: #f87171;
 }
-
 .roadmap-card.green {
   border-color: #10b981;
 }
 .roadmap-card.green .green-text {
   color: #34d399;
 }
-
 .roadmap-card.purple {
   border-color: #8b5cf6;
 }
 .roadmap-card.purple .purple-text {
   color: #a78bfa;
 }
-
 .roadmap-card.amber {
   border-color: #f59e0b;
 }
@@ -693,55 +607,10 @@ tr:nth-child(even) {
   color: #fbbf24;
 }
 
-.roadmap-card .card-title {
-  font-size: 1.4em;
-  margin: 0 0 10px 0;
-  font-weight: bold;
-}
-
-.roadmap-card .card-subtitle {
-  color: #9ca3af;
-  font-size: 0.95em;
-  margin-bottom: 15px;
-  font-style: italic;
-}
-
-.roadmap-card .roadmap-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.roadmap-card .roadmap-list li {
-  margin-bottom: 8px;
-  padding-left: 20px;
-  position: relative;
-  color: #e5e7eb;
-}
-
-.roadmap-card .roadmap-list li::before {
-  content: "✔";
-  position: absolute;
-  left: 0;
-  color: #10b981;
-}
-
 .topic-header {
   margin-top: 15px;
-  margin-bottom: 5px;
-  color: #e5e7eb;
   border-bottom: 1px solid #374151;
-  padding-bottom: 3px;
-  font-size: 1em;
-}
-
-.card-highlight {
-  margin-top: auto;
-  background-color: rgba(59, 130, 246, 0.1);
-  padding: 10px;
-  border-radius: 6px;
-  color: #93c5fd;
-  font-size: 0.9em;
-  text-align: center;
+  color: #e5e7eb;
 }
 
 .checklist-item {
@@ -749,10 +618,7 @@ tr:nth-child(even) {
   align-items: center;
   padding: 8px;
   border-radius: 6px;
-  transition: background-color 0.2s;
-  cursor: pointer;
 }
-
 .checklist-item:hover {
   background-color: #374151;
 }
@@ -764,18 +630,13 @@ tr:nth-child(even) {
   height: 18px;
   border: 2px solid #6b7280;
   border-radius: 4px;
-  background-color: transparent;
   margin-right: 10px;
-  cursor: pointer;
   position: relative;
-  flex-shrink: 0;
 }
-
 .roadmap-check:checked {
   background-color: #10b981;
   border-color: #10b981;
 }
-
 .roadmap-check:checked::after {
   content: "✓";
   position: absolute;
@@ -786,32 +647,21 @@ tr:nth-child(even) {
   font-weight: bold;
 }
 
-.checklist-item label {
-  cursor: pointer;
-  color: #d1d5db;
-  font-size: 0.95em;
-  line-height: 1.3;
-}
-
-.checklist-item input:checked + label {
-  text-decoration: line-through;
-  color: #6b7280;
-}
-
-/* Responsividade */
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  .content-section {
-    padding: 10px;
+  .nav-tabs {
+    padding: 5px;
+    gap: 5px;
   }
-  #agenda-section,
-  #dieta-section,
-  #treino-section,
-  #bem-estar-section,
-  #carreira-section {
+  .tab-button {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+  .content-section {
     padding: 10px;
   }
   #agenda-section .container {
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
   }
 }
