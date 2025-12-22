@@ -6,15 +6,19 @@ function showSection(sectionId) {
   document
     .querySelectorAll(".tab-button")
     .forEach((b) => b.classList.remove("active"));
-  document
-    .querySelector(`.tab-button[onclick="showSection('${sectionId}')"]`)
-    .classList.add("active");
-  document.getElementById(sectionId).classList.add("active");
+
+  const btn = document.querySelector(
+    `.tab-button[onclick="showSection('${sectionId}')"]`
+  );
+  if (btn) btn.classList.add("active");
+
+  const section = document.getElementById(sectionId);
+  if (section) section.classList.add("active");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   // ========================================================
-  // SCRIPT DO ROADMAP PROFISSIONAL
+  // 1. SCRIPT DO ROADMAP PROFISSIONAL (Carreira)
   // ========================================================
   if (document.getElementById("carreira-section")) {
     const roadmapCheckboxes = document.querySelectorAll(".roadmap-check");
@@ -33,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
         roadmapProgressBar.textContent = percentage + "%";
       }
 
-      // Salvar no LocalStorage
       roadmapCheckboxes.forEach((box) => {
         localStorage.setItem(box.id, box.checked);
       });
@@ -47,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
       updateRoadmapProgress();
     }
 
-    // Listeners
     roadmapCheckboxes.forEach((box) => {
       box.addEventListener("change", updateRoadmapProgress);
     });
@@ -56,27 +58,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ========================================================
-  // SCRIPT DA AGENDA DINÂMICA (MANTIDO)
+  // 2. SCRIPT DA AGENDA DINÂMICA
   // ========================================================
   if (document.getElementById("agenda")) {
     const agenda = document.getElementById("agenda");
     const HORA_INICIO_AGENDA = 5,
-      HORA_FIM_AGENDA = 27,
+      HORA_FIM_AGENDA = 27, // Vai até 03:00 da manhã visualmente
       ALTURA_HORA = 60;
 
     function gerarGrade() {
       agenda.innerHTML = "";
       const t = document.createElement("div");
-      (t.className = "grid-item"),
-        (t.style.borderLeft = "none"),
-        (t.style.borderBottom = "1px solid #333"),
-        agenda.appendChild(t);
+      t.className = "grid-item";
+      t.style.borderLeft = "none";
+      t.style.borderBottom = "1px solid #333";
+      agenda.appendChild(t);
 
       ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].forEach((e) => {
         const o = document.createElement("div");
-        (o.className = "grid-item header-dia"),
-          (o.textContent = e),
-          agenda.appendChild(o);
+        o.className = "grid-item header-dia";
+        o.textContent = e;
+        agenda.appendChild(o);
       });
 
       for (let o = HORA_INICIO_AGENDA; o < HORA_FIM_AGENDA; o++) {
@@ -84,17 +86,17 @@ document.addEventListener("DOMContentLoaded", function () {
         e.className = "grid-item celula-hora";
         const horaMostrada = o % 24;
         e.textContent = `${horaMostrada.toString().padStart(2, "0")}:00`;
-        (e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`),
-          agenda.appendChild(e);
+        e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`;
+        agenda.appendChild(e);
       }
 
       for (let e = 0; e < 7; e++) {
         const o = document.createElement("div");
-        (o.className = "coluna-dia"),
-          (o.dataset.diaIndex = e + 1),
-          (o.style.gridColumn = `${e + 2}`);
-        (o.style.gridRow = `2 / span ${HORA_FIM_AGENDA - HORA_INICIO_AGENDA}`),
-          agenda.appendChild(o);
+        o.className = "coluna-dia";
+        o.dataset.diaIndex = e + 1;
+        o.style.gridColumn = `${e + 2}`;
+        o.style.gridRow = `2 / span ${HORA_FIM_AGENDA - HORA_INICIO_AGENDA}`;
+        agenda.appendChild(o);
       }
     }
 
@@ -102,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let [d, a] = o.split(":").map(Number);
       let [r, s] = i.split(":").map(Number);
 
+      // Tratamento para horários pós-meia noite (ex: 27h = 03h)
       if (r < d && r < HORA_INICIO_AGENDA) r += 24;
       if (d >= 0 && d < HORA_INICIO_AGENDA) {
         d += 24;
@@ -116,14 +119,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const h = document.createElement("div");
       h.className = "atividade-bloco";
       if (customClass) h.classList.add(customClass);
-      (h.style.top = `${l * ALTURA_HORA}px`),
-        (h.style.height = `${c * ALTURA_HORA}px`),
-        (h.style.backgroundColor = n),
-        (h.style.borderLeftColor = ajustarCor(n, -40)),
-        (h.innerHTML = `${t} <br><small>${o} - ${i}</small>`),
-        agenda
-          .querySelector(`.coluna-dia[data-dia-index='${e}']`)
-          ?.appendChild(h);
+      h.style.top = `${l * ALTURA_HORA}px`;
+      h.style.height = `${c * ALTURA_HORA}px`;
+      h.style.backgroundColor = n;
+      h.style.borderLeftColor = ajustarCor(n, -40);
+      h.innerHTML = `${t} <br><small>${o} - ${i}</small>`;
+      agenda
+        .querySelector(`.coluna-dia[data-dia-index='${e}']`)
+        ?.appendChild(h);
     }
 
     function ajustarCor(t, e) {
@@ -141,205 +144,121 @@ document.addEventListener("DOMContentLoaded", function () {
 
     gerarGrade();
 
-    // --- PALETA DE CORES ---
-    const corCardio = "#00ced1"; // Ciano
+    // CORES E ATIVIDADES
+    const corCardio = "#00ced1"; // Turquesa
     const corAcademia = "#e74c3c"; // Vermelho
-    const corCore = "#007bff"; // Azul para CORE (No agendamento)
-
-    // Cores Estudos
     const corPortugues = "#3498db"; // Azul
+    const corMatematica = "#d63384"; // Rosa
     const corBancarios = "#27ae60"; // Verde
     const corVendas = "#f1c40f"; // Amarelo
     const corInformatica = "#8e44ad"; // Roxo
-    const corMatematica = "#d63384"; // Rosa
-    const corIngles = "#4b4b8f"; // Indigo
-    const corSimulado = "#636e72"; // Cinza
-    const corRoadmap = "#00b899"; // MINT/Ciano Claro
+    const corIngles = "#e67e22"; // Laranja
+    const corSimulado = "#95a5a6"; // Cinza
 
-    // --- ROTINA SEMANAL (SEG-SEX) - MANTIDO ---
-    for (let dia = 1; dia <= 5; dia++) {
-      // Cardio AEJ 08:00 - 09:00
-      // ALTERADO: Removido "(AEJ)" do nome.
+    // 1. CARDIO (Seg-Sex + Dom) -> 10:00 às 11:00
+    [1, 2, 3, 4, 5, 7].forEach((dia) => {
       adicionarAtividade(
         "<strong>🏃 Cardio</strong>",
         dia,
-        "08:00",
-        "09:00",
+        "10:00",
+        "11:00",
         corCardio
       );
+    });
 
-      // Academia 15:00 - 17:00 (PPL)
+    // 2. ACADEMIA (Seg-Sáb) -> 15:00 às 17:00
+    [1, 2, 3, 4, 5, 6].forEach((dia) => {
       adicionarAtividade(
-        "<strong>💪 Academia (PPL)</strong>",
+        "<strong>💪 Academia</strong>",
         dia,
         "15:00",
         "17:00",
         corAcademia
       );
+    });
 
-      // Estudos Roadmap 22:00 - 00:00 (MANTIDO)
+    // 3. ESTUDOS - TURNO DA NOITE (19h - 00h)
+
+    // --- BLOCO 1: BASE (19:00 - 21:00) ---
+    // Seg, Qua, Sex: Português
+    [1, 3, 5].forEach((dia) => {
       adicionarAtividade(
-        "<strong>🚀 Estudos Roadmap</strong><br><small>Novo Conteúdo</small>",
+        "<strong>📚 Português</strong>",
         dia,
-        "22:00",
-        "00:00", // 00:00 é 24:00 (ou 27 na agenda)
-        corRoadmap
+        "19:00",
+        "21:00",
+        corPortugues
       );
-    }
-
-    // REMOVIDO: Blocos de Core da Agenda (Segunda, Quarta, Sexta)
-
-    // --- MATÉRIAS BANCO DO BRASIL (SEG-DOM) - MANTIDO ---
-    // (Lógica de agendamento das matérias mantida)
-    // SEGUNDA-FEIRA (Dia 1)
+    });
+    // Ter, Qui: Matemática
+    [2, 4].forEach((dia) => {
+      adicionarAtividade(
+        "<strong>📐 Matemática</strong>",
+        dia,
+        "19:00",
+        "21:00",
+        corMatematica
+      );
+    });
+    // Sábado: Matemática
     adicionarAtividade(
-      "<strong>📚 Português</strong><br><small>Gramática/Texto</small>",
-      1,
-      "10:00",
-      "12:00", // Bloco 1 (Manhã)
-      corPortugues
-    );
-    adicionarAtividade(
-      "<strong>🏦 C. Bancários</strong><br><small>Sistema Financeiro</small>",
-      1,
-      "19:30",
-      "21:30", // Bloco 2 (Noite)
-      corBancarios
-    );
-
-    // TERÇA-FEIRA (Dia 2)
-    adicionarAtividade(
-      "<strong>📐 Matemática</strong><br><small>Lógica/Probabilidade</small>",
-      2,
-      "10:00",
-      "12:00", // Bloco 1 (Manhã)
-      corMatematica
-    );
-    adicionarAtividade(
-      "<strong>💼 Vendas e Negociação</strong><br><small>Técnicas/CDC</small>",
-      2,
-      "19:30",
-      "21:30", // Bloco 2 (Noite)
-      corVendas
-    );
-
-    // QUARTA-FEIRA (Dia 3)
-    adicionarAtividade(
-      "<strong>💻 Informática</strong><br><small>Segurança/Office</small>",
-      3,
-      "10:00",
-      "12:00", // Bloco 1 (Manhã)
-      corInformatica
-    );
-    adicionarAtividade(
-      "<strong>📐 Matemática</strong><br><small>Lógica/Probabilidade</small>",
-      3,
-      "19:30",
-      "21:30", // Bloco 2 (Noite)
-      corMatematica
-    );
-
-    // QUINTA-FEIRA (Dia 4)
-    adicionarAtividade(
-      "<strong>📈 Mat. Financeira</strong><br><small>Juros/Taxas</small>",
-      4,
-      "10:00",
-      "12:00", // Bloco 1 (Manhã)
-      corMatematica
-    );
-    adicionarAtividade(
-      "<strong>🏦 C. Bancários</strong><br><small>Produtos/Serviços</small>",
-      4,
-      "19:30",
-      "21:30", // Bloco 2 (Noite)
-      corBancarios
-    );
-
-    // SEXTA-FEIRA (Dia 5)
-    adicionarAtividade(
-      "<strong>💻 Informática</strong><br><small>Teoria + Questões</small>",
-      5,
-      "10:00",
-      "12:00", // Bloco 1 (Manhã)
-      corInformatica
-    );
-    adicionarAtividade(
-      "<strong>💼 Vendas e Negociação</strong><br><small>Teoria + Questões</small>",
-      5,
-      "19:30",
-      "21:30", // Bloco 2 (Noite)
-      corVendas
-    );
-
-    // --- FIM DE SEMANA (MANTIDO) ---
-    // Sábado
-    adicionarAtividade(
-      "<strong>📚 Português</strong><br><small>Foco Total</small>",
-      6,
-      "10:00",
-      "12:00",
-      corPortugues
-    );
-    adicionarAtividade(
-      "<strong>📐 Matemática</strong><br><small>Foco Total</small>",
-      6,
-      "13:00",
-      "15:00",
-      corMatematica
-    );
-    adicionarAtividade(
-      "<strong>💪 Academia (LEGS 2)</strong>",
-      6,
-      "16:00",
-      "18:00",
-      corAcademia
-    );
-    adicionarAtividade(
-      "<strong>📰 Atualidades Mercado</strong><br><small>Mundo Financeiro</small>",
+      "<strong>📐 Matemática Fin.</strong>",
       6,
       "19:00",
-      "20:00",
-      corBancarios
+      "21:00",
+      corMatematica
     );
 
-    // Domingo (APENAS ESTUDO E DESCANSO TOTAL)
-    // Inglês 13-14
+    // --- BLOCO 2: ESPECÍFICAS (22:00 - 00:00) ---
+    // Seg, Qui: Conhecimentos Bancários
+    [1, 4].forEach((dia) => {
+      adicionarAtividade(
+        "<strong>🏦 C. Bancários</strong>",
+        dia,
+        "22:00",
+        "00:00",
+        corBancarios
+      );
+    });
+    // Ter, Sex: Vendas e Negociação / Atualidades
+    [2, 5].forEach((dia) => {
+      adicionarAtividade(
+        "<strong>💼 Vendas/Negoc.</strong>",
+        dia,
+        "22:00",
+        "00:00",
+        corVendas
+      );
+    });
+    // Qua, Sáb: Informática
+    [3, 6].forEach((dia) => {
+      adicionarAtividade(
+        "<strong>💻 Informática</strong>",
+        dia,
+        "22:00",
+        "00:00",
+        corInformatica
+      );
+    });
+
+    // --- DOMINGO (ESPECIAL) ---
     adicionarAtividade(
-      "<strong>🇺🇸 Inglês</strong><br><small>Interpretação</small>",
+      "<strong>✍️ Redação + Inglês</strong>",
       7,
-      "13:00",
-      "14:00",
+      "19:00",
+      "21:00",
       corIngles
     );
-
-    // Revisão 15-16
     adicionarAtividade(
-      "<strong>🔄 Revisão Geral</strong><br><small>Antes do Simulado</small>",
+      "<strong>📝 Simulado/Revisão</strong>",
       7,
-      "15:00",
-      "16:00",
+      "22:00",
+      "00:00",
       corSimulado
-    );
-
-    // Simulado 17-19:30
-    adicionarAtividade(
-      "<strong>📝 SIMULADÃO</strong><br><small>Prova Completa</small>",
-      7,
-      "17:00",
-      "19:30",
-      corSimulado
-    );
-
-    // Redação 20:30-21:30
-    adicionarAtividade(
-      "<strong>✍️ Redação + Correção</strong><br><small>Pós-Simulado</small>",
-      7,
-      "20:30",
-      "21:30",
-      corPortugues
     );
   }
 
+  // Salvamento dos Textareas da Agenda
   const textareasToSave = [
     "provas-textarea",
     "atividades-textarea",
@@ -355,30 +274,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // ========================================================
+  // 3. SCRIPT DO TREINO (PPL)
+  // ========================================================
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
-    // Seleciona todos os blocos de treino PPL e os blocos de Core (que possuem data-day-index)
     const allWorkoutBlocks = document.querySelectorAll(
       ".workout-day[data-day-index]"
     );
     const toggleAllWorkoutsBtn = document.getElementById(
       "toggle-all-workouts-btn"
     );
-
-    // Variável de estado para controlar a visualização
     let showAllWorkoutsMode = false;
-
     const storageKey = "workoutProgress";
+    const currentDayIndex = new Date().getDay(); // 0=Dom, 1=Seg...
 
-    // Obter o dia da semana atual (0=domingo, 1=segunda, 6=sábado)
-    const currentDayIndex = new Date().getDay();
-
-    // Função para mostrar apenas o treino do dia atual
     function updateWorkoutVisibilityByDay() {
       allWorkoutBlocks.forEach((dayBlock) => {
         const dayIndex = parseInt(dayBlock.dataset.dayIndex, 10);
-
-        // Mostrar o bloco APENAS se o data-day-index for o dia atual.
         if (dayIndex === currentDayIndex) {
           dayBlock.classList.remove("hidden-workout");
         } else {
@@ -387,29 +300,20 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // NOVA FUNÇÃO: Alterna a visualização entre o dia e a semana completa
     function toggleAllWorkouts() {
       showAllWorkoutsMode = !showAllWorkoutsMode;
-
       if (showAllWorkoutsMode) {
-        // Mostrar todos os blocos
-        allWorkoutBlocks.forEach((dayBlock) => {
-          dayBlock.classList.remove("hidden-workout");
-        });
+        allWorkoutBlocks.forEach((b) => b.classList.remove("hidden-workout"));
         toggleAllWorkoutsBtn.textContent = "Ver Treino do Dia";
       } else {
-        // Voltar a mostrar apenas o treino do dia atual
         updateWorkoutVisibilityByDay();
         toggleAllWorkoutsBtn.textContent = "Ver Todos os Treinos";
       }
     }
 
-    // Adicionar listener ao botão de alternância
     if (toggleAllWorkoutsBtn) {
       toggleAllWorkoutsBtn.addEventListener("click", toggleAllWorkouts);
     }
-
-    // Lógica de séries e peso (mantida)
 
     function saveProgress() {
       const progressData = {};
@@ -419,9 +323,8 @@ document.addEventListener("DOMContentLoaded", function () {
           const seriesDots = item.querySelectorAll(".series-dot");
           const completedSeries = [];
           seriesDots.forEach((dot, index) => {
-            if (dot.classList.contains("completed")) {
+            if (dot.classList.contains("completed"))
               completedSeries.push(index);
-            }
           });
           progressData[id] = {
             completed:
@@ -446,25 +349,22 @@ document.addEventListener("DOMContentLoaded", function () {
               checkbox.checked = savedData[id].completed;
               item.classList.toggle("completed", checkbox.checked);
             }
-            if (weightInput) {
-              weightInput.value = savedData[id].weight;
-            }
+            if (weightInput) weightInput.value = savedData[id].weight;
             if (savedData[id].series) {
               const seriesDots = item.querySelectorAll(".series-dot");
               seriesDots.forEach((dot, index) => {
-                if (savedData[id].series.includes(index)) {
+                if (savedData[id].series.includes(index))
                   dot.classList.add("completed");
-                }
               });
             }
           }
         });
       }
-
-      // Aplica a visibilidade inicial: apenas o treino do dia
+      // Inicializar visualização
       updateWorkoutVisibilityByDay();
     }
 
+    // Inicialização dos itens de exercício
     exerciseItems.forEach((item) => {
       const checkbox = item.querySelector(".exercise-checkbox");
       const weightInput = item.querySelector(".weight-input");
@@ -475,11 +375,12 @@ document.addEventListener("DOMContentLoaded", function () {
         seriesCounter.innerHTML = "";
         let seriesCount = 0;
         const seriesMatch = smallText.match(/(\d+)\s*séries/);
-        if (seriesMatch) {
-          seriesCount = parseInt(seriesMatch[1], 10);
-        } else if (smallText.includes("até a falha")) {
-          seriesCount = 3;
-        }
+        if (seriesMatch) seriesCount = parseInt(seriesMatch[1], 10);
+        else if (smallText.includes("até a falha")) seriesCount = 3;
+
+        // Default caso não ache o número
+        if (seriesCount === 0) seriesCount = 3;
+
         for (let i = 0; i < seriesCount; i++) {
           const dot = document.createElement("div");
           dot.className = "series-dot";
@@ -497,47 +398,160 @@ document.addEventListener("DOMContentLoaded", function () {
           saveProgress();
         });
       }
-
       if (weightInput) {
         weightInput.addEventListener("input", saveProgress);
       }
     });
 
-    loadProgress();
-
-    const resetButtons = document.querySelectorAll(".reset-button");
-    resetButtons.forEach((button) => {
+    // Reset Buttons
+    document.querySelectorAll(".reset-button").forEach((button) => {
       button.addEventListener("click", function () {
         const workoutDay = this.closest(".workout-day");
         if (workoutDay) {
-          const itemsToReset = workoutDay.querySelectorAll(".exercise-item");
-          itemsToReset.forEach((item) => {
+          workoutDay.querySelectorAll(".exercise-item").forEach((item) => {
             const checkbox = item.querySelector(".exercise-checkbox");
-            if (checkbox) {
-              checkbox.checked = false;
-            }
+            if (checkbox) checkbox.checked = false;
             item.classList.remove("completed");
-            const seriesDots = item.querySelectorAll(".series-dot");
-            seriesDots.forEach((dot) => {
-              dot.classList.remove("completed");
-            });
+            item
+              .querySelectorAll(".series-dot")
+              .forEach((dot) => dot.classList.remove("completed"));
           });
           saveProgress();
         }
       });
     });
+
+    loadProgress();
   }
+
+  // ========================================================
+  // 4. BEM-ESTAR & DIÁRIOS
+  // ========================================================
+  // Identidade
+  const idInput = document.getElementById("identity-input");
+  const saveIdBtn = document.getElementById("save-identity-btn");
+  const idDisplay = document.getElementById("identity-display");
+  const idContainer = document.getElementById("identity-display-container");
+  const idInputContainer = document.getElementById("identity-input-container");
+  const deleteIdBtn = document.getElementById("delete-identity-btn");
+
+  if (saveIdBtn) {
+    function loadIdentity() {
+      const savedId = localStorage.getItem("novaIdentidade");
+      if (savedId) {
+        idDisplay.textContent = savedId;
+        idInputContainer.style.display = "none";
+        idContainer.style.display = "flex";
+      }
+    }
+    saveIdBtn.addEventListener("click", () => {
+      if (idInput.value) {
+        localStorage.setItem("novaIdentidade", idInput.value);
+        loadIdentity();
+      }
+    });
+    deleteIdBtn.addEventListener("click", () => {
+      localStorage.removeItem("novaIdentidade");
+      idInput.value = "";
+      idInputContainer.style.display = "flex";
+      idContainer.style.display = "none";
+    });
+    loadIdentity();
+  }
+
+  // Micro Vitórias
+  const winInput = document.getElementById("micro-win-input");
+  const addWinBtn = document.getElementById("add-micro-win-btn");
+  const winsList = document.getElementById("micro-wins-list");
+
+  if (addWinBtn) {
+    function loadWins() {
+      const wins = JSON.parse(localStorage.getItem("microWins")) || [];
+      winsList.innerHTML = "";
+      wins.forEach((win) => {
+        const li = document.createElement("li");
+        li.textContent = `🏆 ${win}`;
+        winsList.appendChild(li);
+      });
+    }
+    addWinBtn.addEventListener("click", () => {
+      if (winInput.value) {
+        const wins = JSON.parse(localStorage.getItem("microWins")) || [];
+        wins.push(winInput.value);
+        localStorage.setItem("microWins", JSON.stringify(wins));
+        winInput.value = "";
+        loadWins();
+      }
+    });
+    loadWins();
+  }
+
+  // Diários Gerais
+  function setupJournal(dateId, textId, btnId, storageKey, containerId) {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      const date = document.getElementById(dateId).value;
+      const text = document.getElementById(textId).value;
+      if (date && text) {
+        const entries = JSON.parse(localStorage.getItem(storageKey)) || [];
+        entries.unshift({ date, text }); // Adiciona no topo
+        localStorage.setItem(storageKey, JSON.stringify(entries));
+        renderJournal(storageKey, containerId);
+        document.getElementById(textId).value = "";
+      }
+    });
+    renderJournal(storageKey, containerId);
+  }
+
+  function renderJournal(storageKey, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const entries = JSON.parse(localStorage.getItem(storageKey)) || [];
+    container.innerHTML = "";
+    entries.forEach((entry, index) => {
+      const div = document.createElement("div");
+      div.className = "journal-entry";
+      div.innerHTML = `<div class="entry-date">${entry.date}</div><p>${entry.text}</p>`;
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "Apagar";
+      delBtn.style.cssText =
+        "background: #c0392b; border:none; color:white; padding:5px; border-radius:3px; float:right; cursor:pointer;";
+      delBtn.onclick = () => {
+        entries.splice(index, 1);
+        localStorage.setItem(storageKey, JSON.stringify(entries));
+        renderJournal(storageKey, containerId);
+      };
+
+      div.prepend(delBtn);
+      container.appendChild(div);
+    });
+  }
+
+  setupJournal(
+    "journal-date",
+    "journal-text",
+    "add-note-button",
+    "journalEntries",
+    "journal-history-container"
+  );
+  setupJournal(
+    "dream-journal-date",
+    "dream-journal-text",
+    "add-dream-button",
+    "dreamEntries",
+    "dream-history-container"
+  );
 });
 
+// Service Worker
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("./sw.js")
-      .then((registration) =>
-        console.log("Service Worker registrado com sucesso.")
-      )
-      .catch((error) =>
-        console.log("Falha ao registrar o Service Worker:", error)
-      );
+      .then(() => console.log("Service Worker registrado."))
+      .catch((err) => console.log("Falha no SW:", err));
   });
 }
