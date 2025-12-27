@@ -17,20 +17,32 @@ function showSection(sectionId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // ========================================================
-  // 1. SCRIPT DO ROADMAP PROFISSIONAL (Carreira)
-  // ========================================================
+  // --- DATA AUTOMÁTICA NOS DIÁRIOS ---
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+  const dia = String(hoje.getDate()).padStart(2, "0");
+  const dataFormatada = `${ano}-${mes}-${dia}`;
+
+  const inputSonho = document.getElementById("dream-journal-date");
+  const inputNota = document.getElementById("journal-date");
+
+  if (inputSonho) inputSonho.value = dataFormatada;
+  if (inputNota) inputNota.value = dataFormatada;
+
+  // =======================================================
+  // 1. CARREIRA (ROADMAP)
+  // =======================================================
   if (document.getElementById("carreira-section")) {
     const roadmapCheckboxes = document.querySelectorAll(".roadmap-check");
     const roadmapProgressBar = document.getElementById("roadmapProgressBar");
 
     function updateRoadmapProgress() {
-      const totalItems = roadmapCheckboxes.length;
-      const checkedItems = document.querySelectorAll(
+      const total = roadmapCheckboxes.length;
+      const checked = document.querySelectorAll(
         ".roadmap-check:checked"
       ).length;
-      const percentage =
-        totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
+      const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
 
       if (roadmapProgressBar) {
         roadmapProgressBar.style.width = percentage + "%";
@@ -38,42 +50,83 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       roadmapCheckboxes.forEach((box) => {
+        // Salva estado
         localStorage.setItem(box.id, box.checked);
+        // Aplica visual riscado no pai
+        const parent = box.closest(".checklist-item");
+        if (parent) {
+          if (box.checked) parent.classList.add("completed");
+          else parent.classList.remove("completed");
+        }
       });
-    }
-
-    function loadRoadmapProgress() {
-      roadmapCheckboxes.forEach((box) => {
-        const isChecked = localStorage.getItem(box.id) === "true";
-        box.checked = isChecked;
-      });
-      updateRoadmapProgress();
     }
 
     roadmapCheckboxes.forEach((box) => {
+      // Carrega estado inicial
+      const isChecked = localStorage.getItem(box.id) === "true";
+      box.checked = isChecked;
+
+      // Aplica visual inicial
+      const parent = box.closest(".checklist-item");
+      if (parent && isChecked) parent.classList.add("completed");
+
       box.addEventListener("change", updateRoadmapProgress);
     });
-
-    loadRoadmapProgress();
+    updateRoadmapProgress();
   }
 
-  // ========================================================
-  // 2. SCRIPT DA AGENDA DINÂMICA
-  // ========================================================
+  // =======================================================
+  // 2. DIETA (LISTAS DE COMPRAS E VERIFICAÇÃO) - NOVO
+  // =======================================================
+  if (document.getElementById("dieta-section")) {
+    const shoppingChecks = document.querySelectorAll(".shopping-check");
+
+    function saveDietState() {
+      shoppingChecks.forEach((box) => {
+        localStorage.setItem(box.id, box.checked);
+
+        // Lógica visual de riscar
+        const parent = box.closest(".checklist-item");
+        if (parent) {
+          if (box.checked) parent.classList.add("completed");
+          else parent.classList.remove("completed");
+        }
+      });
+    }
+
+    shoppingChecks.forEach((box) => {
+      // Carregar
+      const isChecked = localStorage.getItem(box.id) === "true";
+      box.checked = isChecked;
+
+      // Visual inicial
+      const parent = box.closest(".checklist-item");
+      if (parent && isChecked) parent.classList.add("completed");
+
+      // Evento
+      box.addEventListener("change", saveDietState);
+    });
+  }
+
+  // =======================================================
+  // 3. AGENDA DINÂMICA
+  // =======================================================
   if (document.getElementById("agenda")) {
     const agenda = document.getElementById("agenda");
-    const HORA_INICIO_AGENDA = 5,
-      HORA_FIM_AGENDA = 27, // Vai até 03:00 da manhã visualmente
+    const HORA_INICIO = 10,
+      HORA_FIM = 25,
       ALTURA_HORA = 60;
 
     function gerarGrade() {
       agenda.innerHTML = "";
+      // Canto vazio
       const t = document.createElement("div");
       t.className = "grid-item";
       t.style.borderLeft = "none";
       t.style.borderBottom = "1px solid #333";
       agenda.appendChild(t);
 
+      // Cabeçalho Dias
       ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].forEach((e) => {
         const o = document.createElement("div");
         o.className = "grid-item header-dia";
@@ -81,477 +134,388 @@ document.addEventListener("DOMContentLoaded", function () {
         agenda.appendChild(o);
       });
 
-      for (let o = HORA_INICIO_AGENDA; o < HORA_FIM_AGENDA; o++) {
+      // Células Horas (Lateral)
+      for (let o = HORA_INICIO; o < HORA_FIM; o++) {
         const e = document.createElement("div");
         e.className = "grid-item celula-hora";
-        const horaMostrada = o % 24;
-        e.textContent = `${horaMostrada.toString().padStart(2, "0")}:00`;
-        e.style.gridRow = `${o - HORA_INICIO_AGENDA + 2}`;
+        e.textContent = `${(o % 24).toString().padStart(2, "0")}:00`;
+        e.style.gridRow = `${o - HORA_INICIO + 2}`;
         agenda.appendChild(e);
       }
 
+      // Colunas dos Dias
       for (let e = 0; e < 7; e++) {
         const o = document.createElement("div");
         o.className = "coluna-dia";
         o.dataset.diaIndex = e + 1;
         o.style.gridColumn = `${e + 2}`;
-        o.style.gridRow = `2 / span ${HORA_FIM_AGENDA - HORA_INICIO_AGENDA}`;
+        o.style.gridRow = `2 / span ${HORA_FIM - HORA_INICIO}`;
         agenda.appendChild(o);
       }
     }
 
-    function adicionarAtividade(t, e, o, i, n, customClass) {
-      let [d, a] = o.split(":").map(Number);
-      let [r, s] = i.split(":").map(Number);
+    function adicionarAtividade(nome, diaIndex, horaInicio, horaFim, cor) {
+      let [hIni, mIni] = horaInicio.split(":").map(Number);
+      let [hFim, mFim] = horaFim.split(":").map(Number);
 
-      // Tratamento para horários pós-meia noite (ex: 27h = 03h)
-      if (r < d && r < HORA_INICIO_AGENDA) r += 24;
-      if (d >= 0 && d < HORA_INICIO_AGENDA) {
-        d += 24;
-        if (r < d) r += 24;
+      // Ajuste para madrugada
+      if (hFim < hIni && hFim < HORA_INICIO) hFim += 24;
+      if (hIni >= 0 && hIni < HORA_INICIO) {
+        hIni += 24;
+        if (hFim < hIni) hFim += 24;
       }
 
-      const l = (d * 60 + a - HORA_INICIO_AGENDA * 60) / 60;
-      const c = (r * 60 + s - (d * 60 + a)) / 60;
+      const topo = (hIni * 60 + mIni - HORA_INICIO * 60) / 60;
+      const duracao = (hFim * 60 + mFim - (hIni * 60 + mIni)) / 60;
 
-      if (d < HORA_INICIO_AGENDA && r < HORA_INICIO_AGENDA) return;
+      if (topo < 0) return;
 
-      const h = document.createElement("div");
-      h.className = "atividade-bloco";
-      if (customClass) h.classList.add(customClass);
-      h.style.top = `${l * ALTURA_HORA}px`;
-      h.style.height = `${c * ALTURA_HORA}px`;
-      h.style.backgroundColor = n;
-      h.style.borderLeftColor = ajustarCor(n, -40);
-      h.innerHTML = `${t} <br><small>${o} - ${i}</small>`;
-      agenda
-        .querySelector(`.coluna-dia[data-dia-index='${e}']`)
-        ?.appendChild(h);
-    }
+      const bloco = document.createElement("div");
+      bloco.className = "atividade-bloco";
+      bloco.style.top = `${topo * ALTURA_HORA}px`;
+      bloco.style.height = `${duracao * ALTURA_HORA}px`;
+      bloco.style.backgroundColor = cor;
+      bloco.innerHTML = `${nome} <br><small>${horaInicio} - ${horaFim}</small>`;
 
-    function ajustarCor(t, e) {
-      let o = parseInt(t.slice(1, 3), 16),
-        i = parseInt(t.slice(3, 5), 16),
-        n = parseInt(t.slice(5, 7), 16);
-      return `#${Math.max(0, Math.min(255, o + e))
-        .toString(16)
-        .padStart(2, "0")}${Math.max(0, Math.min(255, i + e))
-        .toString(16)
-        .padStart(2, "0")}${Math.max(0, Math.min(255, n + e))
-        .toString(16)
-        .padStart(2, "0")}`;
+      const coluna = agenda.querySelector(
+        `.coluna-dia[data-dia-index='${diaIndex}']`
+      );
+      if (coluna) coluna.appendChild(bloco);
     }
 
     gerarGrade();
 
-    // CORES E ATIVIDADES
-    const corCardio = "#00ced1"; // Turquesa
-    const corAcademia = "#e74c3c"; // Vermelho
-    const corPortugues = "#3498db"; // Azul
-    const corMatematica = "#d63384"; // Rosa
-    const corBancarios = "#27ae60"; // Verde
-    const corVendas = "#f1c40f"; // Amarelo
-    const corInformatica = "#8e44ad"; // Roxo
-    const corIngles = "#e67e22"; // Laranja
-    const corSimulado = "#95a5a6"; // Cinza
+    const colors = {
+      cardio: "#00ced1",
+      gym: "#e74c3c",
+      port: "#3498db",
+      mat: "#d63384",
+      bank: "#27ae60",
+      sales: "#f1c40f",
+      info: "#8e44ad",
+      eng: "#e67e22",
+      sim: "#95a5a6",
+    };
 
-    // 1. CARDIO (Seg-Sex + Dom) -> 10:00 às 11:00
-    [1, 2, 3, 4, 5, 7].forEach((dia) => {
-      adicionarAtividade(
-        "<strong>🏃 Cardio</strong>",
-        dia,
-        "10:00",
-        "11:00",
-        corCardio
-      );
-    });
-
-    // 2. ACADEMIA (Seg-Sáb) -> 15:00 às 17:00
-    [1, 2, 3, 4, 5, 6].forEach((dia) => {
-      adicionarAtividade(
-        "<strong>💪 Academia</strong>",
-        dia,
-        "15:00",
-        "17:00",
-        corAcademia
-      );
-    });
-
-    // 3. ESTUDOS - TURNO DA NOITE (19h - 00h)
-
-    // --- BLOCO 1: BASE (19:00 - 21:00) ---
-    // Seg, Qua, Sex: Português
-    [1, 3, 5].forEach((dia) => {
-      adicionarAtividade(
-        "<strong>📚 Português</strong>",
-        dia,
-        "19:00",
-        "21:00",
-        corPortugues
-      );
-    });
-    // Ter, Qui: Matemática
-    [2, 4].forEach((dia) => {
-      adicionarAtividade(
-        "<strong>📐 Matemática</strong>",
-        dia,
-        "19:00",
-        "21:00",
-        corMatematica
-      );
-    });
-    // Sábado: Matemática
-    adicionarAtividade(
-      "<strong>📐 Matemática Fin.</strong>",
-      6,
-      "19:00",
-      "21:00",
-      corMatematica
+    [1, 2, 3, 4, 5, 7].forEach((d) =>
+      adicionarAtividade("🏃 Cardio", d, "10:00", "11:00", colors.cardio)
     );
-
-    // --- BLOCO 2: ESPECÍFICAS (22:00 - 00:00) ---
-    // Seg, Qui: Conhecimentos Bancários
-    [1, 4].forEach((dia) => {
-      adicionarAtividade(
-        "<strong>🏦 C. Bancários</strong>",
-        dia,
-        "22:00",
-        "00:00",
-        corBancarios
-      );
-    });
-    // Ter, Sex: Vendas e Negociação / Atualidades
-    [2, 5].forEach((dia) => {
-      adicionarAtividade(
-        "<strong>💼 Vendas/Negoc.</strong>",
-        dia,
-        "22:00",
-        "00:00",
-        corVendas
-      );
-    });
-    // Qua, Sáb: Informática
-    [3, 6].forEach((dia) => {
-      adicionarAtividade(
-        "<strong>💻 Informática</strong>",
-        dia,
-        "22:00",
-        "00:00",
-        corInformatica
-      );
-    });
-
-    // --- DOMINGO (ESPECIAL) ---
-    adicionarAtividade(
-      "<strong>✍️ Redação + Inglês</strong>",
-      7,
-      "19:00",
-      "21:00",
-      corIngles
+    [1, 2, 3, 4, 5, 6].forEach((d) =>
+      adicionarAtividade("💪 Academia", d, "15:00", "17:00", colors.gym)
     );
-    adicionarAtividade(
-      "<strong>📝 Simulado/Revisão</strong>",
-      7,
-      "22:00",
-      "00:00",
-      corSimulado
+    [1, 3, 5].forEach((d) =>
+      adicionarAtividade("📚 Português", d, "19:00", "21:00", colors.port)
     );
+    [2, 4, 6].forEach((d) =>
+      adicionarAtividade("📐 Matemática", d, "19:00", "21:00", colors.mat)
+    );
+    [1, 4].forEach((d) =>
+      adicionarAtividade("🏦 C. Bancários", d, "22:00", "00:00", colors.bank)
+    );
+    [2, 5].forEach((d) =>
+      adicionarAtividade("💼 Vendas", d, "22:00", "00:00", colors.sales)
+    );
+    [3, 6].forEach((d) =>
+      adicionarAtividade("💻 Informática", d, "22:00", "00:00", colors.info)
+    );
+    adicionarAtividade("✍️ Inglês/Red", 7, "19:00", "21:00", colors.eng);
+    adicionarAtividade("📝 Simulado", 7, "22:00", "00:00", colors.sim);
   }
 
-  // Salvamento dos Textareas da Agenda
-  const textareasToSave = [
-    "provas-textarea",
-    "atividades-textarea",
-    "consultas-textarea",
-  ];
-  textareasToSave.forEach((id) => {
-    const textarea = document.getElementById(id);
-    if (textarea) {
-      textarea.value = localStorage.getItem(id) || "";
-      textarea.addEventListener("input", () =>
-        localStorage.setItem(id, textarea.value)
-      );
-    }
-  });
-
-  // ========================================================
-  // 3. SCRIPT DO TREINO (PPL)
-  // ========================================================
+  // =======================================================
+  // 4. TREINO PPL (Com lógica visual de Riscado)
+  // =======================================================
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
+    const toggleBtn = document.getElementById("toggle-all-workouts-btn");
     const allWorkoutBlocks = document.querySelectorAll(
       ".workout-day[data-day-index]"
     );
-    const toggleAllWorkoutsBtn = document.getElementById(
-      "toggle-all-workouts-btn"
-    );
-    let showAllWorkoutsMode = false;
-    const storageKey = "workoutProgress";
-    const currentDayIndex = new Date().getDay(); // 0=Dom, 1=Seg...
+    let showAll = false;
 
-    function updateWorkoutVisibilityByDay() {
-      allWorkoutBlocks.forEach((dayBlock) => {
-        const dayIndex = parseInt(dayBlock.dataset.dayIndex, 10);
-        if (dayIndex === currentDayIndex) {
-          dayBlock.classList.remove("hidden-workout");
-        } else {
-          dayBlock.classList.add("hidden-workout");
-        }
+    // Alternar visibilidade dos dias
+    function updateVisibility() {
+      const today = new Date().getDay() || 7;
+      allWorkoutBlocks.forEach((b) => {
+        const idx = parseInt(b.dataset.dayIndex);
+        if (showAll || idx === today) b.classList.remove("hidden-workout");
+        else b.classList.add("hidden-workout");
       });
     }
 
-    function toggleAllWorkouts() {
-      showAllWorkoutsMode = !showAllWorkoutsMode;
-      if (showAllWorkoutsMode) {
-        allWorkoutBlocks.forEach((b) => b.classList.remove("hidden-workout"));
-        toggleAllWorkoutsBtn.textContent = "Ver Treino do Dia";
-      } else {
-        updateWorkoutVisibilityByDay();
-        toggleAllWorkoutsBtn.textContent = "Ver Todos os Treinos";
-      }
+    if (toggleBtn) {
+      toggleBtn.onclick = () => {
+        showAll = !showAll;
+        toggleBtn.textContent = showAll
+          ? "Ver Treino do Dia"
+          : "Ver Todos os Treinos";
+        updateVisibility();
+      };
     }
 
-    if (toggleAllWorkoutsBtn) {
-      toggleAllWorkoutsBtn.addEventListener("click", toggleAllWorkouts);
-    }
-
-    function saveProgress() {
-      const progressData = {};
+    function saveWorkout() {
+      const data = {};
       exerciseItems.forEach((item) => {
         const id = item.dataset.exerciseId;
-        if (id) {
-          const seriesDots = item.querySelectorAll(".series-dot");
-          const completedSeries = [];
-          seriesDots.forEach((dot, index) => {
-            if (dot.classList.contains("completed"))
-              completedSeries.push(index);
-          });
-          progressData[id] = {
-            completed:
-              item.querySelector(".exercise-checkbox")?.checked ?? false,
-            weight: item.querySelector(".weight-input")?.value ?? null,
-            series: completedSeries,
+        const checkbox = item.querySelector(".exercise-checkbox");
+
+        if (id && checkbox) {
+          // Lógica Visual: Adiciona classe .completed ao container pai se marcado
+          if (checkbox.checked) {
+            item.classList.add("completed");
+          } else {
+            item.classList.remove("completed");
+          }
+
+          data[id] = {
+            done: checkbox.checked,
+            weight: item.querySelector(".weight-input")?.value,
+            series: Array.from(item.querySelectorAll(".series-dot")).map((d) =>
+              d.classList.contains("completed")
+            ),
           };
         }
       });
-      localStorage.setItem(storageKey, JSON.stringify(progressData));
+      localStorage.setItem("workout_progress_v2026", JSON.stringify(data));
     }
 
-    function loadProgress() {
-      const savedData = JSON.parse(localStorage.getItem(storageKey));
-      if (savedData) {
-        exerciseItems.forEach((item) => {
-          const id = item.dataset.exerciseId;
-          if (id && savedData[id]) {
-            const checkbox = item.querySelector(".exercise-checkbox");
-            const weightInput = item.querySelector(".weight-input");
-            if (checkbox) {
-              checkbox.checked = savedData[id].completed;
-              item.classList.toggle("completed", checkbox.checked);
-            }
-            if (weightInput) weightInput.value = savedData[id].weight;
-            if (savedData[id].series) {
-              const seriesDots = item.querySelectorAll(".series-dot");
-              seriesDots.forEach((dot, index) => {
-                if (savedData[id].series.includes(index))
-                  dot.classList.add("completed");
-              });
-            }
-          }
-        });
-      }
-      // Inicializar visualização
-      updateWorkoutVisibilityByDay();
-    }
+    // Carregar Treinos
+    const saved =
+      JSON.parse(localStorage.getItem("workout_progress_v2026")) || {};
 
-    // Inicialização dos itens de exercício
     exerciseItems.forEach((item) => {
-      const checkbox = item.querySelector(".exercise-checkbox");
-      const weightInput = item.querySelector(".weight-input");
-      const seriesCounter = item.querySelector(".series-counter");
-      const smallText = item.querySelector("small")?.textContent || "";
+      const id = item.dataset.exerciseId;
 
-      if (seriesCounter) {
-        seriesCounter.innerHTML = "";
-        let seriesCount = 0;
-        const seriesMatch = smallText.match(/(\d+)\s*séries/);
-        if (seriesMatch) seriesCount = parseInt(seriesMatch[1], 10);
-        else if (smallText.includes("até a falha")) seriesCount = 3;
-
-        // Default caso não ache o número
-        if (seriesCount === 0) seriesCount = 3;
-
-        for (let i = 0; i < seriesCount; i++) {
+      // Carregar Bolinhas de Série
+      const counter = item.querySelector(".series-counter");
+      if (counter) {
+        counter.innerHTML = "";
+        const match = item
+          .querySelector("small")
+          .textContent.match(/(\d+)\s*séries/);
+        const count = match ? parseInt(match[1]) : 3;
+        for (let i = 0; i < count; i++) {
           const dot = document.createElement("div");
           dot.className = "series-dot";
-          dot.addEventListener("click", () => {
+          if (saved[id]?.series?.[i]) dot.classList.add("completed");
+          dot.onclick = () => {
             dot.classList.toggle("completed");
-            saveProgress();
-          });
-          seriesCounter.appendChild(dot);
+            saveWorkout();
+          };
+          counter.appendChild(dot);
         }
       }
 
-      if (checkbox) {
-        checkbox.addEventListener("change", () => {
-          item.classList.toggle("completed", checkbox.checked);
-          saveProgress();
+      // Carregar Checkbox e Peso
+      const cb = item.querySelector(".exercise-checkbox");
+      if (cb && saved[id]) {
+        cb.checked = saved[id].done;
+        if (saved[id].done) item.classList.add("completed"); // Visual inicial
+      }
+
+      const wi = item.querySelector(".weight-input");
+      if (wi && saved[id]) wi.value = saved[id].weight || "";
+
+      // Listeners
+      cb?.addEventListener("change", saveWorkout);
+      wi?.addEventListener("input", saveWorkout);
+    });
+
+    updateVisibility();
+
+    // Botão Resetar
+    document.querySelectorAll(".reset-button").forEach((btn) => {
+      btn.onclick = function () {
+        const container = this.closest(".workout-day");
+        container.querySelectorAll(".exercise-checkbox").forEach((c) => {
+          c.checked = false;
         });
-      }
-      if (weightInput) {
-        weightInput.addEventListener("input", saveProgress);
-      }
-    });
-
-    // Reset Buttons
-    document.querySelectorAll(".reset-button").forEach((button) => {
-      button.addEventListener("click", function () {
-        const workoutDay = this.closest(".workout-day");
-        if (workoutDay) {
-          workoutDay.querySelectorAll(".exercise-item").forEach((item) => {
-            const checkbox = item.querySelector(".exercise-checkbox");
-            if (checkbox) checkbox.checked = false;
-            item.classList.remove("completed");
-            item
-              .querySelectorAll(".series-dot")
-              .forEach((dot) => dot.classList.remove("completed"));
-          });
-          saveProgress();
-        }
-      });
-    });
-
-    loadProgress();
-  }
-
-  // ========================================================
-  // 4. BEM-ESTAR & DIÁRIOS
-  // ========================================================
-  // Identidade
-  const idInput = document.getElementById("identity-input");
-  const saveIdBtn = document.getElementById("save-identity-btn");
-  const idDisplay = document.getElementById("identity-display");
-  const idContainer = document.getElementById("identity-display-container");
-  const idInputContainer = document.getElementById("identity-input-container");
-  const deleteIdBtn = document.getElementById("delete-identity-btn");
-
-  if (saveIdBtn) {
-    function loadIdentity() {
-      const savedId = localStorage.getItem("novaIdentidade");
-      if (savedId) {
-        idDisplay.textContent = savedId;
-        idInputContainer.style.display = "none";
-        idContainer.style.display = "flex";
-      }
-    }
-    saveIdBtn.addEventListener("click", () => {
-      if (idInput.value) {
-        localStorage.setItem("novaIdentidade", idInput.value);
-        loadIdentity();
-      }
-    });
-    deleteIdBtn.addEventListener("click", () => {
-      localStorage.removeItem("novaIdentidade");
-      idInput.value = "";
-      idInputContainer.style.display = "flex";
-      idContainer.style.display = "none";
-    });
-    loadIdentity();
-  }
-
-  // Micro Vitórias
-  const winInput = document.getElementById("micro-win-input");
-  const addWinBtn = document.getElementById("add-micro-win-btn");
-  const winsList = document.getElementById("micro-wins-list");
-
-  if (addWinBtn) {
-    function loadWins() {
-      const wins = JSON.parse(localStorage.getItem("microWins")) || [];
-      winsList.innerHTML = "";
-      wins.forEach((win) => {
-        const li = document.createElement("li");
-        li.textContent = `🏆 ${win}`;
-        winsList.appendChild(li);
-      });
-    }
-    addWinBtn.addEventListener("click", () => {
-      if (winInput.value) {
-        const wins = JSON.parse(localStorage.getItem("microWins")) || [];
-        wins.push(winInput.value);
-        localStorage.setItem("microWins", JSON.stringify(wins));
-        winInput.value = "";
-        loadWins();
-      }
-    });
-    loadWins();
-  }
-
-  // Diários Gerais
-  function setupJournal(dateId, textId, btnId, storageKey, containerId) {
-    const btn = document.getElementById(btnId);
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-      const date = document.getElementById(dateId).value;
-      const text = document.getElementById(textId).value;
-      if (date && text) {
-        const entries = JSON.parse(localStorage.getItem(storageKey)) || [];
-        entries.unshift({ date, text }); // Adiciona no topo
-        localStorage.setItem(storageKey, JSON.stringify(entries));
-        renderJournal(storageKey, containerId);
-        document.getElementById(textId).value = "";
-      }
-    });
-    renderJournal(storageKey, containerId);
-  }
-
-  function renderJournal(storageKey, containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    const entries = JSON.parse(localStorage.getItem(storageKey)) || [];
-    container.innerHTML = "";
-    entries.forEach((entry, index) => {
-      const div = document.createElement("div");
-      div.className = "journal-entry";
-      div.innerHTML = `<div class="entry-date">${entry.date}</div><p>${entry.text}</p>`;
-
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "Apagar";
-      delBtn.style.cssText =
-        "background: #c0392b; border:none; color:white; padding:5px; border-radius:3px; float:right; cursor:pointer;";
-      delBtn.onclick = () => {
-        entries.splice(index, 1);
-        localStorage.setItem(storageKey, JSON.stringify(entries));
-        renderJournal(storageKey, containerId);
+        container.querySelectorAll(".exercise-item").forEach((item) => {
+          item.classList.remove("completed"); // Remove visual riscado
+        });
+        container
+          .querySelectorAll(".series-dot")
+          .forEach((d) => d.classList.remove("completed"));
+        saveWorkout();
       };
+    });
+  }
 
-      div.prepend(delBtn);
+  // =======================================================
+  // 5. BEM-ESTAR (COM FUNÇÃO DE APAGAR REGISTROS)
+  // =======================================================
+
+  // Função global para deletar itens (precisa estar no escopo global ou window para o onclick funcionar stringificado, mas aqui faremos via renderização limpa)
+
+  // --- SABOTAGEM ---
+  window.deleteSabotageItem = function (index, type) {
+    if (confirm("Tem certeza que deseja apagar este registro?")) {
+      if (type === "sab") {
+        const list = JSON.parse(localStorage.getItem("sabotageList")) || [];
+        list.splice(index, 1);
+        localStorage.setItem("sabotageList", JSON.stringify(list));
+      } else if (type === "win") {
+        const list = JSON.parse(localStorage.getItem("microWins")) || [];
+        list.splice(index, 1);
+        localStorage.setItem("microWins", JSON.stringify(list));
+      }
+      loadSabotageHistory();
+    }
+  };
+
+  function loadSabotageHistory() {
+    const list = JSON.parse(localStorage.getItem("sabotageList")) || [];
+    const wins = JSON.parse(localStorage.getItem("microWins")) || [];
+    const container = document.getElementById("combined-sabotage-history");
+
+    if (!container) return;
+    container.innerHTML = "";
+
+    // Renderiza Vitórias (Wins)
+    wins.forEach((winText, index) => {
+      const li = document.createElement("li");
+      li.className = "history-item-wrapper";
+      li.innerHTML = `
+            <span class="history-content" style="color: #4caf50;">🏆 Vitória: ${winText}</span>
+            <button class="delete-btn" onclick="deleteSabotageItem(${index}, 'win')">🗑️</button>
+        `;
+      container.appendChild(li);
+    });
+
+    // Renderiza Sabotagens
+    list.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.className = "history-item-wrapper";
+      li.innerHTML = `
+            <span class="history-content" style="color: #e74c3c;">⚠️ Fuga: ${item.action}</span>
+            <button class="delete-btn" onclick="deleteSabotageItem(${index}, 'sab')">🗑️</button>
+        `;
+      container.appendChild(li);
+    });
+  }
+
+  // Botões de Adicionar (Sabotagem)
+  const addWinBtn = document.getElementById("add-micro-win-btn");
+  if (addWinBtn) {
+    addWinBtn.onclick = () => {
+      const input = document.getElementById("micro-win-input");
+      if (input.value) {
+        const wins = JSON.parse(localStorage.getItem("microWins")) || [];
+        wins.unshift(input.value); // Adiciona no começo
+        localStorage.setItem("microWins", JSON.stringify(wins));
+        input.value = "";
+        loadSabotageHistory();
+      }
+    };
+  }
+
+  const addSabBtn = document.getElementById("add-sabotage-btn");
+  if (addSabBtn) {
+    addSabBtn.onclick = () => {
+      const action = document.getElementById("sabotage-action");
+      if (action.value) {
+        const list = JSON.parse(localStorage.getItem("sabotageList")) || [];
+        list.unshift({ action: action.value }); // Adiciona no começo
+        localStorage.setItem("sabotageList", JSON.stringify(list));
+        action.value = "";
+        loadSabotageHistory();
+      }
+    };
+  }
+
+  // --- DIÁRIOS (SONHOS E NOTAS) ---
+  window.deleteJournalItem = function (index, type) {
+    if (confirm("Apagar este diário?")) {
+      if (type === "dream") {
+        const list = JSON.parse(localStorage.getItem("dreamEntries")) || [];
+        list.splice(index, 1);
+        localStorage.setItem("dreamEntries", JSON.stringify(list));
+      } else if (type === "note") {
+        const list = JSON.parse(localStorage.getItem("journalEntries")) || [];
+        list.splice(index, 1);
+        localStorage.setItem("journalEntries", JSON.stringify(list));
+      }
+      loadJournalHistory();
+    }
+  };
+
+  function loadJournalHistory() {
+    const dreams = JSON.parse(localStorage.getItem("dreamEntries")) || [];
+    const notes = JSON.parse(localStorage.getItem("journalEntries")) || [];
+    const container = document.getElementById("combined-journal-history");
+
+    if (!container) return;
+    container.innerHTML = "";
+
+    // Combinar listas para exibição visual, mas manter índice original para deletar
+    // Estratégia: Renderizar separado ou criar objeto com referência.
+    // Para simplificar: Renderizamos listas separadas dentro do container para manter índices corretos de deleção.
+
+    // 1. Sonhos
+    dreams.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "history-item-wrapper";
+      div.style.borderBottom = "1px solid #333";
+      div.style.marginBottom = "10px";
+      div.innerHTML = `
+        <div class="history-content">
+            <div style="font-size:0.8em; color:#a0a0a0;">${item.date} - 🌙 Sonho</div>
+            <div>${item.text}</div>
+        </div>
+        <button class="delete-btn" onclick="deleteJournalItem(${index}, 'dream')">🗑️</button>
+      `;
+      container.appendChild(div);
+    });
+
+    // 2. Notas
+    notes.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "history-item-wrapper";
+      div.style.borderBottom = "1px solid #333";
+      div.style.marginBottom = "10px";
+      div.innerHTML = `
+          <div class="history-content">
+              <div style="font-size:0.8em; color:#a0a0a0;">${item.date} - 📓 Nota</div>
+              <div>${item.text}</div>
+          </div>
+          <button class="delete-btn" onclick="deleteJournalItem(${index}, 'note')">🗑️</button>
+        `;
       container.appendChild(div);
     });
   }
 
-  setupJournal(
-    "journal-date",
-    "journal-text",
-    "add-note-button",
-    "journalEntries",
-    "journal-history-container"
-  );
-  setupJournal(
-    "dream-journal-date",
-    "dream-journal-text",
-    "add-dream-button",
-    "dreamEntries",
-    "dream-history-container"
-  );
-});
+  // Botões de Adicionar (Diário)
+  const addDreamBtn = document.getElementById("add-dream-button");
+  if (addDreamBtn) {
+    addDreamBtn.onclick = () => {
+      const d = document.getElementById("dream-journal-date").value;
+      const t = document.getElementById("dream-journal-text").value;
+      if (d && t) {
+        const l = JSON.parse(localStorage.getItem("dreamEntries")) || [];
+        l.unshift({ date: d, text: t }); // Unshift para o mais novo ficar no indice 0
+        localStorage.setItem("dreamEntries", JSON.stringify(l));
+        document.getElementById("dream-journal-text").value = "";
+        loadJournalHistory();
+      }
+    };
+  }
 
-// Service Worker
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("./sw.js")
-      .then(() => console.log("Service Worker registrado."))
-      .catch((err) => console.log("Falha no SW:", err));
-  });
-}
+  const addNoteBtn = document.getElementById("add-note-button");
+  if (addNoteBtn) {
+    addNoteBtn.onclick = () => {
+      const d = document.getElementById("journal-date").value;
+      const t = document.getElementById("journal-text").value;
+      if (d && t) {
+        const l = JSON.parse(localStorage.getItem("journalEntries")) || [];
+        l.unshift({ date: d, text: t });
+        localStorage.setItem("journalEntries", JSON.stringify(l));
+        document.getElementById("journal-text").value = "";
+        loadJournalHistory();
+      }
+    };
+  }
+
+  // Inicializar carregamentos
+  loadSabotageHistory();
+  loadJournalHistory();
+});
