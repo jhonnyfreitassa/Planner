@@ -2,7 +2,7 @@
 
 :root {
   --bg-color: #121212;
-  --surface-color: #1e1e1e; /* O PRETO PADRÃO DOS CARDS */
+  --surface-color: #1e1e1e;
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --border-color: #333;
@@ -145,11 +145,10 @@ input[type="checkbox"] {
 .series-dot.completed { background-color: var(--cor-destaque); border-color: var(--cor-destaque); }
 .weight-input { width: 50px; padding: 6px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-primary); text-align: center; }
 
-/* --- DIETA (ESTILO UNIFICADO COM TREINO) --- */
+/* --- DIETA --- */
 #dieta-section .container {
   max-width: 900px;
   margin: 0 auto;
-  /* Removemos o padding/background do container principal para os cards ficarem soltos como no treino */
   background-color: transparent; 
   padding: 0 10px;
   border-radius: 0;
@@ -174,7 +173,7 @@ input[type="checkbox"] {
 }
 .shopping-list h2 { color: var(--color-dieta); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
 .shopping-check { width: 18px; height: 18px; margin-right: 10px; cursor: pointer; accent-color: var(--color-dieta); }
-.checklist-item { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid #2a2a2a; /* Linha separadora igual treino */ }
+.checklist-item { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid #2a2a2a; }
 .checklist-item:last-child { border-bottom: none; }
 
 
@@ -260,16 +259,21 @@ input[type="checkbox"] {
   .shopping-lists-container { grid-template-columns: 1fr; }
   .triad-container { grid-template-columns: 1fr; }
 
-  /* 2. REFEIÇÕES IGUAIS AO TREINO (FUNDO PRETO & LINHAS) */
-  table.meal-plan, table.meal-plan thead, table.meal-plan tbody, table.meal-plan th, table.meal-plan td, table.meal-plan tr { 
+  /* 2. REFEIÇÕES (VISUAL CORRIGIDO) */
+  /* Removemos a regra display: block da tabela inteira, aplicamos só onde precisa */
+  table.meal-plan, table.meal-plan tbody, table.meal-plan th, table.meal-plan td, table.meal-plan tr { 
     display: block !important; width: 100% !important;
   }
-  .meal-plan thead { display: none !important; }
+  
+  /* ESCONDER O CABEÇALHO VERDE (CORREÇÃO DA ESPECIFICIDADE) */
+  table.meal-plan thead { 
+    display: none !important; 
+  }
 
   /* O Card da Refeição */
   .meal-plan tr {
     margin-bottom: 25px;
-    background-color: var(--surface-color); /* Fundo Preto Padrão */
+    background-color: var(--surface-color); /* Fundo Preto/Cinza #1e1e1e */
     border: 1px solid var(--border-color);
     border-left: 5px solid var(--color-dieta) !important;
     border-radius: 8px;
@@ -277,7 +281,7 @@ input[type="checkbox"] {
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   }
 
-  /* Cabeçalho do Card */
+  /* Cabeçalho do Card (Horário) */
   .meal-plan td.meal-time {
     background-color: transparent;
     color: var(--color-dieta);
@@ -297,16 +301,16 @@ input[type="checkbox"] {
     color: #fff; margin-top: 5px; margin-bottom: 15px; font-weight: bold; font-size: 1.1em;
   }
   
-  /* A Lista em si: Estilo "Checklist" sem bolinha */
+  /* Lista de Alimentos Estilo Checklist (Com linhas) */
   .meal-plan td.meal-details ul {
     padding-left: 0; margin: 0; list-style: none; /* Remove bolinhas */
   }
   
   .meal-plan td.meal-details ul li {
     padding: 10px 0;
-    border-bottom: 1px solid #2a2a2a; /* Linha divisória igual treino */
+    border-bottom: 1px solid #2a2a2a; /* Linha divisória igual lista semanal */
     color: #e0e0e0;
-    padding-left: 5px;
+    padding-left: 5px; /* Leve recuo */
   }
   
   .meal-plan td.meal-details ul li:last-child {
