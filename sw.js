@@ -1,5 +1,5 @@
 // Incremente a versão sempre que fizer alterações nos arquivos principais
-const CACHE_NAME = "planner-pessoal-cache-v37";
+const CACHE_NAME = "planner-pessoal-cache-v38";
 const urlsToCache = [
   "./",
   "./index.html",
@@ -55,5 +55,6 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
 
 
