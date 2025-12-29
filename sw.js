@@ -1,315 +1,57 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap");
+// Incremente a versão sempre que fizer alterações nos arquivos principais
+const CACHE_NAME = "planner-pessoal-cache-v35";
+const urlsToCache = [
+  "./",
+  "./index.html",
+  "./style.css", // <-- ADICIONADO
+  "./script.js", // <-- ADICIONADO
+  "./icon-192x192.png",
+  "./icon-512x512.png",
+  // Adicione aqui outros arquivos importantes (CSS, JS) se tiver
+];
 
-:root {
-  --bg-color: #121212;
-  --surface-color: #1e1e1e; /* O PRETO PADRÃO DOS CARDS */
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0a0;
-  --border-color: #333;
+// Evento de Instalação: Salva os arquivos e força a ativação.
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Cache aberto");
+      return cache.addAll(urlsToCache);
+    })
+  );
+  // NOVIDADE: Força o novo Service Worker a se ativar imediatamente.
+  self.skipWaiting();
+});
 
-  --color-treino: #e74c3c;
-  --color-agenda: #007bff;
-  --color-dieta: #4caf50;
-  --color-bemestar: #007bff;
-  --color-carreira: #9b59b6;
+// Evento de Ativação: Limpa os caches antigos (seu código aqui já estava perfeito).
+self.addEventListener("activate", (event) => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
 
-  --blue-unified: #007bff;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "JetBrains Mono", monospace;
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  overscroll-behavior-x: none;
-  padding-bottom: 50px;
-}
-
-/* --- GERAL --- */
-input[type="checkbox"] {
-  accent-color: #e74c3c;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.exercise-item.completed label,
-.checklist-item.completed label {
-  text-decoration: line-through;
-  color: #666;
-  opacity: 0.6;
-  transition: all 0.3s ease;
-}
-
-/* --- NAVEGAÇÃO --- */
-.nav-tabs {
-  display: flex;
-  background-color: var(--surface-color);
-  padding: 0 10px;
-  justify-content: center;
-  gap: 10px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid var(--border-color);
-}
-.tab-button {
-  padding: 15px 20px;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  color: var(--text-secondary);
-  font-size: 1.1em;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-  font-family: "JetBrains Mono", monospace;
-}
-.tab-button.active {
-  color: #ffffff;
-  font-weight: bold;
-}
-.tab-button[onclick*="agenda"].active { border-bottom-color: var(--color-agenda); }
-.tab-button[onclick*="treino"].active { border-bottom-color: var(--color-treino); }
-.tab-button[onclick*="dieta"].active { border-bottom-color: var(--color-dieta); }
-.tab-button[onclick*="bem-estar"].active { border-bottom-color: var(--color-bemestar); }
-.tab-button[onclick*="carreira"].active { border-bottom-color: var(--color-carreira); }
-
-.content-section {
-  display: none;
-  padding: 20px;
-  animation: fadeIn 0.5s;
-}
-.content-section.active {
-  display: block;
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* --- AGENDA --- */
-#agenda-section { --hora-altura: 60px; }
-#agenda-section .container {
-  max-width: 98%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  padding: 0 10px;
-}
-
-.agenda-layout-daily { display: flex; flex-direction: row; align-items: flex-start; gap: 20px; width: 100%; }
-.agenda-layout-daily .agenda-main-area { flex: 1; width: 100%; }
-.agenda-layout-daily .deadlines-area { width: 320px; flex-shrink: 0; }
-.agenda-layout-daily .deadlines-container { display: flex; flex-direction: column; gap: 15px; }
-
-.agenda-layout-full { display: flex; flex-direction: column; gap: 20px; }
-.agenda-layout-full .deadlines-area { width: 100%; order: -1; }
-.agenda-layout-full .agenda-main-area { width: 100%; order: 1; }
-.agenda-layout-full .deadlines-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-
-.deadline-box { background-color: var(--surface-color); border-radius: 8px; padding: 15px; border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%; }
-.deadline-box h3 { margin: 0 0 10px 0; color: #fff; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
-.deadline-box textarea { width: 100%; height: 120px; background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 5px; color: var(--text-primary); padding: 10px; font-family: inherit; resize: none; box-sizing: border-box; }
-
-.agenda-container-wrapper { width: 100%; overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--surface-color); }
-.agenda-container { display: grid; grid-template-columns: 60px repeat(7, 1fr); grid-template-rows: 50px repeat(15, var(--hora-altura)); min-width: 900px; width: 100%; }
-.grid-item { text-align: center; padding: 5px; border-bottom: 1px solid #333; border-right: 1px solid #333; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
-.header-dia { font-weight: bold; background-color: #252525; border-top: none; }
-.celula-hora { font-size: 0.8em; color: var(--text-secondary); background-color: #1a1a1a; }
-.coluna-dia { position: relative; border-right: 1px solid var(--border-color); background-image: linear-gradient(var(--border-color) 1px, transparent 1px); background-size: 100% var(--hora-altura); }
-.atividade-bloco { position: absolute; left: 3px; right: 3px; border-left: 4px solid rgba(0, 0, 0, 0.3); border-radius: 4px; padding: 4px; box-sizing: border-box; color: white; font-size: 0.65em; overflow: hidden; display: flex; flex-direction: column; justify-content: center; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
-
-.agenda-today-view { max-width: 800px; margin: 0 auto; padding: 10px; }
-.today-activity-card { background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #fff; cursor: pointer; transition: all 0.2s ease; }
-.today-activity-card:hover { transform: translateX(5px); background-color: #252525; }
-.today-activity-card.completed { opacity: 0.3; filter: grayscale(100%); text-decoration: line-through; background-color: #121212; }
-.today-activity-info h4 { margin: 0 0 5px 0; font-size: 1.2em; color: #fff; }
-.today-activity-time { font-family: "JetBrains Mono", monospace; font-size: 0.9em; color: var(--text-secondary); background: #121212; padding: 5px 8px; border-radius: 4px; display: inline-block; }
-
-/* --- TREINO --- */
-#treino-section { --cor-destaque: #e74c3c; }
-#treino-section .treino-title { color: var(--cor-destaque); text-align: center; font-size: 1.8em; margin-bottom: 20px; }
-.workout-day { background-color: var(--surface-color); border: 1px solid var(--border-color); border-left: 5px solid var(--cor-destaque); border-radius: 8px; padding: 20px; margin-bottom: 25px; }
-.hidden-workout { display: none !important; }
-.workout-day-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px; }
-.workout-day-header h3 { color: var(--cor-destaque); margin: 0; }
-.reset-button { background-color: #333; color: #e0e0e0; border: 1px solid #555; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
-.toggle-btn { background-color: var(--cor-destaque); padding: 12px 24px; font-size: 1em; border-radius: 6px; color: #fff; border: none; cursor: pointer; font-weight: bold; }
-.exercise-item { padding: 12px 0; border-bottom: 1px solid #2a2a2a; display: flex; justify-content: space-between; align-items: center; gap: 10px; transition: all 0.3s; }
-.exercise-info { display: flex; align-items: center; gap: 15px; flex-grow: 1; }
-.exercise-checkbox { width: 18px; height: 18px; cursor: pointer; accent-color: var(--cor-destaque); }
-.exercise-controls { display: flex; align-items: center; gap: 8px; }
-.series-counter { display: flex; gap: 4px; }
-.series-dot { width: 14px; height: 14px; background-color: #333; border: 1px solid #555; border-radius: 50%; cursor: pointer; }
-.series-dot.completed { background-color: var(--cor-destaque); border-color: var(--cor-destaque); }
-.weight-input { width: 50px; padding: 6px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-primary); text-align: center; }
-
-/* --- DIETA (ESTILO UNIFICADO COM TREINO) --- */
-#dieta-section .container {
-  max-width: 900px;
-  margin: 0 auto;
-  /* Removemos o padding/background do container principal para os cards ficarem soltos como no treino */
-  background-color: transparent; 
-  padding: 0 10px;
-  border-radius: 0;
-}
-#dieta-section h1 { color: var(--color-dieta); text-align: center; margin-top: 20px; }
-.water-goal { background: linear-gradient(90deg, #2e7d32, #4caf50) !important; color: white; padding: 20px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 25px; }
-
-.meal-plan-wrapper { width: 100%; overflow-x: auto; }
-.meal-plan { width: 100%; border-collapse: collapse; margin-top: 20px; min-width: 600px; }
-.meal-plan th, .meal-plan td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
-.meal-plan th { background-color: var(--color-dieta); color: white; }
-.meal-time { font-weight: 700; color: var(--color-dieta); min-width: 140px; }
-
-/* Shopping Lists: Agora com fundo PRETO (Surface) igual aos Treinos */
-.shopping-lists-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
-.shopping-list {
-  background-color: var(--surface-color); /* Fundo Preto/Cinza Igual Treino */
-  border: 1px solid var(--border-color);
-  border-left: 5px solid var(--color-dieta);
-  padding: 20px;
-  border-radius: 8px;
-}
-.shopping-list h2 { color: var(--color-dieta); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
-.shopping-check { width: 18px; height: 18px; margin-right: 10px; cursor: pointer; accent-color: var(--color-dieta); }
-.checklist-item { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid #2a2a2a; /* Linha separadora igual treino */ }
-.checklist-item:last-child { border-bottom: none; }
-
-
-/* --- BEM-ESTAR --- */
-.protocol-card { background-color: var(--surface-color); padding: 25px; border-radius: 10px; border: 1px solid var(--border-color); border-left: 5px solid var(--blue-unified) !important; margin-bottom: 30px; }
-.protocol-card h2 { color: var(--blue-unified) !important; margin-top: 0; margin-bottom: 20px; }
-.raiva-card, .sabotage-card, .voice-card, .sleep-card { border-left-color: var(--blue-unified) !important; }
-.triad-container { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 30px; }
-.triad-box { background: #1a1a1a; border: 1px solid var(--blue-unified); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; }
-.triad-box h3 { margin-top: 0; font-size: 1em; color: #fff; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-.triad-box input, .triad-box textarea { background-color: #121212; border: 1px solid #333; color: white; padding: 10px; border-radius: 5px; font-family: inherit; margin-bottom: 10px; width: 100%; box-sizing: border-box; }
-.triad-box textarea { resize: none; height: 80px; }
-.small-btn { align-self: flex-end; padding: 5px 15px; border-radius: 4px; border: none; cursor: pointer; font-size: 0.85em; font-weight: bold; }
-.red-btn { background-color: #e74c3c; color: white; }
-.history-box { max-height: 250px; overflow-y: auto; }
-.simple-list { list-style: none; padding: 0; margin: 0; }
-.history-item-wrapper { display: flex; justify-content: space-between; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #333; }
-.history-content { flex: 1; }
-.delete-btn { background: none; border: none; cursor: pointer; font-size: 1.2em; margin-left: 10px; opacity: 0.7; transition: opacity 0.2s; }
-.delete-btn:hover { opacity: 1; transform: scale(1.1); }
-
-/* --- CARREIRA --- */
-#carreira-section .container { max-width: 100%; padding: 0 20px; box-sizing: border-box; }
-.roadmap-header { text-align: center; margin-bottom: 40px; }
-.progress-container { max-width: 600px; margin: 0 auto; background-color: var(--surface-color); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); }
-.progress-bar-bg { background-color: #374151; border-radius: 99px; height: 24px; overflow: hidden; }
-.progress-bar-fill { background-color: var(--color-carreira); height: 100%; color: white; display: flex; align-items: center; justify-content: center; width: 0%; font-size: 0.8em; transition: width 0.5s ease-in-out; }
-.roadmap-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; }
-.roadmap-card { background-color: #1f2937; border-radius: 12px; padding: 20px; border: 1px solid #374151; display: flex; flex-direction: column; }
-.roadmap-card.blue { border-color: #3b82f6; } .blue-text { color: #60a5fa; }
-.roadmap-card.green { border-color: #10b981; } .green-text { color: #34d399; }
-.roadmap-card.purple { border-color: #8b5cf6; } .purple-text { color: #a78bfa; }
-.roadmap-card.red { border-color: #ef4444; } .red-text { color: #f87171; }
-.roadmap-card.amber { border-color: #f59e0b; } .amber-text { color: #fbbf24; }
-.topic-header { margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #374151; color: #e5e7eb; padding-bottom: 5px; font-size: 0.95em; font-weight: bold; }
-.checklist-item:hover { background-color: rgba(255, 255, 255, 0.05); border-radius: 4px; }
-.roadmap-check { width: 18px; height: 18px; margin-right: 12px; cursor: pointer; accent-color: #10b981; }
-
-/* ======================================================= */
-/* MEDIA QUERIES (MOBILE)                                  */
-/* ======================================================= */
-
-@media (max-width: 1024px) {
-  .roadmap-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-}
-
-@media (max-width: 768px) {
-  
-  /* 1. ABAS HORIZONTAIS */
-  .nav-tabs {
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    justify-content: flex-start;
-    padding: 10px 5px;
-    gap: 8px;
-    -webkit-overflow-scrolling: touch;
-  }
-  .tab-button {
-    flex: 0 0 auto;
-    padding: 10px 16px;
-    font-size: 0.9em;
-    background-color: #2a2a2a;
-    border-radius: 20px;
-    border: 1px solid #444;
-    margin: 0;
-  }
-  .tab-button.active { background-color: #333; border-color: #fff; color: #fff; }
-  .tab-button[onclick*="agenda"].active { border-color: var(--color-agenda); background-color: rgba(0, 123, 255, 0.2); }
-  .tab-button[onclick*="treino"].active { border-color: var(--color-treino); background-color: rgba(231, 76, 60, 0.2); }
-  .tab-button[onclick*="dieta"].active { border-color: var(--color-dieta); background-color: rgba(76, 175, 80, 0.2); }
-  .tab-button[onclick*="bem-estar"].active { border-color: var(--color-bemestar); background-color: rgba(0, 123, 255, 0.2); }
-  .tab-button[onclick*="carreira"].active { border-color: var(--color-carreira); background-color: rgba(155, 89, 182, 0.2); }
-
-  /* OUTROS AJUSTES */
-  .agenda-layout-daily { flex-direction: column; }
-  .agenda-layout-daily .deadlines-area { width: 100%; }
-  .deadline-box { min-width: 100%; }
-  .agenda-container { min-width: 700px; }
-  .roadmap-grid { grid-template-columns: 1fr; }
-  .workout-day { padding: 15px; }
-  .exercise-item { flex-direction: column; align-items: flex-start; }
-  .exercise-controls { width: 100%; justify-content: space-between; margin-top: 10px; margin-left: 0; }
-  .shopping-lists-container { grid-template-columns: 1fr; }
-  .triad-container { grid-template-columns: 1fr; }
-
-  /* 2. REFEIÇÕES IGUAIS AO TREINO (FUNDO PRETO & LINHAS) */
-  table.meal-plan, table.meal-plan thead, table.meal-plan tbody, table.meal-plan th, table.meal-plan td, table.meal-plan tr { 
-    display: block !important; width: 100% !important;
-  }
-  .meal-plan thead { display: none !important; }
-
-  /* O Card da Refeição */
-  .meal-plan tr {
-    margin-bottom: 25px;
-    background-color: var(--surface-color); /* Fundo Preto Padrão */
-    border: 1px solid var(--border-color);
-    border-left: 5px solid var(--color-dieta) !important;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  }
-
-  /* Cabeçalho do Card */
-  .meal-plan td.meal-time {
-    background-color: transparent;
-    color: var(--color-dieta);
-    font-size: 1.3em;
-    font-weight: bold;
-    padding: 0 0 10px 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #333;
-    text-align: left;
-  }
-
-  /* Conteúdo: Lista de Alimentos */
-  .meal-plan td.meal-details { padding: 0; border: none; background-color: transparent; }
-  
-  /* Título Interno (Ex: "Sólido", "Energia") */
-  .meal-plan td.meal-details p {
-    color: #fff; margin-top: 5px; margin-bottom: 15px; font-weight: bold; font-size: 1.1em;
-  }
-  
-  /* A Lista em si: Estilo "Checklist" sem bolinha */
-  .meal-plan td.meal-details ul {
-    padding-left: 0; margin: 0; list-style: none; /* Remove bolinhas */
-  }
-  
-  .meal-plan td.meal-details ul li {
-    padding: 10px 0;
-    border-bottom: 1px solid #2a2a2a; /* Linha divisória igual treino */
-    color: #e0e0e0;
-    padding-left: 5px;
-  }
-  
-  .meal-plan td.meal-details ul li:last-child {
-    border-bottom: none;
-  }
-}
+// Evento de Fetch: Estratégia "Stale-While-Revalidate" (a mais recomendada).
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      // Retorna o cache imediatamente se existir
+      const fetchPromise = fetch(event.request).then((networkResponse) => {
+        // Se a busca na rede funcionar, atualizamos o cache em segundo plano
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+        });
+        return networkResponse;
+      });
+      // Retorna o que estiver no cache primeiro, enquanto a rede atualiza para a próxima visita.
+      return cachedResponse || fetchPromise;
+    })
+  );
+});
