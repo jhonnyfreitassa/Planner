@@ -2,7 +2,7 @@
 
 :root {
   --bg-color: #121212;
-  --surface-color: #1e1e1e;
+  --surface-color: #1e1e1e; /* O PRETO PADRÃO DOS CARDS */
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --border-color: #333;
@@ -42,7 +42,7 @@ input[type="checkbox"] {
   transition: all 0.3s ease;
 }
 
-/* --- NAVEGAÇÃO (DESIGN PADRÃO DESKTOP) --- */
+/* --- NAVEGAÇÃO --- */
 .nav-tabs {
   display: flex;
   background-color: var(--surface-color);
@@ -54,7 +54,6 @@ input[type="checkbox"] {
   z-index: 1000;
   border-bottom: 1px solid var(--border-color);
 }
-
 .tab-button {
   padding: 15px 20px;
   cursor: pointer;
@@ -66,7 +65,6 @@ input[type="checkbox"] {
   transition: all 0.3s ease;
   font-family: "JetBrains Mono", monospace;
 }
-
 .tab-button.active {
   color: #ffffff;
   font-weight: bold;
@@ -100,45 +98,19 @@ input[type="checkbox"] {
   padding: 0 10px;
 }
 
-/* Layouts Agenda */
-.agenda-layout-daily {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 20px;
-  width: 100%;
-}
+.agenda-layout-daily { display: flex; flex-direction: row; align-items: flex-start; gap: 20px; width: 100%; }
 .agenda-layout-daily .agenda-main-area { flex: 1; width: 100%; }
 .agenda-layout-daily .deadlines-area { width: 320px; flex-shrink: 0; }
 .agenda-layout-daily .deadlines-container { display: flex; flex-direction: column; gap: 15px; }
 
-.agenda-layout-full {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+.agenda-layout-full { display: flex; flex-direction: column; gap: 20px; }
 .agenda-layout-full .deadlines-area { width: 100%; order: -1; }
 .agenda-layout-full .agenda-main-area { width: 100%; order: 1; }
-.agenda-layout-full .deadlines-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
+.agenda-layout-full .deadlines-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 
-.deadline-box {
-  background-color: var(--surface-color);
-  border-radius: 8px;
-  padding: 15px;
-  border: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+.deadline-box { background-color: var(--surface-color); border-radius: 8px; padding: 15px; border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%; }
 .deadline-box h3 { margin: 0 0 10px 0; color: #fff; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
-.deadline-box textarea {
-  width: 100%; height: 120px; background-color: var(--bg-color); border: 1px solid var(--border-color);
-  border-radius: 5px; color: var(--text-primary); padding: 10px; font-family: inherit; resize: none; box-sizing: border-box;
-}
+.deadline-box textarea { width: 100%; height: 120px; background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 5px; color: var(--text-primary); padding: 10px; font-family: inherit; resize: none; box-sizing: border-box; }
 
 .agenda-container-wrapper { width: 100%; overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--surface-color); }
 .agenda-container { display: grid; grid-template-columns: 60px repeat(7, 1fr); grid-template-rows: 50px repeat(15, var(--hora-altura)); min-width: 900px; width: 100%; }
@@ -149,9 +121,7 @@ input[type="checkbox"] {
 .atividade-bloco { position: absolute; left: 3px; right: 3px; border-left: 4px solid rgba(0, 0, 0, 0.3); border-radius: 4px; padding: 4px; box-sizing: border-box; color: white; font-size: 0.65em; overflow: hidden; display: flex; flex-direction: column; justify-content: center; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); }
 
 .agenda-today-view { max-width: 800px; margin: 0 auto; padding: 10px; }
-.today-activity-card {
-  background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #fff; cursor: pointer; transition: all 0.2s ease;
-}
+.today-activity-card { background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #fff; cursor: pointer; transition: all 0.2s ease; }
 .today-activity-card:hover { transform: translateX(5px); background-color: #252525; }
 .today-activity-card.completed { opacity: 0.3; filter: grayscale(100%); text-decoration: line-through; background-color: #121212; }
 .today-activity-info h4 { margin: 0 0 5px 0; font-size: 1.2em; color: #fff; }
@@ -175,20 +145,38 @@ input[type="checkbox"] {
 .series-dot.completed { background-color: var(--cor-destaque); border-color: var(--cor-destaque); }
 .weight-input { width: 50px; padding: 6px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--bg-color); color: var(--text-primary); text-align: center; }
 
-/* --- DIETA --- */
-#dieta-section .container { max-width: 900px; margin: 0 auto; background-color: var(--surface-color); padding: 25px; border-radius: 12px; }
-#dieta-section h1 { color: var(--color-dieta); text-align: center; margin-top: 0; }
+/* --- DIETA (ESTILO UNIFICADO COM TREINO) --- */
+#dieta-section .container {
+  max-width: 900px;
+  margin: 0 auto;
+  /* Removemos o padding/background do container principal para os cards ficarem soltos como no treino */
+  background-color: transparent; 
+  padding: 0 10px;
+  border-radius: 0;
+}
+#dieta-section h1 { color: var(--color-dieta); text-align: center; margin-top: 20px; }
 .water-goal { background: linear-gradient(90deg, #2e7d32, #4caf50) !important; color: white; padding: 20px; border-radius: 12px; text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 25px; }
+
 .meal-plan-wrapper { width: 100%; overflow-x: auto; }
 .meal-plan { width: 100%; border-collapse: collapse; margin-top: 20px; min-width: 600px; }
 .meal-plan th, .meal-plan td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
 .meal-plan th { background-color: var(--color-dieta); color: white; }
 .meal-time { font-weight: 700; color: var(--color-dieta); min-width: 140px; }
 
+/* Shopping Lists: Agora com fundo PRETO (Surface) igual aos Treinos */
 .shopping-lists-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
-.shopping-list { background-color: #1a2a1a; border: 1px solid #2e3b2e; border-left: 5px solid var(--color-dieta); padding: 20px; border-radius: 8px; }
-.shopping-list h2 { color: var(--color-dieta); margin-top: 0; border-bottom: 1px solid #2e3b2e; padding-bottom: 10px; }
+.shopping-list {
+  background-color: var(--surface-color); /* Fundo Preto/Cinza Igual Treino */
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--color-dieta);
+  padding: 20px;
+  border-radius: 8px;
+}
+.shopping-list h2 { color: var(--color-dieta); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
 .shopping-check { width: 18px; height: 18px; margin-right: 10px; cursor: pointer; accent-color: var(--color-dieta); }
+.checklist-item { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid #2a2a2a; /* Linha separadora igual treino */ }
+.checklist-item:last-child { border-bottom: none; }
+
 
 /* --- BEM-ESTAR --- */
 .protocol-card { background-color: var(--surface-color); padding: 25px; border-radius: 10px; border: 1px solid var(--border-color); border-left: 5px solid var(--blue-unified) !important; margin-bottom: 30px; }
@@ -222,12 +210,11 @@ input[type="checkbox"] {
 .roadmap-card.red { border-color: #ef4444; } .red-text { color: #f87171; }
 .roadmap-card.amber { border-color: #f59e0b; } .amber-text { color: #fbbf24; }
 .topic-header { margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #374151; color: #e5e7eb; padding-bottom: 5px; font-size: 0.95em; font-weight: bold; }
-.checklist-item { display: flex; align-items: center; padding: 8px 0; transition: background 0.2s; }
 .checklist-item:hover { background-color: rgba(255, 255, 255, 0.05); border-radius: 4px; }
 .roadmap-check { width: 18px; height: 18px; margin-right: 12px; cursor: pointer; accent-color: #10b981; }
 
 /* ======================================================= */
-/* MEDIA QUERIES (MOBILE) - ONDE A MÁGICA ACONTECE         */
+/* MEDIA QUERIES (MOBILE)                                  */
 /* ======================================================= */
 
 @media (max-width: 1024px) {
@@ -236,39 +223,32 @@ input[type="checkbox"] {
 
 @media (max-width: 768px) {
   
-  /* 1. NAVEGAÇÃO HORIZONTAL (ESTILO STORIES) */
+  /* 1. ABAS HORIZONTAIS */
   .nav-tabs {
-    flex-wrap: nowrap !important; /* FORÇA UMA LINHA SÓ */
-    overflow-x: auto !important; /* PERMITE ROLAGEM */
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
     justify-content: flex-start;
     padding: 10px 5px;
     gap: 8px;
     -webkit-overflow-scrolling: touch;
   }
-  
   .tab-button {
-    flex: 0 0 auto; /* IMPEDE O BOTÃO DE ENCOLHER */
+    flex: 0 0 auto;
     padding: 10px 16px;
     font-size: 0.9em;
     background-color: #2a2a2a;
-    border-radius: 20px; /* Borda redonda tipo chip */
+    border-radius: 20px;
     border: 1px solid #444;
     margin: 0;
   }
-  
-  /* Cores Ativas no Mobile (Preenchimento) */
-  .tab-button.active {
-    background-color: #333;
-    border-color: #fff;
-    color: #fff;
-  }
+  .tab-button.active { background-color: #333; border-color: #fff; color: #fff; }
   .tab-button[onclick*="agenda"].active { border-color: var(--color-agenda); background-color: rgba(0, 123, 255, 0.2); }
   .tab-button[onclick*="treino"].active { border-color: var(--color-treino); background-color: rgba(231, 76, 60, 0.2); }
   .tab-button[onclick*="dieta"].active { border-color: var(--color-dieta); background-color: rgba(76, 175, 80, 0.2); }
   .tab-button[onclick*="bem-estar"].active { border-color: var(--color-bemestar); background-color: rgba(0, 123, 255, 0.2); }
   .tab-button[onclick*="carreira"].active { border-color: var(--color-carreira); background-color: rgba(155, 89, 182, 0.2); }
 
-  /* OUTROS AJUSTES MOBILE */
+  /* OUTROS AJUSTES */
   .agenda-layout-daily { flex-direction: column; }
   .agenda-layout-daily .deadlines-area { width: 100%; }
   .deadline-box { min-width: 100%; }
@@ -280,24 +260,16 @@ input[type="checkbox"] {
   .shopping-lists-container { grid-template-columns: 1fr; }
   .triad-container { grid-template-columns: 1fr; }
 
-  /* 2. DIETA EM CARDS (IGUAL TREINO) */
-  /* Força a tabela a se comportar como blocos */
-  table.meal-plan, 
-  table.meal-plan thead, 
-  table.meal-plan tbody, 
-  table.meal-plan th, 
-  table.meal-plan td, 
-  table.meal-plan tr { 
-    display: block !important; 
-    width: 100% !important;
+  /* 2. REFEIÇÕES IGUAIS AO TREINO (FUNDO PRETO & LINHAS) */
+  table.meal-plan, table.meal-plan thead, table.meal-plan tbody, table.meal-plan th, table.meal-plan td, table.meal-plan tr { 
+    display: block !important; width: 100% !important;
   }
-
   .meal-plan thead { display: none !important; }
 
-  /* O TR vira o Card */
+  /* O Card da Refeição */
   .meal-plan tr {
     margin-bottom: 25px;
-    background-color: var(--surface-color);
+    background-color: var(--surface-color); /* Fundo Preto Padrão */
     border: 1px solid var(--border-color);
     border-left: 5px solid var(--color-dieta) !important;
     border-radius: 8px;
@@ -305,7 +277,7 @@ input[type="checkbox"] {
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
   }
 
-  /* Título (Horário) */
+  /* Cabeçalho do Card */
   .meal-plan td.meal-time {
     background-color: transparent;
     color: var(--color-dieta);
@@ -317,23 +289,27 @@ input[type="checkbox"] {
     text-align: left;
   }
 
-  /* Conteúdo */
-  .meal-plan td.meal-details {
-    padding: 0;
-    border: none;
-    background-color: transparent;
-  }
+  /* Conteúdo: Lista de Alimentos */
+  .meal-plan td.meal-details { padding: 0; border: none; background-color: transparent; }
   
+  /* Título Interno (Ex: "Sólido", "Energia") */
   .meal-plan td.meal-details p {
-    color: #fff;
-    margin-top: 5px;
-    font-weight: bold;
-    font-size: 1.1em;
+    color: #fff; margin-top: 5px; margin-bottom: 15px; font-weight: bold; font-size: 1.1em;
   }
   
+  /* A Lista em si: Estilo "Checklist" sem bolinha */
   .meal-plan td.meal-details ul {
-    padding-left: 20px;
-    margin-bottom: 0;
-    color: #ccc;
+    padding-left: 0; margin: 0; list-style: none; /* Remove bolinhas */
+  }
+  
+  .meal-plan td.meal-details ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #2a2a2a; /* Linha divisória igual treino */
+    color: #e0e0e0;
+    padding-left: 5px;
+  }
+  
+  .meal-plan td.meal-details ul li:last-child {
+    border-bottom: none;
   }
 }
