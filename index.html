@@ -28,22 +28,43 @@
 
     <section id="agenda-section" class="content-section active">
       <div class="container">
-        <div class="deadlines-container">
-          <div class="deadline-box">
-            <h3>Provas & Metas</h3>
-            <textarea id="provas-textarea" placeholder="Ex: 15/09 - Prova do Banco..."></textarea>
-          </div>
-          <div class="deadline-box">
-            <h3>Atividades Pendentes</h3>
-            <textarea id="atividades-textarea" placeholder="Anote suas atividades pendentes aqui..."></textarea>
-          </div>
-          <div class="deadline-box">
-            <h3>Consultas Médicas</h3>
-            <textarea id="consultas-textarea" placeholder="Ex: 20/09 - 14h - Dr. Silva..."></textarea>
-          </div>
+
+        <div style="text-align: center; margin-bottom: 10px;">
+          <button id="toggle-agenda-view-btn" class="toggle-btn">Ver Grade Semanal Completa</button>
         </div>
-        <div class="agenda-container-wrapper">
-          <div class="agenda-container" id="agenda"></div>
+
+        <div id="agenda-wrapper" class="agenda-layout-daily">
+
+          <div class="agenda-main-area">
+
+            <div id="agenda-hoje-container" class="agenda-today-view">
+              <h2 id="titulo-dia-hoje" style="text-align: center; color: #fff; margin-bottom: 20px;">Agenda de Hoje</h2>
+              <div id="lista-atividades-hoje" class="today-list">
+              </div>
+            </div>
+
+            <div id="agenda-grade-wrapper" class="agenda-container-wrapper hidden-workout">
+              <div class="agenda-container" id="agenda"></div>
+            </div>
+          </div>
+
+          <div class="deadlines-area">
+            <div class="deadlines-container">
+              <div class="deadline-box">
+                <h3>Provas & Metas</h3>
+                <textarea id="provas-textarea" placeholder="Ex: 15/09 - Prova do Banco..."></textarea>
+              </div>
+              <div class="deadline-box">
+                <h3>Atividades Pendentes</h3>
+                <textarea id="atividades-textarea" placeholder="Anote suas atividades pendentes aqui..."></textarea>
+              </div>
+              <div class="deadline-box">
+                <h3>Consultas Médicas</h3>
+                <textarea id="consultas-textarea" placeholder="Ex: 20/09 - 14h - Dr. Silva..."></textarea>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -464,10 +485,10 @@
     <section id="dieta-section" class="content-section">
       <div class="container">
         <header>
-          <h1>🥗 Dieta: Jejum Intermitente (16:8)</h1>
-          <p style="text-align: center; color: #a0a0a0;">Janela Alimentar: 12:00 às 20:00</p>
+          <h1>🥗 Dieta: Protocolo Anti-Inflamatório & PTI</h1>
+          <p style="text-align: center; color: #a0a0a0;">Foco: Preservação Óssea, Plaquetas e Massa Magra</p>
           <div class="water-goal" style="background: linear-gradient(90deg, #2980b9, #3498db); color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 20px;">
-            💧 Meta Diária: 5 Litros de Água
+            💧 Meta: 5 a 6 Litros (Atenção aos dias de Corticoide)
           </div>
         </header>
 
@@ -481,60 +502,49 @@
             </thead>
             <tbody>
               <tr>
-                <td class="meal-time">Jejum (Manhã)<br>(20:00 - 12:00)</td>
+                <td class="meal-time">Refeição 1 (12:00)<br>Almoço</td>
                 <td class="meal-details">
-                  <p>💊 Fase de Jejum & Hidratação</p>
-                  <ul style="color: #4caf50;">
-                    <li>08:00: Tomar Eltrombopag (Jejum total).</li>
-                    <li>10:00: Cardio em Jejum.</li>
-                    <li>Permitido: Água (5L), Café preto sem açúcar, Chá sem açúcar.</li>
+                  <p>🍖 Proteína & Ferro</p>
+                  <ul>
+                    <li>200g Carne Magra ou Frango.</li>
+                    <li>Opção A: 100g Arroz + 70g Feijão.</li>
+                    <li>Opção B: 200g Batata / Aipim.</li>
+                    <li>Vegetais (Brócolis, Couve-Flor, Abobrinha, Cenoura).</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Refeição 1 (12:00)<br>Almoço (Pré-treino)</td>
+                <td class="meal-time">Refeição 2 (16:30)<br>Pré/Pós Treino</td>
                 <td class="meal-details">
-                  <p>Sólido & Energia</p>
+                  <p>⚡ Energia & Força</p>
                   <ul>
-                    <li>160g a 180g Carne (Bife/Moída) ou Frango.</li>
-                    <li>Opção A: 130g Arroz + 70g Feijão.</li>
-                    <li>Opção B: 220g Batata (Doce/Inglesa/Aipim).</li>
-                    <li>Vegetais: Brócolis, Couve-Flor, Tomate (À vontade).</li>
+                    <li>1 Scoop Whey/Carnibol.</li>
+                    <li>10g Creatina.</li>
+                    <li>1 Banana.</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Refeição 2 (17:00)<br>Pós-Treino</td>
+                <td class="meal-time">Refeição 3 (19:00)<br>Lanche</td>
                 <td class="meal-details">
-                  <p>Recuperação Rápida</p>
+                  <p>🦴 Janela de Cálcio</p>
                   <ul>
-                    <li>1 Scoop Carnibol (ou Whey)</li>
-                    <li>9g Creatina</li>
-                    <li>1 Banana</li>
+                    <li>1 Pote Iogurte Natural (170g).</li>
+                    <li>40g Queijo Branco (2 fatias).</li>
+                    <li>10g Psyllium (1 colher de sopa).</li>
+                    <li>Fruta: Melão, Melancia, Kiwi ou Morango.</li>
                   </ul>
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Refeição 3 (18:30)<br>Lanche</td>
+                <td class="meal-time">Refeição 4 (21:00)<br>Jantar</td>
                 <td class="meal-details">
-                  <p>Fibras & Cálcio</p>
+                  <p>🌙 Sólido</p>
                   <ul>
-                    <li>1 Pote (170g) Iogurte Natural + 1 Fruta picada.</li>
-                    <li>1 colher de sopa de Psyllium (Misturar).</li>
-                    <li>2 a 3 fatias grossas de Queijo Branco.</li>
-                    <li style="color: #3498db; font-weight: bold;">+ 300ml de Água em seguida.</li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td class="meal-time">Refeição 4 (20:00)<br>Jantar</td>
-                <td class="meal-details">
-                  <p>Sólido Final</p>
-                  <ul>
-                    <li>150g Peixe, Frango ou Carne magra.</li>
-                    <li>Opção A: 100g Arroz + 50g Feijão.</li>
-                    <li>Opção B: 180g a 200g Batata (C/ cenoura assada).</li>
-                    <li>Sobremesa: Melão ou Melancia.</li>
+                    <li>180g Peixe, Frango ou Carne Magra.</li>
+                    <li>Opção A: 80g Arroz + 50g Feijão.</li>
+                    <li>Opção B: 150g Batata.</li>
+                    <li>Vegetais (Brócolis, Couve-Flor, Abobrinha, Cenoura).</li>
                   </ul>
                 </td>
               </tr>
@@ -544,57 +554,30 @@
 
         <div class="shopping-lists-container">
           <div class="shopping-list">
-            <h2>🛒 Lista de Compras Semanal</h2>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-banana"><label>🍌 7 Bananas</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-frutas-div"><label>🍉 Melão / Melancia / Morango</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-iogurte"><label>🥛 7 Potes Iogurte Natural (170g)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-queijo"><label>🧀 Queijo Branco (Fatias grossas)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-psyllium-week"><label>🌾 70g Psyllium (Granel)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-veg"><label>🥦 2kg Vegetais (Brócolis, Couve-Flor)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-carnes"><label>🥩 ~3.0kg Carnes (Cru)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-carb"><label>🥔 Batatas, Aipim, Arroz</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-limao"><label>🍋 7 Limões (Opcional)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-gas"><label>💧 3-4 Garrafas Água com Gás</label></div>
+            <h2>🛒 Lista Semanal</h2>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-banana"><label>🍌 7 Bananas (Pós-treino)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-frutas"><label>🍉 Frutas (Melão, Melancia, Kiwi, Morango) - 7 porções</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-iogurte"><label>🥛 7 Potes Iogurte Natural</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-queijo"><label>🧀 Queijo Branco (400g)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-veg"><label>🥦 Vegetais (2.5kg total)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-carnes"><label>🥩 Carnes/Frango/Peixe (4.0kg Cru)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-batata"><label>🥔 Batata/Aipim (2.5kg)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-psyllium-week"><label>🌾 Psyllium (100g)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-arroz-week"><label>🍚 Arroz (450g Cru)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-feijao-week"><label>🫘 Feijão (350g Cru)</label></div>
           </div>
 
           <div class="shopping-list">
-            <h2>📅 Lista Mensal / Logística</h2>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-whey"><label>🥤 Whey Protein / Carnibol</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-creatina"><label>💊 1 Pote Creatina (300g)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-psyllium"><label>🌾 300g Psyllium (Granel)</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-arroz"><label>🍚 5kg Arroz + 2kg Feijão</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-marmita"><label>🥡 50un Embalagens Marmita</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-cha"><label>🍵 Chá Verde + Camomila/Capim Santo</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-cafe"><label>☕ Café</label></div>
+            <h2>📅 Lista Mensal / Estoque</h2>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-arroz"><label>🍚 Arroz (5kg)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-feijao"><label>🫘 Feijão (2kg)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-whey"><label>🥤 Whey/Carnibol (1kg)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-creatina"><label>💊 Creatina (300g)</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-azeite"><label>🫒 Azeite de Oliva</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-gas-mes"><label>💧 ~15 Garrafas Água Gás</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-marmita"><label>🥡 Embalagens Marmita (50un)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-cafe"><label>☕ Café / Chá Verde</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="m-cha"><label>🍵 Chá de Camomila</label></div>
           </div>
-        </div>
-
-        <div class="green-protocol-box" style="margin-top: 30px;">
-          <h2 style="color: #4caf50; margin-top: 0;">🥤 Bebidas Estratégicas (Jejum & Foco)</h2>
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th style="width: 30%;">Momento</th>
-                <th>Bebida & Função</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-weight: bold; color: #4caf50;">Manhã (Jejum)</td>
-                <td><strong>Café Preto / Chá Verde</strong><br><small style="color: #a0a0a0;">Acelerar metabolismo.</small></td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold; color: #4caf50;">Tarde (Estudo)</td>
-                <td><strong>Água com Gás / Limão</strong><br><small style="color: #a0a0a0;">Saciedade e foco.</small></td>
-              </tr>
-              <tr>
-                <td style="font-weight: bold; color: #4caf50;">Noite (Relax)</td>
-                <td><strong>Chá de Camomila + Capim Santo</strong><br><small style="color: #a0a0a0;">Baixar adrenalina (00:00).</small></td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
       </div>
