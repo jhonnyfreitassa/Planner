@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =======================================================
-  // 2. DIETA (LISTAS DE COMPRAS E VERIFICAÇÃO) - NOVO
+  // 2. DIETA (LISTAS DE COMPRAS E VERIFICAÇÃO)
   // =======================================================
   if (document.getElementById("dieta-section")) {
     const shoppingChecks = document.querySelectorAll(".shopping-check");
@@ -109,29 +109,84 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =======================================================
-  // 3. AGENDA DINÂMICA
+  // 3. AGENDA DINÂMICA (ATUALIZADO: HOJE vs GRADE + LAYOUT)
   // =======================================================
   if (document.getElementById("agenda")) {
-    const agenda = document.getElementById("agenda");
+    const agendaGrid = document.getElementById("agenda");
+    const listaHoje = document.getElementById("lista-atividades-hoje");
+    const tituloHoje = document.getElementById("titulo-dia-hoje");
+    const toggleBtn = document.getElementById("toggle-agenda-view-btn");
+    const gradeWrapper = document.getElementById("agenda-grade-wrapper");
+    const containerHoje = document.getElementById("agenda-hoje-container");
+    const wrapperPrincipal = document.getElementById("agenda-wrapper");
+
+    // Lógica do botão Toggle (Agora controla a classe do Wrapper)
+    let showGrid = false;
+    if (toggleBtn) {
+      toggleBtn.onclick = () => {
+        showGrid = !showGrid;
+        if (showGrid) {
+          // Modo Grade Completa: Mostra grade, esconde hoje
+          gradeWrapper.classList.remove("hidden-workout");
+          containerHoje.classList.add("hidden-workout");
+
+          // Muda o layout para Vertical (Caixas no topo)
+          wrapperPrincipal.classList.remove("agenda-layout-daily");
+          wrapperPrincipal.classList.add("agenda-layout-full");
+
+          toggleBtn.textContent = "Ver Apenas Hoje";
+        } else {
+          // Modo Diário: Mostra hoje, esconde grade
+          gradeWrapper.classList.add("hidden-workout");
+          containerHoje.classList.remove("hidden-workout");
+
+          // Muda o layout para Lado a Lado
+          wrapperPrincipal.classList.remove("agenda-layout-full");
+          wrapperPrincipal.classList.add("agenda-layout-daily");
+
+          toggleBtn.textContent = "Ver Grade Semanal Completa";
+        }
+      };
+    }
+
+    // Descobrir dia da semana (Dom=0, Seg=1... mas nosso sistema usa Dom=7)
+    let diaSemana = new Date().getDay();
+    if (diaSemana === 0) diaSemana = 7;
+
+    const diasNomes = [
+      "",
+      "Segunda-feira",
+      "Terça-feira",
+      "Quarta-feira",
+      "Quinta-feira",
+      "Sexta-feira",
+      "Sábado",
+      "Domingo",
+    ];
+    if (tituloHoje)
+      tituloHoje.textContent = `Agenda de: ${diasNomes[diaSemana]}`;
+    if (listaHoje) listaHoje.innerHTML = ""; // Limpa lista
+
+    // Configuração Grade
     const HORA_INICIO = 10,
-      HORA_FIM = 25,
+      HORA_FIM = 25, // Vai até 01:00 da manhã
       ALTURA_HORA = 60;
 
     function gerarGrade() {
-      agenda.innerHTML = "";
+      agendaGrid.innerHTML = "";
       // Canto vazio
       const t = document.createElement("div");
       t.className = "grid-item";
       t.style.borderLeft = "none";
       t.style.borderBottom = "1px solid #333";
-      agenda.appendChild(t);
+      agendaGrid.appendChild(t);
 
       // Cabeçalho Dias
       ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].forEach((e) => {
         const o = document.createElement("div");
         o.className = "grid-item header-dia";
         o.textContent = e;
-        agenda.appendChild(o);
+        agendaGrid.appendChild(o);
       });
 
       // Células Horas (Lateral)
@@ -140,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.className = "grid-item celula-hora";
         e.textContent = `${(o % 24).toString().padStart(2, "0")}:00`;
         e.style.gridRow = `${o - HORA_INICIO + 2}`;
-        agenda.appendChild(e);
+        agendaGrid.appendChild(e);
       }
 
       // Colunas dos Dias
@@ -150,15 +205,16 @@ document.addEventListener("DOMContentLoaded", function () {
         o.dataset.diaIndex = e + 1;
         o.style.gridColumn = `${e + 2}`;
         o.style.gridRow = `2 / span ${HORA_FIM - HORA_INICIO}`;
-        agenda.appendChild(o);
+        agendaGrid.appendChild(o);
       }
     }
 
+    // Função Unificada: Adiciona na Grade E na Lista de Hoje
     function adicionarAtividade(nome, diaIndex, horaInicio, horaFim, cor) {
+      // 1. Adicionar na Grade
       let [hIni, mIni] = horaInicio.split(":").map(Number);
       let [hFim, mFim] = horaFim.split(":").map(Number);
 
-      // Ajuste para madrugada
       if (hFim < hIni && hFim < HORA_INICIO) hFim += 24;
       if (hIni >= 0 && hIni < HORA_INICIO) {
         hIni += 24;
@@ -168,19 +224,56 @@ document.addEventListener("DOMContentLoaded", function () {
       const topo = (hIni * 60 + mIni - HORA_INICIO * 60) / 60;
       const duracao = (hFim * 60 + mFim - (hIni * 60 + mIni)) / 60;
 
-      if (topo < 0) return;
+      if (topo >= 0) {
+        const bloco = document.createElement("div");
+        bloco.className = "atividade-bloco";
+        bloco.style.top = `${topo * ALTURA_HORA}px`;
+        bloco.style.height = `${duracao * ALTURA_HORA}px`;
+        bloco.style.backgroundColor = cor;
+        bloco.innerHTML = `${nome} <br><small>${horaInicio} - ${horaFim}</small>`;
 
-      const bloco = document.createElement("div");
-      bloco.className = "atividade-bloco";
-      bloco.style.top = `${topo * ALTURA_HORA}px`;
-      bloco.style.height = `${duracao * ALTURA_HORA}px`;
-      bloco.style.backgroundColor = cor;
-      bloco.innerHTML = `${nome} <br><small>${horaInicio} - ${horaFim}</small>`;
+        const coluna = agendaGrid.querySelector(
+          `.coluna-dia[data-dia-index='${diaIndex}']`
+        );
+        if (coluna) coluna.appendChild(bloco);
+      }
 
-      const coluna = agenda.querySelector(
-        `.coluna-dia[data-dia-index='${diaIndex}']`
-      );
-      if (coluna) coluna.appendChild(bloco);
+      // 2. Adicionar na Lista "Hoje" (Se for o dia atual)
+      if (diaIndex === diaSemana) {
+        const card = document.createElement("div");
+        card.className = "today-activity-card";
+        card.style.borderLeftColor = cor;
+
+        // ID único para salvar estado
+        const taskId = `task_${diaIndex}_${nome.replace(
+          /\s/g,
+          ""
+        )}_${horaInicio}`;
+
+        // Verifica se já estava concluído
+        if (localStorage.getItem(taskId) === "done") {
+          card.classList.add("completed");
+        }
+
+        // Evento de clique para marcar/desmarcar
+        card.onclick = function () {
+          this.classList.toggle("completed");
+          if (this.classList.contains("completed")) {
+            localStorage.setItem(taskId, "done");
+          } else {
+            localStorage.removeItem(taskId);
+          }
+        };
+
+        card.innerHTML = `
+            <div class="today-activity-info">
+                <h4>${nome}</h4>
+                <div class="today-activity-time">🕒 ${horaInicio} - ${horaFim}</div>
+            </div>
+            <div style="font-size: 1.5em; opacity: 0.5;">✅</div>
+        `;
+        listaHoje.appendChild(card);
+      }
     }
 
     gerarGrade();
@@ -220,10 +313,15 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     adicionarAtividade("✍️ Inglês/Red", 7, "19:00", "21:00", colors.eng);
     adicionarAtividade("📝 Simulado", 7, "22:00", "00:00", colors.sim);
+
+    if (listaHoje.children.length === 0) {
+      listaHoje.innerHTML =
+        '<p style="text-align: center; padding: 20px; color: #666;">Dia Livre! Nenhuma atividade agendada.</p>';
+    }
   }
 
   // =======================================================
-  // 4. TREINO PPL (Com lógica visual de Riscado)
+  // 4. TREINO PPL
   // =======================================================
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
@@ -260,7 +358,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const checkbox = item.querySelector(".exercise-checkbox");
 
         if (id && checkbox) {
-          // Lógica Visual: Adiciona classe .completed ao container pai se marcado
           if (checkbox.checked) {
             item.classList.add("completed");
           } else {
@@ -279,14 +376,12 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("workout_progress_v2026", JSON.stringify(data));
     }
 
-    // Carregar Treinos
     const saved =
       JSON.parse(localStorage.getItem("workout_progress_v2026")) || {};
 
     exerciseItems.forEach((item) => {
       const id = item.dataset.exerciseId;
 
-      // Carregar Bolinhas de Série
       const counter = item.querySelector(".series-counter");
       if (counter) {
         counter.innerHTML = "";
@@ -306,24 +401,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      // Carregar Checkbox e Peso
       const cb = item.querySelector(".exercise-checkbox");
       if (cb && saved[id]) {
         cb.checked = saved[id].done;
-        if (saved[id].done) item.classList.add("completed"); // Visual inicial
+        if (saved[id].done) item.classList.add("completed");
       }
 
       const wi = item.querySelector(".weight-input");
       if (wi && saved[id]) wi.value = saved[id].weight || "";
 
-      // Listeners
       cb?.addEventListener("change", saveWorkout);
       wi?.addEventListener("input", saveWorkout);
     });
 
     updateVisibility();
 
-    // Botão Resetar
     document.querySelectorAll(".reset-button").forEach((btn) => {
       btn.onclick = function () {
         const container = this.closest(".workout-day");
@@ -331,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function () {
           c.checked = false;
         });
         container.querySelectorAll(".exercise-item").forEach((item) => {
-          item.classList.remove("completed"); // Remove visual riscado
+          item.classList.remove("completed");
         });
         container
           .querySelectorAll(".series-dot")
@@ -342,12 +434,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =======================================================
-  // 5. BEM-ESTAR (COM FUNÇÃO DE APAGAR REGISTROS)
+  // 5. BEM-ESTAR
   // =======================================================
-
-  // Função global para deletar itens (precisa estar no escopo global ou window para o onclick funcionar stringificado, mas aqui faremos via renderização limpa)
-
-  // --- SABOTAGEM ---
   window.deleteSabotageItem = function (index, type) {
     if (confirm("Tem certeza que deseja apagar este registro?")) {
       if (type === "sab") {
@@ -371,7 +459,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!container) return;
     container.innerHTML = "";
 
-    // Renderiza Vitórias (Wins)
     wins.forEach((winText, index) => {
       const li = document.createElement("li");
       li.className = "history-item-wrapper";
@@ -382,7 +469,6 @@ document.addEventListener("DOMContentLoaded", function () {
       container.appendChild(li);
     });
 
-    // Renderiza Sabotagens
     list.forEach((item, index) => {
       const li = document.createElement("li");
       li.className = "history-item-wrapper";
@@ -394,14 +480,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Botões de Adicionar (Sabotagem)
   const addWinBtn = document.getElementById("add-micro-win-btn");
   if (addWinBtn) {
     addWinBtn.onclick = () => {
       const input = document.getElementById("micro-win-input");
       if (input.value) {
         const wins = JSON.parse(localStorage.getItem("microWins")) || [];
-        wins.unshift(input.value); // Adiciona no começo
+        wins.unshift(input.value);
         localStorage.setItem("microWins", JSON.stringify(wins));
         input.value = "";
         loadSabotageHistory();
@@ -415,7 +500,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const action = document.getElementById("sabotage-action");
       if (action.value) {
         const list = JSON.parse(localStorage.getItem("sabotageList")) || [];
-        list.unshift({ action: action.value }); // Adiciona no começo
+        list.unshift({ action: action.value });
         localStorage.setItem("sabotageList", JSON.stringify(list));
         action.value = "";
         loadSabotageHistory();
@@ -423,7 +508,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  // --- DIÁRIOS (SONHOS E NOTAS) ---
   window.deleteJournalItem = function (index, type) {
     if (confirm("Apagar este diário?")) {
       if (type === "dream") {
@@ -447,11 +531,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!container) return;
     container.innerHTML = "";
 
-    // Combinar listas para exibição visual, mas manter índice original para deletar
-    // Estratégia: Renderizar separado ou criar objeto com referência.
-    // Para simplificar: Renderizamos listas separadas dentro do container para manter índices corretos de deleção.
-
-    // 1. Sonhos
     dreams.forEach((item, index) => {
       const div = document.createElement("div");
       div.className = "history-item-wrapper";
@@ -467,7 +546,6 @@ document.addEventListener("DOMContentLoaded", function () {
       container.appendChild(div);
     });
 
-    // 2. Notas
     notes.forEach((item, index) => {
       const div = document.createElement("div");
       div.className = "history-item-wrapper";
@@ -484,7 +562,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Botões de Adicionar (Diário)
   const addDreamBtn = document.getElementById("add-dream-button");
   if (addDreamBtn) {
     addDreamBtn.onclick = () => {
@@ -492,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const t = document.getElementById("dream-journal-text").value;
       if (d && t) {
         const l = JSON.parse(localStorage.getItem("dreamEntries")) || [];
-        l.unshift({ date: d, text: t }); // Unshift para o mais novo ficar no indice 0
+        l.unshift({ date: d, text: t });
         localStorage.setItem("dreamEntries", JSON.stringify(l));
         document.getElementById("dream-journal-text").value = "";
         loadJournalHistory();
@@ -515,7 +592,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  // Inicializar carregamentos
   loadSabotageHistory();
   loadJournalHistory();
 });
