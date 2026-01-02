@@ -50,9 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       roadmapCheckboxes.forEach((box) => {
-        // Salva estado
         localStorage.setItem(box.id, box.checked);
-        // Aplica visual riscado no pai
         const parent = box.closest(".checklist-item");
         if (parent) {
           if (box.checked) parent.classList.add("completed");
@@ -62,14 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     roadmapCheckboxes.forEach((box) => {
-      // Carrega estado inicial
       const isChecked = localStorage.getItem(box.id) === "true";
       box.checked = isChecked;
-
-      // Aplica visual inicial
       const parent = box.closest(".checklist-item");
       if (parent && isChecked) parent.classList.add("completed");
-
       box.addEventListener("change", updateRoadmapProgress);
     });
     updateRoadmapProgress();
@@ -84,8 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function saveDietState() {
       shoppingChecks.forEach((box) => {
         localStorage.setItem(box.id, box.checked);
-
-        // Lógica visual de riscar
         const parent = box.closest(".checklist-item");
         if (parent) {
           if (box.checked) parent.classList.add("completed");
@@ -95,21 +87,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     shoppingChecks.forEach((box) => {
-      // Carregar
       const isChecked = localStorage.getItem(box.id) === "true";
       box.checked = isChecked;
-
-      // Visual inicial
       const parent = box.closest(".checklist-item");
       if (parent && isChecked) parent.classList.add("completed");
-
-      // Evento
       box.addEventListener("change", saveDietState);
     });
   }
 
   // =======================================================
-  // 3. AGENDA DINÂMICA (ATUALIZADO: HOJE vs GRADE + LAYOUT)
+  // 3. AGENDA DINÂMICA (ATUALIZADO: ORDENAÇÃO + TEXTO CORRIGIDO)
   // =======================================================
   if (document.getElementById("agenda")) {
     const agendaGrid = document.getElementById("agenda");
@@ -120,36 +107,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const containerHoje = document.getElementById("agenda-hoje-container");
     const wrapperPrincipal = document.getElementById("agenda-wrapper");
 
-    // Lógica do botão Toggle (Agora controla a classe do Wrapper)
     let showGrid = false;
     if (toggleBtn) {
       toggleBtn.onclick = () => {
         showGrid = !showGrid;
         if (showGrid) {
-          // Modo Grade Completa: Mostra grade, esconde hoje
           gradeWrapper.classList.remove("hidden-workout");
           containerHoje.classList.add("hidden-workout");
-
-          // Muda o layout para Vertical (Caixas no topo)
           wrapperPrincipal.classList.remove("agenda-layout-daily");
           wrapperPrincipal.classList.add("agenda-layout-full");
-
           toggleBtn.textContent = "Ver Apenas Hoje";
         } else {
-          // Modo Diário: Mostra hoje, esconde grade
           gradeWrapper.classList.add("hidden-workout");
           containerHoje.classList.remove("hidden-workout");
-
-          // Muda o layout para Lado a Lado
           wrapperPrincipal.classList.remove("agenda-layout-full");
           wrapperPrincipal.classList.add("agenda-layout-daily");
-
           toggleBtn.textContent = "Ver Grade Semanal Completa";
         }
       };
     }
 
-    // Descobrir dia da semana (Dom=0, Seg=1... mas nosso sistema usa Dom=7)
     let diaSemana = new Date().getDay();
     if (diaSemana === 0) diaSemana = 7;
 
@@ -165,23 +142,20 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
     if (tituloHoje)
       tituloHoje.textContent = `Agenda de: ${diasNomes[diaSemana]}`;
-    if (listaHoje) listaHoje.innerHTML = ""; // Limpa lista
+    if (listaHoje) listaHoje.innerHTML = "";
 
-    // Configuração Grade
-    const HORA_INICIO = 10,
-      HORA_FIM = 25, // Vai até 01:00 da manhã
-      ALTURA_HORA = 60;
+    // CONFIGURAÇÃO 24 HORAS
+    const HORA_INICIO = 0;
+    const HORA_FIM = 24;
+    const ALTURA_HORA = 80; // AUMENTADO para combinar com CSS
 
     function gerarGrade() {
       agendaGrid.innerHTML = "";
-      // Canto vazio
       const t = document.createElement("div");
       t.className = "grid-item";
       t.style.borderLeft = "none";
-      t.style.borderBottom = "1px solid #333";
       agendaGrid.appendChild(t);
 
-      // Cabeçalho Dias
       ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].forEach((e) => {
         const o = document.createElement("div");
         o.className = "grid-item header-dia";
@@ -189,16 +163,14 @@ document.addEventListener("DOMContentLoaded", function () {
         agendaGrid.appendChild(o);
       });
 
-      // Células Horas (Lateral)
       for (let o = HORA_INICIO; o < HORA_FIM; o++) {
         const e = document.createElement("div");
         e.className = "grid-item celula-hora";
-        e.textContent = `${(o % 24).toString().padStart(2, "0")}:00`;
+        e.textContent = `${o.toString().padStart(2, "0")}:00`;
         e.style.gridRow = `${o - HORA_INICIO + 2}`;
         agendaGrid.appendChild(e);
       }
 
-      // Colunas dos Dias
       for (let e = 0; e < 7; e++) {
         const o = document.createElement("div");
         o.className = "coluna-dia";
@@ -209,28 +181,35 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Função Unificada: Adiciona na Grade E na Lista de Hoje
+    // ARRAY PARA ARMAZENAR AS ATIVIDADES DO DIA DE HOJE PARA ORDENAÇÃO
+    let atividadesHoje = [];
+
     function adicionarAtividade(nome, diaIndex, horaInicio, horaFim, cor) {
-      // 1. Adicionar na Grade
       let [hIni, mIni] = horaInicio.split(":").map(Number);
       let [hFim, mFim] = horaFim.split(":").map(Number);
 
-      if (hFim < hIni && hFim < HORA_INICIO) hFim += 24;
-      if (hIni >= 0 && hIni < HORA_INICIO) {
-        hIni += 24;
-        if (hFim < hIni) hFim += 24;
+      if (hFim < hIni) {
+        // Bloco 1: Do inicio até 24:00
+        let duracao1 = (24 * 60 - (hIni * 60 + mIni)) / 60;
+        renderBloco(hIni + mIni / 60, duracao1);
+        // Bloco 2: Das 00:00 até o fim
+        let duracao2 = (hFim * 60 + mFim) / 60;
+        renderBloco(0, duracao2);
+      } else {
+        let topo = (hIni * 60 + mIni) / 60;
+        let duracao = (hFim * 60 + mFim - (hIni * 60 + mIni)) / 60;
+        renderBloco(topo, duracao);
       }
 
-      const topo = (hIni * 60 + mIni - HORA_INICIO * 60) / 60;
-      const duracao = (hFim * 60 + mFim - (hIni * 60 + mIni)) / 60;
-
-      if (topo >= 0) {
+      function renderBloco(topPos, durationTime) {
         const bloco = document.createElement("div");
         bloco.className = "atividade-bloco";
-        bloco.style.top = `${topo * ALTURA_HORA}px`;
-        bloco.style.height = `${duracao * ALTURA_HORA}px`;
+        bloco.style.top = `${topPos * ALTURA_HORA}px`;
+        bloco.style.height = `${durationTime * ALTURA_HORA}px`;
         bloco.style.backgroundColor = cor;
-        bloco.innerHTML = `${nome} <br><small>${horaInicio} - ${horaFim}</small>`;
+        bloco.style.zIndex = durationTime < 1 ? "10" : "1";
+
+        bloco.innerHTML = `<strong style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${nome}</strong><span style="font-size:0.9em; opacity:0.9;">${horaInicio}-${horaFim}</span>`;
 
         const coluna = agendaGrid.querySelector(
           `.coluna-dia[data-dia-index='${diaIndex}']`
@@ -238,90 +217,173 @@ document.addEventListener("DOMContentLoaded", function () {
         if (coluna) coluna.appendChild(bloco);
       }
 
-      // 2. Adicionar na Lista "Hoje" (Se for o dia atual)
+      // Adicionar na Lista Hoje (APENAS ARMAZENA, NÃO RENDERIZA AINDA)
       if (diaIndex === diaSemana) {
-        const card = document.createElement("div");
-        card.className = "today-activity-card";
-        card.style.borderLeftColor = cor;
-
-        // ID único para salvar estado
-        const taskId = `task_${diaIndex}_${nome.replace(
-          /\s/g,
-          ""
-        )}_${horaInicio}`;
-
-        // Verifica se já estava concluído
-        if (localStorage.getItem(taskId) === "done") {
-          card.classList.add("completed");
-        }
-
-        // Evento de clique para marcar/desmarcar
-        card.onclick = function () {
-          this.classList.toggle("completed");
-          if (this.classList.contains("completed")) {
-            localStorage.setItem(taskId, "done");
-          } else {
-            localStorage.removeItem(taskId);
-          }
-        };
-
-        card.innerHTML = `
-            <div class="today-activity-info">
-                <h4>${nome}</h4>
-                <div class="today-activity-time">🕒 ${horaInicio} - ${horaFim}</div>
-            </div>
-            <div style="font-size: 1.5em; opacity: 0.5;">✅</div>
-        `;
-        listaHoje.appendChild(card);
+        atividadesHoje.push({
+          nome: nome,
+          horaInicio: horaInicio,
+          horaFim: horaFim,
+          cor: cor,
+          // Criar ID único para o localStorage
+          taskId: `task_${diaIndex}_${nome}_${horaInicio}`,
+        });
       }
     }
 
     gerarGrade();
 
     const colors = {
-      cardio: "#00ced1",
+      sono: "#2c3e50",
+      cardio: "#e67e22",
+      mat_port: "#3498db",
+      mat_exatas: "#9b59b6",
+      mat_banc: "#27ae60",
+      mat_vendas: "#f1c40f",
+      mat_info: "#8e44ad",
+      almoco: "#16a085",
       gym: "#e74c3c",
-      port: "#3498db",
-      mat: "#d63384",
-      bank: "#27ae60",
-      sales: "#f1c40f",
-      info: "#8e44ad",
-      eng: "#e67e22",
-      sim: "#95a5a6",
+      refeicao: "#00b894",
+      livre: "#95a5a6",
+      domingo_estudo: "#d35400",
+      domingo_simulado: "#7f8c8d",
     };
 
-    [1, 2, 3, 4, 5, 7].forEach((d) =>
-      adicionarAtividade("🏃 Cardio", d, "10:00", "11:00", colors.cardio)
-    );
-    [1, 2, 3, 4, 5, 6].forEach((d) =>
-      adicionarAtividade("💪 Academia", d, "15:00", "17:00", colors.gym)
-    );
+    // ---------------------------------------------
+    // ROTINA SEGUNDA A SEXTA (1 a 5)
+    // ---------------------------------------------
+    // CARDIO 1h30 (06:00 - 07:30) - NOME CORRIGIDO: APENAS "Cardio"
+    for (let d = 1; d <= 5; d++) {
+      adicionarAtividade("🏃 Cardio", d, "06:00", "07:30", colors.cardio);
+      adicionarAtividade("💪 Academia", d, "15:00", "17:00", colors.gym);
+      adicionarAtividade("🍌 Pós-Treino", d, "17:00", "17:30", colors.refeicao);
+    }
+
+    // Matérias Seg-Sex (Começando as 08:00)
     [1, 3, 5].forEach((d) =>
-      adicionarAtividade("📚 Português", d, "19:00", "21:00", colors.port)
+      adicionarAtividade("📚 Português", d, "08:00", "10:00", colors.mat_port)
     );
-    [2, 4, 6].forEach((d) =>
-      adicionarAtividade("📐 Matemática", d, "19:00", "21:00", colors.mat)
+    [2, 4].forEach((d) =>
+      adicionarAtividade(
+        "📐 Matemática",
+        d,
+        "08:00",
+        "10:00",
+        colors.mat_exatas
+      )
     );
+
     [1, 4].forEach((d) =>
-      adicionarAtividade("🏦 C. Bancários", d, "22:00", "00:00", colors.bank)
+      adicionarAtividade(
+        "🏦 C. Bancários",
+        d,
+        "10:00",
+        "12:00",
+        colors.mat_banc
+      )
     );
     [2, 5].forEach((d) =>
-      adicionarAtividade("💼 Vendas", d, "22:00", "00:00", colors.sales)
+      adicionarAtividade("💼 Vendas", d, "10:00", "12:00", colors.mat_vendas)
     );
-    [3, 6].forEach((d) =>
-      adicionarAtividade("💻 Informática", d, "22:00", "00:00", colors.info)
+    [3].forEach((d) =>
+      adicionarAtividade("💻 Informática", d, "10:00", "12:00", colors.mat_info)
     );
-    adicionarAtividade("✍️ Inglês/Red", 7, "19:00", "21:00", colors.eng);
-    adicionarAtividade("📝 Simulado", 7, "22:00", "00:00", colors.sim);
+
+    // ---------------------------------------------
+    // SÁBADO (6) - ROTINA ADAPTADA
+    // ---------------------------------------------
+    adicionarAtividade("📐 Matemática", 6, "06:00", "08:00", colors.mat_exatas);
+    adicionarAtividade("💻 Informática", 6, "08:00", "10:00", colors.mat_info);
+
+    adicionarAtividade("🏃 Cardio", 6, "11:00", "12:30", colors.cardio);
+
+    adicionarAtividade("💪 Academia", 6, "16:00", "18:00", colors.gym);
+    adicionarAtividade("🍌 Pós-Treino", 6, "18:00", "18:30", colors.refeicao);
+
+    // ---------------------------------------------
+    // DOMINGO (7) - ROTINA LEVE / NOTURNA
+    // ---------------------------------------------
+    adicionarAtividade("🏃 Cardio", 7, "10:00", "11:30", colors.cardio);
+
+    adicionarAtividade(
+      "✍️ Inglês/Red",
+      7,
+      "19:00",
+      "21:00",
+      colors.domingo_estudo
+    );
+    adicionarAtividade(
+      "📝 Simulado",
+      7,
+      "22:00",
+      "00:00",
+      colors.domingo_simulado
+    );
+
+    // ---------------------------------------------
+    // FIXOS TODOS OS DIAS (Refeições/Sono)
+    // ---------------------------------------------
+    for (let d = 1; d <= 7; d++) {
+      // Almoço (13:00 - JEJUM INTERMITENTE)
+      adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", colors.almoco);
+
+      // Jantar (AGORA 18:30)
+      adicionarAtividade("🍲 Jantar", d, "18:30", "19:00", colors.refeicao);
+
+      // Ceia (AGORA 20:30 - Leve)
+      adicionarAtividade("🥣 Ceia", d, "20:30", "21:00", colors.refeicao);
+
+      // Sono
+      adicionarAtividade("😴 Sono (8h)", d, "21:00", "05:00", colors.sono);
+    }
+
+    // --- ORDENAR E RENDERIZAR A LISTA DE HOJE ---
+    // Ordena pelo horário de início para garantir cronologia correta
+    atividadesHoje.sort((a, b) => {
+      let timeA = parseInt(a.horaInicio.replace(":", ""));
+      let timeB = parseInt(b.horaInicio.replace(":", ""));
+      // Ajuste para atividades que viram a noite (ex: 00h deve vir depois de 23h na lógica de visualização do dia se fosse contínuo, mas aqui tratamos 00h como começo)
+      // Como o planner vai de 00 a 24, a ordenação simples funciona bem.
+      return timeA - timeB;
+    });
+
+    atividadesHoje.forEach((atividade) => {
+      const idUnico = `list_today_${atividade.taskId}`; // ID único para o DOM
+      if (document.getElementById(idUnico)) return;
+
+      const card = document.createElement("div");
+      card.id = idUnico;
+      card.className = "today-activity-card";
+      card.style.borderLeftColor = atividade.cor;
+
+      if (localStorage.getItem(atividade.taskId) === "done")
+        card.classList.add("completed");
+
+      card.onclick = function () {
+        this.classList.toggle("completed");
+        localStorage.setItem(
+          atividade.taskId,
+          this.classList.contains("completed") ? "done" : ""
+        );
+      };
+
+      card.innerHTML = `
+            <div class="today-activity-info">
+                <h4>${atividade.nome}</h4>
+                <div class="today-activity-time">🕒 ${atividade.horaInicio} - ${atividade.horaFim}</div>
+            </div>
+            <div style="font-size: 1.5em; opacity: 0.5;">✅</div>
+        `;
+      listaHoje.appendChild(card);
+    });
 
     if (listaHoje.children.length === 0) {
       listaHoje.innerHTML =
-        '<p style="text-align: center; padding: 20px; color: #666;">Dia Livre! Nenhuma atividade agendada.</p>';
+        '<p style="text-align: center; padding: 20px; color: #666;">Dia Livre!</p>';
     }
   }
 
   // =======================================================
-  // 4. TREINO PPL
+  // 4. TREINO PPL (Mantido)
   // =======================================================
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
@@ -331,7 +393,6 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     let showAll = false;
 
-    // Alternar visibilidade dos dias
     function updateVisibility() {
       const today = new Date().getDay() || 7;
       allWorkoutBlocks.forEach((b) => {
@@ -356,14 +417,9 @@ document.addEventListener("DOMContentLoaded", function () {
       exerciseItems.forEach((item) => {
         const id = item.dataset.exerciseId;
         const checkbox = item.querySelector(".exercise-checkbox");
-
         if (id && checkbox) {
-          if (checkbox.checked) {
-            item.classList.add("completed");
-          } else {
-            item.classList.remove("completed");
-          }
-
+          if (checkbox.checked) item.classList.add("completed");
+          else item.classList.remove("completed");
           data[id] = {
             done: checkbox.checked,
             weight: item.querySelector(".weight-input")?.value,
@@ -378,10 +434,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const saved =
       JSON.parse(localStorage.getItem("workout_progress_v2026")) || {};
-
     exerciseItems.forEach((item) => {
       const id = item.dataset.exerciseId;
-
       const counter = item.querySelector(".series-counter");
       if (counter) {
         counter.innerHTML = "";
@@ -400,31 +454,27 @@ document.addEventListener("DOMContentLoaded", function () {
           counter.appendChild(dot);
         }
       }
-
       const cb = item.querySelector(".exercise-checkbox");
       if (cb && saved[id]) {
         cb.checked = saved[id].done;
         if (saved[id].done) item.classList.add("completed");
       }
-
       const wi = item.querySelector(".weight-input");
       if (wi && saved[id]) wi.value = saved[id].weight || "";
-
       cb?.addEventListener("change", saveWorkout);
       wi?.addEventListener("input", saveWorkout);
     });
 
     updateVisibility();
-
     document.querySelectorAll(".reset-button").forEach((btn) => {
       btn.onclick = function () {
         const container = this.closest(".workout-day");
-        container.querySelectorAll(".exercise-checkbox").forEach((c) => {
-          c.checked = false;
-        });
-        container.querySelectorAll(".exercise-item").forEach((item) => {
-          item.classList.remove("completed");
-        });
+        container
+          .querySelectorAll(".exercise-checkbox")
+          .forEach((c) => (c.checked = false));
+        container
+          .querySelectorAll(".exercise-item")
+          .forEach((item) => item.classList.remove("completed"));
         container
           .querySelectorAll(".series-dot")
           .forEach((d) => d.classList.remove("completed"));
@@ -434,7 +484,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // =======================================================
-  // 5. BEM-ESTAR
+  // 5. BEM-ESTAR (Mantido)
   // =======================================================
   window.deleteSabotageItem = function (index, type) {
     if (confirm("Tem certeza que deseja apagar este registro?")) {
@@ -455,27 +505,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const list = JSON.parse(localStorage.getItem("sabotageList")) || [];
     const wins = JSON.parse(localStorage.getItem("microWins")) || [];
     const container = document.getElementById("combined-sabotage-history");
-
     if (!container) return;
     container.innerHTML = "";
-
     wins.forEach((winText, index) => {
       const li = document.createElement("li");
       li.className = "history-item-wrapper";
-      li.innerHTML = `
-            <span class="history-content" style="color: #4caf50;">🏆 Vitória: ${winText}</span>
-            <button class="delete-btn" onclick="deleteSabotageItem(${index}, 'win')">🗑️</button>
-        `;
+      li.innerHTML = `<span class="history-content" style="color: #4caf50;">🏆 Vitória: ${winText}</span><button class="delete-btn" onclick="deleteSabotageItem(${index}, 'win')">🗑️</button>`;
       container.appendChild(li);
     });
-
     list.forEach((item, index) => {
       const li = document.createElement("li");
       li.className = "history-item-wrapper";
-      li.innerHTML = `
-            <span class="history-content" style="color: #e74c3c;">⚠️ Fuga: ${item.action}</span>
-            <button class="delete-btn" onclick="deleteSabotageItem(${index}, 'sab')">🗑️</button>
-        `;
+      li.innerHTML = `<span class="history-content" style="color: #e74c3c;">⚠️ Fuga: ${item.action}</span><button class="delete-btn" onclick="deleteSabotageItem(${index}, 'sab')">🗑️</button>`;
       container.appendChild(li);
     });
   }
@@ -527,37 +568,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const dreams = JSON.parse(localStorage.getItem("dreamEntries")) || [];
     const notes = JSON.parse(localStorage.getItem("journalEntries")) || [];
     const container = document.getElementById("combined-journal-history");
-
     if (!container) return;
     container.innerHTML = "";
-
     dreams.forEach((item, index) => {
       const div = document.createElement("div");
       div.className = "history-item-wrapper";
       div.style.borderBottom = "1px solid #333";
       div.style.marginBottom = "10px";
-      div.innerHTML = `
-        <div class="history-content">
-            <div style="font-size:0.8em; color:#a0a0a0;">${item.date} - 🌙 Sonho</div>
-            <div>${item.text}</div>
-        </div>
-        <button class="delete-btn" onclick="deleteJournalItem(${index}, 'dream')">🗑️</button>
-      `;
+      div.innerHTML = `<div class="history-content"><div style="font-size:0.8em; color:#a0a0a0;">${item.date} - 🌙 Sonho</div><div>${item.text}</div></div><button class="delete-btn" onclick="deleteJournalItem(${index}, 'dream')">🗑️</button>`;
       container.appendChild(div);
     });
-
     notes.forEach((item, index) => {
       const div = document.createElement("div");
       div.className = "history-item-wrapper";
       div.style.borderBottom = "1px solid #333";
       div.style.marginBottom = "10px";
-      div.innerHTML = `
-          <div class="history-content">
-              <div style="font-size:0.8em; color:#a0a0a0;">${item.date} - 📓 Nota</div>
-              <div>${item.text}</div>
-          </div>
-          <button class="delete-btn" onclick="deleteJournalItem(${index}, 'note')">🗑️</button>
-        `;
+      div.innerHTML = `<div class="history-content"><div style="font-size:0.8em; color:#a0a0a0;">${item.date} - 📓 Nota</div><div>${item.text}</div></div><button class="delete-btn" onclick="deleteJournalItem(${index}, 'note')">🗑️</button>`;
       container.appendChild(div);
     });
   }
