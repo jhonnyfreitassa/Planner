@@ -53,7 +53,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 6,
     seriesMin: 4,
   },
-  // ADDED CROSSOVER
+  // NOVO: CROSSOVER
   "🙅‍♂️ Crossover na Polia (Alto → Baixo)": {
     tipo: "isolador",
     cargaTipo: "maquina",
@@ -149,7 +149,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 6,
     seriesMin: 4,
   },
-  // Face Pull
+  // NOVO: Face Pull
   "👺 Face Pull na Polia": {
     tipo: "isolador",
     cargaTipo: "maquina",
@@ -760,19 +760,13 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     });
 
-    // --- NOVA LÓGICA: MODAL E GRÁFICOS ---
-    const modal = document.getElementById("stats-modal");
-    const closeModal = document.querySelector(".close-modal");
-    const select = document.getElementById("stats-exercise-select");
-    const summary = document.getElementById("stats-summary");
-    let chartInstance = null;
-
+    // --- NOVA LÓGICA: ADMIN SEM MODAL VISUAL ---
     if (adminBtn) {
-      // Modificado para usar console.table (requisito "sem relatórios visuais" no admin)
       adminBtn.onclick = () => {
         const log = JSON.parse(localStorage.getItem("frog_admin_log")) || [];
         if (log.length === 0) {
           console.warn("Sem histórico registrado.");
+          alert("Sem histórico registrado ainda.");
         } else {
           console.table(log);
           alert(
