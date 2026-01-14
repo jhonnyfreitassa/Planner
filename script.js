@@ -15,7 +15,6 @@ function showSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) section.classList.add("active");
 
-  // Lógica do Botão Admin (Só aparece no Treino)
   const adminBtn = document.getElementById("admin-history");
   if (adminBtn) {
     if (sectionId === "treino-section") {
@@ -26,6 +25,7 @@ function showSection(sectionId) {
   }
 }
 
+// CONFIGURAÇÃO DOS EXERCÍCIOS
 const EXERCICIOS_CONFIG = {
   // --- PUSH ---
   "💥 Supino com Halteres": {
@@ -53,7 +53,6 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 6,
     seriesMin: 4,
   },
-  // NOVO: CROSSOVER
   "🙅‍♂️ Crossover na Polia (Alto → Baixo)": {
     tipo: "isolador",
     cargaTipo: "maquina",
@@ -149,7 +148,6 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 6,
     seriesMin: 4,
   },
-  // NOVO: Face Pull
   "👺 Face Pull na Polia": {
     tipo: "isolador",
     cargaTipo: "maquina",
@@ -230,6 +228,34 @@ const EXERCICIOS_CONFIG = {
   },
 };
 
+// --- CORES GLOBAIS DA AGENDA ---
+const COLORS = {
+  sono: "#2c3e50",
+  cardio: "#e55039",
+  gym: "#6D214F",
+  almoco: "#16a085",
+  refeicao: "#00b894",
+  uber: "#f39c12",
+  livre: "#95a5a6",
+
+  conc_bancario: "#27ae60",
+  conc_info: "#2980b9",
+  conc_vendas: "#f1c40f",
+  conc_port: "#d35400",
+  conc_matfin: "#8e44ad",
+  conc_estat: "#c0392b",
+  conc_redacao: "#e84393",
+
+  fac_metodos: "#009432",
+  fac_jogos: "#EA2027",
+  fac_calculo: "#0652DD",
+  fac_estrut: "#5758BB",
+  fac_algo: "#12CBC4",
+  carreira: "#9980FA",
+};
+
+const DATA_INICIO_AULAS = new Date("2026-02-09T00:00:00");
+
 document.addEventListener("DOMContentLoaded", function () {
   const hoje = new Date();
   const ano = hoje.getFullYear();
@@ -242,11 +268,37 @@ document.addEventListener("DOMContentLoaded", function () {
   if (inputSonho) inputSonho.value = dataFormatada;
   if (inputNota) inputNota.value = dataFormatada;
 
-  // Esconder botão admin ao carregar se não estiver na aba treino
   const adminBtn = document.getElementById("admin-history");
   if (adminBtn) adminBtn.style.display = "none";
 
-  // Lógica da Agenda
+  const containerAgenda = document.querySelector("#agenda-section .container");
+  if (containerAgenda) {
+    const btnPreview = document.createElement("button");
+    btnPreview.id = "btn-preview-rotina";
+    btnPreview.textContent = "👁️ Preview 2026.1";
+    btnPreview.className = "toggle-btn";
+    btnPreview.style.marginBottom = "10px";
+    btnPreview.style.fontSize = "0.8em";
+    btnPreview.style.padding = "5px 10px";
+    btnPreview.style.backgroundColor = "#333";
+
+    const divBotoes = containerAgenda.querySelector(
+      "div[style*='text-align: center']"
+    );
+    if (divBotoes) divBotoes.insertBefore(btnPreview, divBotoes.firstChild);
+
+    btnPreview.onclick = () => {
+      const estadoAtual = localStorage.getItem("preview_mode") === "true";
+      localStorage.setItem("preview_mode", !estadoAtual);
+      location.reload();
+    };
+
+    if (localStorage.getItem("preview_mode") === "true") {
+      btnPreview.style.backgroundColor = "#e74c3c";
+      btnPreview.textContent = "❌ Sair do Preview";
+    }
+  }
+
   if (document.getElementById("agenda")) {
     const agendaGrid = document.getElementById("agenda");
     const listaHoje = document.getElementById("lista-atividades-hoje");
@@ -296,6 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const HORA_INICIO = 0;
     const HORA_FIM = 24;
     const ALTURA_HORA = 80;
+
     function gerarGrade() {
       agendaGrid.innerHTML = "";
       const t = document.createElement("div");
@@ -324,20 +377,26 @@ document.addEventListener("DOMContentLoaded", function () {
         agendaGrid.appendChild(o);
       }
     }
+
     let atividadesHoje = [];
+
     function adicionarAtividade(nome, diaIndex, horaInicio, horaFim, cor) {
       let [hIni, mIni] = horaInicio.split(":").map(Number);
       let [hFim, mFim] = horaFim.split(":").map(Number);
+
+      let topo = (hIni * 60 + mIni) / 60;
+      let duracao = 0;
+
       if (hFim < hIni) {
-        let duracao1 = (24 * 60 - (hIni * 60 + mIni)) / 60;
-        renderBloco(hIni + mIni / 60, duracao1);
-        let duracao2 = (hFim * 60 + mFim) / 60;
-        renderBloco(0, duracao2);
+        let duracaoParte1 = (24 * 60 - (hIni * 60 + mIni)) / 60;
+        renderBloco(topo, duracaoParte1);
+        let duracaoParte2 = (hFim * 60 + mFim) / 60;
+        renderBloco(0, duracaoParte2);
       } else {
-        let topo = (hIni * 60 + mIni) / 60;
-        let duracao = (hFim * 60 + mFim - (hIni * 60 + mIni)) / 60;
+        duracao = (hFim * 60 + mFim - (hIni * 60 + mIni)) / 60;
         renderBloco(topo, duracao);
       }
+
       function renderBloco(topPos, durationTime) {
         const bloco = document.createElement("div");
         bloco.className = "atividade-bloco";
@@ -351,90 +410,328 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         if (coluna) coluna.appendChild(bloco);
       }
+
       if (diaIndex === diaSemana) {
         atividadesHoje.push({
           nome: nome,
           horaInicio: horaInicio,
           horaFim: horaFim,
           cor: cor,
-          taskId: `task_${diaIndex}_${nome}_${horaInicio}`,
+          taskId: `task_${diaIndex}_${nome.replace(
+            /\s/g,
+            ""
+          )}_${horaInicio.replace(":", "")}`,
         });
       }
     }
+
     gerarGrade();
-    const colors = {
-      sono: "#2c3e50",
-      cardio: "#e67e22",
-      mat_port: "#3498db",
-      mat_exatas: "#9b59b6",
-      mat_banc: "#27ae60",
-      mat_vendas: "#f1c40f",
-      mat_info: "#8e44ad",
-      almoco: "#16a085",
-      gym: "#e74c3c",
-      refeicao: "#00b894",
-      livre: "#95a5a6",
-      domingo_estudo: "#d35400",
-      domingo_simulado: "#7f8c8d",
-    };
-    for (let d = 1; d <= 5; d++) {
-      adicionarAtividade("🏃 Cardio", d, "06:00", "07:30", colors.cardio);
-      adicionarAtividade("💪 Academia", d, "15:00", "17:00", colors.gym);
-      adicionarAtividade("🍌 Pós-Treino", d, "17:00", "17:30", colors.refeicao);
+
+    const isPreview = localStorage.getItem("preview_mode") === "true";
+    const dataAtual = new Date();
+
+    if (isPreview || dataAtual >= DATA_INICIO_AULAS) {
+      carregarRotinaSemestre();
+    } else {
+      carregarRotinaFerias();
     }
-    [1, 3, 5].forEach((d) =>
-      adicionarAtividade("📚 Português", d, "08:00", "10:00", colors.mat_port)
-    );
-    [2, 4].forEach((d) =>
+
+    function carregarRotinaFerias() {
+      for (let d = 1; d <= 5; d++) {
+        adicionarAtividade("🏃 Cardio", d, "06:00", "07:30", COLORS.cardio);
+        adicionarAtividade("💪 Musculação", d, "15:00", "17:00", COLORS.gym);
+        adicionarAtividade(
+          "🍌 Pós-Treino",
+          d,
+          "17:00",
+          "17:30",
+          COLORS.refeicao
+        );
+      }
+      [1, 3, 5].forEach((d) =>
+        adicionarAtividade(
+          "📚 Português",
+          d,
+          "08:00",
+          "10:00",
+          COLORS.conc_port
+        )
+      );
+      [2, 4].forEach((d) =>
+        adicionarAtividade(
+          "📐 Matemática",
+          d,
+          "08:00",
+          "10:00",
+          COLORS.conc_matfin
+        )
+      );
+      [1, 4].forEach((d) =>
+        adicionarAtividade(
+          "🏦 C. Bancários",
+          d,
+          "10:00",
+          "12:00",
+          COLORS.conc_bancario
+        )
+      );
+      [2, 5].forEach((d) =>
+        adicionarAtividade("💼 Vendas", d, "10:00", "12:00", COLORS.conc_vendas)
+      );
+      [3].forEach((d) =>
+        adicionarAtividade(
+          "💻 Informática",
+          d,
+          "10:00",
+          "12:00",
+          COLORS.conc_info
+        )
+      );
+
       adicionarAtividade(
         "📐 Matemática",
-        d,
+        6,
+        "06:00",
+        "08:00",
+        COLORS.conc_matfin
+      );
+      adicionarAtividade(
+        "💻 Informática",
+        6,
         "08:00",
         "10:00",
-        colors.mat_exatas
-      )
-    );
-    [1, 4].forEach((d) =>
+        COLORS.conc_info
+      );
+      adicionarAtividade("🏃 Cardio", 6, "11:00", "12:30", COLORS.cardio);
+      adicionarAtividade("💪 Musculação", 6, "16:00", "18:00", COLORS.gym);
+      adicionarAtividade("🍌 Pós-Treino", 6, "18:00", "18:30", COLORS.refeicao);
+
+      adicionarAtividade("🏃 Cardio", 7, "10:00", "11:30", COLORS.cardio);
+      adicionarAtividade("✍️ Inglês/Red", 7, "19:00", "21:00", COLORS.carreira);
       adicionarAtividade(
-        "🏦 C. Bancários",
-        d,
-        "10:00",
-        "12:00",
-        colors.mat_banc
-      )
-    );
-    [2, 5].forEach((d) =>
-      adicionarAtividade("💼 Vendas", d, "10:00", "12:00", colors.mat_vendas)
-    );
-    [3].forEach((d) =>
-      adicionarAtividade("💻 Informática", d, "10:00", "12:00", colors.mat_info)
-    );
-    adicionarAtividade("📐 Matemática", 6, "06:00", "08:00", colors.mat_exatas);
-    adicionarAtividade("💻 Informática", 6, "08:00", "10:00", colors.mat_info);
-    adicionarAtividade("🏃 Cardio", 6, "11:00", "12:30", colors.cardio);
-    adicionarAtividade("💪 Academia", 6, "16:00", "18:00", colors.gym);
-    adicionarAtividade("🍌 Pós-Treino", 6, "18:00", "18:30", colors.refeicao);
-    adicionarAtividade("🏃 Cardio", 7, "10:00", "11:30", colors.cardio);
-    adicionarAtividade(
-      "✍️ Inglês/Red",
-      7,
-      "19:00",
-      "21:00",
-      colors.domingo_estudo
-    );
-    adicionarAtividade(
-      "📝 Simulado",
-      7,
-      "22:00",
-      "00:00",
-      colors.domingo_simulado
-    );
-    for (let d = 1; d <= 7; d++) {
-      adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", colors.almoco);
-      adicionarAtividade("🍲 Jantar", d, "18:30", "19:00", colors.refeicao);
-      adicionarAtividade("🥣 Ceia", d, "20:30", "21:00", colors.refeicao);
-      adicionarAtividade("😴 Sono (8h)", d, "21:00", "05:00", colors.sono);
+        "📝 Simulado",
+        7,
+        "22:00",
+        "00:00",
+        COLORS.conc_redacao
+      );
+
+      for (let d = 1; d <= 7; d++) {
+        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+        adicionarAtividade("🍲 Jantar", d, "18:30", "19:00", COLORS.refeicao);
+        adicionarAtividade("🥣 Ceia", d, "20:30", "21:00", COLORS.refeicao);
+        adicionarAtividade("😴 Sono (8h)", d, "21:00", "05:00", COLORS.sono);
+      }
     }
+
+    function carregarRotinaSemestre() {
+      console.log("Carregando Rotina de Semestre (Guerra)");
+
+      // 1. SEGUNDA E QUARTA
+      [1, 3].forEach((d) => {
+        adicionarAtividade("🏃 Cardio", d, "07:00", "08:30", COLORS.cardio);
+        adicionarAtividade(
+          "🚿 Banho/Transp.",
+          d,
+          "08:30",
+          "10:15",
+          COLORS.livre
+        );
+        if (d === 1)
+          adicionarAtividade(
+            "🎓 M. Matemáticos (P1-312)",
+            1,
+            "10:15",
+            "12:00",
+            COLORS.fac_metodos
+          );
+        if (d === 3)
+          adicionarAtividade(
+            "🎓 Estruturas (P1-314)",
+            3,
+            "10:15",
+            "12:50",
+            COLORS.fac_estrut
+          );
+        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+        adicionarAtividade("💪 Musculação", d, "14:00", "16:00", COLORS.gym);
+        adicionarAtividade("🚿 Pré-Estudo", d, "16:00", "16:30", COLORS.livre);
+
+        if (d === 1) {
+          adicionarAtividade(
+            "🏦 Conh. Bancários",
+            1,
+            "16:30",
+            "18:30",
+            COLORS.conc_bancario
+          );
+          adicionarAtividade("⏸️ Intervalo", 1, "18:30", "19:00", COLORS.livre);
+          adicionarAtividade(
+            "📚 Português",
+            1,
+            "19:00",
+            "21:00",
+            COLORS.conc_port
+          );
+        }
+        if (d === 3) {
+          adicionarAtividade(
+            "💼 Vendas/Negoc.",
+            3,
+            "16:30",
+            "18:30",
+            COLORS.conc_vendas
+          );
+          adicionarAtividade("⏸️ Intervalo", 3, "18:30", "19:00", COLORS.livre);
+          adicionarAtividade(
+            "🏦 Conh. Bancários",
+            3,
+            "19:00",
+            "21:00",
+            COLORS.conc_bancario
+          );
+        }
+      });
+
+      // 2. TERÇA E QUINTA
+      [2, 4].forEach((d) => {
+        adicionarAtividade("🏃 Cardio", d, "05:30", "06:15", COLORS.cardio);
+        // Uber removido visualmente, apenas tempo livre
+        if (d === 2) {
+          adicionarAtividade(
+            "🎓 Jogos Dig. (P1-203)",
+            2,
+            "07:30",
+            "09:10",
+            COLORS.fac_jogos
+          );
+          adicionarAtividade(
+            "🎓 Cálc. V.V. (P1-202)",
+            2,
+            "09:25",
+            "11:05",
+            COLORS.fac_calculo
+          );
+        }
+        if (d === 4) {
+          adicionarAtividade(
+            "🎓 Algoritmos (P1-202)",
+            4,
+            "07:30",
+            "10:15",
+            COLORS.fac_algo
+          );
+        }
+        adicionarAtividade("⏳ Tempo Livre", d, "11:30", "13:00", COLORS.livre);
+        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+        adicionarAtividade("💪 Musculação", d, "14:00", "16:00", COLORS.gym);
+        adicionarAtividade("🚿 Pré-Estudo", d, "16:00", "16:30", COLORS.livre);
+
+        if (d === 2) {
+          adicionarAtividade(
+            "💻 Informática",
+            2,
+            "16:30",
+            "18:30",
+            COLORS.conc_info
+          );
+          adicionarAtividade("⏸️ Intervalo", 2, "18:30", "19:00", COLORS.livre);
+          adicionarAtividade(
+            "💰 Mat. Financeira",
+            2,
+            "19:00",
+            "21:00",
+            COLORS.conc_matfin
+          );
+        }
+        if (d === 4) {
+          adicionarAtividade(
+            "💻 Informática",
+            4,
+            "16:30",
+            "18:30",
+            COLORS.conc_info
+          );
+          adicionarAtividade("⏸️ Intervalo", 4, "18:30", "19:00", COLORS.livre);
+          adicionarAtividade(
+            "📊 Estatística",
+            4,
+            "19:00",
+            "21:00",
+            COLORS.conc_estat
+          );
+        }
+      });
+
+      // 3. SEXTA (Padronizada a noite / Roadmap Manhã)
+      adicionarAtividade("🏃 Cardio", 5, "07:00", "08:30", COLORS.cardio);
+      adicionarAtividade(
+        "🚀 Roadmap/Carreira",
+        5,
+        "09:00",
+        "12:00",
+        COLORS.carreira
+      );
+      adicionarAtividade("🍽️ Almoço", 5, "13:00", "14:00", COLORS.almoco);
+      adicionarAtividade("💪 Musculação", 5, "14:00", "16:00", COLORS.gym);
+      adicionarAtividade("🚿 Pré-Estudo", 5, "16:00", "16:30", COLORS.livre);
+
+      // Noite Igual aos outros dias
+      adicionarAtividade(
+        "🏦 Conh. Bancários",
+        5,
+        "16:30",
+        "18:30",
+        COLORS.conc_bancario
+      );
+      adicionarAtividade("⏸️ Intervalo", 5, "18:30", "19:00", COLORS.livre);
+      adicionarAtividade(
+        "💼 Vendas/Negoc.",
+        5,
+        "19:00",
+        "21:00",
+        COLORS.conc_vendas
+      );
+
+      // 4. FIM DE SEMANA
+      adicionarAtividade("🏃 Cardio Jejum", 6, "08:00", "09:00", COLORS.cardio);
+      adicionarAtividade(
+        "📝 Simulado + Redação",
+        6,
+        "09:30",
+        "13:00",
+        COLORS.conc_redacao
+      );
+      adicionarAtividade("🍽️ Almoço", 6, "13:00", "14:00", COLORS.almoco);
+      adicionarAtividade(
+        "🚀 Roadmap (2h)",
+        6,
+        "14:30",
+        "16:30",
+        COLORS.carreira
+      );
+      adicionarAtividade("💪 Musculação", 6, "16:30", "18:30", COLORS.gym);
+      adicionarAtividade("🍲 Jantar", 6, "19:00", "20:00", COLORS.refeicao);
+      adicionarAtividade("😴 Sono", 6, "21:30", "07:30", COLORS.sono);
+
+      adicionarAtividade("🏃 Cardio", 7, "08:00", "09:30", COLORS.cardio);
+      adicionarAtividade("🍽️ Almoço", 7, "13:00", "14:00", COLORS.almoco);
+      adicionarAtividade(
+        "🚀 Carreira (Dados)",
+        7,
+        "14:00",
+        "18:00",
+        COLORS.carreira
+      );
+      adicionarAtividade("🍲 Jantar", 7, "19:00", "20:00", COLORS.refeicao);
+      adicionarAtividade("😴 Sono", 7, "21:00", "05:00", COLORS.sono);
+
+      for (let d = 1; d <= 5; d++) {
+        adicionarAtividade("🍲 Jantar", d, "20:30", "21:00", COLORS.refeicao);
+        adicionarAtividade("😴 Sono", d, "21:00", "05:00", COLORS.sono);
+      }
+    }
+
     atividadesHoje.sort(
       (a, b) =>
         parseInt(a.horaInicio.replace(":", "")) -
@@ -464,7 +761,6 @@ document.addEventListener("DOMContentLoaded", function () {
         '<p style="text-align: center; padding: 20px; color: #666;">Dia Livre!</p>';
   }
 
-  // LÓGICA DO TREINO
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
     const toggleBtn = document.getElementById("toggle-all-workouts-btn");
@@ -504,10 +800,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           dados.falhas++;
           if (dados.falhas >= 2) {
-            // Deload com arredondamento seguro para halteres
             let novaCarga = dados.carga * 0.9;
             if (config.cargaTipo === "halter") {
-              // Garante que o deload respeite o incremento do halter (arredonda para baixo)
               novaCarga =
                 Math.floor(novaCarga / config.incremento) * config.incremento;
             } else {
@@ -520,7 +814,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } else if (config.tipo === "isolador") {
         if (seriesFeitas >= seriesTotais) {
-          // Se seriesMax == seriesMin (ex: Face Pull), pula direto pro aumento de carga
           if (
             dados.series < config.seriesMax &&
             config.seriesMax > config.seriesMin
@@ -553,13 +846,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let showAll = false;
     function updateVisibility() {
       const today = new Date().getDay() || 7;
-
       specificWorkoutBlocks.forEach((b) => {
         const idx = parseInt(b.dataset.dayIndex);
         if (showAll || idx === today) b.classList.remove("hidden-workout");
         else b.classList.add("hidden-workout");
       });
-
       if (showAll) {
         if (coreABlocks) coreABlocks.classList.remove("hidden-workout");
         if (coreBBlocks) coreBBlocks.classList.remove("hidden-workout");
@@ -603,7 +894,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
       localStorage.setItem("workout_progress_v2026", JSON.stringify(data));
-
       if (triggeredByCheckbox && exerciseItem) {
         const checkbox = exerciseItem.querySelector(".exercise-checkbox");
         if (checkbox.checked) {
@@ -642,7 +932,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const match = item
           .querySelector("small")
           ?.textContent.match(/(\d+)\s*séries/);
-        // Fallback para Iso se não tiver salvo
         if (!match && item.querySelector("small")?.textContent.includes("Iso"))
           seriesCount = 4;
         else seriesCount = match ? parseInt(match[1]) : 0;
@@ -667,7 +956,6 @@ document.addEventListener("DOMContentLoaded", function () {
         cb.checked = saved[id].done;
         if (saved[id].done) item.classList.add("completed");
       }
-
       const wi = item.querySelector(".weight-input");
       if (wi) {
         if (
@@ -679,7 +967,6 @@ document.addEventListener("DOMContentLoaded", function () {
           wi.value = saved[id].weight || "";
         }
       }
-
       cb?.addEventListener("change", () => saveWorkout(true, item));
       wi?.addEventListener("input", () => saveWorkout(false, null));
     });
@@ -702,56 +989,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const cardioBtn = document.getElementById("cardio-done");
-    const coreABtn = document.getElementById("core-a-done");
-    const coreBBtn = document.getElementById("core-b-done");
-
     if (cardioBtn) {
       cardioBtn.onclick = () => {
         localStorage.setItem("last_cardio", new Date().toLocaleDateString());
-        document.getElementById("cardio-hint").textContent =
-          "Cardio OK. Mantenha 60-75% FC.";
+        document.getElementById("cardio-hint").textContent = "Cardio OK.";
         setTimeout(
           () => (document.getElementById("cardio-hint").textContent = ""),
           3000
         );
       };
     }
-
-    if (coreABtn) {
-      coreABtn.onclick = () => {
-        localStorage.setItem("last_core_a", new Date().toLocaleDateString());
-        document.getElementById("core-a-hint").textContent =
-          "Core A Finalizado.";
-        setTimeout(
-          () => (document.getElementById("core-a-hint").textContent = ""),
-          3000
-        );
-      };
-    }
-
-    if (coreBBtn) {
-      coreBBtn.onclick = () => {
-        localStorage.setItem("last_core_b", new Date().toLocaleDateString());
-        document.getElementById("core-b-hint").textContent =
-          "Core B Finalizado.";
-        setTimeout(
-          () => (document.getElementById("core-b-hint").textContent = ""),
-          3000
-        );
-      };
-    }
+    const coreABtn = document.getElementById("core-a-done");
+    if (coreABtn) coreABtn.onclick = () => alert("Core A OK");
+    const coreBBtn = document.getElementById("core-b-done");
+    if (coreBBtn) coreBBtn.onclick = () => alert("Core B OK");
 
     document.querySelectorAll(".finish-workout-btn").forEach((btn) => {
       btn.onclick = function () {
         const parent = this.closest(".workout-day");
         const hintDiv = parent.querySelector(".workout-hint");
         const dayName = parent.getAttribute("data-day-name");
-
         localStorage.setItem(
           `last_workout_${dayName}`,
           new Date().toLocaleDateString()
         );
-
         if (hintDiv) {
           hintDiv.textContent = `Treino de ${dayName} registrado!`;
           hintDiv.style.color = "#4caf50";
@@ -760,24 +1021,80 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     });
 
-    // --- NOVA LÓGICA: ADMIN SEM MODAL VISUAL ---
     if (adminBtn) {
       adminBtn.onclick = () => {
         const log = JSON.parse(localStorage.getItem("frog_admin_log")) || [];
         if (log.length === 0) {
-          console.warn("Sem histórico registrado.");
-          alert("Sem histórico registrado ainda.");
+          alert("Sem histórico.");
         } else {
           console.table(log);
-          alert(
-            "Histórico exibido no Console (F12) para evitar relatórios visuais no app."
-          );
+          alert("Histórico no Console.");
         }
       };
     }
   }
 
-  // Bem-Estar e Carreira (Funções mantidas)
+  if (document.getElementById("bem-estar-section")) {
+    const section = document.getElementById("bem-estar-section");
+    const container = section.querySelector(".container");
+
+    if (container && !document.getElementById("rezas-container")) {
+      const rezasHTML = `
+        <div id="rezas-container" class="protocol-card" style="border-left: 5px solid #fff;">
+            <h2 style="color: #fff;">📿 Rezas de Alinhamento e Força</h2>
+            <div style="display: grid; gap: 15px;">
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">1. Reza de Orí (Alinhamento)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Orí, cabeça que escolhe meu caminho, alinha meus pensamentos ao meu destino. Que eu não confunda desejo com propósito nem aceite trilhas que me afastam de mim. Que minha cabeça reconheça o que é certo e sustente essa escolha até o fim."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">2. Reza de Orí (Despertar)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Orí, desperta em mim o que adormeceu. A coragem de decidir, a força de sustentar e a disciplina de continuar. Que eu não abandone meu destino por medo, cansaço ou distração."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">3. Reza de Orí (Proteção Mental)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Orí, protege minha mente de pensamentos que me sabotam. Que eu não repita padrões que já provaram não servir. Fecha minha cabeça para o que me enfraquece e abre para aquilo que me fortalece e organiza."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">4. Reza a Exu (Caminhos)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Exu, senhor do movimento e da comunicação, organiza meus caminhos. Que eu não desperdice energia em conflitos vazios nem caminhe onde não há crescimento. Abre o que é meu por direito e fecha o que nasce da confusão."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">5. Reza a Ògún (Ação)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Ògún, dá firmeza às minhas atitudes. Corta a procrastinação, a preguiça e a dúvida excessiva. Que minha força seja direcionada e minha ação constante até a conclusão."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">6. Reza a Òṣun (Equilíbrio)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Òṣun, acalma meu coração sem enfraquecer minha postura. Que eu saiba sentir sem me perder e cuidar sem me anular. Dá-me equilíbrio para não reagir no impulso nem endurecer diante da vida."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">7. Reza a Oyá (Mudança)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Oyá, movimenta o que estagnou. Leva o que já cumpriu seu ciclo e fortalece-me para atravessar mudanças sem medo de recomeçar."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">8. Reza a Òbàlúayé (Cura)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Òbàlúayé, cura o que é visível e o que carrego em silêncio. Ensina-me a respeitar meus limites e a compreender o tempo de cada processo."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">9. Reza a Òrúnmìlà (Sabedoria)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Òrúnmìlà, ensina-me a ouvir antes de agir. Que eu não confunda pressa com urgência nem opinião com verdade. Que minhas escolhas nasçam da consciência."</p>
+                </details>
+                <details style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                    <summary style="cursor: pointer; font-weight: bold;">10. Reza de Orí (Fechamento)</summary>
+                    <p style="margin-top: 10px; font-style: italic;">"Orí, recolhe o aprendizado do dia. Corrige meus excessos, fortalece meus acertos e limpa minha cabeça do que não me pertence. Prepara-me para o amanhã com clareza e direção."</p>
+                </details>
+            </div>
+        </div>`;
+
+      const firstCard = container.querySelector(".protocol-card");
+      if (firstCard) {
+        firstCard.insertAdjacentHTML("afterend", rezasHTML);
+      } else {
+        container.innerHTML += rezasHTML;
+      }
+    }
+  }
+
   if (document.getElementById("carreira-section")) {
     const roadmapCheckboxes = document.querySelectorAll(".roadmap-check");
     const roadmapProgressBar = document.getElementById("roadmapProgressBar");
@@ -832,7 +1149,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.deleteSabotageItem = function (index, type) {
-    if (confirm("Tem certeza que deseja apagar este registro?")) {
+    if (confirm("Apagar?")) {
       if (type === "sab") {
         const list = JSON.parse(localStorage.getItem("sabotageList")) || [];
         list.splice(index, 1);
@@ -895,7 +1212,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.deleteJournalItem = function (index, type) {
-    if (confirm("Apagar este diário?")) {
+    if (confirm("Apagar?")) {
       if (type === "dream") {
         const list = JSON.parse(localStorage.getItem("dreamEntries")) || [];
         list.splice(index, 1);
