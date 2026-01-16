@@ -8,7 +8,7 @@ function showSection(sectionId) {
     .forEach((b) => b.classList.remove("active"));
 
   const btn = document.querySelector(
-    `.tab-button[onclick="showSection('${sectionId}')"]`
+    `.tab-button[onclick="showSection('${sectionId}')"]`,
   );
   if (btn) btn.classList.add("active");
 
@@ -228,33 +228,35 @@ const EXERCICIOS_CONFIG = {
   },
 };
 
-// --- CORES GLOBAIS DA AGENDA ---
+// --- PALETA DE CORES EXCLUSIVA ---
 const COLORS = {
-  sono: "#2c3e50",
-  cardio: "#e55039",
-  gym: "#6D214F",
-  almoco: "#16a085",
-  refeicao: "#00b894",
-  uber: "#f39c12",
-  livre: "#95a5a6",
+  sono: "#2f3542",
+  cardio: "#ff4757",
+  gym: "#2ed573",
+  almoco: "#ffa502",
+  refeicao: "#eccc68",
+  livre: "#747d8c",
 
-  conc_bancario: "#27ae60",
-  conc_info: "#2980b9",
-  conc_vendas: "#f1c40f",
   conc_port: "#d35400",
   conc_matfin: "#8e44ad",
-  conc_estat: "#c0392b",
+  conc_bancario: "#27ae60",
+  conc_vendas: "#c0392b",
+  conc_info: "#2980b9",
+  conc_estat: "#7f8c8d",
   conc_redacao: "#e84393",
 
-  fac_metodos: "#009432",
-  fac_jogos: "#EA2027",
-  fac_calculo: "#0652DD",
-  fac_estrut: "#5758BB",
-  fac_algo: "#12CBC4",
-  carreira: "#9980FA",
+  fac_metodos: "#1abc9c",
+  fac_jogos: "#9b59b6",
+  fac_calculo: "#3498db",
+  fac_web: "#00cec9",
+  fac_estrut: "#6c5ce7",
+  fac_algo: "#fd79a8",
+  fac_sist: "#0984e3",
+  carreira: "#fdcb6e",
 };
 
 const DATA_INICIO_AULAS = new Date("2026-02-09T00:00:00");
+const DATA_FIM_CURTAS = new Date("2026-04-25T00:00:00");
 
 document.addEventListener("DOMContentLoaded", function () {
   const hoje = new Date();
@@ -275,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (containerAgenda) {
     const btnPreview = document.createElement("button");
     btnPreview.id = "btn-preview-rotina";
-    btnPreview.textContent = "👁️ Preview 2026.1";
+    btnPreview.textContent = "👁️ Ver Semestre (Fase 1)";
     btnPreview.className = "toggle-btn";
     btnPreview.style.marginBottom = "10px";
     btnPreview.style.fontSize = "0.8em";
@@ -283,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnPreview.style.backgroundColor = "#333";
 
     const divBotoes = containerAgenda.querySelector(
-      "div[style*='text-align: center']"
+      "div[style*='text-align: center']",
     );
     if (divBotoes) divBotoes.insertBefore(btnPreview, divBotoes.firstChild);
 
@@ -406,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function () {
         bloco.style.zIndex = durationTime < 1 ? "10" : "1";
         bloco.innerHTML = `<strong style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${nome}</strong><span style="font-size:0.9em; opacity:0.9;">${horaInicio}-${horaFim}</span>`;
         const coluna = agendaGrid.querySelector(
-          `.coluna-dia[data-dia-index='${diaIndex}']`
+          `.coluna-dia[data-dia-index='${diaIndex}']`,
         );
         if (coluna) coluna.appendChild(bloco);
       }
@@ -417,10 +419,7 @@ document.addEventListener("DOMContentLoaded", function () {
           horaInicio: horaInicio,
           horaFim: horaFim,
           cor: cor,
-          taskId: `task_${diaIndex}_${nome.replace(
-            /\s/g,
-            ""
-          )}_${horaInicio.replace(":", "")}`,
+          taskId: `task_${diaIndex}_${nome.replace(/\s/g, "")}_${horaInicio.replace(":", "")}`,
         });
       }
     }
@@ -430,187 +429,181 @@ document.addEventListener("DOMContentLoaded", function () {
     const isPreview = localStorage.getItem("preview_mode") === "true";
     const dataAtual = new Date();
 
-    if (isPreview || dataAtual >= DATA_INICIO_AULAS) {
-      carregarRotinaSemestre();
+    // LÓGICA DE FASES
+    if (isPreview) {
+      carregarRotinaSemestre(true);
     } else {
-      carregarRotinaFerias();
+      if (dataAtual < DATA_INICIO_AULAS) {
+        carregarRotinaFerias();
+      } else if (
+        dataAtual >= DATA_INICIO_AULAS &&
+        dataAtual <= DATA_FIM_CURTAS
+      ) {
+        carregarRotinaSemestre(true);
+      } else {
+        carregarRotinaSemestre(false);
+      }
     }
 
+    // --- ROTINA FÉRIAS (ATUAL) ---
     function carregarRotinaFerias() {
-      for (let d = 1; d <= 5; d++) {
-        adicionarAtividade("🏃 Cardio", d, "06:00", "07:30", COLORS.cardio);
-        adicionarAtividade("💪 Musculação", d, "15:00", "17:00", COLORS.gym);
-        adicionarAtividade(
-          "🍌 Pós-Treino",
-          d,
-          "17:00",
-          "17:30",
-          COLORS.refeicao
-        );
-      }
-      [1, 3, 5].forEach((d) =>
-        adicionarAtividade(
-          "📚 Português",
-          d,
-          "08:00",
-          "10:00",
-          COLORS.conc_port
-        )
-      );
-      [2, 4].forEach((d) =>
-        adicionarAtividade(
-          "📐 Matemática",
-          d,
-          "08:00",
-          "10:00",
-          COLORS.conc_matfin
-        )
-      );
-      [1, 4].forEach((d) =>
-        adicionarAtividade(
-          "🏦 C. Bancários",
-          d,
-          "10:00",
-          "12:00",
-          COLORS.conc_bancario
-        )
-      );
-      [2, 5].forEach((d) =>
-        adicionarAtividade("💼 Vendas", d, "10:00", "12:00", COLORS.conc_vendas)
-      );
-      [3].forEach((d) =>
-        adicionarAtividade(
-          "💻 Informática",
-          d,
-          "10:00",
-          "12:00",
-          COLORS.conc_info
-        )
-      );
-
-      adicionarAtividade(
-        "📐 Matemática",
-        6,
-        "06:00",
-        "08:00",
-        COLORS.conc_matfin
-      );
-      adicionarAtividade(
-        "💻 Informática",
-        6,
-        "08:00",
-        "10:00",
-        COLORS.conc_info
-      );
-      adicionarAtividade("🏃 Cardio", 6, "11:00", "12:30", COLORS.cardio);
-      adicionarAtividade("💪 Musculação", 6, "16:00", "18:00", COLORS.gym);
-      adicionarAtividade("🍌 Pós-Treino", 6, "18:00", "18:30", COLORS.refeicao);
-
-      adicionarAtividade("🏃 Cardio", 7, "10:00", "11:30", COLORS.cardio);
-      adicionarAtividade("✍️ Inglês/Red", 7, "19:00", "21:00", COLORS.carreira);
-      adicionarAtividade(
-        "📝 Simulado",
-        7,
-        "22:00",
-        "00:00",
-        COLORS.conc_redacao
-      );
-
+      console.log("Modo Férias Ativado (Relax)");
       for (let d = 1; d <= 7; d++) {
-        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
-        adicionarAtividade("🍲 Jantar", d, "18:30", "19:00", COLORS.refeicao);
-        adicionarAtividade("🥣 Ceia", d, "20:30", "21:00", COLORS.refeicao);
-        adicionarAtividade("😴 Sono (8h)", d, "21:00", "05:00", COLORS.sono);
+        if (d <= 5) {
+          // Seg-Sex
+          adicionarAtividade("🛌 Acordar", d, "09:30", "10:00", COLORS.sono);
+          adicionarAtividade("🏃 Cardio", d, "10:00", "11:00", COLORS.cardio);
+          adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+
+          // TREINO: Sexta é diferente (16-18h)
+          if (d === 5) {
+            adicionarAtividade(
+              "💪 Musculação",
+              5,
+              "16:00",
+              "18:00",
+              COLORS.gym,
+            );
+          } else {
+            adicionarAtividade(
+              "💪 Musculação",
+              d,
+              "15:00",
+              "17:00",
+              COLORS.gym,
+            );
+          }
+
+          // NOITE: DISTRIBUIÇÃO ESTRATÉGICA
+          const materiasNoite = [
+            // Seg: Vendas + Português
+            {
+              d: 1,
+              m1: "💼 Vendas",
+              c1: COLORS.conc_vendas,
+              m2: "📚 Português",
+              c2: COLORS.conc_port,
+            },
+            // Ter: Info + Finanças
+            {
+              d: 2,
+              m1: "💻 Informática",
+              c1: COLORS.conc_info,
+              m2: "💰 Mat. Financeira",
+              c2: COLORS.conc_matfin,
+            },
+            // Qua: Bancários + Vendas
+            {
+              d: 3,
+              m1: "🏦 C. Bancários",
+              c1: COLORS.conc_bancario,
+              m2: "💼 Vendas",
+              c2: COLORS.conc_vendas,
+            },
+            // Qui: Info + Português/Estatística
+            {
+              d: 4,
+              m1: "💻 Informática",
+              c1: COLORS.conc_info,
+              m2: "📊 Estatística",
+              c2: COLORS.conc_estat,
+            },
+            // Sex: Bancários + Vendas
+            {
+              d: 5,
+              m1: "🏦 C. Bancários",
+              c1: COLORS.conc_bancario,
+              m2: "💼 Vendas",
+              c2: COLORS.conc_vendas,
+            },
+          ];
+
+          materiasNoite.forEach((item) => {
+            if (item.d === d) {
+              adicionarAtividade(item.m1, d, "18:00", "20:00", item.c1);
+              adicionarAtividade(
+                "⏸️ Intervalo",
+                d,
+                "20:00",
+                "20:30",
+                COLORS.livre,
+              );
+              adicionarAtividade(item.m2, d, "20:30", "22:30", item.c2);
+            }
+          });
+
+          adicionarAtividade("😴 Dormir", d, "01:30", "09:30", COLORS.sono);
+        } else {
+          // FDS Férias
+          adicionarAtividade("🏃 Cardio", d, "10:00", "11:30", COLORS.cardio);
+          adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+          if (d === 6) {
+            adicionarAtividade(
+              "💪 Musculação",
+              6,
+              "16:00",
+              "18:00",
+              COLORS.gym,
+            );
+          }
+        }
       }
     }
 
-    function carregarRotinaSemestre() {
-      console.log("Carregando Rotina de Semestre (Guerra)");
+    // --- ROTINA SEMESTRE (09/02 EM DIANTE) ---
+    function carregarRotinaSemestre(isFase1) {
+      console.log(`Rotina Semestre. Fase 1: ${isFase1}`);
 
-      // 1. SEGUNDA E QUARTA
-      [1, 3].forEach((d) => {
-        adicionarAtividade("🏃 Cardio", d, "07:00", "08:30", COLORS.cardio);
-        adicionarAtividade(
-          "🚿 Banho/Transp.",
-          d,
-          "08:30",
-          "10:15",
-          COLORS.livre
-        );
-        if (d === 1)
-          adicionarAtividade(
-            "🎓 M. Matemáticos (P1-312)",
-            1,
-            "10:15",
-            "12:00",
-            COLORS.fac_metodos
-          );
-        if (d === 3)
-          adicionarAtividade(
-            "🎓 Estruturas (P1-314)",
-            3,
-            "10:15",
-            "12:50",
-            COLORS.fac_estrut
-          );
-        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
-        adicionarAtividade("💪 Musculação", d, "14:00", "16:00", COLORS.gym);
-        adicionarAtividade("🚿 Pré-Estudo", d, "16:00", "16:30", COLORS.livre);
+      // 1. SEGUNDA-FEIRA
+      adicionarAtividade("😴 Sono / Livre", 1, "05:00", "07:00", COLORS.sono);
+      adicionarAtividade("🏃 Cardio", 1, "07:00", "08:30", COLORS.cardio);
+      adicionarAtividade(
+        "🎓 M. Matemáticos (P1-312)",
+        1,
+        "10:15",
+        "12:00",
+        COLORS.fac_metodos,
+      );
 
-        if (d === 1) {
-          adicionarAtividade(
-            "🏦 Conh. Bancários",
-            1,
-            "16:30",
-            "18:30",
-            COLORS.conc_bancario
-          );
-          adicionarAtividade("⏸️ Intervalo", 1, "18:30", "19:00", COLORS.livre);
-          adicionarAtividade(
-            "📚 Português",
-            1,
-            "19:00",
-            "21:00",
-            COLORS.conc_port
-          );
-        }
-        if (d === 3) {
-          adicionarAtividade(
-            "💼 Vendas/Negoc.",
-            3,
-            "16:30",
-            "18:30",
-            COLORS.conc_vendas
-          );
-          adicionarAtividade("⏸️ Intervalo", 3, "18:30", "19:00", COLORS.livre);
-          adicionarAtividade(
-            "🏦 Conh. Bancários",
-            3,
-            "19:00",
-            "21:00",
-            COLORS.conc_bancario
-          );
-        }
-      });
+      // 2. TERÇA A SEXTA (Manhã)
+      const diasSufoco = isFase1 ? [2, 3, 4, 5] : [2, 4];
+      const diasLivres = isFase1 ? [] : [3, 5];
 
-      // 2. TERÇA E QUINTA
-      [2, 4].forEach((d) => {
+      // >>> DIAS DE AULA CEDO (07:30)
+      diasSufoco.forEach((d) => {
         adicionarAtividade("🏃 Cardio", d, "05:30", "06:15", COLORS.cardio);
-        // Uber removido visualmente, apenas tempo livre
+        // Espaço vazio 06:15 - 07:30 (Sem textos extras)
+
         if (d === 2) {
           adicionarAtividade(
             "🎓 Jogos Dig. (P1-203)",
             2,
             "07:30",
             "09:10",
-            COLORS.fac_jogos
+            COLORS.fac_jogos,
           );
           adicionarAtividade(
             "🎓 Cálc. V.V. (P1-202)",
             2,
             "09:25",
             "11:05",
-            COLORS.fac_calculo
+            COLORS.fac_calculo,
+          );
+        }
+        if (d === 3) {
+          adicionarAtividade(
+            "🎓 Desenv. Web (P1-610)",
+            3,
+            "07:30",
+            "11:05",
+            COLORS.fac_web,
+          );
+          adicionarAtividade(
+            "🎓 Estruturas (P1-314)",
+            3,
+            "10:15",
+            "12:50",
+            COLORS.fac_estrut,
           );
         }
         if (d === 4) {
@@ -619,123 +612,157 @@ document.addEventListener("DOMContentLoaded", function () {
             4,
             "07:30",
             "10:15",
-            COLORS.fac_algo
+            COLORS.fac_algo,
           );
-        }
-        adicionarAtividade("⏳ Tempo Livre", d, "11:30", "13:00", COLORS.livre);
-        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
-        adicionarAtividade("💪 Musculação", d, "14:00", "16:00", COLORS.gym);
-        adicionarAtividade("🚿 Pré-Estudo", d, "16:00", "16:30", COLORS.livre);
-
-        if (d === 2) {
           adicionarAtividade(
-            "💻 Informática",
-            2,
-            "16:30",
-            "18:30",
-            COLORS.conc_info
-          );
-          adicionarAtividade("⏸️ Intervalo", 2, "18:30", "19:00", COLORS.livre);
-          adicionarAtividade(
-            "💰 Mat. Financeira",
-            2,
-            "19:00",
-            "21:00",
-            COLORS.conc_matfin
-          );
-        }
-        if (d === 4) {
-          adicionarAtividade(
-            "💻 Informática",
+            "🎓 Desenv. Web (P1-201)",
             4,
-            "16:30",
-            "18:30",
-            COLORS.conc_info
-          );
-          adicionarAtividade("⏸️ Intervalo", 4, "18:30", "19:00", COLORS.livre);
+            "09:25",
+            "12:50",
+            COLORS.fac_web,
+          ); // CORRIGIDO: Dia longo na quinta tb
+        }
+        if (d === 5) {
           adicionarAtividade(
-            "📊 Estatística",
-            4,
-            "19:00",
-            "21:00",
-            COLORS.conc_estat
+            "🎓 Sist. Comp. (P1-210)",
+            5,
+            "07:30",
+            "11:05",
+            COLORS.fac_sist,
           );
         }
       });
 
-      // 3. SEXTA (Padronizada a noite / Roadmap Manhã)
-      adicionarAtividade("🏃 Cardio", 5, "07:00", "08:30", COLORS.cardio);
-      adicionarAtividade(
-        "🚀 Roadmap/Carreira",
-        5,
-        "09:00",
-        "12:00",
-        COLORS.carreira
-      );
+      // >>> DIAS LIVRES (FASE 2)
+      diasLivres.forEach((d) => {
+        adicionarAtividade("😴 Sono / Livre", d, "05:00", "07:00", COLORS.sono);
+        adicionarAtividade("🏃 Cardio", d, "07:00", "08:30", COLORS.cardio);
+
+        if (d === 3) {
+          adicionarAtividade(
+            "🎓 Estruturas (P1-314)",
+            3,
+            "10:15",
+            "12:50",
+            COLORS.fac_estrut,
+          );
+        }
+        if (d === 5) {
+          adicionarAtividade(
+            "🏠 Manhã Livre",
+            5,
+            "08:30",
+            "11:00",
+            COLORS.livre,
+          );
+        }
+      });
+
+      // --- TARDE E NOITE (Seg-Qui) ---
+      for (let d = 1; d <= 4; d++) {
+        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+        adicionarAtividade("💪 Musculação", d, "14:00", "16:00", COLORS.gym);
+      }
+
+      // --- SEXTA (Ajuste Tático: Treino 16-18h) ---
       adicionarAtividade("🍽️ Almoço", 5, "13:00", "14:00", COLORS.almoco);
-      adicionarAtividade("💪 Musculação", 5, "14:00", "16:00", COLORS.gym);
-      adicionarAtividade("🚿 Pré-Estudo", 5, "16:00", "16:30", COLORS.livre);
-
-      // Noite Igual aos outros dias
       adicionarAtividade(
-        "🏦 Conh. Bancários",
+        "🏦 C. Bancários",
         5,
-        "16:30",
-        "18:30",
-        COLORS.conc_bancario
+        "14:00",
+        "16:00",
+        COLORS.conc_bancario,
       );
-      adicionarAtividade("⏸️ Intervalo", 5, "18:30", "19:00", COLORS.livre);
-      adicionarAtividade(
-        "💼 Vendas/Negoc.",
-        5,
-        "19:00",
-        "21:00",
-        COLORS.conc_vendas
-      );
+      adicionarAtividade("💪 Musculação", 5, "16:00", "18:00", COLORS.gym);
+      adicionarAtividade("💼 Vendas", 5, "19:00", "21:00", COLORS.conc_vendas);
 
-      // 4. FIM DE SEMANA
-      adicionarAtividade("🏃 Cardio Jejum", 6, "08:00", "09:00", COLORS.cardio);
-      adicionarAtividade(
-        "📝 Simulado + Redação",
-        6,
-        "09:30",
-        "13:00",
-        COLORS.conc_redacao
-      );
+      // --- NOITE PADRONIZADA (Seg-Qui) ---
+      const cronogramaNoite = [
+        {
+          d: 1,
+          m1: "💼 Vendas",
+          c1: COLORS.conc_vendas,
+          m2: "📚 Português",
+          c2: COLORS.conc_port,
+        },
+        {
+          d: 2,
+          m1: "💻 Informática",
+          c1: COLORS.conc_info,
+          m2: "💰 Mat. Financeira",
+          c2: COLORS.conc_matfin,
+        },
+        {
+          d: 3,
+          m1: "🏦 C. Bancários",
+          c1: COLORS.conc_bancario,
+          m2: "💼 Vendas",
+          c2: COLORS.conc_vendas,
+        },
+        {
+          d: 4,
+          m1: "💻 Informática",
+          c1: COLORS.conc_info,
+          m2: "📊 Estatística",
+          c2: COLORS.conc_estat,
+        },
+      ];
+
+      cronogramaNoite.forEach((item) => {
+        adicionarAtividade(item.m1, item.d, "16:30", "18:30", item.c1);
+        adicionarAtividade(
+          "⏸️ Intervalo",
+          item.d,
+          "18:30",
+          "19:00",
+          COLORS.livre,
+        );
+        adicionarAtividade(item.m2, item.d, "19:00", "21:00", item.c2);
+        adicionarAtividade(
+          "🍲 Jantar",
+          item.d,
+          "21:00",
+          "21:30",
+          COLORS.refeicao,
+        );
+        adicionarAtividade("😴 Sono", item.d, "21:30", "05:00", COLORS.sono);
+      });
+
+      // Jantar/Sono Sexta
+      adicionarAtividade("🍲 Jantar", 5, "21:00", "21:30", COLORS.refeicao);
+      adicionarAtividade("😴 Sono", 5, "21:30", "05:00", COLORS.sono);
+
+      // --- FIM DE SEMANA ---
+      adicionarAtividade("🏃 Cardio", 6, "08:00", "09:00", COLORS.cardio);
       adicionarAtividade("🍽️ Almoço", 6, "13:00", "14:00", COLORS.almoco);
       adicionarAtividade(
-        "🚀 Roadmap (2h)",
+        "🚀 Roadmap (Dados)",
         6,
         "14:30",
-        "16:30",
-        COLORS.carreira
+        "16:00",
+        COLORS.carreira,
       );
-      adicionarAtividade("💪 Musculação", 6, "16:30", "18:30", COLORS.gym);
+      adicionarAtividade("💪 Musculação", 6, "16:00", "18:00", COLORS.gym);
       adicionarAtividade("🍲 Jantar", 6, "19:00", "20:00", COLORS.refeicao);
-      adicionarAtividade("😴 Sono", 6, "21:30", "07:30", COLORS.sono);
+      adicionarAtividade("😴 Sono", 6, "22:00", "08:00", COLORS.sono);
 
       adicionarAtividade("🏃 Cardio", 7, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade("🍽️ Almoço", 7, "13:00", "14:00", COLORS.almoco);
       adicionarAtividade(
-        "🚀 Carreira (Dados)",
+        "🚀 Roadmap (Dados)",
         7,
         "14:00",
         "18:00",
-        COLORS.carreira
+        COLORS.carreira,
       );
       adicionarAtividade("🍲 Jantar", 7, "19:00", "20:00", COLORS.refeicao);
       adicionarAtividade("😴 Sono", 7, "21:00", "05:00", COLORS.sono);
-
-      for (let d = 1; d <= 5; d++) {
-        adicionarAtividade("🍲 Jantar", d, "20:30", "21:00", COLORS.refeicao);
-        adicionarAtividade("😴 Sono", d, "21:00", "05:00", COLORS.sono);
-      }
     }
 
     atividadesHoje.sort(
       (a, b) =>
         parseInt(a.horaInicio.replace(":", "")) -
-        parseInt(b.horaInicio.replace(":", ""))
+        parseInt(b.horaInicio.replace(":", "")),
     );
     atividadesHoje.forEach((atividade) => {
       const idUnico = `list_today_${atividade.taskId}`;
@@ -750,7 +777,7 @@ document.addEventListener("DOMContentLoaded", function () {
         this.classList.toggle("completed");
         localStorage.setItem(
           atividade.taskId,
-          this.classList.contains("completed") ? "done" : ""
+          this.classList.contains("completed") ? "done" : "",
         );
       };
       card.innerHTML = `<div class="today-activity-info"><h4>${atividade.nome}</h4><div class="today-activity-time">🕒 ${atividade.horaInicio} - ${atividade.horaFim}</div></div><div style="font-size: 1.5em; opacity: 0.5;">✅</div>`;
@@ -761,11 +788,12 @@ document.addEventListener("DOMContentLoaded", function () {
         '<p style="text-align: center; padding: 20px; color: #666;">Dia Livre!</p>';
   }
 
+  // LÓGICA DO TREINO
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
     const toggleBtn = document.getElementById("toggle-all-workouts-btn");
     const specificWorkoutBlocks = document.querySelectorAll(
-      ".workout-day[data-day-index]"
+      ".workout-day[data-day-index]",
     );
     const coreABlocks = document.getElementById("core-a-block");
     const coreBBlocks = document.getElementById("core-b-block");
@@ -888,7 +916,7 @@ document.addEventListener("DOMContentLoaded", function () {
             done: checkbox.checked,
             weight: item.querySelector(".weight-input")?.value,
             series: Array.from(item.querySelectorAll(".series-dot")).map((d) =>
-              d.classList.contains("completed")
+              d.classList.contains("completed"),
             ),
           };
         }
@@ -900,7 +928,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const nomeLabel = exerciseItem.querySelector("label").textContent;
           const seriesDots = exerciseItem.querySelectorAll(".series-dot");
           const seriesFeitas = Array.from(seriesDots).filter((d) =>
-            d.classList.contains("completed")
+            d.classList.contains("completed"),
           ).length;
           const seriesTotais = seriesDots.length;
           if (seriesTotais > 0) {
@@ -995,7 +1023,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("cardio-hint").textContent = "Cardio OK.";
         setTimeout(
           () => (document.getElementById("cardio-hint").textContent = ""),
-          3000
+          3000,
         );
       };
     }
@@ -1011,7 +1039,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const dayName = parent.getAttribute("data-day-name");
         localStorage.setItem(
           `last_workout_${dayName}`,
-          new Date().toLocaleDateString()
+          new Date().toLocaleDateString(),
         );
         if (hintDiv) {
           hintDiv.textContent = `Treino de ${dayName} registrado!`;
@@ -1034,6 +1062,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // --- REZAS NA ABA BEM-ESTAR ---
   if (document.getElementById("bem-estar-section")) {
     const section = document.getElementById("bem-estar-section");
     const container = section.querySelector(".container");
@@ -1095,13 +1124,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // OUTROS MÓDULOS (DIETA, CARREIRA, SABOTAGEM)
   if (document.getElementById("carreira-section")) {
     const roadmapCheckboxes = document.querySelectorAll(".roadmap-check");
     const roadmapProgressBar = document.getElementById("roadmapProgressBar");
     function updateRoadmapProgress() {
       const total = roadmapCheckboxes.length;
       const checked = document.querySelectorAll(
-        ".roadmap-check:checked"
+        ".roadmap-check:checked",
       ).length;
       const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
       if (roadmapProgressBar) {
