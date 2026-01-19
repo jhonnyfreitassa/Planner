@@ -29,66 +29,66 @@ function showSection(sectionId) {
 const EXERCICIOS_CONFIG = {
   // --- PUSH ---
   "💥 Supino com Halteres": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "halter",
     incremento: 2,
     cargaMax: 50,
   },
   "📐 Supino Inclinado (Halteres)": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "halter",
     incremento: 2,
     cargaMax: 50,
   },
   "⚙️ Supino Sentado Máquina": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
     cargaMax: 120,
   },
   "🦅 Crucifixo na Máquina": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🙅‍♂️ Crossover na Polia (Alto → Baixo)": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🆙 Desenvolvimento Halteres": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "halter",
     incremento: 2,
     cargaMax: 40,
   },
   "🥥 Elevação Lateral": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "halter",
     incremento: 2,
     seriesMax: 6,
     seriesMin: 4,
   },
   "↕️ Elevação Frontal": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "halter",
     incremento: 2,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🔱 Tríceps Testa (Barra EZ)": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "barra",
     incremento: 2,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🪜 Tríceps Mergulho Máquina": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 6,
@@ -97,59 +97,59 @@ const EXERCICIOS_CONFIG = {
 
   // --- PULL ---
   "🧗 Barra Fixa no Graviton": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
     cargaMax: 100,
   },
   "🚣 Remada Curvada (Barra)": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "barra",
     incremento: 4,
     cargaMax: 120,
   },
   "🪚 Remada Unilateral (Halter)": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "halter",
     incremento: 2,
     cargaMax: 60,
   },
   "⏬ Puxada Neutra Máquina": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
     cargaMax: 120,
   },
   "🦾 Rosca Direta (Barra)": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "barra",
     incremento: 2,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🧠 Rosca Concentrada": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "halter",
     incremento: 2,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🔨 Rosca Martelo": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "halter",
     incremento: 2,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🔄 Rosca Inversa (Barra EZ)": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "barra",
     incremento: 2,
     seriesMax: 6,
     seriesMin: 4,
   },
   "👺 Face Pull na Polia": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
     seriesMax: 4,
@@ -158,69 +158,69 @@ const EXERCICIOS_CONFIG = {
 
   // --- LEGS ---
   "🏋️‍♂️ Agachamento com Barra": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "barra",
     incremento: 5,
     cargaMax: 200,
   },
   "⚙️ Hack Machine": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "maquina",
     incremento: 10,
     cargaMax: 300,
   },
   "🦶 Leg Press": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "maquina",
     incremento: 10,
     cargaMax: 400,
   },
   "🇧🇬 Afundo Búlgaro": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "halter",
     incremento: 2,
     cargaMax: 40,
   },
   "🍑 Elevação Pélvica (Barra)": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "barra",
     incremento: 5,
     cargaMax: 200,
   },
   "🦵 Cadeira Extensora": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 6,
     seriesMin: 4,
   },
   "🏗️ RDL (Terra Romeno)": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "barra",
     incremento: 5,
     cargaMax: 200,
   },
   "📏 Stiff com Barra": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "barra",
     incremento: 5,
     cargaMax: 150,
   },
   "🚶 Passada Longa (Halteres)": {
-    tipo: "composto",
+    type: "composto",
     cargaTipo: "halter",
     incremento: 2,
     cargaMax: 40,
   },
   "🛌 Mesa Flexora": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 6,
     seriesMin: 4,
   },
   "👐 Abdutor na Máquina": {
-    tipo: "isolador",
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 6,
@@ -265,6 +265,54 @@ document.addEventListener("DOMContentLoaded", function () {
   const dia = String(hoje.getDate()).padStart(2, "0");
   const dataFormatada = `${ano}-${mes}-${dia}`;
 
+  // --- LÓGICA DE RESET AUTOMÁTICO (ANTI-ESQUECIMENTO) ---
+  const lastVisit = localStorage.getItem("last_app_visit_date");
+
+  // Se for um novo dia (visitou ontem e hoje abriu de novo)
+  if (lastVisit && lastVisit !== dataFormatada) {
+    const savedProgress =
+      JSON.parse(localStorage.getItem("workout_progress_v2026")) || {};
+    let trainedYesterday = false;
+
+    // Verifica se houve PELO MENOS UM exercício marcado
+    for (const key in savedProgress) {
+      if (savedProgress[key].done === true) {
+        trainedYesterday = true;
+        break;
+      }
+    }
+
+    // SÓ REGISTRA SE TIVER ALGO MARCADO
+    if (trainedYesterday) {
+      let historico = JSON.parse(localStorage.getItem("frog_admin_log")) || [];
+      historico.push({
+        data: lastVisit, // Registra na data da última visita (ontem/anteontem)
+        ex: "AUTO",
+        carga: "-",
+        s: "-",
+        msg: "Treino Auto-Finalizado (Esquecimento)",
+        up: true,
+      });
+      localStorage.setItem("frog_admin_log", JSON.stringify(historico));
+    }
+
+    // RESET LIMPO (Mantém Cargas)
+    for (const key in savedProgress) {
+      savedProgress[key].done = false;
+      // Zera as séries (todas false)
+      if (savedProgress[key].series) {
+        savedProgress[key].series = savedProgress[key].series.map(() => false);
+      }
+    }
+    localStorage.setItem(
+      "workout_progress_v2026",
+      JSON.stringify(savedProgress),
+    );
+  }
+
+  // Atualiza a data da última visita para hoje
+  localStorage.setItem("last_app_visit_date", dataFormatada);
+
   const inputSonho = document.getElementById("dream-journal-date");
   const inputNota = document.getElementById("journal-date");
   if (inputSonho) inputSonho.value = dataFormatada;
@@ -273,11 +321,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const adminBtn = document.getElementById("admin-history");
   if (adminBtn) adminBtn.style.display = "none";
 
+  // REMOVENDO BLOCOS DE CARDIO (SOMENTE CARDIO)
+  // CORE A e CORE B são RESTAURADOS
+  const elementsToHide = [
+    "cardio-block",
+    "cardio-tracker-container",
+    "cardio-daily-container",
+  ];
+
+  elementsToHide.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
+  });
+
+  const trackerContainer = document.querySelector(".cardio-tracker-container");
+  if (trackerContainer) trackerContainer.style.display = "none";
+
   const containerAgenda = document.querySelector("#agenda-section .container");
   if (containerAgenda) {
     const btnPreview = document.createElement("button");
     btnPreview.id = "btn-preview-rotina";
-    btnPreview.textContent = "👁️ Ver Semestre (Fase 1)";
+    btnPreview.textContent = "👁️ Ver Semestre";
     btnPreview.className = "toggle-btn";
     btnPreview.style.marginBottom = "10px";
     btnPreview.style.fontSize = "0.8em";
@@ -429,7 +493,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const isPreview = localStorage.getItem("preview_mode") === "true";
     const dataAtual = new Date();
 
-    // LÓGICA DE FASES
     if (isPreview) {
       carregarRotinaSemestre(true);
     } else {
@@ -445,18 +508,27 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // --- ROTINA FÉRIAS (ATUAL) ---
+    // --- ROTINA ATUAL (FÉRIAS) ---
     function carregarRotinaFerias() {
-      console.log("Modo Férias Ativado (Relax)");
+      console.log("Modo Férias");
       for (let d = 1; d <= 7; d++) {
+        // SONO REMOVIDO DA GRADE VISUAL
+
         if (d <= 5) {
           // Seg-Sex
-          adicionarAtividade("🛌 Acordar", d, "09:30", "10:00", COLORS.sono);
           adicionarAtividade("🏃 Cardio", d, "10:00", "11:00", COLORS.cardio);
-          adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+          adicionarAtividade("Almoço", d, "13:00", "14:00", COLORS.almoco);
 
-          // TREINO: Sexta é diferente (16-18h)
-          if (d === 5) {
+          if (d === 2) {
+            adicionarAtividade(
+              "💪 Musculação",
+              2,
+              "15:00",
+              "17:00",
+              COLORS.gym,
+            );
+          } else if (d === 5) {
+            // Sexta
             adicionarAtividade(
               "💪 Musculação",
               5,
@@ -474,9 +546,8 @@ document.addEventListener("DOMContentLoaded", function () {
             );
           }
 
-          // NOITE: DISTRIBUIÇÃO ESTRATÉGICA
-          const materiasNoite = [
-            // Seg: Vendas + Português
+          // NOITE
+          const materias = [
             {
               d: 1,
               m1: "💼 Vendas",
@@ -484,7 +555,6 @@ document.addEventListener("DOMContentLoaded", function () {
               m2: "📚 Português",
               c2: COLORS.conc_port,
             },
-            // Ter: Info + Finanças
             {
               d: 2,
               m1: "💻 Informática",
@@ -492,7 +562,6 @@ document.addEventListener("DOMContentLoaded", function () {
               m2: "💰 Mat. Financeira",
               c2: COLORS.conc_matfin,
             },
-            // Qua: Bancários + Vendas
             {
               d: 3,
               m1: "🏦 C. Bancários",
@@ -500,15 +569,13 @@ document.addEventListener("DOMContentLoaded", function () {
               m2: "💼 Vendas",
               c2: COLORS.conc_vendas,
             },
-            // Qui: Info + Português/Estatística
             {
               d: 4,
               m1: "💻 Informática",
               c1: COLORS.conc_info,
-              m2: "📊 Estatística",
-              c2: COLORS.conc_estat,
+              m2: "📚 Português",
+              c2: COLORS.conc_port,
             },
-            // Sex: Bancários + Vendas
             {
               d: 5,
               m1: "🏦 C. Bancários",
@@ -518,25 +585,37 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           ];
 
-          materiasNoite.forEach((item) => {
+          materias.forEach((item) => {
             if (item.d === d) {
-              adicionarAtividade(item.m1, d, "18:00", "20:00", item.c1);
-              adicionarAtividade(
-                "⏸️ Intervalo",
-                d,
-                "20:00",
-                "20:30",
-                COLORS.livre,
-              );
-              adicionarAtividade(item.m2, d, "20:30", "22:30", item.c2);
+              if (d === 5) {
+                // Sexta Deslocada 1h
+                adicionarAtividade(item.m1, d, "19:00", "21:00", item.c1);
+                adicionarAtividade(
+                  "🍲 Jantar",
+                  d,
+                  "21:00",
+                  "21:30",
+                  COLORS.refeicao,
+                );
+                adicionarAtividade(item.m2, d, "21:30", "23:30", item.c2);
+              } else {
+                // Seg-Qui
+                adicionarAtividade(item.m1, d, "18:00", "20:00", item.c1);
+                adicionarAtividade(
+                  "🍲 Jantar",
+                  d,
+                  "20:00",
+                  "20:30",
+                  COLORS.refeicao,
+                );
+                adicionarAtividade(item.m2, d, "20:30", "22:30", item.c2);
+              }
             }
           });
-
-          adicionarAtividade("😴 Dormir", d, "01:30", "09:30", COLORS.sono);
         } else {
-          // FDS Férias
+          // FDS
           adicionarAtividade("🏃 Cardio", d, "10:00", "11:30", COLORS.cardio);
-          adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
+          adicionarAtividade("Almoço", d, "13:00", "14:00", COLORS.almoco);
           if (d === 6) {
             adicionarAtividade(
               "💪 Musculação",
@@ -550,12 +629,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // --- ROTINA SEMESTRE (09/02 EM DIANTE) ---
+    // --- ROTINA SEMESTRE (09/02+) ---
     function carregarRotinaSemestre(isFase1) {
       console.log(`Rotina Semestre. Fase 1: ${isFase1}`);
 
-      // 1. SEGUNDA-FEIRA
-      adicionarAtividade("😴 Sono / Livre", 1, "05:00", "07:00", COLORS.sono);
+      // SEGUNDA
       adicionarAtividade("🏃 Cardio", 1, "07:00", "08:30", COLORS.cardio);
       adicionarAtividade(
         "🎓 M. Matemáticos (P1-312)",
@@ -564,15 +642,15 @@ document.addEventListener("DOMContentLoaded", function () {
         "12:00",
         COLORS.fac_metodos,
       );
+      adicionarAtividade("Almoço", 1, "13:00", "14:00", COLORS.almoco);
+      adicionarAtividade("💪 Musculação", 1, "15:00", "17:00", COLORS.gym);
 
-      // 2. TERÇA A SEXTA (Manhã)
       const diasSufoco = isFase1 ? [2, 3, 4, 5] : [2, 4];
       const diasLivres = isFase1 ? [] : [3, 5];
 
-      // >>> DIAS DE AULA CEDO (07:30)
+      // TERÇA A SEXTA (Manhã)
       diasSufoco.forEach((d) => {
-        adicionarAtividade("🏃 Cardio", d, "05:30", "06:15", COLORS.cardio);
-        // Espaço vazio 06:15 - 07:30 (Sem textos extras)
+        // Cardio 05:30 removido. Início direto na aula 07:30.
 
         if (d === 2) {
           adicionarAtividade(
@@ -620,7 +698,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "09:25",
             "12:50",
             COLORS.fac_web,
-          ); // CORRIGIDO: Dia longo na quinta tb
+          );
         }
         if (d === 5) {
           adicionarAtividade(
@@ -633,11 +711,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // >>> DIAS LIVRES (FASE 2)
       diasLivres.forEach((d) => {
-        adicionarAtividade("😴 Sono / Livre", d, "05:00", "07:00", COLORS.sono);
         adicionarAtividade("🏃 Cardio", d, "07:00", "08:30", COLORS.cardio);
-
         if (d === 3) {
           adicionarAtividade(
             "🎓 Estruturas (P1-314)",
@@ -647,36 +722,28 @@ document.addEventListener("DOMContentLoaded", function () {
             COLORS.fac_estrut,
           );
         }
+      });
+
+      // TARDE (QUA/QUI)
+      for (let d = 3; d <= 4; d++) {
+        adicionarAtividade("Almoço", d, "13:00", "14:00", COLORS.almoco);
+        adicionarAtividade("💪 Musculação", d, "14:00", "17:00", COLORS.gym);
+      }
+
+      // TERÇA & SEXTA (Estratégia Dias Curtos)
+      [2, 5].forEach((d) => {
+        adicionarAtividade("🏃 Cardio", d, "12:00", "13:00", COLORS.cardio);
+        adicionarAtividade("Almoço", d, "13:00", "14:00", COLORS.almoco);
+
+        if (d === 2) {
+          adicionarAtividade("💪 Musculação", 2, "15:00", "17:00", COLORS.gym);
+        }
         if (d === 5) {
-          adicionarAtividade(
-            "🏠 Manhã Livre",
-            5,
-            "08:30",
-            "11:00",
-            COLORS.livre,
-          );
+          adicionarAtividade("💪 Musculação", 5, "16:00", "18:00", COLORS.gym);
         }
       });
 
-      // --- TARDE E NOITE (Seg-Qui) ---
-      for (let d = 1; d <= 4; d++) {
-        adicionarAtividade("🍽️ Almoço", d, "13:00", "14:00", COLORS.almoco);
-        adicionarAtividade("💪 Musculação", d, "14:00", "16:00", COLORS.gym);
-      }
-
-      // --- SEXTA (Ajuste Tático: Treino 16-18h) ---
-      adicionarAtividade("🍽️ Almoço", 5, "13:00", "14:00", COLORS.almoco);
-      adicionarAtividade(
-        "🏦 C. Bancários",
-        5,
-        "14:00",
-        "16:00",
-        COLORS.conc_bancario,
-      );
-      adicionarAtividade("💪 Musculação", 5, "16:00", "18:00", COLORS.gym);
-      adicionarAtividade("💼 Vendas", 5, "19:00", "21:00", COLORS.conc_vendas);
-
-      // --- NOITE PADRONIZADA (Seg-Qui) ---
+      // NOITE PADRONIZADA
       const cronogramaNoite = [
         {
           d: 1,
@@ -706,57 +773,52 @@ document.addEventListener("DOMContentLoaded", function () {
           m2: "📊 Estatística",
           c2: COLORS.conc_estat,
         },
+        {
+          d: 5,
+          m1: "🏦 C. Bancários",
+          c1: COLORS.conc_bancario,
+          m2: "💼 Vendas",
+          c2: COLORS.conc_vendas,
+        },
       ];
 
       cronogramaNoite.forEach((item) => {
-        adicionarAtividade(item.m1, item.d, "16:30", "18:30", item.c1);
-        adicionarAtividade(
-          "⏸️ Intervalo",
-          item.d,
-          "18:30",
-          "19:00",
-          COLORS.livre,
-        );
-        adicionarAtividade(item.m2, item.d, "19:00", "21:00", item.c2);
-        adicionarAtividade(
-          "🍲 Jantar",
-          item.d,
-          "21:00",
-          "21:30",
-          COLORS.refeicao,
-        );
-        adicionarAtividade("😴 Sono", item.d, "21:30", "05:00", COLORS.sono);
+        if (item.d === 5) {
+          // Sexta Deslocada
+          adicionarAtividade(item.m1, item.d, "19:00", "21:00", item.c1);
+          adicionarAtividade(
+            "🍲 Jantar",
+            item.d,
+            "21:00",
+            "21:30",
+            COLORS.refeicao,
+          );
+          adicionarAtividade(item.m2, item.d, "21:30", "23:30", item.c2);
+        } else {
+          // Seg-Qui
+          adicionarAtividade(item.m1, item.d, "18:00", "20:00", item.c1);
+          adicionarAtividade(
+            "🍲 Jantar",
+            item.d,
+            "20:00",
+            "20:30",
+            COLORS.refeicao,
+          );
+          adicionarAtividade(item.m2, item.d, "20:30", "22:30", item.c2);
+        }
       });
 
-      // Jantar/Sono Sexta
-      adicionarAtividade("🍲 Jantar", 5, "21:00", "21:30", COLORS.refeicao);
-      adicionarAtividade("😴 Sono", 5, "21:30", "05:00", COLORS.sono);
-
-      // --- FIM DE SEMANA ---
+      // FIM DE SEMANA
       adicionarAtividade("🏃 Cardio", 6, "08:00", "09:00", COLORS.cardio);
-      adicionarAtividade("🍽️ Almoço", 6, "13:00", "14:00", COLORS.almoco);
-      adicionarAtividade(
-        "🚀 Roadmap (Dados)",
-        6,
-        "14:30",
-        "16:00",
-        COLORS.carreira,
-      );
+      adicionarAtividade("Almoço", 6, "13:00", "14:00", COLORS.almoco);
+      adicionarAtividade("🚀 Roadmap", 6, "14:30", "16:00", COLORS.carreira);
       adicionarAtividade("💪 Musculação", 6, "16:00", "18:00", COLORS.gym);
       adicionarAtividade("🍲 Jantar", 6, "19:00", "20:00", COLORS.refeicao);
-      adicionarAtividade("😴 Sono", 6, "22:00", "08:00", COLORS.sono);
 
       adicionarAtividade("🏃 Cardio", 7, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade("🍽️ Almoço", 7, "13:00", "14:00", COLORS.almoco);
-      adicionarAtividade(
-        "🚀 Roadmap (Dados)",
-        7,
-        "14:00",
-        "18:00",
-        COLORS.carreira,
-      );
+      adicionarAtividade("Almoço", 7, "13:00", "14:00", COLORS.almoco);
+      adicionarAtividade("🚀 Roadmap", 7, "14:00", "18:00", COLORS.carreira);
       adicionarAtividade("🍲 Jantar", 7, "19:00", "20:00", COLORS.refeicao);
-      adicionarAtividade("😴 Sono", 7, "21:00", "05:00", COLORS.sono);
     }
 
     atividadesHoje.sort(
@@ -795,6 +857,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const specificWorkoutBlocks = document.querySelectorAll(
       ".workout-day[data-day-index]",
     );
+
+    // RESTAURADO: Referência aos blocos de CORE A e B
     const coreABlocks = document.getElementById("core-a-block");
     const coreBBlocks = document.getElementById("core-b-block");
 
@@ -879,14 +943,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (showAll || idx === today) b.classList.remove("hidden-workout");
         else b.classList.add("hidden-workout");
       });
+
+      // RESTAURADO: Lógica de alternância do Core
       if (showAll) {
         if (coreABlocks) coreABlocks.classList.remove("hidden-workout");
         if (coreBBlocks) coreBBlocks.classList.remove("hidden-workout");
       } else {
         if (today % 2 !== 0) {
+          // Ímpar = A
           if (coreABlocks) coreABlocks.classList.remove("hidden-workout");
           if (coreBBlocks) coreBBlocks.classList.add("hidden-workout");
         } else {
+          // Par = B
           if (coreABlocks) coreABlocks.classList.add("hidden-workout");
           if (coreBBlocks) coreBBlocks.classList.remove("hidden-workout");
         }
@@ -1000,6 +1068,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     updateVisibility();
+
+    // RESTAURADO: Botão de RESET Manual do Dia
     document.querySelectorAll(".reset-button").forEach((btn) => {
       btn.onclick = function () {
         const container = this.closest(".workout-day");
@@ -1016,22 +1086,6 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     });
 
-    const cardioBtn = document.getElementById("cardio-done");
-    if (cardioBtn) {
-      cardioBtn.onclick = () => {
-        localStorage.setItem("last_cardio", new Date().toLocaleDateString());
-        document.getElementById("cardio-hint").textContent = "Cardio OK.";
-        setTimeout(
-          () => (document.getElementById("cardio-hint").textContent = ""),
-          3000,
-        );
-      };
-    }
-    const coreABtn = document.getElementById("core-a-done");
-    if (coreABtn) coreABtn.onclick = () => alert("Core A OK");
-    const coreBBtn = document.getElementById("core-b-done");
-    if (coreBBtn) coreBBtn.onclick = () => alert("Core B OK");
-
     document.querySelectorAll(".finish-workout-btn").forEach((btn) => {
       btn.onclick = function () {
         const parent = this.closest(".workout-day");
@@ -1041,6 +1095,18 @@ document.addEventListener("DOMContentLoaded", function () {
           `last_workout_${dayName}`,
           new Date().toLocaleDateString(),
         );
+
+        parent
+          .querySelectorAll(".exercise-checkbox")
+          .forEach((c) => (c.checked = false));
+        parent
+          .querySelectorAll(".exercise-item")
+          .forEach((item) => item.classList.remove("completed"));
+        parent
+          .querySelectorAll(".series-dot")
+          .forEach((d) => d.classList.remove("completed"));
+        saveWorkout(false, null);
+
         if (hintDiv) {
           hintDiv.textContent = `Treino de ${dayName} registrado!`;
           hintDiv.style.color = "#4caf50";
