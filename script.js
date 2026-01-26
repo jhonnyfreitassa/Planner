@@ -226,6 +226,42 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 6,
     seriesMin: 4,
   },
+
+  // --- NOVOS ADICIONADOS (ANTEBRAÇO & ABS) ---
+  "🍫 Abdominal Supra Curto (Crunch)": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 0,
+    seriesMax: 6,
+    seriesMin: 4,
+  },
+  "🏗️ Abdominal Infra Pendurado (Barra)": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 0,
+    seriesMax: 6,
+    seriesMin: 4,
+  },
+  "✊ Flexão de Punho (Halteres)": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 5,
+    seriesMin: 4,
+  },
+  "🖐️ Extensão de Punho (Halteres)": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 5,
+    seriesMin: 3,
+  },
+  "🧗 Sustentação Isométrica (Halteres)": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
+    cargaMax: 100,
+  },
 };
 
 // --- PALETA DE CORES EXCLUSIVA ---
@@ -883,7 +919,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let subiu = false;
       let mensagem = "";
 
-      if (config.tipo === "composto") {
+      if (config.type === "composto") {
         if (seriesFeitas >= seriesTotais) {
           dados.carga = (dados.carga || 0) + config.incremento;
           dados.falhas = 0;
@@ -904,7 +940,7 @@ document.addEventListener("DOMContentLoaded", function () {
             mensagem = "Deload Aplicado (-10%)";
           }
         }
-      } else if (config.tipo === "isolador") {
+      } else if (config.type === "isolador") {
         if (seriesFeitas >= seriesTotais) {
           if (
             dados.series < config.seriesMax &&
