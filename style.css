@@ -6,13 +6,12 @@
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --border-color: #333;
-
   --color-treino: #e74c3c;
-  --color-agenda: #007bff;
+  --color-agenda: #6c757d; /* AGORA CINZA */
   --color-dieta: #4caf50;
   --color-bemestar: #007bff;
   --color-carreira: #9b59b6;
-
+  --color-concurso: #f1c40f;
   --blue-unified: #007bff;
 }
 
@@ -26,14 +25,13 @@ body {
   padding-bottom: 50px;
 }
 
-/* --- GERAL --- */
+/* GERAL */
 input[type="checkbox"] {
   accent-color: #e74c3c;
   width: 18px;
   height: 18px;
   cursor: pointer;
 }
-
 .exercise-item.completed label,
 .checklist-item.completed label {
   text-decoration: line-through;
@@ -42,7 +40,24 @@ input[type="checkbox"] {
   transition: all 0.3s ease;
 }
 
-/* --- NAVEGAÇÃO --- */
+/* INPUTS PRETO */
+input,
+textarea {
+  background-color: #000000 !important;
+  color: #fff !important;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+input:focus,
+textarea:focus {
+  outline: 1px solid var(--color-agenda);
+  border-color: var(--color-agenda);
+}
+
+/* NAV */
 .nav-tabs {
   display: flex;
   background-color: var(--surface-color);
@@ -84,6 +99,10 @@ input[type="checkbox"] {
 .tab-button[onclick*="carreira"].active {
   border-bottom-color: var(--color-carreira);
 }
+.tab-button[onclick*="concursos"].active {
+  border-bottom-color: var(--color-concurso);
+  color: var(--color-concurso);
+}
 
 .content-section {
   display: none;
@@ -102,216 +121,245 @@ input[type="checkbox"] {
   }
 }
 
-/* --- AGENDA --- */
+/* =========================================
+   AGENDA SECTION
+   ========================================= */
+
 #agenda-section {
   --hora-altura: 80px;
+  width: 100%;
+  overflow-x: hidden;
 }
+
 #agenda-section .container {
-  max-width: 98%;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+#agenda-wrapper {
   display: flex;
-  flex-direction: column;
-  padding: 0 10px;
+  gap: 20px;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 .agenda-layout-daily {
-  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 20px;
-  width: 100%;
-}
-.agenda-layout-daily .agenda-main-area {
-  flex: 1;
-  width: 100%;
-}
-.agenda-layout-daily .deadlines-area {
-  width: 320px;
-  flex-shrink: 0;
-}
-.agenda-layout-daily .deadlines-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
 }
 
 .agenda-layout-full {
-  display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-.agenda-layout-full .deadlines-area {
-  width: 100%;
-  order: -1;
-}
-.agenda-layout-full .agenda-main-area {
-  width: 100%;
-  order: 1;
-}
-.agenda-layout-full .deadlines-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
 }
 
-.deadline-box {
-  background-color: var(--surface-color);
-  border-radius: 8px;
-  padding: 15px;
-  border: 1px solid var(--border-color);
+.agenda-main-area {
+  flex: 1 1 600px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
-}
-.deadline-box h3 {
-  margin: 0 0 10px 0;
-  color: #fff;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
-}
-.deadline-box textarea {
-  width: 100%;
-  height: 120px;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  color: var(--text-primary);
-  padding: 10px;
-  font-family: inherit;
-  resize: none;
-  box-sizing: border-box;
+  gap: 20px;
 }
 
 .agenda-container-wrapper {
   width: 100%;
-  overflow-x: auto;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
   background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+
+#agenda-grade-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .agenda-container {
   display: grid;
-  grid-template-columns: 60px repeat(7, 1fr);
-  grid-template-rows: 50px repeat(24, var(--hora-altura)); /* 24 Horas */
+  grid-template-columns: 60px repeat(7, minmax(120px, 1fr));
+  grid-template-rows: 50px repeat(24, var(--hora-altura));
   min-width: 900px;
-  width: 100%;
+  background-color: #1a1a1a;
 }
+
 .grid-item {
-  text-align: center;
-  padding: 5px;
   border-bottom: 1px solid #333;
   border-right: 1px solid #333;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
+
 .header-dia {
-  font-weight: bold;
   background-color: #252525;
-  border-top: none;
+  font-weight: bold;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
+
 .celula-hora {
-  font-size: 0.8em;
+  background-color: #121212;
   color: var(--text-secondary);
-  background-color: #1a1a1a;
+  font-size: 0.75em;
+  font-weight: bold;
 }
+
 .coluna-dia {
   position: relative;
-  border-right: 1px solid var(--border-color);
-  background-image: linear-gradient(var(--border-color) 1px, transparent 1px);
+  border-right: 1px solid #333;
+  background-image: linear-gradient(to bottom, #333 1px, transparent 1px);
   background-size: 100% var(--hora-altura);
 }
 
-/* --- BLOCO DA AGENDA (CENTRALIZADO) --- */
 .atividade-bloco {
   position: absolute;
-  left: 2px;
-  right: 2px;
-  border-left: 4px solid rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  padding: 4px 6px;
-  box-sizing: border-box;
-  color: white;
-
-  /* Fonte Ajustada */
-  font-size: 0.75em;
-  line-height: 1.2;
-
+  left: 4px;
+  right: 4px;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: 0.8em;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  border-left: 4px solid rgba(0, 0, 0, 0.4);
   overflow: hidden;
+  transition: transform 0.2s;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-
-  /* CENTRALIZAÇÃO TOTAL */
-  justify-content: center; /* Vertical */
-  align-items: center; /* Horizontal */
-  text-align: center; /* Texto */
-
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
   z-index: 1;
 }
-.atividade-bloco strong {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  margin-bottom: 2px;
-  font-size: 1.1em;
+.atividade-bloco:hover {
+  transform: scale(1.02);
+  z-index: 20 !important;
+}
+
+.deadlines-area {
+  flex: 1 1 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  align-content: start;
+}
+
+.deadline-box {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.deadline-box h3 {
+  font-size: 1em;
+  margin-top: 0;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  color: var(--color-agenda);
+}
+.deadline-box textarea {
   width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  background-color: #121212 !important;
+  border: 1px solid #333;
+  color: #ddd;
 }
 
 .agenda-today-view {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
-}
-.today-activity-card {
   background-color: var(--surface-color);
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 10px;
+}
+.today-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.today-activity-card {
+  background-color: #252525;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 10px 15px;
   border-left: 5px solid #fff;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .today-activity-card:hover {
-  transform: translateX(5px);
-  background-color: #252525;
+  transform: translateX(2px);
+  background-color: #333;
 }
 .today-activity-card.completed {
-  opacity: 0.3;
+  opacity: 0.4;
   filter: grayscale(100%);
   text-decoration: line-through;
-  background-color: #121212;
 }
 .today-activity-info h4 {
   margin: 0 0 5px 0;
-  font-size: 1.2em;
+  font-size: 1em;
   color: #fff;
 }
 .today-activity-time {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: var(--text-secondary);
-  background: #121212;
-  padding: 5px 8px;
+  background: #000;
+  padding: 2px 6px;
   border-radius: 4px;
   display: inline-block;
 }
 
-/* --- TREINO --- */
+/* BEM-ESTAR */
+.azul-uniforme {
+  border-left: 5px solid var(--blue-unified) !important;
+  margin-bottom: 30px;
+}
+.azul-uniforme h2 {
+  color: var(--blue-unified) !important;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.prayer-accordion {
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.prayer-accordion summary {
+  font-weight: bold;
+  color: #fff;
+  list-style: none;
+  outline: none;
+}
+.prayer-accordion summary::-webkit-details-marker {
+  display: none;
+}
+.prayer-accordion p {
+  margin-top: 10px;
+  color: #a0a0a0;
+  font-size: 0.9em;
+  line-height: 1.6;
+  padding-left: 10px;
+  border-left: 2px solid #555;
+}
+
+/* TREINO */
 #treino-section {
   --cor-destaque: #e74c3c;
-}
-#treino-section .treino-title {
-  color: var(--cor-destaque);
-  text-align: center;
-  font-size: 1.8em;
-  margin-bottom: 20px;
 }
 .workout-day {
   background-color: var(--surface-color);
@@ -361,19 +409,12 @@ input[type="checkbox"] {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  transition: all 0.3s;
 }
 .exercise-info {
   display: flex;
   align-items: center;
   gap: 15px;
   flex-grow: 1;
-}
-.exercise-checkbox {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  accent-color: var(--cor-destaque);
 }
 .exercise-controls {
   display: flex;
@@ -382,7 +423,9 @@ input[type="checkbox"] {
 }
 .series-counter {
   display: flex;
-  gap: 4px;
+  flex-direction: row !important;
+  gap: 5px;
+  flex-wrap: nowrap;
 }
 .series-dot {
   width: 14px;
@@ -401,18 +444,17 @@ input[type="checkbox"] {
   padding: 6px;
   border-radius: 4px;
   border: 1px solid var(--border-color);
-  background-color: var(--bg-color);
-  color: var(--text-primary);
+  background-color: #000;
+  color: #fff;
   text-align: center;
 }
 
-/* --- DIETA --- */
+/* DIETA */
 #dieta-section .container {
   max-width: 900px;
   margin: 0 auto;
   background-color: transparent;
   padding: 0 10px;
-  border-radius: 0;
 }
 #dieta-section h1 {
   color: var(--color-dieta);
@@ -426,36 +468,8 @@ input[type="checkbox"] {
   border-radius: 12px;
   text-align: center;
   font-weight: bold;
-  font-size: 1.2em;
   margin-bottom: 25px;
 }
-
-/* Card de Macros */
-.macro-summary {
-  display: flex;
-  justify-content: space-around;
-  background-color: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.macro-item {
-  text-align: center;
-}
-.macro-val {
-  display: block;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
-}
-.macro-label {
-  font-size: 0.8em;
-  color: #a0a0a0;
-}
-
 .meal-plan-wrapper {
   width: 100%;
   overflow-x: auto;
@@ -466,23 +480,20 @@ input[type="checkbox"] {
   margin-top: 20px;
   min-width: 600px;
 }
-.meal-plan th,
-.meal-plan td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #333;
-}
 .meal-plan th {
   background-color: var(--color-dieta);
   color: white;
+  padding: 15px;
+}
+.meal-plan td {
+  padding: 15px;
+  border-bottom: 1px solid #333;
 }
 .meal-time {
   font-weight: 700;
   color: var(--color-dieta);
   min-width: 140px;
 }
-
-/* Shopping Lists: Fundo Dark Unificado */
 .shopping-lists-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -496,52 +507,25 @@ input[type="checkbox"] {
   padding: 20px;
   border-radius: 8px;
 }
-.shopping-list h2 {
-  color: var(--color-dieta);
-  margin-top: 0;
-  border-bottom: 1px solid #333;
-  padding-bottom: 10px;
-}
-.shopping-check {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  cursor: pointer;
-  accent-color: var(--color-dieta);
-}
 .checklist-item {
   display: flex;
   align-items: center;
   padding: 8px 0;
   border-bottom: 1px solid #2a2a2a;
 }
-.checklist-item:last-child {
-  border-bottom: none;
-}
 
-/* --- BEM-ESTAR --- */
+/* PROTOCOLS */
 .protocol-card {
   background-color: var(--surface-color);
   padding: 25px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
-  border-left: 5px solid var(--blue-unified) !important;
+  border-left: 5px solid var(--blue-unified);
   margin-bottom: 30px;
-}
-.protocol-card h2 {
-  color: var(--blue-unified) !important;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-.raiva-card,
-.sabotage-card,
-.voice-card,
-.sleep-card {
-  border-left-color: var(--blue-unified) !important;
 }
 .triad-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 15px;
   margin-bottom: 30px;
 }
@@ -555,27 +539,10 @@ input[type="checkbox"] {
 }
 .triad-box h3 {
   margin-top: 0;
-  font-size: 1em;
   color: #fff;
   margin-bottom: 10px;
   border-bottom: 1px solid #333;
   padding-bottom: 5px;
-}
-.triad-box input,
-.triad-box textarea {
-  background-color: #121212;
-  border: 1px solid #333;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  font-family: inherit;
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.triad-box textarea {
-  resize: none;
-  height: 80px;
 }
 .small-btn {
   align-self: flex-end;
@@ -594,11 +561,6 @@ input[type="checkbox"] {
   max-height: 250px;
   overflow-y: auto;
 }
-.simple-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 .history-item-wrapper {
   display: flex;
   justify-content: space-between;
@@ -606,41 +568,8 @@ input[type="checkbox"] {
   padding: 8px 0;
   border-bottom: 1px solid #333;
 }
-.history-content {
-  flex: 1;
-}
-.delete-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2em;
-  margin-left: 10px;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-.delete-btn:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
 
-/* --- CARREIRA --- */
-#carreira-section .container {
-  max-width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-.roadmap-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.progress-container {
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: var(--surface-color);
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-}
+/* CARREIRA */
 .progress-bar-bg {
   background-color: #374151;
   border-radius: 99px;
@@ -655,22 +584,20 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: center;
   width: 0%;
-  font-size: 0.8em;
   transition: width 0.5s ease-in-out;
 }
+
 .roadmap-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  width: 100%;
 }
+
 .roadmap-card {
   background-color: #1f2937;
   border-radius: 12px;
   padding: 20px;
   border: 1px solid #374151;
-  display: flex;
-  flex-direction: column;
 }
 .roadmap-card.blue {
   border-color: #3b82f6;
@@ -708,204 +635,47 @@ input[type="checkbox"] {
   border-bottom: 1px solid #374151;
   color: #e5e7eb;
   padding-bottom: 5px;
-  font-size: 0.95em;
   font-weight: bold;
 }
-.checklist-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-.roadmap-check {
-  width: 18px;
-  height: 18px;
-  margin-right: 12px;
-  cursor: pointer;
-  accent-color: #10b981;
-}
 
-/* ======================================================= */
-/* MEDIA QUERIES (MOBILE)                                  */
-/* ======================================================= */
-
-@media (max-width: 1024px) {
-  .roadmap-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+@media (max-width: 992px) {
+  #agenda-wrapper {
+    flex-direction: column;
+  }
+  .agenda-main-area,
+  .deadlines-area {
+    flex: 1 1 100%;
   }
 }
-
 @media (max-width: 768px) {
-  /* 1. ABAS HORIZONTAIS */
   .nav-tabs {
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     justify-content: flex-start;
-    padding: 10px 5px;
-    gap: 8px;
-    -webkit-overflow-scrolling: touch;
   }
   .tab-button {
     flex: 0 0 auto;
-    padding: 10px 16px;
-    font-size: 0.9em;
-    background-color: #2a2a2a;
-    border-radius: 20px;
-    border: 1px solid #444;
     margin: 0;
   }
-  .tab-button.active {
-    background-color: #333;
-    border-color: #fff;
-    color: #fff;
-  }
-  .tab-button[onclick*="agenda"].active {
-    border-color: var(--color-agenda);
-    background-color: rgba(0, 123, 255, 0.2);
-  }
-  .tab-button[onclick*="treino"].active {
-    border-color: var(--color-treino);
-    background-color: rgba(231, 76, 60, 0.2);
-  }
-  .tab-button[onclick*="dieta"].active {
-    border-color: var(--color-dieta);
-    background-color: rgba(76, 175, 80, 0.2);
-  }
-  .tab-button[onclick*="bem-estar"].active {
-    border-color: var(--color-bemestar);
-    background-color: rgba(0, 123, 255, 0.2);
-  }
-  .tab-button[onclick*="carreira"].active {
-    border-color: var(--color-carreira);
-    background-color: rgba(155, 89, 182, 0.2);
-  }
-
-  /* OUTROS AJUSTES GERAIS */
-  .agenda-layout-daily {
-    flex-direction: column;
-    width: 100%;
-  }
-  .agenda-layout-daily .deadlines-area {
-    width: 100%;
-  }
-  .deadline-box {
-    min-width: 100%;
-  }
-  .agenda-container-wrapper {
-    max-width: 100%;
-  }
-  .agenda-container {
-    min-width: 700px;
-  }
-  .roadmap-grid {
-    grid-template-columns: 1fr;
-  }
-  .workout-day {
-    padding: 15px;
-  }
-  .exercise-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .exercise-controls {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 10px;
-    margin-left: 0;
-  }
-  .shopping-lists-container {
-    grid-template-columns: 1fr;
-  }
-  .triad-container {
-    grid-template-columns: 1fr;
-  }
-
-  /* 2. DIETA - VISUAL CARD CORRIGIDO */
-
-  /* Garante que o container da dieta não vaze */
   .meal-plan-wrapper {
     width: 100% !important;
-    overflow-x: hidden !important;
   }
-
-  /* Reseta a tabela para blocos e zera a largura mínima */
   table.meal-plan,
   table.meal-plan tbody,
-  table.meal-plan th,
-  table.meal-plan td,
-  table.meal-plan tr {
+  table.meal-plan tr,
+  table.meal-plan td {
     display: block !important;
     width: 100% !important;
-    min-width: 0 !important; /* CORREÇÃO CRÍTICA DE LARGURA */
-    box-sizing: border-box;
   }
-
-  /* Esconde cabeçalho verde */
   table.meal-plan thead {
     display: none !important;
   }
-
-  /* O Card da Refeição */
   .meal-plan tr {
     margin-bottom: 20px;
-    background-color: var(--surface-color); /* Fundo Dark #1e1e1e */
-    border: 1px solid var(--border-color);
     border-left: 5px solid var(--color-dieta) !important;
-    border-radius: 8px;
-    padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    max-width: 100%; /* Garante que não estoure */
   }
-
-  /* Cabeçalho do Card (Horário) */
-  .meal-plan td.meal-time {
-    background-color: transparent;
-    color: var(--color-dieta);
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 0 0 10px 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #333;
-    text-align: left;
-    white-space: normal; /* Permite quebrar linha se precisar */
-  }
-
-  /* Conteúdo: Lista de Alimentos */
-  .meal-plan td.meal-details {
-    padding: 0;
-    border: none;
-    background-color: transparent;
-  }
-
-  /* Título Interno */
-  .meal-plan td.meal-details p {
-    color: #fff;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    font-weight: bold;
-    font-size: 1.1em;
-  }
-
-  /* Lista Estilo Checklist (Com linhas e sem bolinhas) */
-  .meal-plan td.meal-details ul {
-    padding-left: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .meal-plan td.meal-details ul li {
-    padding: 12px 0;
-    border-bottom: 1px solid #2a2a2a;
-    color: #e0e0e0;
-    padding-left: 2px;
-
-    /* CORREÇÃO DO TEXTO CORTADO */
-    white-space: normal !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-    font-size: 0.95em;
-    line-height: 1.5;
-  }
-
-  .meal-plan td.meal-details ul li:last-child {
-    border-bottom: none;
+  .triad-container {
+    grid-template-columns: 1fr;
   }
 }
