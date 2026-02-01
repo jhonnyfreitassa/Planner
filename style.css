@@ -2,9 +2,8 @@
 
 :root {
   --bg-color: #121212;
-  --surface-color: #1e1e1e;
-  /* Cor de fundo estilo Roadmap para cards (Azulado - Usado no Desktop) */
-  --card-bg-color: #1f2937;
+  --surface-color: #1e1e1e; /* Cinza Escuro */
+  --card-bg-color: #1f2937; /* Azulado (apenas Desktop) */
   --card-border-color: #374151;
   
   --text-primary: #e0e0e0;
@@ -25,7 +24,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: "JetBrains Mono", monospace;
-  /* Reduzido para 14px para caber mais conteúdo */
   font-size: 14px; 
   background-color: var(--bg-color);
   color: var(--text-primary);
@@ -38,7 +36,7 @@ body {
    ========================================= */
 input[type="checkbox"] {
   accent-color: #e74c3c;
-  width: 16px; /* Levemente menor */
+  width: 16px;
   height: 16px;
   cursor: pointer;
 }
@@ -57,9 +55,9 @@ textarea {
   color: #fff !important;
   border: 1px solid #444;
   border-radius: 5px;
-  padding: 8px; /* Padding reduzido */
+  padding: 8px;
   font-family: inherit;
-  font-size: 14px; /* Fonte input reduzida */
+  font-size: 14px;
   box-sizing: border-box;
   max-width: 100%;
 }
@@ -86,7 +84,7 @@ textarea:focus {
 }
 
 .tab-button {
-  padding: 12px 15px; /* Botões mais compactos */
+  padding: 12px 15px;
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -112,7 +110,7 @@ textarea:focus {
 
 .content-section {
   display: none;
-  padding: 15px; /* Padding geral reduzido */
+  padding: 15px;
   animation: fadeIn 0.5s;
 }
 
@@ -129,7 +127,7 @@ textarea:focus {
    AGENDA SECTION
    ========================================= */
 #agenda-section {
-  --hora-altura: 70px; /* Altura hora reduzida */
+  --hora-altura: 70px;
   width: 100%;
   overflow-x: hidden;
 }
@@ -182,7 +180,7 @@ textarea:focus {
 
 .agenda-container {
   display: grid;
-  grid-template-columns: 50px repeat(7, minmax(100px, 1fr)); /* Colunas mais estreitas */
+  grid-template-columns: 50px repeat(7, minmax(100px, 1fr));
   grid-template-rows: 40px repeat(24, var(--hora-altura));
   min-width: 800px;
   background-color: #1a1a1a;
@@ -227,7 +225,7 @@ textarea:focus {
   right: 2px;
   border-radius: 4px;
   padding: 2px;
-  font-size: 0.75em; /* Fonte bloco reduzida */
+  font-size: 0.75em;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   border-left: 3px solid rgba(0, 0, 0, 0.4);
   overflow: hidden;
@@ -282,7 +280,7 @@ textarea:focus {
   color: #ddd;
 }
 
-/* AGENDA - HOJE VIEW (Cards) */
+/* AGENDA - HOJE VIEW (Card Style) */
 .agenda-today-view {
   background-color: transparent;
   padding: 0;
@@ -293,14 +291,15 @@ textarea:focus {
 .today-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 12px;
+  gap: 10px; /* Gap levemente reduzido */
 }
 
 .today-activity-card {
   background-color: var(--card-bg-color);
   border: 1px solid var(--card-border-color);
   border-radius: 10px;
-  padding: 12px 15px;
+  /* PADDING REDUZIDO PARA FICAR MAIS COMPACTO */
+  padding: 10px 12px; 
   border-left: 5px solid #fff;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -308,6 +307,7 @@ textarea:focus {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  min-height: 50px; /* Garante altura mínima mas compacta */
 }
 
 .today-activity-card:hover {
@@ -322,18 +322,18 @@ textarea:focus {
 }
 
 .today-activity-info h4 {
-  margin: 0 0 5px 0;
-  font-size: 1em;
+  margin: 0 0 4px 0;
+  font-size: 0.95em; /* Fonte levemente menor */
   color: #fff;
   font-weight: bold;
 }
 
 .today-activity-time {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.8em;
+  font-size: 0.75em; /* Fonte do horário reduzida */
   color: #a0aec0;
   background: rgba(0,0,0,0.3);
-  padding: 3px 6px;
+  padding: 2px 6px;
   border-radius: 4px;
   display: inline-block;
 }
@@ -614,7 +614,7 @@ textarea:focus {
 .progress-bar-bg {
   background-color: #374151;
   border-radius: 99px;
-  height: 20px; /* Mais fino */
+  height: 20px;
   overflow: hidden;
 }
 .progress-bar-fill {
@@ -678,17 +678,19 @@ textarea:focus {
   .nav-tabs::-webkit-scrollbar { display: none; }
   .tab-button { flex: 0 0 auto; margin: 0; }
 
-  /* 2. AGENDA EM CARDS (Mantém o azulado aqui se quiser, ou muda para surface-color) */
+  /* 2. AGENDA EM CARDS (Cinza Escuro e Compacto) */
   .today-list {
     grid-template-columns: 1fr !important;
-    gap: 12px;
+    gap: 8px; /* Espaço menor entre cards */
   }
   .today-activity-card {
-      /* Se quiser a agenda escura também, mude para var(--surface-color) */
-      background-color: var(--card-bg-color); 
+    /* MUDANÇA: Cor escura igual ao resto */
+    background-color: var(--surface-color) !important;
+    border: 1px solid var(--card-border-color);
+    padding: 10px !important; /* Mais compacto */
   }
   
-  /* 3. DIETA EM CARDS VERTICAIS (Fundo Escuro) */
+  /* 3. DIETA EM CARDS VERTICAIS */
   .meal-plan-wrapper { width: 100% !important; }
   .meal-plan, .meal-plan tbody {
     display: block !important;
@@ -697,14 +699,14 @@ textarea:focus {
   }
   .meal-plan thead { display: none !important; }
   
-  /* Card da Refeição */
+  /* Card da Refeição (VERTICAL) */
   .meal-plan tr {
     display: flex !important;
-    flex-direction: column !important; /* Força um embaixo do outro */
+    flex-direction: column !important;
     align-items: flex-start;
-    gap: 8px; /* Espaço entre horário e comida */
+    gap: 8px;
     margin-bottom: 15px;
-    background-color: var(--surface-color) !important; /* Fundo Cinza Escuro */
+    background-color: var(--surface-color) !important;
     border: 1px solid var(--card-border-color) !important;
     border-radius: 12px !important;
     border-left: 5px solid var(--color-dieta) !important;
@@ -712,7 +714,6 @@ textarea:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
-  /* Células dentro do card */
   .meal-plan td {
     display: block !important;
     width: 100% !important;
@@ -722,25 +723,21 @@ textarea:focus {
     text-align: left;
   }
   
-  /* Horário da Refeição */
   .meal-time {
     border-bottom: none !important;
     margin-bottom: 0;
-    font-size: 1.2em; /* Destaque para o horário */
+    font-size: 1.2em;
     font-weight: bold;
     color: var(--color-dieta);
   }
 
-  /* 4. TREINO EM CARDS (Fundo Escuro) */
-  .workout-day ul {
-    padding: 0;
-    list-style: none;
-  }
+  /* 4. TREINO EM CARDS (VERTICAL) */
+  .workout-day ul { padding: 0; list-style: none; }
 
   .exercise-item {
     flex-direction: column !important;
     align-items: flex-start !important;
-    background-color: var(--surface-color) !important; /* Fundo Cinza Escuro */
+    background-color: var(--surface-color) !important;
     border: 1px solid var(--card-border-color) !important;
     border-radius: 12px !important;
     padding: 15px !important;
@@ -749,46 +746,22 @@ textarea:focus {
     border-bottom: 1px solid var(--card-border-color) !important;
   }
 
-  .exercise-info {
-    width: 100%;
-    white-space: normal;
-    padding: 0;
-  }
-  
-  .exercise-info label {
-    display: block;
-    line-height: 1.4;
-    font-size: 1em;
-  }
+  .exercise-info { width: 100%; white-space: normal; padding: 0; }
+  .exercise-info label { display: block; line-height: 1.4; font-size: 1em; }
 
-  /* Rodapé dos controles */
   .exercise-controls {
     width: 100%;
     justify-content: space-between;
-    background-color: rgba(0,0,0,0.2); /* Fundo um pouco mais claro que o card */
+    background-color: rgba(0,0,0,0.2);
     padding: 10px;
     border-radius: 8px;
     margin-top: 5px;
     box-sizing: border-box;
   }
   
-  .series-counter {
-    gap: 8px;
-  }
-  
-  .series-dot {
-    width: 22px;
-    height: 22px;
-    border-width: 2px;
-  }
-  
-  .weight-input {
-    width: 60px;
-    height: 35px;
-    font-size: 14px;
-    background-color: #121212 !important;
-    border: 1px solid #555;
-  }
+  .series-counter { gap: 8px; }
+  .series-dot { width: 22px; height: 22px; border-width: 2px; }
+  .weight-input { width: 60px; height: 35px; font-size: 14px; background-color: #121212 !important; border: 1px solid #555; }
 
   .triad-container { grid-template-columns: 1fr; }
 }
