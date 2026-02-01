@@ -1,17 +1,17 @@
 {
-  "name": "Planner Pessoal",
+  "name": "Planner Inosuke",
   "short_name": "Planner",
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#121212",
-  "theme_color": "#1e1e1e",
-  "description": "Uma aplicação para gerenciar a agenda e a dieta.",
+  "theme_color": "#121212",
+  "description": "Foco total, sem descanso.",
   "icons": [
     {
       "src": "icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512x512.png",
