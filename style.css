@@ -3,11 +3,17 @@
 :root {
   --bg-color: #121212;
   --surface-color: #1e1e1e;
+  /* Cor de fundo estilo Roadmap para cards */
+  --card-bg-color: #1f2937;
+  --card-border-color: #374151;
+
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --border-color: #333;
+
+  /* Cores Temáticas */
   --color-treino: #e74c3c;
-  --color-agenda: #6c757d; /* AGORA CINZA */
+  --color-agenda: #6c757d;
   --color-dieta: #4caf50;
   --color-bemestar: #007bff;
   --color-carreira: #9b59b6;
@@ -25,13 +31,16 @@ body {
   padding-bottom: 50px;
 }
 
-/* GERAL */
+/* =========================================
+   GERAL & INPUTS
+   ========================================= */
 input[type="checkbox"] {
   accent-color: #e74c3c;
   width: 18px;
   height: 18px;
   cursor: pointer;
 }
+
 .exercise-item.completed label,
 .checklist-item.completed label {
   text-decoration: line-through;
@@ -40,7 +49,6 @@ input[type="checkbox"] {
   transition: all 0.3s ease;
 }
 
-/* INPUTS PRETO */
 input,
 textarea {
   background-color: #000000 !important;
@@ -50,14 +58,18 @@ textarea {
   padding: 10px;
   font-family: inherit;
   box-sizing: border-box;
+  max-width: 100%;
 }
+
 input:focus,
 textarea:focus {
   outline: 1px solid var(--color-agenda);
   border-color: var(--color-agenda);
 }
 
-/* NAV */
+/* =========================================
+   NAVEGAÇÃO (TABS)
+   ========================================= */
 .nav-tabs {
   display: flex;
   background-color: var(--surface-color);
@@ -69,6 +81,7 @@ textarea:focus {
   z-index: 1000;
   border-bottom: 1px solid var(--border-color);
 }
+
 .tab-button {
   padding: 15px 20px;
   cursor: pointer;
@@ -79,11 +92,14 @@ textarea:focus {
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
   font-family: "JetBrains Mono", monospace;
+  white-space: nowrap; /* Impede quebra de texto */
 }
+
 .tab-button.active {
   color: #ffffff;
   font-weight: bold;
 }
+
 .tab-button[onclick*="agenda"].active {
   border-bottom-color: var(--color-agenda);
 }
@@ -109,9 +125,11 @@ textarea:focus {
   padding: 20px;
   animation: fadeIn 0.5s;
 }
+
 .content-section.active {
   display: block;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -124,7 +142,6 @@ textarea:focus {
 /* =========================================
    AGENDA SECTION
    ========================================= */
-
 #agenda-section {
   --hora-altura: 80px;
   width: 100%;
@@ -135,7 +152,7 @@ textarea:focus {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0; /* Remove padding lateral container principal */
   box-sizing: border-box;
 }
 
@@ -237,6 +254,7 @@ textarea:focus {
   color: white;
   z-index: 1;
 }
+
 .atividade-bloco:hover {
   transform: scale(1.02);
   z-index: 20 !important;
@@ -258,6 +276,7 @@ textarea:focus {
   display: flex;
   flex-direction: column;
 }
+
 .deadline-box h3 {
   font-size: 1em;
   margin-top: 0;
@@ -266,6 +285,7 @@ textarea:focus {
   margin-bottom: 10px;
   color: var(--color-agenda);
 }
+
 .deadline-box textarea {
   width: 100%;
   min-height: 80px;
@@ -275,56 +295,68 @@ textarea:focus {
   color: #ddd;
 }
 
+/* AGENDA - HOJE VIEW (Estilo atualizado para Cards) */
 .agenda-today-view {
-  background-color: var(--surface-color);
-  border-radius: 12px;
-  padding: 15px;
-  border: 1px solid var(--border-color);
+  /* Em mobile, o background do container some para dar lugar aos cards individuais */
+  background-color: transparent;
+  padding: 0;
+  border: none;
   margin-bottom: 10px;
 }
+
 .today-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
+  gap: 15px; /* Espaço maior entre cards */
 }
 
 .today-activity-card {
-  background-color: #252525;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 10px 15px;
-  border-left: 5px solid #fff;
+  /* Estilo visual igual ao Roadmap */
+  background-color: var(--card-bg-color); /* #1f2937 */
+  border: 1px solid var(--card-border-color); /* #374151 */
+  border-radius: 12px;
+  padding: 15px 20px;
+  border-left: 6px solid #fff; /* Borda lateral colorida mais grossa */
+
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 .today-activity-card:hover {
   transform: translateX(2px);
-  background-color: #333;
+  background-color: #2d3748;
 }
+
 .today-activity-card.completed {
-  opacity: 0.4;
+  opacity: 0.5;
   filter: grayscale(100%);
   text-decoration: line-through;
 }
+
 .today-activity-info h4 {
-  margin: 0 0 5px 0;
-  font-size: 1em;
+  margin: 0 0 8px 0;
+  font-size: 1.1em;
   color: #fff;
+  font-weight: bold;
 }
+
 .today-activity-time {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.8em;
-  color: var(--text-secondary);
-  background: #000;
-  padding: 2px 6px;
+  font-size: 0.85em;
+  color: #a0aec0; /* Cor mais clara */
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 8px;
   border-radius: 4px;
   display: inline-block;
 }
 
-/* BEM-ESTAR */
+/* =========================================
+   BEM-ESTAR
+   ========================================= */
 .azul-uniforme {
   border-left: 5px solid var(--blue-unified) !important;
   margin-bottom: 30px;
@@ -357,7 +389,9 @@ textarea:focus {
   border-left: 2px solid #555;
 }
 
-/* TREINO */
+/* =========================================
+   TREINO
+   ========================================= */
 #treino-section {
   --cor-destaque: #e74c3c;
 }
@@ -449,7 +483,9 @@ textarea:focus {
   text-align: center;
 }
 
-/* DIETA */
+/* =========================================
+   DIETA
+   ========================================= */
 #dieta-section .container {
   max-width: 900px;
   margin: 0 auto;
@@ -476,23 +512,40 @@ textarea:focus {
 }
 .meal-plan {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+  border-collapse: separate; /* Permite border-radius nas trs */
+  border-spacing: 0 15px; /* Espaço entre as linhas/cards */
+  margin-top: 0;
   min-width: 600px;
 }
 .meal-plan th {
   background-color: var(--color-dieta);
   color: white;
   padding: 15px;
+  text-align: left;
 }
 .meal-plan td {
   padding: 15px;
   border-bottom: 1px solid #333;
+  background-color: var(--surface-color);
 }
+.meal-plan tr:first-child td:first-child {
+  border-top-left-radius: 8px;
+}
+.meal-plan tr:first-child td:last-child {
+  border-top-right-radius: 8px;
+}
+.meal-plan tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+.meal-plan tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
 .meal-time {
   font-weight: 700;
   color: var(--color-dieta);
   min-width: 140px;
+  vertical-align: top;
 }
 .shopping-lists-container {
   display: grid;
@@ -514,7 +567,9 @@ textarea:focus {
   border-bottom: 1px solid #2a2a2a;
 }
 
-/* PROTOCOLS */
+/* =========================================
+   PROTOCOLS
+   ========================================= */
 .protocol-card {
   background-color: var(--surface-color);
   padding: 25px;
@@ -569,7 +624,9 @@ textarea:focus {
   border-bottom: 1px solid #333;
 }
 
-/* CARREIRA */
+/* =========================================
+   CARREIRA / ROADMAP
+   ========================================= */
 .progress-bar-bg {
   background-color: #374151;
   border-radius: 99px;
@@ -594,10 +651,10 @@ textarea:focus {
 }
 
 .roadmap-card {
-  background-color: #1f2937;
+  background-color: var(--card-bg-color); /* #1f2937 */
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid #374151;
+  border: 1px solid var(--card-border-color); /* #374151 */
 }
 .roadmap-card.blue {
   border-color: #3b82f6;
@@ -605,30 +662,35 @@ textarea:focus {
 .blue-text {
   color: #60a5fa;
 }
+
 .roadmap-card.green {
   border-color: #10b981;
 }
 .green-text {
   color: #34d399;
 }
+
 .roadmap-card.purple {
   border-color: #8b5cf6;
 }
 .purple-text {
   color: #a78bfa;
 }
+
 .roadmap-card.red {
   border-color: #ef4444;
 }
 .red-text {
   color: #f87171;
 }
+
 .roadmap-card.amber {
   border-color: #f59e0b;
 }
 .amber-text {
   color: #fbbf24;
 }
+
 .topic-header {
   margin-top: 20px;
   margin-bottom: 10px;
@@ -638,6 +700,9 @@ textarea:focus {
   font-weight: bold;
 }
 
+/* =========================================
+   RESPONSIVO (MEDIA QUERIES)
+   ========================================= */
 @media (max-width: 992px) {
   #agenda-wrapper {
     flex-direction: column;
@@ -647,35 +712,82 @@ textarea:focus {
     flex: 1 1 100%;
   }
 }
+
 @media (max-width: 768px) {
+  /* NAVEGAÇÃO DESLIZANTE */
   .nav-tabs {
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar {
+    display: none;
   }
   .tab-button {
     flex: 0 0 auto;
     margin: 0;
   }
+
+  /* AGENDA EM CARDS (Estilo Roadmap) */
+  .today-list {
+    grid-template-columns: 1fr !important; /* Um card por linha */
+    gap: 15px;
+  }
+
+  /* DIETA EM CARDS */
   .meal-plan-wrapper {
     width: 100% !important;
   }
-  table.meal-plan,
-  table.meal-plan tbody,
-  table.meal-plan tr,
-  table.meal-plan td {
+
+  /* Desmonta a tabela e transforma em blocos */
+  .meal-plan,
+  .meal-plan tbody,
+  .meal-plan tr,
+  .meal-plan td {
     display: block !important;
     width: 100% !important;
+    box-sizing: border-box;
   }
-  table.meal-plan thead {
+
+  .meal-plan thead {
     display: none !important;
   }
+
+  /* Estilo Card para Refeições */
   .meal-plan tr {
     margin-bottom: 20px;
+    background-color: var(--card-bg-color) !important; /* #1f2937 */
+    border: 1px solid var(--card-border-color) !important; /* #374151 */
+    border-radius: 12px !important;
     border-left: 5px solid var(--color-dieta) !important;
+    padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
+
+  .meal-plan td {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 5px 0 !important;
+  }
+
+  .meal-time {
+    border-bottom: 1px solid #4a5568 !important;
+    margin-bottom: 10px;
+    padding-bottom: 5px !important;
+    font-size: 1.2em;
+    width: 100%;
+    display: block;
+  }
+
+  /* Triades empilhadas */
   .triad-container {
     grid-template-columns: 1fr;
+  }
+
+  /* Inputs full width */
+  .weight-input {
+    width: 60px; /* Um pouco maior no touch */
   }
 }
