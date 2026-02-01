@@ -1,5 +1,5 @@
-// Atualizei a versão para v33 para garantir que ele pegue o CSS novo
-const CACHE_NAME = "planner-2026-v33"; 
+// Atualizei a versão para v34 para garantir que ele pegue o CSS novo
+const CACHE_NAME = "planner-2026-v34"; 
 
 const urlsToCache = [
   "./",
@@ -57,6 +57,7 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
 
 
 
