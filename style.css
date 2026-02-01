@@ -25,6 +25,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "JetBrains Mono", monospace;
+  /* Reduzido para 14px para caber mais conteúdo */
+  font-size: 14px; 
   background-color: var(--bg-color);
   color: var(--text-primary);
   overscroll-behavior-x: none;
@@ -36,8 +38,8 @@ body {
    ========================================= */
 input[type="checkbox"] {
   accent-color: #e74c3c;
-  width: 18px;
-  height: 18px;
+  width: 16px; /* Levemente menor */
+  height: 16px;
   cursor: pointer;
 }
 
@@ -55,8 +57,9 @@ textarea {
   color: #fff !important;
   border: 1px solid #444;
   border-radius: 5px;
-  padding: 10px;
+  padding: 8px; /* Padding reduzido */
   font-family: inherit;
+  font-size: 14px; /* Fonte input reduzida */
   box-sizing: border-box;
   max-width: 100%;
 }
@@ -83,7 +86,7 @@ textarea:focus {
 }
 
 .tab-button {
-  padding: 15px 20px;
+  padding: 12px 15px; /* Botões mais compactos */
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -92,7 +95,7 @@ textarea:focus {
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
   font-family: "JetBrains Mono", monospace;
-  white-space: nowrap; /* Impede quebra de texto */
+  white-space: nowrap;
 }
 
 .tab-button.active {
@@ -109,7 +112,7 @@ textarea:focus {
 
 .content-section {
   display: none;
-  padding: 20px;
+  padding: 15px; /* Padding geral reduzido */
   animation: fadeIn 0.5s;
 }
 
@@ -126,7 +129,7 @@ textarea:focus {
    AGENDA SECTION
    ========================================= */
 #agenda-section {
-  --hora-altura: 80px;
+  --hora-altura: 70px; /* Altura hora reduzida */
   width: 100%;
   overflow-x: hidden;
 }
@@ -179,9 +182,9 @@ textarea:focus {
 
 .agenda-container {
   display: grid;
-  grid-template-columns: 60px repeat(7, minmax(120px, 1fr));
-  grid-template-rows: 50px repeat(24, var(--hora-altura));
-  min-width: 900px;
+  grid-template-columns: 50px repeat(7, minmax(100px, 1fr)); /* Colunas mais estreitas */
+  grid-template-rows: 40px repeat(24, var(--hora-altura));
+  min-width: 800px;
   background-color: #1a1a1a;
 }
 
@@ -192,6 +195,7 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   position: relative;
+  font-size: 0.9em;
 }
 
 .header-dia {
@@ -219,13 +223,13 @@ textarea:focus {
 
 .atividade-bloco {
   position: absolute;
-  left: 4px;
-  right: 4px;
-  border-radius: 6px;
-  padding: 5px;
-  font-size: 0.8em;
+  left: 2px;
+  right: 2px;
+  border-radius: 4px;
+  padding: 2px;
+  font-size: 0.75em; /* Fonte bloco reduzida */
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  border-left: 4px solid rgba(0, 0, 0, 0.4);
+  border-left: 3px solid rgba(0, 0, 0, 0.4);
   overflow: hidden;
   transition: transform 0.2s;
   cursor: pointer;
@@ -246,7 +250,7 @@ textarea:focus {
 .deadlines-area {
   flex: 1 1 300px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
   align-content: start;
 }
@@ -278,7 +282,7 @@ textarea:focus {
   color: #ddd;
 }
 
-/* AGENDA - HOJE VIEW (Card Style) */
+/* AGENDA - HOJE VIEW (Cards) */
 .agenda-today-view {
   background-color: transparent;
   padding: 0;
@@ -289,15 +293,15 @@ textarea:focus {
 .today-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 15px;
+  gap: 12px;
 }
 
 .today-activity-card {
   background-color: var(--card-bg-color);
   border: 1px solid var(--card-border-color);
-  border-radius: 12px;
-  padding: 15px 20px;
-  border-left: 6px solid #fff;
+  border-radius: 10px;
+  padding: 12px 15px;
+  border-left: 5px solid #fff;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -318,18 +322,18 @@ textarea:focus {
 }
 
 .today-activity-info h4 {
-  margin: 0 0 8px 0;
-  font-size: 1.1em;
+  margin: 0 0 5px 0;
+  font-size: 1em;
   color: #fff;
   font-weight: bold;
 }
 
 .today-activity-time {
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.85em;
+  font-size: 0.8em;
   color: #a0aec0;
   background: rgba(0,0,0,0.3);
-  padding: 4px 8px;
+  padding: 3px 6px;
   border-radius: 4px;
   display: inline-block;
 }
@@ -339,16 +343,17 @@ textarea:focus {
    ========================================= */
 .azul-uniforme {
   border-left: 5px solid var(--blue-unified) !important;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .azul-uniforme h2 {
   color: var(--blue-unified) !important;
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 1.3em;
 }
 .prayer-accordion {
   border-bottom: 1px solid #333;
-  padding: 10px 0;
+  padding: 8px 0;
   cursor: pointer;
 }
 .prayer-accordion summary {
@@ -361,10 +366,10 @@ textarea:focus {
   display: none;
 }
 .prayer-accordion p {
-  margin-top: 10px;
+  margin-top: 8px;
   color: #a0a0a0;
   font-size: 0.9em;
-  line-height: 1.6;
+  line-height: 1.5;
   padding-left: 10px;
   border-left: 2px solid #555;
 }
@@ -380,8 +385,8 @@ textarea:focus {
   border: 1px solid var(--border-color);
   border-left: 5px solid var(--cor-destaque);
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 25px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 .hidden-workout {
   display: none !important;
@@ -391,25 +396,27 @@ textarea:focus {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
 }
 .workout-day-header h3 {
   color: var(--cor-destaque);
   margin: 0;
+  font-size: 1.1em;
 }
 .reset-button {
   background-color: #333;
   color: #e0e0e0;
   border: 1px solid #555;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 0.9em;
 }
 .toggle-btn {
   background-color: var(--cor-destaque);
-  padding: 12px 24px;
-  font-size: 1em;
+  padding: 10px 20px;
+  font-size: 0.95em;
   border-radius: 6px;
   color: #fff;
   border: none;
@@ -417,7 +424,7 @@ textarea:focus {
   font-weight: bold;
 }
 .exercise-item {
-  padding: 12px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #2a2a2a;
   display: flex;
   justify-content: space-between;
@@ -427,7 +434,7 @@ textarea:focus {
 .exercise-info {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   flex-grow: 1;
 }
 .exercise-controls {
@@ -438,12 +445,12 @@ textarea:focus {
 .series-counter {
   display: flex;
   flex-direction: row !important;
-  gap: 5px;
+  gap: 4px;
   flex-wrap: nowrap;
 }
 .series-dot {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background-color: #333;
   border: 1px solid #555;
   border-radius: 50%;
@@ -454,13 +461,14 @@ textarea:focus {
   border-color: var(--cor-destaque);
 }
 .weight-input {
-  width: 50px;
-  padding: 6px;
+  width: 45px;
+  padding: 5px;
   border-radius: 4px;
   border: 1px solid var(--border-color);
   background-color: #000;
   color: #fff;
   text-align: center;
+  font-size: 0.9em;
 }
 
 /* =========================================
@@ -470,21 +478,23 @@ textarea:focus {
   max-width: 900px;
   margin: 0 auto;
   background-color: transparent;
-  padding: 0 10px;
+  padding: 0;
 }
 #dieta-section h1 {
   color: var(--color-dieta);
   text-align: center;
-  margin-top: 20px;
+  margin-top: 15px;
+  font-size: 1.5em;
 }
 .water-goal {
   background: linear-gradient(90deg, #2e7d32, #4caf50) !important;
   color: white;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 15px;
+  border-radius: 10px;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  font-size: 1em;
 }
 .meal-plan-wrapper {
   width: 100%;
@@ -493,18 +503,18 @@ textarea:focus {
 .meal-plan {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 15px;
+  border-spacing: 0 10px;
   margin-top: 0;
   min-width: 600px;
 }
 .meal-plan th {
   background-color: var(--color-dieta);
   color: white;
-  padding: 15px;
+  padding: 12px;
   text-align: left;
 }
 .meal-plan td {
-  padding: 15px;
+  padding: 12px;
   border-bottom: 1px solid #333;
   background-color: var(--surface-color);
 }
@@ -516,27 +526,28 @@ textarea:focus {
 .meal-time {
   font-weight: 700;
   color: var(--color-dieta);
-  min-width: 140px;
+  min-width: 120px;
   vertical-align: top;
 }
 .shopping-lists-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
 }
 .shopping-list {
   background-color: var(--surface-color);
   border: 1px solid var(--border-color);
   border-left: 5px solid var(--color-dieta);
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
 }
 .checklist-item {
   display: flex;
   align-items: center;
-  padding: 8px 0;
+  padding: 6px 0;
   border-bottom: 1px solid #2a2a2a;
+  font-size: 0.95em;
 }
 
 /* =========================================
@@ -544,40 +555,41 @@ textarea:focus {
    ========================================= */
 .protocol-card {
   background-color: var(--surface-color);
-  padding: 25px;
+  padding: 20px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
   border-left: 5px solid var(--blue-unified);
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 .triad-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 15px;
-  margin-bottom: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 25px;
 }
 .triad-box {
   background: #1a1a1a;
   border: 1px solid var(--blue-unified);
   border-radius: 8px;
-  padding: 15px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
 }
 .triad-box h3 {
   margin-top: 0;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   border-bottom: 1px solid #333;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
+  font-size: 1em;
 }
 .small-btn {
   align-self: flex-end;
-  padding: 5px 15px;
+  padding: 4px 12px;
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  font-size: 0.85em;
+  font-size: 0.8em;
   font-weight: bold;
 }
 .red-btn {
@@ -585,14 +597,14 @@ textarea:focus {
   color: white;
 }
 .history-box {
-  max-height: 250px;
+  max-height: 200px;
   overflow-y: auto;
 }
 .history-item-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 8px 0;
+  padding: 6px 0;
   border-bottom: 1px solid #333;
 }
 
@@ -602,7 +614,7 @@ textarea:focus {
 .progress-bar-bg {
   background-color: #374151;
   border-radius: 99px;
-  height: 24px;
+  height: 20px; /* Mais fino */
   overflow: hidden;
 }
 .progress-bar-fill {
@@ -613,17 +625,18 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   width: 0%;
+  font-size: 0.8em;
   transition: width 0.5s ease-in-out;
 }
 .roadmap-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 15px;
 }
 .roadmap-card {
   background-color: var(--card-bg-color);
   border-radius: 12px;
-  padding: 20px;
+  padding: 15px;
   border: 1px solid var(--card-border-color);
 }
 .roadmap-card.blue { border-color: #3b82f6; }
@@ -637,11 +650,11 @@ textarea:focus {
 .roadmap-card.amber { border-color: #f59e0b; }
 .amber-text { color: #fbbf24; }
 .topic-header {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 8px;
   border-bottom: 1px solid #374151;
   color: #e5e7eb;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
   font-weight: bold;
 }
 
@@ -668,7 +681,7 @@ textarea:focus {
   /* 2. AGENDA EM CARDS */
   .today-list {
     grid-template-columns: 1fr !important;
-    gap: 15px;
+    gap: 12px;
   }
   
   /* 3. DIETA EM CARDS */
@@ -681,65 +694,87 @@ textarea:focus {
   .meal-plan thead { display: none !important; }
   
   .meal-plan tr {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     background-color: var(--card-bg-color) !important;
     border: 1px solid var(--card-border-color) !important;
     border-radius: 12px !important;
     border-left: 5px solid var(--color-dieta) !important;
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   .meal-plan td {
     background-color: transparent !important;
     border: none !important;
-    padding: 5px 0 !important;
+    padding: 4px 0 !important;
   }
   .meal-time {
     border-bottom: 1px solid #4a5568 !important;
-    margin-bottom: 10px;
-    padding-bottom: 5px !important;
-    font-size: 1.2em;
+    margin-bottom: 8px;
+    padding-bottom: 4px !important;
+    font-size: 1.1em; /* Reduzido */
     width: 100%;
     display: block;
   }
 
-  /* 4. CORREÇÃO DO TREINO (NOVO) */
-  /* Isso força o texto a ficar em cima e os controles embaixo */
-  .exercise-item {
-    flex-direction: column; /* Pilha vertical */
-    align-items: flex-start; /* Alinha à esquerda */
-    gap: 15px;
-    padding: 15px 10px; /* Mais espaço interno */
+  /* 4. CORREÇÃO DEFINITIVA DO TREINO (CARDS) */
+  .workout-day ul {
+    padding: 0;
+    list-style: none;
   }
-  
+
+  /* Transforma cada item de exercício em um CARTÃO SEPARADO */
+  .exercise-item {
+    flex-direction: column !important; /* Força empilhamento vertical */
+    align-items: flex-start !important;
+    background-color: var(--card-bg-color) !important; /* Cor de fundo do Card */
+    border: 1px solid var(--card-border-color) !important; /* Borda do Card */
+    border-radius: 12px !important; /* Arredondamento */
+    padding: 15px !important; /* Espaço interno */
+    margin-bottom: 12px !important; /* Espaço entre cards */
+    gap: 12px !important;
+    border-bottom: 1px solid var(--card-border-color) !important;
+  }
+
   .exercise-info {
     width: 100%;
-    padding-right: 0;
+    white-space: normal; /* Permite que o texto quebre linha */
+    padding: 0;
   }
   
+  .exercise-info label {
+    display: block;
+    line-height: 1.4;
+    font-size: 1em; /* Fonte reduzida para caber melhor */
+  }
+
+  /* Área dos controles (bolinhas e peso) vira um rodapé do card */
   .exercise-controls {
     width: 100%;
-    justify-content: space-between; /* Espalha bolinhas e input */
-    background-color: rgba(0,0,0,0.2);
+    justify-content: space-between;
+    background-color: rgba(0,0,0,0.3); /* Fundo escuro para destacar controles */
     padding: 10px;
     border-radius: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
   }
   
   .series-counter {
-    gap: 12px; /* Aumenta espaço das bolinhas para o dedo */
+    gap: 8px;
   }
   
   .series-dot {
-    width: 20px; /* Bolinhas maiores no mobile */
-    height: 20px;
+    width: 22px; /* Tamanho bom para toque */
+    height: 22px;
+    border-width: 2px;
   }
   
   .weight-input {
     width: 60px;
-    height: 35px; /* Input maior para o dedo */
-    font-size: 16px;
+    height: 35px;
+    font-size: 14px;
+    background-color: #121212 !important;
+    border: 1px solid #555;
   }
 
-  /* Triades empilhadas */
   .triad-container { grid-template-columns: 1fr; }
 }
