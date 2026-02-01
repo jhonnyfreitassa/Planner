@@ -6,11 +6,11 @@
   /* Cor de fundo estilo Roadmap para cards */
   --card-bg-color: #1f2937;
   --card-border-color: #374151;
-
+  
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --border-color: #333;
-
+  
   /* Cores Temáticas */
   --color-treino: #e74c3c;
   --color-agenda: #6c757d;
@@ -100,25 +100,12 @@ textarea:focus {
   font-weight: bold;
 }
 
-.tab-button[onclick*="agenda"].active {
-  border-bottom-color: var(--color-agenda);
-}
-.tab-button[onclick*="treino"].active {
-  border-bottom-color: var(--color-treino);
-}
-.tab-button[onclick*="dieta"].active {
-  border-bottom-color: var(--color-dieta);
-}
-.tab-button[onclick*="bem-estar"].active {
-  border-bottom-color: var(--color-bemestar);
-}
-.tab-button[onclick*="carreira"].active {
-  border-bottom-color: var(--color-carreira);
-}
-.tab-button[onclick*="concursos"].active {
-  border-bottom-color: var(--color-concurso);
-  color: var(--color-concurso);
-}
+.tab-button[onclick*="agenda"].active { border-bottom-color: var(--color-agenda); }
+.tab-button[onclick*="treino"].active { border-bottom-color: var(--color-treino); }
+.tab-button[onclick*="dieta"].active { border-bottom-color: var(--color-dieta); }
+.tab-button[onclick*="bem-estar"].active { border-bottom-color: var(--color-bemestar); }
+.tab-button[onclick*="carreira"].active { border-bottom-color: var(--color-carreira); }
+.tab-button[onclick*="concursos"].active { border-bottom-color: var(--color-concurso); color: var(--color-concurso); }
 
 .content-section {
   display: none;
@@ -131,12 +118,8 @@ textarea:focus {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* =========================================
@@ -152,7 +135,7 @@ textarea:focus {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  padding: 0; /* Remove padding lateral container principal */
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -295,9 +278,8 @@ textarea:focus {
   color: #ddd;
 }
 
-/* AGENDA - HOJE VIEW (Estilo atualizado para Cards) */
+/* AGENDA - HOJE VIEW (Card Style) */
 .agenda-today-view {
-  /* Em mobile, o background do container some para dar lugar aos cards individuais */
   background-color: transparent;
   padding: 0;
   border: none;
@@ -307,23 +289,21 @@ textarea:focus {
 .today-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 15px; /* Espaço maior entre cards */
+  gap: 15px;
 }
 
 .today-activity-card {
-  /* Estilo visual igual ao Roadmap */
-  background-color: var(--card-bg-color); /* #1f2937 */
-  border: 1px solid var(--card-border-color); /* #374151 */
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--card-border-color);
   border-radius: 12px;
   padding: 15px 20px;
-  border-left: 6px solid #fff; /* Borda lateral colorida mais grossa */
-
+  border-left: 6px solid #fff;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .today-activity-card:hover {
@@ -347,8 +327,8 @@ textarea:focus {
 .today-activity-time {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.85em;
-  color: #a0aec0; /* Cor mais clara */
-  background: rgba(0, 0, 0, 0.3);
+  color: #a0aec0;
+  background: rgba(0,0,0,0.3);
   padding: 4px 8px;
   border-radius: 4px;
   display: inline-block;
@@ -512,8 +492,8 @@ textarea:focus {
 }
 .meal-plan {
   width: 100%;
-  border-collapse: separate; /* Permite border-radius nas trs */
-  border-spacing: 0 15px; /* Espaço entre as linhas/cards */
+  border-collapse: separate;
+  border-spacing: 0 15px;
   margin-top: 0;
   min-width: 600px;
 }
@@ -528,18 +508,10 @@ textarea:focus {
   border-bottom: 1px solid #333;
   background-color: var(--surface-color);
 }
-.meal-plan tr:first-child td:first-child {
-  border-top-left-radius: 8px;
-}
-.meal-plan tr:first-child td:last-child {
-  border-top-right-radius: 8px;
-}
-.meal-plan tr:last-child td:first-child {
-  border-bottom-left-radius: 8px;
-}
-.meal-plan tr:last-child td:last-child {
-  border-bottom-right-radius: 8px;
-}
+.meal-plan tr:first-child td:first-child { border-top-left-radius: 8px; }
+.meal-plan tr:first-child td:last-child { border-top-right-radius: 8px; }
+.meal-plan tr:last-child td:first-child { border-bottom-left-radius: 8px; }
+.meal-plan tr:last-child td:last-child { border-bottom-right-radius: 8px; }
 
 .meal-time {
   font-weight: 700;
@@ -568,7 +540,7 @@ textarea:focus {
 }
 
 /* =========================================
-   PROTOCOLS
+   PROTOCOLS & OTHERS
    ========================================= */
 .protocol-card {
   background-color: var(--surface-color);
@@ -643,54 +615,27 @@ textarea:focus {
   width: 0%;
   transition: width 0.5s ease-in-out;
 }
-
 .roadmap-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
-
 .roadmap-card {
-  background-color: var(--card-bg-color); /* #1f2937 */
+  background-color: var(--card-bg-color);
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid var(--card-border-color); /* #374151 */
+  border: 1px solid var(--card-border-color);
 }
-.roadmap-card.blue {
-  border-color: #3b82f6;
-}
-.blue-text {
-  color: #60a5fa;
-}
-
-.roadmap-card.green {
-  border-color: #10b981;
-}
-.green-text {
-  color: #34d399;
-}
-
-.roadmap-card.purple {
-  border-color: #8b5cf6;
-}
-.purple-text {
-  color: #a78bfa;
-}
-
-.roadmap-card.red {
-  border-color: #ef4444;
-}
-.red-text {
-  color: #f87171;
-}
-
-.roadmap-card.amber {
-  border-color: #f59e0b;
-}
-.amber-text {
-  color: #fbbf24;
-}
-
+.roadmap-card.blue { border-color: #3b82f6; }
+.blue-text { color: #60a5fa; }
+.roadmap-card.green { border-color: #10b981; }
+.green-text { color: #34d399; }
+.roadmap-card.purple { border-color: #8b5cf6; }
+.purple-text { color: #a78bfa; }
+.roadmap-card.red { border-color: #ef4444; }
+.red-text { color: #f87171; }
+.roadmap-card.amber { border-color: #f59e0b; }
+.amber-text { color: #fbbf24; }
 .topic-header {
   margin-top: 20px;
   margin-bottom: 10px;
@@ -704,17 +649,12 @@ textarea:focus {
    RESPONSIVO (MEDIA QUERIES)
    ========================================= */
 @media (max-width: 992px) {
-  #agenda-wrapper {
-    flex-direction: column;
-  }
-  .agenda-main-area,
-  .deadlines-area {
-    flex: 1 1 100%;
-  }
+  #agenda-wrapper { flex-direction: column; }
+  .agenda-main-area, .deadlines-area { flex: 1 1 100%; }
 }
 
 @media (max-width: 768px) {
-  /* NAVEGAÇÃO DESLIZANTE */
+  /* 1. NAVEGAÇÃO DESLIZANTE */
   .nav-tabs {
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
@@ -722,56 +662,38 @@ textarea:focus {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  .nav-tabs::-webkit-scrollbar {
-    display: none;
-  }
-  .tab-button {
-    flex: 0 0 auto;
-    margin: 0;
-  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-button { flex: 0 0 auto; margin: 0; }
 
-  /* AGENDA EM CARDS (Estilo Roadmap) */
+  /* 2. AGENDA EM CARDS */
   .today-list {
-    grid-template-columns: 1fr !important; /* Um card por linha */
+    grid-template-columns: 1fr !important;
     gap: 15px;
   }
-
-  /* DIETA EM CARDS */
-  .meal-plan-wrapper {
-    width: 100% !important;
-  }
-
-  /* Desmonta a tabela e transforma em blocos */
-  .meal-plan,
-  .meal-plan tbody,
-  .meal-plan tr,
-  .meal-plan td {
+  
+  /* 3. DIETA EM CARDS */
+  .meal-plan-wrapper { width: 100% !important; }
+  .meal-plan, .meal-plan tbody, .meal-plan tr, .meal-plan td {
     display: block !important;
     width: 100% !important;
     box-sizing: border-box;
   }
-
-  .meal-plan thead {
-    display: none !important;
-  }
-
-  /* Estilo Card para Refeições */
+  .meal-plan thead { display: none !important; }
+  
   .meal-plan tr {
     margin-bottom: 20px;
-    background-color: var(--card-bg-color) !important; /* #1f2937 */
-    border: 1px solid var(--card-border-color) !important; /* #374151 */
+    background-color: var(--card-bg-color) !important;
+    border: 1px solid var(--card-border-color) !important;
     border-radius: 12px !important;
     border-left: 5px solid var(--color-dieta) !important;
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
-
   .meal-plan td {
     background-color: transparent !important;
     border: none !important;
     padding: 5px 0 !important;
   }
-
   .meal-time {
     border-bottom: 1px solid #4a5568 !important;
     margin-bottom: 10px;
@@ -781,13 +703,43 @@ textarea:focus {
     display: block;
   }
 
-  /* Triades empilhadas */
-  .triad-container {
-    grid-template-columns: 1fr;
+  /* 4. CORREÇÃO DO TREINO (NOVO) */
+  /* Isso força o texto a ficar em cima e os controles embaixo */
+  .exercise-item {
+    flex-direction: column; /* Pilha vertical */
+    align-items: flex-start; /* Alinha à esquerda */
+    gap: 15px;
+    padding: 15px 10px; /* Mais espaço interno */
+  }
+  
+  .exercise-info {
+    width: 100%;
+    padding-right: 0;
+  }
+  
+  .exercise-controls {
+    width: 100%;
+    justify-content: space-between; /* Espalha bolinhas e input */
+    background-color: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .series-counter {
+    gap: 12px; /* Aumenta espaço das bolinhas para o dedo */
+  }
+  
+  .series-dot {
+    width: 20px; /* Bolinhas maiores no mobile */
+    height: 20px;
+  }
+  
+  .weight-input {
+    width: 60px;
+    height: 35px; /* Input maior para o dedo */
+    font-size: 16px;
   }
 
-  /* Inputs full width */
-  .weight-input {
-    width: 60px; /* Um pouco maior no touch */
-  }
+  /* Triades empilhadas */
+  .triad-container { grid-template-columns: 1fr; }
 }
