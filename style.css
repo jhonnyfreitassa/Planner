@@ -3,7 +3,7 @@
 :root {
   --bg-color: #121212;
   --surface-color: #1e1e1e;
-  /* Cor de fundo estilo Roadmap para cards */
+  /* Cor de fundo estilo Roadmap para cards (Azulado - Usado no Desktop) */
   --card-bg-color: #1f2937;
   --card-border-color: #374151;
   
@@ -678,80 +678,94 @@ textarea:focus {
   .nav-tabs::-webkit-scrollbar { display: none; }
   .tab-button { flex: 0 0 auto; margin: 0; }
 
-  /* 2. AGENDA EM CARDS */
+  /* 2. AGENDA EM CARDS (Mantém o azulado aqui se quiser, ou muda para surface-color) */
   .today-list {
     grid-template-columns: 1fr !important;
     gap: 12px;
   }
+  .today-activity-card {
+      /* Se quiser a agenda escura também, mude para var(--surface-color) */
+      background-color: var(--card-bg-color); 
+  }
   
-  /* 3. DIETA EM CARDS */
+  /* 3. DIETA EM CARDS VERTICAIS (Fundo Escuro) */
   .meal-plan-wrapper { width: 100% !important; }
-  .meal-plan, .meal-plan tbody, .meal-plan tr, .meal-plan td {
+  .meal-plan, .meal-plan tbody {
     display: block !important;
     width: 100% !important;
     box-sizing: border-box;
   }
   .meal-plan thead { display: none !important; }
   
+  /* Card da Refeição */
   .meal-plan tr {
+    display: flex !important;
+    flex-direction: column !important; /* Força um embaixo do outro */
+    align-items: flex-start;
+    gap: 8px; /* Espaço entre horário e comida */
     margin-bottom: 15px;
-    background-color: var(--card-bg-color) !important;
+    background-color: var(--surface-color) !important; /* Fundo Cinza Escuro */
     border: 1px solid var(--card-border-color) !important;
     border-radius: 12px !important;
     border-left: 5px solid var(--color-dieta) !important;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
+  
+  /* Células dentro do card */
   .meal-plan td {
+    display: block !important;
+    width: 100% !important;
     background-color: transparent !important;
     border: none !important;
-    padding: 4px 0 !important;
+    padding: 0 !important;
+    text-align: left;
   }
+  
+  /* Horário da Refeição */
   .meal-time {
-    border-bottom: 1px solid #4a5568 !important;
-    margin-bottom: 8px;
-    padding-bottom: 4px !important;
-    font-size: 1.1em; /* Reduzido */
-    width: 100%;
-    display: block;
+    border-bottom: none !important;
+    margin-bottom: 0;
+    font-size: 1.2em; /* Destaque para o horário */
+    font-weight: bold;
+    color: var(--color-dieta);
   }
 
-  /* 4. CORREÇÃO DEFINITIVA DO TREINO (CARDS) */
+  /* 4. TREINO EM CARDS (Fundo Escuro) */
   .workout-day ul {
     padding: 0;
     list-style: none;
   }
 
-  /* Transforma cada item de exercício em um CARTÃO SEPARADO */
   .exercise-item {
-    flex-direction: column !important; /* Força empilhamento vertical */
+    flex-direction: column !important;
     align-items: flex-start !important;
-    background-color: var(--card-bg-color) !important; /* Cor de fundo do Card */
-    border: 1px solid var(--card-border-color) !important; /* Borda do Card */
-    border-radius: 12px !important; /* Arredondamento */
-    padding: 15px !important; /* Espaço interno */
-    margin-bottom: 12px !important; /* Espaço entre cards */
+    background-color: var(--surface-color) !important; /* Fundo Cinza Escuro */
+    border: 1px solid var(--card-border-color) !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin-bottom: 12px !important;
     gap: 12px !important;
     border-bottom: 1px solid var(--card-border-color) !important;
   }
 
   .exercise-info {
     width: 100%;
-    white-space: normal; /* Permite que o texto quebre linha */
+    white-space: normal;
     padding: 0;
   }
   
   .exercise-info label {
     display: block;
     line-height: 1.4;
-    font-size: 1em; /* Fonte reduzida para caber melhor */
+    font-size: 1em;
   }
 
-  /* Área dos controles (bolinhas e peso) vira um rodapé do card */
+  /* Rodapé dos controles */
   .exercise-controls {
     width: 100%;
     justify-content: space-between;
-    background-color: rgba(0,0,0,0.3); /* Fundo escuro para destacar controles */
+    background-color: rgba(0,0,0,0.2); /* Fundo um pouco mais claro que o card */
     padding: 10px;
     border-radius: 8px;
     margin-top: 5px;
@@ -763,7 +777,7 @@ textarea:focus {
   }
   
   .series-dot {
-    width: 22px; /* Tamanho bom para toque */
+    width: 22px;
     height: 22px;
     border-width: 2px;
   }
