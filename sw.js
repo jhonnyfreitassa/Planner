@@ -1,36 +1,31 @@
-// Incremente a versão sempre que fizer alterações nos arquivos principais
-const CACHE_NAME = "planner-pessoal-cache-v50";
-const urlsToCache = [
-  "./",
-  "./index.html",
-  "./style.css", // <-- ADICIONADO
-  "./script.js", // <-- ADICIONADO
-  "./icon-192x192.png",
-  "./icon-512x512.png",
-  // Adicione aqui outros arquivos importantes (CSS, JS) se tiver
+const CACHE_NAME = 'planner-2026-v1';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './style.css',
+  './script.js',
+  './manifest.json'
 ];
 
-// Evento de Instalação: Salva os arquivos e força a ativação.
-self.addEventListener("install", (event) => {
+// 1. Instalação: Cache dos arquivos estáticos
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Cache aberto");
-      return cache.addAll(urlsToCache);
+      console.log('[Service Worker] Caching assets');
+      return cache.addAll(ASSETS_TO_CACHE);
     })
   );
-  // NOVIDADE: Força o novo Service Worker a se ativar imediatamente.
-  self.skipWaiting();
 });
 
-// Evento de Ativação: Limpa os caches antigos (seu código aqui já estava perfeito).
-self.addEventListener("activate", (event) => {
-  const cacheWhitelist = [CACHE_NAME];
+// 2. Ativação: Limpeza de caches antigos (se houver atualização de versão)
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then((keyList) => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
+        keyList.map((key) => {
+          if (key !== CACHE_NAME) {
+            console.log('[Service Worker] Removing old cache', key);
+            return caches.delete(key);
           }
         })
       );
@@ -38,20 +33,12 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Evento de Fetch: Estratégia "Stale-While-Revalidate" (a mais recomendada).
-self.addEventListener("fetch", (event) => {
+// 3. Fetch: Intercepta as requisições (Offline First)
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // Retorna o cache imediatamente se existir
-      const fetchPromise = fetch(event.request).then((networkResponse) => {
-        // Se a busca na rede funcionar, atualizamos o cache em segundo plano
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-        });
-        return networkResponse;
-      });
-      // Retorna o que estiver no cache primeiro, enquanto a rede atualiza para a próxima visita.
-      return cachedResponse || fetchPromise;
+    caches.match(event.request).then((response) => {
+      // Retorna do cache se existir, senão busca na rede
+      return response || fetch(event.request);
     })
   );
 });
