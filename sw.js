@@ -1,5 +1,5 @@
-// Versão 2.0 (Inosuke Edition)
-const CACHE_NAME = "planner-2026-v2.0"; 
+// Versão 2.1 
+const CACHE_NAME = "planner-2026-v2.1"; 
 
 const urlsToCache = [
   "./",
@@ -55,3 +55,4 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
