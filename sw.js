@@ -1,72 +1,780 @@
-// Incremente a versão sempre que fizer alterações nos arquivos principais
-const CACHE_NAME = "planner-pessoal-cache-v50";
-const urlsToCache = [
-  "./",
-  "./index.html",
-  "./style.css", // <-- ADICIONADO
-  "./script.js", // <-- ADICIONADO
-  "./icon-192x192.png",
-  "./icon-512x512.png",
-  // Adicione aqui outros arquivos importantes (CSS, JS) se tiver
-];
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap");
 
-// Evento de Instalação: Salva os arquivos e força a ativação.
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log("Cache aberto");
-      return cache.addAll(urlsToCache);
-    })
-  );
-  // NOVIDADE: Força o novo Service Worker a se ativar imediatamente.
-  self.skipWaiting();
-});
+:root {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  /* Cor de fundo estilo Roadmap para cards */
+  --card-bg-color: #1f2937;
+  --card-border-color: #374151;
+  
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --border-color: #333;
+  
+  /* Cores Temáticas */
+  --color-treino: #e74c3c;
+  --color-agenda: #6c757d;
+  --color-dieta: #4caf50;
+  --color-bemestar: #007bff;
+  --color-carreira: #9b59b6;
+  --color-concurso: #f1c40f;
+  --blue-unified: #007bff;
+}
 
-// Evento de Ativação: Limpa os caches antigos (seu código aqui já estava perfeito).
-self.addEventListener("activate", (event) => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "JetBrains Mono", monospace;
+  /* Reduzido para 14px para caber mais conteúdo */
+  font-size: 14px; 
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overscroll-behavior-x: none;
+  padding-bottom: 50px;
+}
 
-// Evento de Fetch: Estratégia "Stale-While-Revalidate" (a mais recomendada).
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // Retorna o cache imediatamente se existir
-      const fetchPromise = fetch(event.request).then((networkResponse) => {
-        // Se a busca na rede funcionar, atualizamos o cache em segundo plano
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-        });
-        return networkResponse;
-      });
-      // Retorna o que estiver no cache primeiro, enquanto a rede atualiza para a próxima visita.
-      return cachedResponse || fetchPromise;
-    })
-  );
-});
+/* =========================================
+   GERAL & INPUTS
+   ========================================= */
+input[type="checkbox"] {
+  accent-color: #e74c3c;
+  width: 16px; /* Levemente menor */
+  height: 16px;
+  cursor: pointer;
+}
 
+.exercise-item.completed label,
+.checklist-item.completed label {
+  text-decoration: line-through;
+  color: #666;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
 
+input,
+textarea {
+  background-color: #000000 !important;
+  color: #fff !important;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 8px; /* Padding reduzido */
+  font-family: inherit;
+  font-size: 14px; /* Fonte input reduzida */
+  box-sizing: border-box;
+  max-width: 100%;
+}
 
+input:focus,
+textarea:focus {
+  outline: 1px solid var(--color-agenda);
+  border-color: var(--color-agenda);
+}
 
+/* =========================================
+   NAVEGAÇÃO (TABS)
+   ========================================= */
+.nav-tabs {
+  display: flex;
+  background-color: var(--surface-color);
+  padding: 0 10px;
+  justify-content: center;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-color);
+}
 
+.tab-button {
+  padding: 12px 15px; /* Botões mais compactos */
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: var(--text-secondary);
+  font-size: 1.1em;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-family: "JetBrains Mono", monospace;
+  white-space: nowrap;
+}
 
+.tab-button.active {
+  color: #ffffff;
+  font-weight: bold;
+}
 
+.tab-button[onclick*="agenda"].active { border-bottom-color: var(--color-agenda); }
+.tab-button[onclick*="treino"].active { border-bottom-color: var(--color-treino); }
+.tab-button[onclick*="dieta"].active { border-bottom-color: var(--color-dieta); }
+.tab-button[onclick*="bem-estar"].active { border-bottom-color: var(--color-bemestar); }
+.tab-button[onclick*="carreira"].active { border-bottom-color: var(--color-carreira); }
+.tab-button[onclick*="concursos"].active { border-bottom-color: var(--color-concurso); color: var(--color-concurso); }
 
+.content-section {
+  display: none;
+  padding: 15px; /* Padding geral reduzido */
+  animation: fadeIn 0.5s;
+}
 
+.content-section.active {
+  display: block;
+}
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
+/* =========================================
+   AGENDA SECTION
+   ========================================= */
+#agenda-section {
+  --hora-altura: 70px; /* Altura hora reduzida */
+  width: 100%;
+  overflow-x: hidden;
+}
 
+#agenda-section .container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+#agenda-wrapper {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
 
+.agenda-layout-daily {
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 
+.agenda-layout-full {
+  flex-direction: column;
+}
+
+.agenda-main-area {
+  flex: 1 1 600px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.agenda-container-wrapper {
+  width: 100%;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#agenda-grade-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.agenda-container {
+  display: grid;
+  grid-template-columns: 50px repeat(7, minmax(100px, 1fr)); /* Colunas mais estreitas */
+  grid-template-rows: 40px repeat(24, var(--hora-altura));
+  min-width: 800px;
+  background-color: #1a1a1a;
+}
+
+.grid-item {
+  border-bottom: 1px solid #333;
+  border-right: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 0.9em;
+}
+
+.header-dia {
+  background-color: #252525;
+  font-weight: bold;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.celula-hora {
+  background-color: #121212;
+  color: var(--text-secondary);
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.coluna-dia {
+  position: relative;
+  border-right: 1px solid #333;
+  background-image: linear-gradient(to bottom, #333 1px, transparent 1px);
+  background-size: 100% var(--hora-altura);
+}
+
+.atividade-bloco {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  border-radius: 4px;
+  padding: 2px;
+  font-size: 0.75em; /* Fonte bloco reduzida */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  border-left: 3px solid rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: transform 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.atividade-bloco:hover {
+  transform: scale(1.02);
+  z-index: 20 !important;
+}
+
+.deadlines-area {
+  flex: 1 1 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  align-content: start;
+}
+
+.deadline-box {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.deadline-box h3 {
+  font-size: 1em;
+  margin-top: 0;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  color: var(--color-agenda);
+}
+
+.deadline-box textarea {
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  background-color: #121212 !important;
+  border: 1px solid #333;
+  color: #ddd;
+}
+
+/* AGENDA - HOJE VIEW (Cards) */
+.agenda-today-view {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.today-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.today-activity-card {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--card-border-color);
+  border-radius: 10px;
+  padding: 12px 15px;
+  border-left: 5px solid #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.today-activity-card:hover {
+  transform: translateX(2px);
+  background-color: #2d3748;
+}
+
+.today-activity-card.completed {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  text-decoration: line-through;
+}
+
+.today-activity-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 1em;
+  color: #fff;
+  font-weight: bold;
+}
+
+.today-activity-time {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8em;
+  color: #a0aec0;
+  background: rgba(0,0,0,0.3);
+  padding: 3px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* =========================================
+   BEM-ESTAR
+   ========================================= */
+.azul-uniforme {
+  border-left: 5px solid var(--blue-unified) !important;
+  margin-bottom: 20px;
+}
+.azul-uniforme h2 {
+  color: var(--blue-unified) !important;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+}
+.prayer-accordion {
+  border-bottom: 1px solid #333;
+  padding: 8px 0;
+  cursor: pointer;
+}
+.prayer-accordion summary {
+  font-weight: bold;
+  color: #fff;
+  list-style: none;
+  outline: none;
+}
+.prayer-accordion summary::-webkit-details-marker {
+  display: none;
+}
+.prayer-accordion p {
+  margin-top: 8px;
+  color: #a0a0a0;
+  font-size: 0.9em;
+  line-height: 1.5;
+  padding-left: 10px;
+  border-left: 2px solid #555;
+}
+
+/* =========================================
+   TREINO
+   ========================================= */
+#treino-section {
+  --cor-destaque: #e74c3c;
+}
+.workout-day {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--cor-destaque);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+.hidden-workout {
+  display: none !important;
+}
+.workout-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.workout-day-header h3 {
+  color: var(--cor-destaque);
+  margin: 0;
+  font-size: 1.1em;
+}
+.reset-button {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+.toggle-btn {
+  background-color: var(--cor-destaque);
+  padding: 10px 20px;
+  font-size: 0.95em;
+  border-radius: 6px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.exercise-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #2a2a2a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.exercise-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+.exercise-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.series-counter {
+  display: flex;
+  flex-direction: row !important;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+.series-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.series-dot.completed {
+  background-color: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+}
+.weight-input {
+  width: 45px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+/* =========================================
+   DIETA
+   ========================================= */
+#dieta-section .container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: transparent;
+  padding: 0;
+}
+#dieta-section h1 {
+  color: var(--color-dieta);
+  text-align: center;
+  margin-top: 15px;
+  font-size: 1.5em;
+}
+.water-goal {
+  background: linear-gradient(90deg, #2e7d32, #4caf50) !important;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+.meal-plan-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+.meal-plan {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  margin-top: 0;
+  min-width: 600px;
+}
+.meal-plan th {
+  background-color: var(--color-dieta);
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+.meal-plan td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+  background-color: var(--surface-color);
+}
+.meal-plan tr:first-child td:first-child { border-top-left-radius: 8px; }
+.meal-plan tr:first-child td:last-child { border-top-right-radius: 8px; }
+.meal-plan tr:last-child td:first-child { border-bottom-left-radius: 8px; }
+.meal-plan tr:last-child td:last-child { border-bottom-right-radius: 8px; }
+
+.meal-time {
+  font-weight: 700;
+  color: var(--color-dieta);
+  min-width: 120px;
+  vertical-align: top;
+}
+.shopping-lists-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+.shopping-list {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--color-dieta);
+  padding: 15px;
+  border-radius: 8px;
+}
+.checklist-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #2a2a2a;
+  font-size: 0.95em;
+}
+
+/* =========================================
+   PROTOCOLS & OTHERS
+   ========================================= */
+.protocol-card {
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--blue-unified);
+  margin-bottom: 25px;
+}
+.triad-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 25px;
+}
+.triad-box {
+  background: #1a1a1a;
+  border: 1px solid var(--blue-unified);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.triad-box h3 {
+  margin-top: 0;
+  color: #fff;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 4px;
+  font-size: 1em;
+}
+.small-btn {
+  align-self: flex-end;
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.red-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+.history-box {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.history-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+
+/* =========================================
+   CARREIRA / ROADMAP
+   ========================================= */
+.progress-bar-bg {
+  background-color: #374151;
+  border-radius: 99px;
+  height: 20px; /* Mais fino */
+  overflow: hidden;
+}
+.progress-bar-fill {
+  background-color: var(--color-carreira);
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0%;
+  font-size: 0.8em;
+  transition: width 0.5s ease-in-out;
+}
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+.roadmap-card {
+  background-color: var(--card-bg-color);
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid var(--card-border-color);
+}
+.roadmap-card.blue { border-color: #3b82f6; }
+.blue-text { color: #60a5fa; }
+.roadmap-card.green { border-color: #10b981; }
+.green-text { color: #34d399; }
+.roadmap-card.purple { border-color: #8b5cf6; }
+.purple-text { color: #a78bfa; }
+.roadmap-card.red { border-color: #ef4444; }
+.red-text { color: #f87171; }
+.roadmap-card.amber { border-color: #f59e0b; }
+.amber-text { color: #fbbf24; }
+.topic-header {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #374151;
+  color: #e5e7eb;
+  padding-bottom: 4px;
+  font-weight: bold;
+}
+
+/* =========================================
+   RESPONSIVO (MEDIA QUERIES)
+   ========================================= */
+@media (max-width: 992px) {
+  #agenda-wrapper { flex-direction: column; }
+  .agenda-main-area, .deadlines-area { flex: 1 1 100%; }
+}
+
+@media (max-width: 768px) {
+  /* 1. NAVEGAÇÃO DESLIZANTE */
+  .nav-tabs {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-button { flex: 0 0 auto; margin: 0; }
+
+  /* 2. AGENDA EM CARDS */
+  .today-list {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+  
+  /* 3. DIETA EM CARDS */
+  .meal-plan-wrapper { width: 100% !important; }
+  .meal-plan, .meal-plan tbody, .meal-plan tr, .meal-plan td {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  .meal-plan thead { display: none !important; }
+  
+  .meal-plan tr {
+    margin-bottom: 15px;
+    background-color: var(--card-bg-color) !important;
+    border: 1px solid var(--card-border-color) !important;
+    border-radius: 12px !important;
+    border-left: 5px solid var(--color-dieta) !important;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .meal-plan td {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 4px 0 !important;
+  }
+  .meal-time {
+    border-bottom: 1px solid #4a5568 !important;
+    margin-bottom: 8px;
+    padding-bottom: 4px !important;
+    font-size: 1.1em; /* Reduzido */
+    width: 100%;
+    display: block;
+  }
+
+  /* 4. CORREÇÃO DEFINITIVA DO TREINO (CARDS) */
+  .workout-day ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Transforma cada item de exercício em um CARTÃO SEPARADO */
+  .exercise-item {
+    flex-direction: column !important; /* Força empilhamento vertical */
+    align-items: flex-start !important;
+    background-color: var(--card-bg-color) !important; /* Cor de fundo do Card */
+    border: 1px solid var(--card-border-color) !important; /* Borda do Card */
+    border-radius: 12px !important; /* Arredondamento */
+    padding: 15px !important; /* Espaço interno */
+    margin-bottom: 12px !important; /* Espaço entre cards */
+    gap: 12px !important;
+    border-bottom: 1px solid var(--card-border-color) !important;
+  }
+
+  .exercise-info {
+    width: 100%;
+    white-space: normal; /* Permite que o texto quebre linha */
+    padding: 0;
+  }
+  
+  .exercise-info label {
+    display: block;
+    line-height: 1.4;
+    font-size: 1em; /* Fonte reduzida para caber melhor */
+  }
+
+  /* Área dos controles (bolinhas e peso) vira um rodapé do card */
+  .exercise-controls {
+    width: 100%;
+    justify-content: space-between;
+    background-color: rgba(0,0,0,0.3); /* Fundo escuro para destacar controles */
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+  
+  .series-counter {
+    gap: 8px;
+  }
+  
+  .series-dot {
+    width: 22px; /* Tamanho bom para toque */
+    height: 22px;
+    border-width: 2px;
+  }
+  
+  .weight-input {
+    width: 60px;
+    height: 35px;
+    font-size: 14px;
+    background-color: #121212 !important;
+    border: 1px solid #555;
+  }
+
+  .triad-container { grid-template-columns: 1fr; }
+}
