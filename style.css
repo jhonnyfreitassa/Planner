@@ -322,3 +322,53 @@ input:focus, textarea:focus {
     padding-bottom: 0; 
   }
 }
+/* =========================================
+   AJUSTES ESPECÍFICOS PARA PC (DESKTOP)
+   ========================================= */
+@media (min-width: 1024px) {
+  
+  /* 1. Consertar Menu Desalinhado */
+  .nav-tabs {
+    justify-content: center; /* Centraliza os botões */
+    padding-right: 0;
+    max-width: 100%; /* Garante a faixa preta na tela toda */
+  }
+
+  /* 2. Centralizar o conteúdo para não ficar esticado */
+  #agenda-section .container,
+  #treino-section,
+  #dieta-section, 
+  #bem-estar-section,
+  #carreira-section {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 3. Consertar Grade Cortada na Agenda */
+  .agenda-container-wrapper {
+    overflow: visible; /* Deixa a barra de rolagem aparecer */
+    border: none;
+  }
+  
+  #agenda-grade-wrapper {
+    overflow-x: auto;
+    padding-bottom: 15px; /* Espaço para a barra de rolagem não comer o conteúdo */
+  }
+
+  /* Estilo da barra de rolagem no PC (Tema Escuro) */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #121212; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333; 
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+}
