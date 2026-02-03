@@ -230,7 +230,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 5,
     seriesMin: 4,
   },
-  "🪚 Remada Serrote": {
+  "🪑 Remada Serrote": {
     type: "composto",
     cargaTipo: "halter",
     incremento: 2,
@@ -403,7 +403,8 @@ document.addEventListener("DOMContentLoaded", function () {
       tituloHoje.textContent = `Agenda de: ${diasNomes[diaSemana]}`;
     if (listaHoje) listaHoje.innerHTML = "";
 
-    const HORA_INICIO = 0;
+    // CONFIGURAÇÃO DA GRADE (AJUSTADO PARA INICIAR AS 08:00)
+    const HORA_INICIO = 8; // Mudado de 0 para 8
     const HORA_FIM = 24;
     const ALTURA_HORA = 80;
 
@@ -454,7 +455,11 @@ document.addEventListener("DOMContentLoaded", function () {
       function renderBloco(topPos, durationTime) {
         const bloco = document.createElement("div");
         bloco.className = "atividade-bloco";
-        bloco.style.top = `${topPos * ALTURA_HORA}px`;
+
+        // AJUSTE DE POSIÇÃO: Subtraímos o HORA_INICIO para o bloco alinhar corretamente
+        // Se começar as 08:00 (topPos=8) e a grade começa as 8, a posição deve ser 0.
+        bloco.style.top = `${(topPos - HORA_INICIO) * ALTURA_HORA}px`;
+
         bloco.style.height = `${durationTime * ALTURA_HORA}px`;
         bloco.style.backgroundColor = cor;
         bloco.style.zIndex = durationTime < 1 ? "10" : "1";
