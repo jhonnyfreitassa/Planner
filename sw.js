@@ -1,5 +1,5 @@
-// Versão 2.3 
-const CACHE_NAME = "planner-2026-v2.3"; 
+// Versão 2.4 
+const CACHE_NAME = "planner-2026-v2.4"; 
 
 const urlsToCache = [
   "./",
@@ -55,6 +55,7 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
 
 
 
