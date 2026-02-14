@@ -587,20 +587,27 @@
         <div class="shopping-lists-container">
           <div class="shopping-list">
             <h2>🛒 Lista Semanal</h2>
-            <p style="color: #e74c3c; font-size: 0.9em; margin-bottom: 15px;">⚠️ Atenção: Pesos abaixo são CRUS (para comprar).</p>
+            <p style="color: #2ecc71; font-size: 0.9em; margin-bottom: 15px;">⚠️ Atenção: Pesos abaixo são CRUS (para comprar).</p>
+
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-banana"><label>🍌 7 Bananas (Pós-treino)</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-frutas"><label>🍉 Frutas (Melancia, Melão, Kiwi, Morango)</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-iogurte"><label>🥛 Iogurte Natural (2L) OU Leite Desn.</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-gelatina"><label>🍮 5-7 Pacotes Gelatina Zero</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-psyllium-week"><label>🌾 Psyllium (Granel)</label></div>
-            <h4 style="margin-top:15px; color:var(--color-treino);">🥩 Proteínas (4kg Total CRU)</h4>
+
+            <h4 style="margin-top:15px; color:#2ecc71;">🥔 Carboidratos & Vegetais</h4>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-raizes"><label>🍠 Raízes (Aipim/Batata/Inhame) (~1.5kg)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-abobora"><label>🎃 Abóbora (Opcional p/ variar) (~1kg)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-legumes"><label>🥦 Legumes (Brócolis, Cenoura, Abobrinha) (~3.5kg)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-folhas"><label>🥬 Folhas (Alface/Rúcula) (À vontade)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-azeite"><label>🫒 Azeite de Oliva (Vidro)</label></div>
+
+            <h4 style="margin-top:15px; color:#2ecc71;">🥩 Proteínas (4kg Total CRU)</h4>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-peixe"><label>🐟 Peixe (1.0kg CRU)</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-carne"><label>🥩 Carne Magra (Patinho/Chã) (1.0kg CRU)</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-frango"><label>🍗 Frango (Sobrecoxa/Peito) (1.0kg CRU)</label></div>
             <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-suino"><label>🐖 Lombo/Filé Suíno (1.0kg CRU)</label></div>
           </div>
-        </div>
-      </div>
     </section>
 
     <section id="bem-estar-section" class="content-section">
@@ -879,6 +886,37 @@
             <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-proj2"><label for="rm-proj2">2. Pipeline Automatizado (Airflow)</label></div>
             <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-proj3"><label for="rm-proj3">3. Data Lake no Databricks</label></div>
             <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="rm-proj4"><label for="rm-proj4">4. Dashboard Final</label></div>
+          </div>
+
+          <div class="roadmap-card pink">
+            <h2 class="card-title pink-text">☕ Java: Zero to Hero</h2>
+            <p class="card-subtitle">Guia Baseado no @devmagro</p>
+
+            <h4 class="topic-header">1. Setup & Base</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-intellij"><label for="java-intellij">Instalar IntelliJ Community</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-git"><label for="java-git">Git Básico + Arquivos .md</label></div>
+
+            <h4 class="topic-header">2. Lógica & Java Core</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-maratona"><label for="java-maratona">Maratona Java (DevDojo) até Aula 95</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-ex-logica"><label for="java-ex-logica">Lista de Exercícios (DIO)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-desafio1"><label for="java-desafio1">🏆 Desafio: Cadastros (Console)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-poo"><label for="java-poo">POO & Exceções</label></div>
+
+            <h4 class="topic-header">3. Banco de Dados</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-sql"><label for="java-sql">SQL Completo (MySQL)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-maven"><label for="java-maven">Maven (Build)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-jdbc"><label for="java-jdbc">Conexão Java + DB</label></div>
+
+            <h4 class="topic-header">4. Spring Boot</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-spring-intro"><label for="java-spring-intro">Intro Spring & Injeção Dep.</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-api"><label for="java-api">1ª API REST (CRUD)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-desafio2"><label for="java-desafio2">🏆 Desafio V2: API + BD</label></div>
+
+            <h4 class="topic-header">5. Diferenciais Jr</h4>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-tests"><label for="java-tests">Testes (JUnit)</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-docker"><label for="java-docker">Docker</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-swagger"><label for="java-swagger">Swagger</label></div>
+            <div class="checklist-item"><input type="checkbox" class="roadmap-check" id="java-security"><label for="java-security">Spring Security</label></div>
           </div>
         </div>
       </div>
