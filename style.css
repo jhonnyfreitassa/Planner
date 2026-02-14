@@ -781,4 +781,39 @@ textarea:focus {
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+  /* --- Adicionar no final do arquivo style.css --- */
+
+  /* Nova variável de cor para o Java */
+  :root {
+    --color-java: #9b59b6; /* Roxo Ametista */
+  }
+
+  /* Estilo do Card Roxo */
+  .roadmap-card.purple {
+    border-top: 4px solid var(--color-java);
+  }
+
+  /* Efeito Hover Roxo */
+  .roadmap-card.purple:hover {
+    box-shadow: 0 10px 25px rgba(155, 89, 182, 0.2);
+  }
+
+  /* Texto Roxo para o Título */
+  .purple-text {
+    color: var(--color-java);
+  }
+  /* --- TEMA ROSA (NOVO) --- */
+  .roadmap-card.pink {
+    border-color: #ff6b81; /* Rosa Vibrante */
+  }
+
+  .pink-text {
+    color: #ff6b81;
+  }
+
+  /* Opcional: Efeito hover suave */
+  .roadmap-card.pink:hover {
+    box-shadow: 0 4px 15px rgba(255, 107, 129, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
 }
