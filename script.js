@@ -300,19 +300,13 @@ const COLORS = {
   cardio: "#ff4757",
   gym: "#b30000",
   almoco: "#ffa502",
-  conc_port: "#e67e22",
-  conc_mat: "#8e44ad",
-  conc_info: "#2980b9",
-  conc_vendas: "#d35400",
-  conc_banc: "#27ae60",
-  conc_atual: "#16a085",
-  conc_rlm: "#d35400",
-  conc_estat: "#7f8c8d",
-  conc_estudo: "#f1c40f",
+  // Cores de Estudo
+  hackers: "#16a085", // Verde Tech para Hackers do Bem
+  espiritual: "#9b59b6", // Roxo para Espiritualidade
   fac_calculo: "#3498db",
   fac_metodos: "#2c3e50",
   fac_sist: "#34495e",
-  fac_estrut: "#9b59b6",
+  fac_estrut: "#8e44ad",
   fac_algo: "#e91e63",
   carreira: "#fdcb6e",
 };
@@ -380,8 +374,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
           gradeWrapper.classList.add("hidden-workout");
           containerHoje.classList.remove("hidden-workout");
-          wrapperPrincipal.classList.remove("agenda-layout-full");
-          wrapperPrincipal.classList.add("agenda-layout-daily");
+          wrapperPrincipal.classList.remove("agenda-layout-daily");
+          wrapperPrincipal.classList.add("agenda-layout-full");
           toggleBtn.textContent = "Ver Grade Semanal Completa";
         }
       };
@@ -403,9 +397,9 @@ document.addEventListener("DOMContentLoaded", function () {
       tituloHoje.textContent = `Agenda de: ${diasNomes[diaSemana]}`;
     if (listaHoje) listaHoje.innerHTML = "";
 
-    // CONFIGURAÇÃO DA GRADE (AJUSTADO PARA INICIAR AS 08:00)
-    const HORA_INICIO = 8; // Mudado de 0 para 8
-    const HORA_FIM = 24;
+    // CONFIGURAÇÃO DA GRADE (AJUSTADO PARA IR ATÉ MEIA-NOITE)
+    const HORA_INICIO = 8;
+    const HORA_FIM = 24; // Vai até 24:00
     const ALTURA_HORA = 80;
 
     function gerarGrade() {
@@ -420,10 +414,12 @@ document.addEventListener("DOMContentLoaded", function () {
         o.textContent = e;
         agendaGrid.appendChild(o);
       });
-      for (let o = HORA_INICIO; o < HORA_FIM; o++) {
+      // Loop até HORA_FIM para incluir a linha final
+      for (let o = HORA_INICIO; o <= HORA_FIM; o++) {
         const e = document.createElement("div");
         e.className = "grid-item celula-hora";
-        e.textContent = `${o.toString().padStart(2, "0")}:00`;
+        // Se for 24, exibe 00:00 (opcional, ou 24:00)
+        e.textContent = `${o === 24 ? "00" : o.toString().padStart(2, "0")}:00`;
         e.style.gridRow = `${o - HORA_INICIO + 2}`;
         agendaGrid.appendChild(e);
       }
@@ -432,7 +428,8 @@ document.addEventListener("DOMContentLoaded", function () {
         o.className = "coluna-dia";
         o.dataset.diaIndex = e + 1;
         o.style.gridColumn = `${e + 2}`;
-        o.style.gridRow = `2 / span ${HORA_FIM - HORA_INICIO}`;
+        // Ajuste do span para cobrir todas as horas + a linha final
+        o.style.gridRow = `2 / span ${HORA_FIM - HORA_INICIO + 1}`;
         agendaGrid.appendChild(o);
       }
     }
@@ -441,25 +438,25 @@ document.addEventListener("DOMContentLoaded", function () {
     function adicionarAtividade(nome, diaIndex, horaInicio, horaFim, cor) {
       let [hIni, mIni] = horaInicio.split(":").map(Number);
       let [hFim, mFim] = horaFim.split(":").map(Number);
+      // Tratamento para meia-noite (24:00 ou 00:00)
+      if (hFim === 0) hFim = 24;
+      
       let topo = (hIni * 60 + mIni) / 60;
       let duracao = 0;
-      if (hFim < hIni) {
+      
+      if (hFim < hIni && hFim !== 24) {
+        // Caso atravesse a meia noite (ex: 23:00 as 01:00) - simplificado para cortar na meia noite
         let duracaoParte1 = (24 * 60 - (hIni * 60 + mIni)) / 60;
         renderBloco(topo, duracaoParte1);
-        let duracaoParte2 = (hFim * 60 + mFim) / 60;
-        renderBloco(0, duracaoParte2);
       } else {
         duracao = (hFim * 60 + mFim - (hIni * 60 + mIni)) / 60;
         renderBloco(topo, duracao);
       }
+      
       function renderBloco(topPos, durationTime) {
         const bloco = document.createElement("div");
         bloco.className = "atividade-bloco";
-
-        // AJUSTE DE POSIÇÃO: Subtraímos o HORA_INICIO para o bloco alinhar corretamente
-        // Se começar as 08:00 (topPos=8) e a grade começa as 8, a posição deve ser 0.
         bloco.style.top = `${(topPos - HORA_INICIO) * ALTURA_HORA}px`;
-
         bloco.style.height = `${durationTime * ALTURA_HORA}px`;
         bloco.style.backgroundColor = cor;
         bloco.style.zIndex = durationTime < 1 ? "10" : "1";
@@ -486,170 +483,45 @@ document.addEventListener("DOMContentLoaded", function () {
       const limitSist = new Date("2026-04-25");
       const isSistActive = hoje <= limitSist;
 
-      // ROTINA SEMANAL (Seg-Sex)
+      // --- ROTINA SEMANAL (Seg-Sex) ---
       for (let d = 1; d <= 5; d++) {
+        // 1. Manhã: Cardio + Bloco 1 (10h-12h)
         adicionarAtividade("Cardio", d, "08:00", "09:30", COLORS.cardio);
+        adicionarAtividade("Hackers do Bem (1/3)", d, "10:00", "12:00", COLORS.hackers);
 
-        // MANHÃ: Estudos Básicos
-        if (d === 1)
-          adicionarAtividade(
-            "Português",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_port,
-          );
-        if (d === 2)
-          adicionarAtividade(
-            "Informática",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_info,
-          );
-        if (d === 3)
-          adicionarAtividade("Vendas", d, "10:00", "12:00", COLORS.conc_vendas);
-        if (d === 4)
-          adicionarAtividade(
-            "Português",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_port,
-          );
-        if (d === 5)
-          adicionarAtividade(
-            "Conh. Bancários",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_banc,
-          );
-
-        // TARDE: Estudos Específicos
-        if (d === 1)
-          adicionarAtividade(
-            "Matemática",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_mat,
-          );
-        if (d === 2)
-          adicionarAtividade(
-            "Conh. Bancários",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_banc,
-          );
-        if (d === 3)
-          adicionarAtividade(
-            "Atualidades & Inglês",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_atual,
-          );
-        if (d === 4)
-          adicionarAtividade(
-            "Matemática",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_mat,
-          );
-        if (d === 5)
-          adicionarAtividade(
-            "Informática",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_info,
-          );
-
-        // Academia (Vermelho Forte)
+        // 2. Tarde: Bloco 2 (13h-15h) + Academia
+        adicionarAtividade("Hackers do Bem (2/3)", d, "13:00", "15:00", COLORS.hackers);
         adicionarAtividade("Academia", d, "15:30", "17:30", COLORS.gym);
 
-        // NOITE: Faculdade
-        if (d === 1) {
-          adicionarAtividade(
-            "Cálculo V.V",
-            1,
-            "19:00",
-            "20:40",
-            COLORS.fac_calculo,
-          );
-          adicionarAtividade(
-            "Métodos Mat.",
-            1,
-            "20:55",
-            "22:35",
-            COLORS.fac_metodos,
-          );
-        } else if (d === 2) {
+        // 3. Noite: Lógica do 3º Bloco vs Faculdade
+        if (d === 1) { // Segunda
+          adicionarAtividade("Cálculo V.V", 1, "19:00", "20:40", COLORS.fac_calculo);
+          adicionarAtividade("Métodos Mat.", 1, "20:55", "22:35", COLORS.fac_metodos);
+        } else if (d === 2) { // Terça
           if (isSistActive)
-            adicionarAtividade(
-              "Sist. Computacionais",
-              2,
-              "19:00",
-              "22:35",
-              COLORS.fac_sist,
-            );
-        } else if (d === 3) {
-          adicionarAtividade("Roadmap", 3, "19:00", "20:30", COLORS.carreira);
-          adicionarAtividade("Roadmap", 3, "21:00", "22:30", COLORS.carreira);
-        } else if (d === 4) {
-          adicionarAtividade(
-            "Estrutura de Dados",
-            4,
-            "19:00",
-            "21:45",
-            COLORS.fac_estrut,
-          );
-        } else if (d === 5) {
-          adicionarAtividade(
-            "Algoritmos",
-            5,
-            "19:00",
-            "21:45",
-            COLORS.fac_algo,
-          );
+            adicionarAtividade("Sist. Computacionais", 2, "19:00", "22:35", COLORS.fac_sist);
+        } else if (d === 3) { // Quarta (LIVRE de Faculdade -> Entra Bloco 3)
+           adicionarAtividade("Hackers do Bem (3/3)", 3, "19:00", "21:00", COLORS.hackers);
+        } else if (d === 4) { // Quinta
+          adicionarAtividade("Estrutura de Dados", 4, "19:00", "21:45", COLORS.fac_estrut);
+        } else if (d === 5) { // Sexta
+          adicionarAtividade("Algoritmos", 5, "19:00", "21:45", COLORS.fac_algo);
         }
       }
 
-      // SÁBADO (Dia 6)
+      // --- SÁBADO (Dia 6) - 3 Blocos ---
       adicionarAtividade("Cardio", 6, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade("Vendas", 6, "10:00", "12:00", COLORS.conc_vendas);
-      adicionarAtividade(
-        "Atualidades & Inglês",
-        6,
-        "13:00",
-        "15:00",
-        COLORS.conc_atual,
-      );
+      adicionarAtividade("Hackers do Bem (1/3)", 6, "10:00", "12:00", COLORS.hackers);
+      adicionarAtividade("Hackers do Bem (2/3)", 6, "13:00", "15:00", COLORS.hackers);
       adicionarAtividade("Academia", 6, "15:30", "17:30", COLORS.gym);
+      adicionarAtividade("Hackers do Bem (3/3)", 6, "19:00", "21:00", COLORS.hackers);
 
-      // SÁBADO NOITE: 2 Blocos de Roadmap com 1h de intervalo
-      adicionarAtividade("Roadmap", 6, "18:00", "19:30", COLORS.carreira);
-      // Intervalo 19:30 - 20:30
-      adicionarAtividade("Roadmap", 6, "20:30", "22:00", COLORS.carreira);
-
-      // DOMINGO (Dia 7)
+      // --- DOMINGO (Dia 7) - 3 Blocos ---
       adicionarAtividade("Cardio", 7, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade(
-        "REVISÃO GERAL",
-        7,
-        "10:00",
-        "12:00",
-        COLORS.conc_estudo,
-      );
-      // Intervalo 1h
-      adicionarAtividade("SIMULADO", 7, "13:00", "16:00", COLORS.conc_estudo);
-      // Intervalo 1h
-      adicionarAtividade("Roadmap", 7, "17:00", "18:30", COLORS.carreira);
-      // Intervalo 1h
-      adicionarAtividade("Roadmap", 7, "19:30", "21:00", COLORS.carreira);
+      adicionarAtividade("Hackers do Bem (1/3)", 7, "10:00", "12:00", COLORS.hackers);
+      adicionarAtividade("Hackers do Bem (2/3)", 7, "13:00", "15:00", COLORS.hackers);
+      // Tarde livre/marmita (15h-19h)
+      adicionarAtividade("Hackers do Bem (3/3)", 7, "19:00", "21:00", COLORS.hackers);
     }
 
     atividadesHoje.sort(
