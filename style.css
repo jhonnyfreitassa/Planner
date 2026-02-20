@@ -242,7 +242,7 @@ textarea:focus {
 
 #agenda-grade-wrapper {
   overflow-x: auto;
-  padding-bottom: 10px; /* Pequeno espaço para a barra de rolagem */
+  padding-bottom: 10px;
   background-color: #1a1a1a;
 }
 
@@ -259,7 +259,7 @@ textarea:focus {
 
   min-width: 800px;
   background-color: #1a1a1a;
-  padding-bottom: 20px; /* Respiro final */
+  padding-bottom: 20px;
   margin-bottom: 0;
 }
 
@@ -285,14 +285,12 @@ textarea:focus {
   color: var(--text-secondary);
   font-size: 0.75em;
   font-weight: bold;
-  /* Alinha o texto da hora no topo */
   align-items: flex-start;
   padding-top: 5px;
 }
 .coluna-dia {
   position: relative;
   border-right: 1px solid #333;
-  /* Garante que as linhas do fundo batam exatamente com o tamanho da hora */
   background-image: linear-gradient(to bottom, #333 1px, transparent 1px);
   background-size: 100% var(--hora-altura);
 }
@@ -607,6 +605,33 @@ textarea:focus {
 .red-btn {
   background-color: #e74c3c;
   color: white;
+}
+
+/* =========================================
+   TIMER E MODO FOCO (BEM ESTAR) - GLOBAL
+   ========================================= */
+.timer-display {
+  font-size: 4em;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  margin: 15px 0;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 2px;
+}
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Modo Foco Visual: Borra e desativa o clique no restante da aba */
+body.modo-foco-ativo #bem-estar-section .protocol-card:not(#foco-timer-card) {
+  filter: blur(4px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+#bem-estar-section .protocol-card {
+  transition: all 0.4s ease;
 }
 
 /* =========================================
