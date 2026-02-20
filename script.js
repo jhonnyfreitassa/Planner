@@ -16,6 +16,29 @@ function showSection(sectionId) {
 
 // --- CONFIGURAÇÃO DOS EXERCÍCIOS ---
 const EXERCICIOS_CONFIG = {
+  // EXERCÍCIOS DE CORE E ABDÔMEN ADICIONADOS
+  "⚙️ Crunch Polia Alta": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 5,
+    seriesMin: 4,
+  },
+  "🔄 Rotação Tronco Polia": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 3,
+  },
+  "📐 Flexão Lateral Halter": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 3,
+  },
+
   // SEGUNDA (PUSH 1)
   "📐 Supino Inclinado c/ Halteres": {
     type: "composto",
@@ -42,7 +65,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 5,
     seriesMin: 4,
   },
-  "🙅‍♂️ Crossover Polia Alta": {
+  "🙅‍♂️ Crossover Polia Alta --> Baixa": {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
@@ -230,7 +253,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 5,
     seriesMin: 4,
   },
-  "🪑 Remada Serrote": {
+  "🪚 Remada Serrote": {
     type: "composto",
     cargaTipo: "halter",
     incremento: 2,
@@ -323,6 +346,191 @@ document.addEventListener("DOMContentLoaded", function () {
   const dia = String(hoje.getDate()).padStart(2, "0");
   const dataFormatada = `${ano}-${mes}-${dia}`;
 
+  // --- TIMER DE FOCO 50/15 ---
+  const timerDisplay = document.getElementById("timer-display");
+  const btnTimerAction = document.getElementById("btn-timer-action");
+  const btnTimerReset = document.getElementById("btn-timer-reset");
+
+  let focusTimerInterval;
+  let isFocusMode = true; // true = 50m (Foco), false = 15m (Pausa)
+  let timerSeconds = 50 * 60;
+  let isTimerRunning = false;
+
+  function updateTimerDisplay() {
+    if (!timerDisplay) return;
+    const minutes = Math.floor(timerSeconds / 60);
+    const seconds = timerSeconds % 60;
+    timerDisplay.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  }
+
+  // Alerta sonoro nativo simples usando API de áudio
+  function playAlertBeep() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      osc.connect(ctx.destination);
+      osc.frequency.value = 600;
+      osc.start();
+      setTimeout(() => osc.stop(), 800);
+    } catch (e) {
+      console.log("Áudio não suportado");
+    }
+  }
+
+  if (btnTimerAction && btnTimerReset) {
+    updateTimerDisplay();
+
+    btnTimerAction.onclick = () => {
+      if (isTimerRunning) {
+        // Pausar
+        clearInterval(focusTimerInterval);
+        isTimerRunning = false;
+        btnTimerAction.textContent = isFocusMode
+          ? "Retomar Bloco (50m)"
+          : "Retomar Pausa (15m)";
+        document.body.classList.remove("modo-foco-ativo");
+      } else {
+        // Iniciar
+        isTimerRunning = true;
+        btnTimerAction.textContent = "Pausar Timer";
+
+        if (isFocusMode) {
+          document.body.classList.add("modo-foco-ativo");
+        }
+
+        focusTimerInterval = setInterval(() => {
+          timerSeconds--;
+          updateTimerDisplay();
+
+          if (timerSeconds <= 0) {
+            clearInterval(focusTimerInterval);
+            isTimerRunning = false;
+            playAlertBeep();
+            document.body.classList.remove("modo-foco-ativo");
+
+            // Alternar os modos
+            isFocusMode = !isFocusMode;
+            timerSeconds = isFocusMode ? 50 * 60 : 15 * 60;
+            updateTimerDisplay();
+
+            btnTimerAction.textContent = isFocusMode
+              ? "Iniciar Bloco (50m)"
+              : "Iniciar Pausa (15m)";
+
+            setTimeout(
+              () =>
+                alert(
+                  isFocusMode
+                    ? "Pausa encerrada! Hora de voltar ao foco."
+                    : "Bloco concluído! Descanse.",
+                ),
+              100,
+            );
+          }
+        }, 1000);
+      }
+    };
+
+    btnTimerReset.onclick = () => {
+      clearInterval(focusTimerInterval);
+      isTimerRunning = false;
+      isFocusMode = true;
+      timerSeconds = 50 * 60;
+      updateTimerDisplay();
+      btnTimerAction.textContent = "Iniciar Bloco (50m)";
+      document.body.classList.remove("modo-foco-ativo");
+    };
+  }
+
+  // --- TRACKER DA VERDADE DIÁRIO ---
+  const btnEncerrarDia = document.getElementById("btn-encerrar-dia");
+  const truthChecks = document.querySelectorAll(".truth-check");
+  const logFalhasContainer = document.getElementById("log-falhas-container");
+  const logFalhasText = document.getElementById("log-falhas-text");
+  const trackerMsg = document.getElementById("tracker-msg");
+
+  if (btnEncerrarDia) {
+    // Setup diário
+    const todayString = new Date().toLocaleDateString();
+    const savedTrackerDate = localStorage.getItem("tracker_date");
+
+    if (savedTrackerDate === todayString) {
+      const savedChecks = JSON.parse(
+        localStorage.getItem("tracker_checks") || "[]",
+      );
+      truthChecks.forEach((chk, idx) => {
+        chk.checked = savedChecks[idx] || false;
+      });
+
+      if (localStorage.getItem("tracker_finished") === "true") {
+        btnEncerrarDia.textContent = "Dia Encerrado 🔒";
+        btnEncerrarDia.disabled = true;
+        btnEncerrarDia.style.opacity = "0.5";
+        truthChecks.forEach((c) => (c.disabled = true));
+      }
+    } else {
+      localStorage.removeItem("tracker_finished");
+      localStorage.removeItem("tracker_checks");
+      localStorage.setItem("tracker_date", todayString);
+    }
+
+    // Salvar progresso em tempo real
+    truthChecks.forEach((chk) => {
+      chk.addEventListener("change", () => {
+        const checksState = Array.from(truthChecks).map((c) => c.checked);
+        localStorage.setItem("tracker_checks", JSON.stringify(checksState));
+
+        // Oculta log de falhas dinamicamente se usuário marcou tudo
+        const allChecked = Array.from(truthChecks).every((c) => c.checked);
+        if (allChecked) {
+          logFalhasContainer.style.display = "none";
+          trackerMsg.textContent = "";
+        }
+      });
+    });
+
+    // Lógica de Encerramento e Regra de Negócio
+    btnEncerrarDia.onclick = () => {
+      const allChecked = Array.from(truthChecks).every((c) => c.checked);
+
+      if (!allChecked) {
+        logFalhasContainer.style.display = "block";
+
+        if (logFalhasText.value.trim() === "") {
+          trackerMsg.textContent = "Preencha o Log de Falhas para prosseguir.";
+          trackerMsg.style.color = "#e74c3c";
+          logFalhasText.focus();
+          return; // Impede encerramento
+        }
+      }
+
+      localStorage.setItem("tracker_finished", "true");
+
+      // Integração com Diário: Salva falha no histórico nativo de Anotações do PWA
+      if (!allChecked && logFalhasText.value.trim() !== "") {
+        const history =
+          JSON.parse(localStorage.getItem("journalEntries")) || [];
+        history.unshift({
+          date: todayString,
+          text: `[Log de Falhas] ${logFalhasText.value.trim()}`,
+        });
+        localStorage.setItem("journalEntries", JSON.stringify(history));
+        if (typeof loadJournalHistory === "function") loadJournalHistory(); // Recarrega tela
+      }
+
+      logFalhasContainer.style.display = "none";
+      btnEncerrarDia.textContent = "Dia Encerrado 🔒";
+      btnEncerrarDia.disabled = true;
+      btnEncerrarDia.style.opacity = "0.5";
+      truthChecks.forEach((c) => (c.disabled = true));
+
+      trackerMsg.textContent = allChecked
+        ? "Parabéns pela disciplina hoje! 🚀"
+        : "Dia encerrado. Falha registrada para aprendizado.";
+      trackerMsg.style.color = "#4caf50";
+    };
+  }
+
   // 1. RESET DIÁRIO AUTOMÁTICO
   const lastVisit = localStorage.getItem("last_app_visit_date");
   if (lastVisit && lastVisit !== dataFormatada) {
@@ -409,14 +617,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function gerarGrade() {
       agendaGrid.innerHTML = "";
 
-      // Canto superior esquerdo
       const t = document.createElement("div");
       t.className = "grid-item";
       t.style.borderLeft = "none";
       t.style.borderBottom = "1px solid #333";
       agendaGrid.appendChild(t);
 
-      // Cabeçalho dos dias
       ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].forEach((e) => {
         const o = document.createElement("div");
         o.className = "grid-item header-dia";
@@ -424,36 +630,28 @@ document.addEventListener("DOMContentLoaded", function () {
         agendaGrid.appendChild(o);
       });
 
-      // Linhas das Horas (06:00 até 00:00)
       for (let o = HORA_INICIO; o <= HORA_FIM; o++) {
         const e = document.createElement("div");
         e.className = "grid-item celula-hora";
-        // Se for 24, exibe 00:00
         e.textContent =
           o === 24 ? "00:00" : `${o.toString().padStart(2, "0")}:00`;
         e.style.gridRow = `${o - HORA_INICIO + 2}`;
 
-        // Ajuste visual para a última linha (00:00)
-        // Isso garante que ela seja apenas uma "tampa" e não uma hora cheia
         if (o === HORA_FIM) {
           e.style.height = "30px";
           e.style.alignSelf = "start";
           e.style.borderBottom = "none";
-          e.style.lineHeight = "15px"; // Texto mais apertado
+          e.style.lineHeight = "15px";
         }
         agendaGrid.appendChild(e);
       }
 
-      // Colunas de Fundo
       for (let e = 0; e < 7; e++) {
         const o = document.createElement("div");
         o.className = "coluna-dia";
         o.dataset.diaIndex = e + 1;
         o.style.gridColumn = `${e + 2}`;
-
-        // VAI ATÉ A LINHA 21 (Final da Grade)
         o.style.gridRow = `2 / 21`;
-
         agendaGrid.appendChild(o);
       }
     }
@@ -467,20 +665,16 @@ document.addEventListener("DOMContentLoaded", function () {
       let topo = hIni + mIni / 60;
       let fimDecimal = hFim + mFim / 60;
 
-      // Tratamento para 00:00 ser 24h
       if (hFim === 0 && mFim === 0) fimDecimal = 24;
-      if (fimDecimal < topo) fimDecimal = 24; // Virada de noite
+      if (fimDecimal < topo) fimDecimal = 24;
 
       let duracao = fimDecimal - topo;
 
       function renderBloco(topPos, durationTime) {
         const bloco = document.createElement("div");
         bloco.className = "atividade-bloco";
-
-        // Cálculo de posição usando 80px
         bloco.style.top = `${(topPos - HORA_INICIO) * ALTURA_HORA}px`;
         bloco.style.height = `${durationTime * ALTURA_HORA}px`;
-
         bloco.style.backgroundColor = cor;
         bloco.style.zIndex = durationTime < 1 ? "15" : "10";
 
@@ -515,90 +709,94 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // ROTINA SEMANAL (Seg-Sex)
       for (let d = 1; d <= 5; d++) {
+        // SAÚDE (Fixo)
         adicionarAtividade("Cardio", d, "08:00", "09:30", COLORS.cardio);
-
-        // MANHÃ
-        if (d === 1)
-          adicionarAtividade(
-            "Português",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_port,
-          );
-        if (d === 2)
-          adicionarAtividade(
-            "Informática",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_info,
-          );
-        if (d === 3)
-          adicionarAtividade("Vendas", d, "10:00", "12:00", COLORS.conc_vendas);
-        if (d === 4)
-          adicionarAtividade(
-            "Português",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_port,
-          );
-        if (d === 5)
-          adicionarAtividade(
-            "Conh. Bancários",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_banc,
-          );
-
-        // TARDE
-        if (d === 1)
-          adicionarAtividade(
-            "Matemática",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_mat,
-          );
-        if (d === 2)
-          adicionarAtividade(
-            "Conh. Bancários",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_banc,
-          );
-        if (d === 3)
-          adicionarAtividade(
-            "Atualidades & Inglês",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_atual,
-          );
-        if (d === 4)
-          adicionarAtividade(
-            "Matemática",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_mat,
-          );
-        if (d === 5)
-          adicionarAtividade(
-            "Informática",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_info,
-          );
-
-        // Academia
         adicionarAtividade("Academia", d, "15:30", "17:30", COLORS.gym);
 
-        // NOITE
+        // CONCURSO (Manhã: Teoria | Tarde: Prática Intercalada)
+        if (d === 1) {
+          // Segunda
+          adicionarAtividade(
+            "Português (Teoria)",
+            d,
+            "10:00",
+            "12:00",
+            COLORS.conc_port,
+          );
+          adicionarAtividade(
+            "Informática (Prática)",
+            d,
+            "13:00",
+            "15:00",
+            COLORS.conc_info,
+          );
+        } else if (d === 2) {
+          // Terça
+          adicionarAtividade(
+            "Matemática/Fin. (Teoria)",
+            d,
+            "10:00",
+            "12:00",
+            COLORS.conc_mat,
+          );
+          adicionarAtividade(
+            "Conh. Bancários (Prática)",
+            d,
+            "13:00",
+            "15:00",
+            COLORS.conc_banc,
+          );
+        } else if (d === 3) {
+          // Quarta
+          adicionarAtividade(
+            "Informática (Teoria)",
+            d,
+            "10:00",
+            "12:00",
+            COLORS.conc_info,
+          );
+          adicionarAtividade(
+            "Vendas (Prática)",
+            d,
+            "13:00",
+            "15:00",
+            COLORS.conc_vendas,
+          );
+        } else if (d === 4) {
+          // Quinta
+          adicionarAtividade(
+            "Conh. Bancários (Teoria)",
+            d,
+            "10:00",
+            "12:00",
+            COLORS.conc_banc,
+          );
+          adicionarAtividade(
+            "Português (Prática)",
+            d,
+            "13:00",
+            "15:00",
+            COLORS.conc_port,
+          );
+        } else if (d === 5) {
+          // Sexta
+          adicionarAtividade(
+            "Vendas (Teoria)",
+            d,
+            "10:00",
+            "12:00",
+            COLORS.conc_vendas,
+          );
+          adicionarAtividade(
+            "Matemática/Fin. (Prática)",
+            d,
+            "13:00",
+            "15:00",
+            COLORS.conc_mat,
+          );
+        }
+
+        // NOITE (Faculdade / Carreira - Intocáveis)
         if (d === 1) {
           adicionarAtividade(
             "Cálculo V.V",
@@ -647,13 +845,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // SÁBADO
       adicionarAtividade("Cardio", 6, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade("Vendas", 6, "10:00", "12:00", COLORS.conc_vendas);
       adicionarAtividade(
-        "Atualidades & Inglês",
+        "Vendas (Questões)",
+        6,
+        "10:00",
+        "12:00",
+        COLORS.conc_vendas,
+      );
+      adicionarAtividade(
+        "Matemática Financeira",
         6,
         "13:00",
         "15:00",
-        COLORS.conc_atual,
+        COLORS.conc_mat,
       );
       adicionarAtividade("Academia", 6, "15:30", "17:30", COLORS.gym);
       adicionarAtividade("Roadmap", 6, "18:00", "19:30", COLORS.carreira);
@@ -662,13 +866,19 @@ document.addEventListener("DOMContentLoaded", function () {
       // DOMINGO
       adicionarAtividade("Cardio", 7, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade(
-        "REVISÃO GERAL",
+        "Revisão Geral",
         7,
         "10:00",
         "12:00",
         COLORS.conc_estudo,
       );
-      adicionarAtividade("SIMULADO", 7, "13:00", "16:00", COLORS.conc_estudo);
+      adicionarAtividade(
+        "Simulado Cesgranrio",
+        7,
+        "13:00",
+        "16:00",
+        COLORS.conc_estudo,
+      );
       adicionarAtividade("Roadmap", 7, "17:00", "18:30", COLORS.carreira);
       adicionarAtividade("Roadmap", 7, "19:30", "21:00", COLORS.carreira);
     }
@@ -702,13 +912,14 @@ document.addEventListener("DOMContentLoaded", function () {
         '<p style="text-align: center; padding: 20px; color: #666;">Dia Livre!</p>';
   }
 
-  // 4. PROGRESSÃO + CHECKBOX + HISTORICOS (Minificados para economizar espaço, mas funcionais)
+  // 4. PROGRESSÃO + CHECKBOX + HISTORICOS
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
     const toggleBtn = document.getElementById("toggle-all-workouts-btn");
     const specificWorkoutBlocks = document.querySelectorAll(
       ".workout-day[data-day-index]",
     );
+
     function processarProgressao(nome, seriesFeitas, seriesTotais) {
       const nomeLimpo = nome
         .replace(/<[^>]*>/g, "")
@@ -749,15 +960,28 @@ document.addEventListener("DOMContentLoaded", function () {
       progresso[nomeLimpo] = dados;
       localStorage.setItem("frog_progresso_cargas", JSON.stringify(progresso));
     }
+
     let showAll = false;
     function updateVisibility() {
       const today = new Date().getDay() || 7;
+
       specificWorkoutBlocks.forEach((b) => {
         const idx = parseInt(b.dataset.dayIndex);
         if (showAll || idx === today) b.classList.remove("hidden-workout");
         else b.classList.add("hidden-workout");
       });
+
+      // Visibilidade das listas dinâmicas de Core Diário
+      document.querySelectorAll(".core-day-list").forEach((list) => {
+        const coreDayIdx = parseInt(list.getAttribute("data-core-day"));
+        if (showAll || coreDayIdx === today) {
+          list.classList.remove("hidden-workout");
+        } else {
+          list.classList.add("hidden-workout");
+        }
+      });
     }
+
     if (toggleBtn) {
       toggleBtn.onclick = () => {
         showAll = !showAll;
@@ -767,6 +991,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateVisibility();
       };
     }
+
     function saveWorkout(triggered, item) {
       const data = {};
       exerciseItems.forEach((i) => {
@@ -798,10 +1023,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
+
     const saved =
       JSON.parse(localStorage.getItem("workout_progress_v2026")) || {};
     const progressoCargas =
       JSON.parse(localStorage.getItem("frog_progresso_cargas")) || {};
+
     exerciseItems.forEach((item) => {
       const id = item.dataset.exerciseId;
       const labelText = item
@@ -847,7 +1074,9 @@ document.addEventListener("DOMContentLoaded", function () {
       cb?.addEventListener("change", () => saveWorkout(true, item));
       wi?.addEventListener("input", () => saveWorkout(false, null));
     });
+
     updateVisibility();
+
     document.querySelectorAll(".reset-button").forEach((btn) => {
       btn.onclick = function () {
         const c = this.closest(".workout-day");
@@ -863,6 +1092,7 @@ document.addEventListener("DOMContentLoaded", function () {
         saveWorkout(false, null);
       };
     });
+
     document.querySelectorAll(".finish-workout-btn").forEach((btn) => {
       btn.onclick = function () {
         const p = this.closest(".workout-day");
