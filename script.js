@@ -16,27 +16,125 @@ function showSection(sectionId) {
 
 // --- CONFIGURAÇÃO DOS EXERCÍCIOS ---
 const EXERCICIOS_CONFIG = {
-  // EXERCÍCIOS DE CORE E ABDÔMEN ADICIONADOS
-  "⚙️ Crunch Polia Alta": {
+  // --- NOVOS EXERCÍCIOS DE CORE E ABDÔMEN (TODOS COM 4 SÉRIES) ---
+  "🌪️ Stomach Vacuum": {
     type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
-    seriesMax: 5,
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
     seriesMin: 4,
   },
-  "🔄 Rotação Tronco Polia": {
+  "⚙️ Crunch na Máquina": {
     type: "isolador",
     cargaTipo: "maquina",
-    incremento: 2.5,
+    incremento: 5,
     seriesMax: 4,
-    seriesMin: 3,
+    seriesMin: 4,
   },
-  "📐 Flexão Lateral Halter": {
+  "💺 Supra Banco Declinado": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🧱 Supra Solo (c/ Anilha)": {
     type: "isolador",
     cargaTipo: "halter",
     incremento: 1,
     seriesMax: 4,
-    seriesMin: 3,
+    seriesMin: 4,
+  },
+  "🔪 Canivete (V-up)": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚣 Abdominal Remador": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🔄 Abdominal Reverso no Solo": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "⬇️ Infra no Banco Reto": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "✂️ Tesoura (Scissor Kicks)": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🔄 Rotação de Tronco": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚴 Abdominal Bicicleta": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🇷🇺 Twist Russo (c/ Anilha)": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🪵 Prancha Lateral": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "📏 Extensão Lombar Banco": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🪵 Prancha Frontal": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦸‍♂️ Superman Isométrico": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🐕 Perdigueiro": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
   },
 
   // SEGUNDA (PUSH 1)
