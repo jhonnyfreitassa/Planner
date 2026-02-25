@@ -16,7 +16,7 @@ function showSection(sectionId) {
 
 // --- CONFIGURAÇÃO DOS EXERCÍCIOS ---
 const EXERCICIOS_CONFIG = {
-  // --- NOVOS EXERCÍCIOS DE CORE E ABDÔMEN (TODOS COM 4 SÉRIES) ---
+  // CORE E ABDÔMEN (Foco Hipertrofia Supra/Infra, Anti-rotação e Abd Wheel)
   "🌪️ Stomach Vacuum": {
     type: "isolador",
     cargaTipo: "corpo",
@@ -28,13 +28,6 @@ const EXERCICIOS_CONFIG = {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "💺 Supra Banco Declinado": {
-    type: "isolador",
-    cargaTipo: "corpo",
-    incremento: 0,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -52,13 +45,6 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🚣 Abdominal Remador": {
-    type: "isolador",
-    cargaTipo: "corpo",
-    incremento: 0,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
   "🔄 Abdominal Reverso no Solo": {
     type: "isolador",
     cargaTipo: "corpo",
@@ -70,34 +56,6 @@ const EXERCICIOS_CONFIG = {
     type: "isolador",
     cargaTipo: "corpo",
     incremento: 0,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "✂️ Tesoura (Scissor Kicks)": {
-    type: "isolador",
-    cargaTipo: "corpo",
-    incremento: 0,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🔄 Rotação de Tronco": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🚴 Abdominal Bicicleta": {
-    type: "isolador",
-    cargaTipo: "corpo",
-    incremento: 0,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🇷🇺 Twist Russo (c/ Anilha)": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 1,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -136,8 +94,22 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
+  "🛞 Roda Abdominal (Ab Wheel)": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "✋ Prancha c/ Toque no Ombro": {
+    type: "isolador",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
 
-  // SEGUNDA (PUSH 1)
+  // PUSH 1
   "📐 Supino Inclinado c/ Halteres": {
     type: "composto",
     cargaTipo: "halter",
@@ -197,7 +169,8 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 5,
     seriesMin: 4,
   },
-  // TERÇA (PULL 1)
+
+  // PULL 1
   "🚣 Remada Máquina (Neutra)": {
     type: "composto",
     cargaTipo: "maquina",
@@ -244,7 +217,8 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 3,
   },
-  // QUARTA (LEGS A)
+
+  // LEGS 1
   "🏋️‍♂️ Agachamento Livre": {
     type: "composto",
     cargaTipo: "barra",
@@ -283,7 +257,8 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 6,
     seriesMin: 5,
   },
-  // QUINTA (PUSH 2)
+
+  // PUSH 2
   "🛫 Crossover Polia Baixa": {
     type: "isolador",
     cargaTipo: "maquina",
@@ -331,7 +306,8 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 5,
     seriesMin: 4,
   },
-  // SEXTA (PULL 2)
+
+  // PULL 2
   "🧗 Barra Fixa / Graviton": {
     type: "composto",
     cargaTipo: "maquina",
@@ -378,7 +354,8 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 5,
     seriesMin: 4,
   },
-  // SÁBADO (LEGS B)
+
+  // LEGS 2
   "📏 Stiff com Barra": {
     type: "composto",
     cargaTipo: "barra",
@@ -414,7 +391,6 @@ const EXERCICIOS_CONFIG = {
   },
 };
 
-// --- VARIÁVEIS GLOBAIS ---
 const COLORS = {
   cardio: "#ff4757",
   gym: "#b30000",
@@ -436,7 +412,6 @@ const COLORS = {
   carreira: "#fdcb6e",
 };
 
-// --- INICIALIZAÇÃO ---
 document.addEventListener("DOMContentLoaded", function () {
   const hoje = new Date();
   const ano = hoje.getFullYear();
@@ -450,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnTimerReset = document.getElementById("btn-timer-reset");
 
   let focusTimerInterval;
-  let isFocusMode = true; // true = 50m (Foco), false = 15m (Pausa)
+  let isFocusMode = true;
   let timerSeconds = 50 * 60;
   let isTimerRunning = false;
 
@@ -461,7 +436,6 @@ document.addEventListener("DOMContentLoaded", function () {
     timerDisplay.textContent = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   }
 
-  // Alerta sonoro nativo simples usando API de áudio
   function playAlertBeep() {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -477,10 +451,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (btnTimerAction && btnTimerReset) {
     updateTimerDisplay();
-
     btnTimerAction.onclick = () => {
       if (isTimerRunning) {
-        // Pausar
         clearInterval(focusTimerInterval);
         isTimerRunning = false;
         btnTimerAction.textContent = isFocusMode
@@ -488,33 +460,24 @@ document.addEventListener("DOMContentLoaded", function () {
           : "Retomar Pausa (15m)";
         document.body.classList.remove("modo-foco-ativo");
       } else {
-        // Iniciar
         isTimerRunning = true;
         btnTimerAction.textContent = "Pausar Timer";
-
-        if (isFocusMode) {
-          document.body.classList.add("modo-foco-ativo");
-        }
+        if (isFocusMode) document.body.classList.add("modo-foco-ativo");
 
         focusTimerInterval = setInterval(() => {
           timerSeconds--;
           updateTimerDisplay();
-
           if (timerSeconds <= 0) {
             clearInterval(focusTimerInterval);
             isTimerRunning = false;
             playAlertBeep();
             document.body.classList.remove("modo-foco-ativo");
-
-            // Alternar os modos
             isFocusMode = !isFocusMode;
             timerSeconds = isFocusMode ? 50 * 60 : 15 * 60;
             updateTimerDisplay();
-
             btnTimerAction.textContent = isFocusMode
               ? "Iniciar Bloco (50m)"
               : "Iniciar Pausa (15m)";
-
             setTimeout(
               () =>
                 alert(
@@ -548,7 +511,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const trackerMsg = document.getElementById("tracker-msg");
 
   if (btnEncerrarDia) {
-    // Setup diário
     const todayString = new Date().toLocaleDateString();
     const savedTrackerDate = localStorage.getItem("tracker_date");
 
@@ -559,7 +521,6 @@ document.addEventListener("DOMContentLoaded", function () {
       truthChecks.forEach((chk, idx) => {
         chk.checked = savedChecks[idx] || false;
       });
-
       if (localStorage.getItem("tracker_finished") === "true") {
         btnEncerrarDia.textContent = "Dia Encerrado 🔒";
         btnEncerrarDia.disabled = true;
@@ -572,13 +533,10 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("tracker_date", todayString);
     }
 
-    // Salvar progresso em tempo real
     truthChecks.forEach((chk) => {
       chk.addEventListener("change", () => {
         const checksState = Array.from(truthChecks).map((c) => c.checked);
         localStorage.setItem("tracker_checks", JSON.stringify(checksState));
-
-        // Oculta log de falhas dinamicamente se usuário marcou tudo
         const allChecked = Array.from(truthChecks).every((c) => c.checked);
         if (allChecked) {
           logFalhasContainer.style.display = "none";
@@ -587,24 +545,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // Lógica de Encerramento e Regra de Negócio
     btnEncerrarDia.onclick = () => {
       const allChecked = Array.from(truthChecks).every((c) => c.checked);
-
       if (!allChecked) {
         logFalhasContainer.style.display = "block";
-
         if (logFalhasText.value.trim() === "") {
           trackerMsg.textContent = "Preencha o Log de Falhas para prosseguir.";
           trackerMsg.style.color = "#e74c3c";
           logFalhasText.focus();
-          return; // Impede encerramento
+          return;
         }
       }
-
       localStorage.setItem("tracker_finished", "true");
-
-      // Integração com Diário: Salva falha no histórico nativo de Anotações do PWA
       if (!allChecked && logFalhasText.value.trim() !== "") {
         const history =
           JSON.parse(localStorage.getItem("journalEntries")) || [];
@@ -613,15 +565,13 @@ document.addEventListener("DOMContentLoaded", function () {
           text: `[Log de Falhas] ${logFalhasText.value.trim()}`,
         });
         localStorage.setItem("journalEntries", JSON.stringify(history));
-        if (typeof loadJournalHistory === "function") loadJournalHistory(); // Recarrega tela
+        if (typeof loadJournalHistory === "function") loadJournalHistory();
       }
-
       logFalhasContainer.style.display = "none";
       btnEncerrarDia.textContent = "Dia Encerrado 🔒";
       btnEncerrarDia.disabled = true;
       btnEncerrarDia.style.opacity = "0.5";
       truthChecks.forEach((c) => (c.disabled = true));
-
       trackerMsg.textContent = allChecked
         ? "Parabéns pela disciplina hoje! 🚀"
         : "Dia encerrado. Falha registrada para aprendizado.";
@@ -629,7 +579,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  // 1. RESET DIÁRIO AUTOMÁTICO
+  // RESET DIÁRIO AUTOMÁTICO
   const lastVisit = localStorage.getItem("last_app_visit_date");
   if (lastVisit && lastVisit !== dataFormatada) {
     const savedProgress =
@@ -646,13 +596,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   localStorage.setItem("last_app_visit_date", dataFormatada);
 
-  // 2. SETAR DATA NOS INPUTS
+  // SETAR DATA NOS INPUTS
   const inputSonho = document.getElementById("dream-journal-date");
   const inputNota = document.getElementById("journal-date");
   if (inputSonho) inputSonho.value = dataFormatada;
   if (inputNota) inputNota.value = dataFormatada;
 
-  // 3. LÓGICA DA AGENDA (06:00 as 00:00)
+  // LÓGICA DA AGENDA (06:00 as 00:00)
   if (document.getElementById("agenda")) {
     const agendaGrid = document.getElementById("agenda");
     const listaHoje = document.getElementById("lista-atividades-hoje");
@@ -706,15 +656,12 @@ document.addEventListener("DOMContentLoaded", function () {
       tituloHoje.textContent = `Agenda de: ${diasNomes[diaSemana]}`;
     if (listaHoje) listaHoje.innerHTML = "";
 
-    // CONFIGURAÇÃO DA GRADE
     const HORA_INICIO = 6;
-    const HORA_FIM = 24; // 24 = 00:00
-    // Sincronizado com CSS (--hora-altura)
+    const HORA_FIM = 24;
     const ALTURA_HORA = 80;
 
     function gerarGrade() {
       agendaGrid.innerHTML = "";
-
       const t = document.createElement("div");
       t.className = "grid-item";
       t.style.borderLeft = "none";
@@ -734,7 +681,6 @@ document.addEventListener("DOMContentLoaded", function () {
         e.textContent =
           o === 24 ? "00:00" : `${o.toString().padStart(2, "0")}:00`;
         e.style.gridRow = `${o - HORA_INICIO + 2}`;
-
         if (o === HORA_FIM) {
           e.style.height = "30px";
           e.style.alignSelf = "start";
@@ -759,13 +705,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function adicionarAtividade(nome, diaIndex, horaInicio, horaFim, cor) {
       let [hIni, mIni] = horaInicio.split(":").map(Number);
       let [hFim, mFim] = horaFim.split(":").map(Number);
-
       let topo = hIni + mIni / 60;
       let fimDecimal = hFim + mFim / 60;
-
       if (hFim === 0 && mFim === 0) fimDecimal = 24;
       if (fimDecimal < topo) fimDecimal = 24;
-
       let duracao = fimDecimal - topo;
 
       function renderBloco(topPos, durationTime) {
@@ -775,18 +718,14 @@ document.addEventListener("DOMContentLoaded", function () {
         bloco.style.height = `${durationTime * ALTURA_HORA}px`;
         bloco.style.backgroundColor = cor;
         bloco.style.zIndex = durationTime < 1 ? "15" : "10";
-
         bloco.innerHTML = `<strong style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${nome}</strong><span style="font-size:0.9em; opacity:0.9;">${horaInicio}-${horaFim}</span>`;
-
         const coluna = agendaGrid.querySelector(
           `.coluna-dia[data-dia-index='${diaIndex}']`,
         );
         if (coluna) coluna.appendChild(bloco);
       }
 
-      if (topo >= HORA_INICIO && topo < HORA_FIM) {
-        renderBloco(topo, duracao);
-      }
+      if (topo >= HORA_INICIO && topo < HORA_FIM) renderBloco(topo, duracao);
 
       if (diaIndex === diaSemana)
         atividadesHoje.push({
@@ -805,15 +744,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const limitSist = new Date("2026-04-25");
       const isSistActive = hoje <= limitSist;
 
-      // ROTINA SEMANAL (Seg-Sex)
       for (let d = 1; d <= 5; d++) {
-        // SAÚDE (Fixo)
         adicionarAtividade("Cardio", d, "08:00", "09:30", COLORS.cardio);
         adicionarAtividade("Academia", d, "15:30", "17:30", COLORS.gym);
 
-        // CONCURSO (Manhã: Teoria | Tarde: Prática Intercalada)
         if (d === 1) {
-          // Segunda
           adicionarAtividade(
             "Português (Teoria)",
             d,
@@ -829,7 +764,6 @@ document.addEventListener("DOMContentLoaded", function () {
             COLORS.conc_info,
           );
         } else if (d === 2) {
-          // Terça
           adicionarAtividade(
             "Matemática/Fin. (Teoria)",
             d,
@@ -845,7 +779,6 @@ document.addEventListener("DOMContentLoaded", function () {
             COLORS.conc_banc,
           );
         } else if (d === 3) {
-          // Quarta
           adicionarAtividade(
             "Informática (Teoria)",
             d,
@@ -861,7 +794,6 @@ document.addEventListener("DOMContentLoaded", function () {
             COLORS.conc_vendas,
           );
         } else if (d === 4) {
-          // Quinta
           adicionarAtividade(
             "Conh. Bancários (Teoria)",
             d,
@@ -877,7 +809,6 @@ document.addEventListener("DOMContentLoaded", function () {
             COLORS.conc_port,
           );
         } else if (d === 5) {
-          // Sexta
           adicionarAtividade(
             "Vendas (Teoria)",
             d,
@@ -894,7 +825,6 @@ document.addEventListener("DOMContentLoaded", function () {
           );
         }
 
-        // NOITE (Faculdade / Carreira - Intocáveis)
         if (d === 1) {
           adicionarAtividade(
             "Cálculo V.V",
@@ -941,7 +871,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      // SÁBADO
       adicionarAtividade("Cardio", 6, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade(
         "Vendas (Questões)",
@@ -961,7 +890,6 @@ document.addEventListener("DOMContentLoaded", function () {
       adicionarAtividade("Roadmap", 6, "18:00", "19:30", COLORS.carreira);
       adicionarAtividade("Roadmap", 6, "20:30", "22:00", COLORS.carreira);
 
-      // DOMINGO
       adicionarAtividade("Cardio", 7, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade(
         "Revisão Geral",
@@ -1010,7 +938,7 @@ document.addEventListener("DOMContentLoaded", function () {
         '<p style="text-align: center; padding: 20px; color: #666;">Dia Livre!</p>';
   }
 
-  // 4. PROGRESSÃO + CHECKBOX + HISTORICOS
+  // --- PROGRESSÃO + CHECKBOX + HISTORICOS DE TREINO ---
   if (document.getElementById("treino-section")) {
     const exerciseItems = document.querySelectorAll(".exercise-item");
     const toggleBtn = document.getElementById("toggle-all-workouts-btn");
@@ -1018,12 +946,17 @@ document.addEventListener("DOMContentLoaded", function () {
       ".workout-day[data-day-index]",
     );
 
-    function processarProgressao(nome, seriesFeitas, seriesTotais) {
-      const nomeLimpo = nome
+    // FUNÇÃO CORRIGIDA PARA EXTRAIR O NOME CORRETAMENTE E EVITAR BUGS DE PARSE NO HTML
+    function getCleanExerciseName(item) {
+      const label = item.querySelector("label");
+      if (!label) return "";
+      return label.innerHTML
+        .split("<br>")[0]
         .replace(/<[^>]*>/g, "")
-        .trim()
-        .split("\n")[0]
         .trim();
+    }
+
+    function processarProgressao(nomeLimpo, seriesFeitas, seriesTotais) {
       const config = EXERCICIOS_CONFIG[nomeLimpo];
       if (!config) return;
       let progresso =
@@ -1031,6 +964,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!progresso[nomeLimpo])
         progresso[nomeLimpo] = { carga: 0, series: seriesTotais, falhas: 0 };
       let dados = progresso[nomeLimpo];
+
       if (config.type === "composto") {
         if (seriesFeitas >= seriesTotais) {
           dados.carga = (dados.carga || 0) + config.incremento;
@@ -1062,21 +996,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let showAll = false;
     function updateVisibility() {
       const today = new Date().getDay() || 7;
-
       specificWorkoutBlocks.forEach((b) => {
         const idx = parseInt(b.dataset.dayIndex);
         if (showAll || idx === today) b.classList.remove("hidden-workout");
         else b.classList.add("hidden-workout");
       });
-
-      // Visibilidade das listas dinâmicas de Core Diário
       document.querySelectorAll(".core-day-list").forEach((list) => {
         const coreDayIdx = parseInt(list.getAttribute("data-core-day"));
-        if (showAll || coreDayIdx === today) {
+        if (showAll || coreDayIdx === today)
           list.classList.remove("hidden-workout");
-        } else {
-          list.classList.add("hidden-workout");
-        }
+        else list.classList.add("hidden-workout");
       });
     }
 
@@ -1111,13 +1040,13 @@ document.addEventListener("DOMContentLoaded", function () {
       if (triggered && item) {
         const cb = item.querySelector(".exercise-checkbox");
         if (cb.checked) {
-          const lbl = item.querySelector("label").textContent;
+          const nomeLimpo = getCleanExerciseName(item);
           const dots = item.querySelectorAll(".series-dot");
           const done = Array.from(dots).filter((d) =>
             d.classList.contains("completed"),
           ).length;
           const total = dots.length;
-          if (total > 0) processarProgressao(lbl, done, total);
+          if (total > 0) processarProgressao(nomeLimpo, done, total);
         }
       }
     }
@@ -1129,12 +1058,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     exerciseItems.forEach((item) => {
       const id = item.dataset.exerciseId;
-      const labelText = item
-        .querySelector("label")
-        .textContent.replace(/<[^>]*>/g, "")
-        .trim()
-        .split("\n")[0]
-        .trim();
+      const labelText = getCleanExerciseName(item);
       let seriesCount = 3;
       if (progressoCargas[labelText]?.series)
         seriesCount = progressoCargas[labelText].series;
@@ -1219,6 +1143,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // --- PROGRESSÃO DE CARREIRA E DIETA ---
   if (document.getElementById("carreira-section")) {
     const roadmapCheckboxes = document.querySelectorAll(".roadmap-check");
     const roadmapProgressBar = document.getElementById("roadmapProgressBar");
@@ -1272,6 +1197,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // --- HISTÓRICOS E DIÁRIOS ---
   window.deleteSabotageItem = function (i, t) {
     if (confirm("Apagar?")) {
       if (t === "sab") {
