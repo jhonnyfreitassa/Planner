@@ -391,6 +391,7 @@ const EXERCICIOS_CONFIG = {
   },
 };
 
+// --- PALETA DE CORES ATUALIZADA (SEM REPETIÇÕES) ---
 const COLORS = {
   cardio: "#ff4757",
   gym: "#b30000",
@@ -398,7 +399,7 @@ const COLORS = {
   conc_port: "#e67e22",
   conc_mat: "#8e44ad",
   conc_info: "#2980b9",
-  conc_vendas: "#d35400",
+  conc_vendas: "#e84393",
   conc_banc: "#27ae60",
   conc_atual: "#16a085",
   conc_rlm: "#d35400",
@@ -409,6 +410,7 @@ const COLORS = {
   fac_sist: "#34495e",
   fac_estrut: "#9b59b6",
   fac_algo: "#e91e63",
+  fac_estudos: "#6c5ce7",
   carreira: "#fdcb6e",
 };
 
@@ -740,173 +742,107 @@ document.addEventListener("DOMContentLoaded", function () {
     gerarGrade();
     carregarRotinaSemestre();
 
+    // ==========================================
+    // NOVA ESTRUTURA DE ROTINA
+    // ==========================================
     function carregarRotinaSemestre() {
       const limitSist = new Date("2026-04-25");
       const isSistActive = hoje <= limitSist;
 
-      for (let d = 1; d <= 5; d++) {
+      // Mapeamento de 1 matéria por dia para o BB
+      const bbSubjects = {
+        1: { nome: "BB: Vendas e Neg", cor: COLORS.conc_vendas },
+        2: { nome: "BB: Informática", cor: COLORS.conc_info },
+        3: { nome: "BB: Conh. Bancários", cor: COLORS.conc_banc },
+        4: { nome: "BB: Português", cor: COLORS.conc_port },
+        5: { nome: "BB: Mat. Financeira", cor: COLORS.conc_mat },
+        6: { nome: "BB: Matemática Básica", cor: COLORS.conc_mat },
+        7: { nome: "BB: Inglês/Atualidades", cor: COLORS.conc_atual },
+      };
+
+      for (let d = 1; d <= 7; d++) {
+        // Vida de Atleta (Inegociável)
         adicionarAtividade("Cardio", d, "08:00", "09:30", COLORS.cardio);
-        adicionarAtividade("Academia", d, "15:30", "17:30", COLORS.gym);
-
-        if (d === 1) {
-          adicionarAtividade(
-            "Português (Teoria)",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_port,
-          );
-          adicionarAtividade(
-            "Informática (Prática)",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_info,
-          );
-        } else if (d === 2) {
-          adicionarAtividade(
-            "Matemática/Fin. (Teoria)",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_mat,
-          );
-          adicionarAtividade(
-            "Conh. Bancários (Prática)",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_banc,
-          );
-        } else if (d === 3) {
-          adicionarAtividade(
-            "Informática (Teoria)",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_info,
-          );
-          adicionarAtividade(
-            "Vendas (Prática)",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_vendas,
-          );
-        } else if (d === 4) {
-          adicionarAtividade(
-            "Conh. Bancários (Teoria)",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_banc,
-          );
-          adicionarAtividade(
-            "Português (Prática)",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_port,
-          );
-        } else if (d === 5) {
-          adicionarAtividade(
-            "Vendas (Teoria)",
-            d,
-            "10:00",
-            "12:00",
-            COLORS.conc_vendas,
-          );
-          adicionarAtividade(
-            "Matemática/Fin. (Prática)",
-            d,
-            "13:00",
-            "15:00",
-            COLORS.conc_mat,
-          );
+        if (d !== 7) {
+          // Musculação de Seg a Sáb
+          adicionarAtividade("Academia", d, "15:30", "17:30", COLORS.gym);
         }
 
-        if (d === 1) {
-          adicionarAtividade(
-            "Cálculo V.V",
-            1,
-            "19:00",
-            "20:40",
-            COLORS.fac_calculo,
-          );
-          adicionarAtividade(
-            "Métodos Mat.",
-            1,
-            "20:55",
-            "22:35",
-            COLORS.fac_metodos,
-          );
-        } else if (d === 2) {
-          if (isSistActive)
-            adicionarAtividade(
-              "Sist. Computacionais",
-              2,
-              "19:00",
-              "22:35",
-              COLORS.fac_sist,
-            );
-        } else if (d === 3) {
-          adicionarAtividade("Roadmap", 3, "19:00", "20:30", COLORS.carreira);
-          adicionarAtividade("Roadmap", 3, "21:00", "22:30", COLORS.carreira);
-        } else if (d === 4) {
-          adicionarAtividade(
-            "Estrutura de Dados",
-            4,
-            "19:00",
-            "21:45",
-            COLORS.fac_estrut,
-          );
-        } else if (d === 5) {
-          adicionarAtividade(
-            "Algoritmos",
-            5,
-            "19:00",
-            "21:45",
-            COLORS.fac_algo,
-          );
-        }
+        // Bloco 1: Concurso BB (2 horas/dia)
+        adicionarAtividade(
+          bbSubjects[d].nome,
+          d,
+          "10:00",
+          "12:00",
+          bbSubjects[d].cor,
+        );
+
+        // Bloco 2: Roadmap (apenas carreira) (2 horas/dia)
+        adicionarAtividade(
+          "Roadmap (Desenv. Carreira)",
+          d,
+          "13:00",
+          "15:00",
+          COLORS.carreira,
+        );
       }
 
-      adicionarAtividade("Cardio", 6, "08:00", "09:30", COLORS.cardio);
+      // Grade de Aulas Reais da Faculdade (Noturno)
+      // Segunda
       adicionarAtividade(
-        "Vendas (Questões)",
-        6,
-        "10:00",
-        "12:00",
-        COLORS.conc_vendas,
+        "Cálculo V.V",
+        1,
+        "19:00",
+        "20:40",
+        COLORS.fac_calculo,
       );
       adicionarAtividade(
-        "Matemática Financeira",
-        6,
-        "13:00",
-        "15:00",
-        COLORS.conc_mat,
+        "Métodos Mat.",
+        1,
+        "20:55",
+        "22:35",
+        COLORS.fac_metodos,
       );
-      adicionarAtividade("Academia", 6, "15:30", "17:30", COLORS.gym);
-      adicionarAtividade("Roadmap", 6, "18:00", "19:30", COLORS.carreira);
-      adicionarAtividade("Roadmap", 6, "20:30", "22:00", COLORS.carreira);
 
-      adicionarAtividade("Cardio", 7, "08:00", "09:30", COLORS.cardio);
+      // Terça
+      if (isSistActive)
+        adicionarAtividade(
+          "Sist. Computacionais",
+          2,
+          "19:00",
+          "22:35",
+          COLORS.fac_sist,
+        );
+
+      // Quarta - Livre
+
+      // Quinta
       adicionarAtividade(
-        "Revisão Geral",
-        7,
-        "10:00",
-        "12:00",
-        COLORS.conc_estudo,
+        "Estrutura de Dados",
+        4,
+        "19:00",
+        "21:45",
+        COLORS.fac_estrut,
+      );
+
+      // Sexta
+      adicionarAtividade("Algoritmos", 5, "19:00", "21:45", COLORS.fac_algo);
+
+      // Fim de Semana - Novo bloco exclusivo para Faculdade/TCC (2 horas)
+      adicionarAtividade(
+        "Estudos Faculdade",
+        6,
+        "18:00",
+        "20:00",
+        COLORS.fac_estudos,
       );
       adicionarAtividade(
-        "Simulado Cesgranrio",
+        "Estudos Faculdade",
         7,
-        "13:00",
         "16:00",
-        COLORS.conc_estudo,
+        "18:00",
+        COLORS.fac_estudos,
       );
-      adicionarAtividade("Roadmap", 7, "17:00", "18:30", COLORS.carreira);
-      adicionarAtividade("Roadmap", 7, "19:30", "21:00", COLORS.carreira);
     }
 
     atividadesHoje.sort(
@@ -946,7 +882,6 @@ document.addEventListener("DOMContentLoaded", function () {
       ".workout-day[data-day-index]",
     );
 
-    // FUNÇÃO CORRIGIDA PARA EXTRAIR O NOME CORRETAMENTE E EVITAR BUGS DE PARSE NO HTML
     function getCleanExerciseName(item) {
       const label = item.querySelector("label");
       if (!label) return "";
