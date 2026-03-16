@@ -12,29 +12,15 @@ function showSection(sectionId) {
 // CONFIGURAÇÃO DOS EXERCÍCIOS
 // =============================================================
 const EXERCICIOS_CONFIG = {
-  // CORE — ABDÔMEN
-  "🌪️ Stomach Vacuum":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "⚙️ Crunch na Máquina":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🧱 Supra Solo (c/ Anilha)":      { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 4, seriesMin: 4 },
-  "🔪 Canivete (V-up)":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🔄 Abdominal Reverso no Solo":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "⬇️ Infra no Banco Reto":          { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🪵 Prancha Lateral":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "📏 Extensão Lombar Banco":        { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🪵 Prancha Frontal":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🦸‍♂️ Superman Isométrico":         { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🐕 Perdigueiro":                  { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🛞 Roda Abdominal (Ab Wheel)":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "✋ Prancha c/ Toque no Ombro":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-
-  // CORE — NOVOS (1 extra por dia)
-  "🦵 Abdominal Supra com Pernas a 90º": { type: "isolador", cargaTipo: "halter", incremento: 1, seriesMax: 4, seriesMin: 4 },
-  "🌊 Hollow Body Hold":                  { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🏋️ Elevação de Pernas na Barra Fixa": { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "👟 Toque no Calcanhar no Solo":        { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🚣 Abdominal Remador":                 { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🚴 Abdominal Bicicleta no Solo":       { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🍑 Ponte Pélvica Isométrica":          { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 3, seriesMin: 3 },
+  // CORE — ABDÔMEN (Rotina de Hipertrofia)
+  "🌪️ Stomach Vacuum":                                { type: "isolador", cargaTipo: "corpo",   incremento: 0, seriesMax: 4, seriesMin: 4 },
+  "🛞 Roda Abdominal (Ab Wheel)":                     { type: "isolador", cargaTipo: "corpo",   incremento: 0, seriesMax: 4, seriesMin: 4 },
+  "⚙️ Crunch na Máquina (ou Polia Alta)":             { type: "isolador", cargaTipo: "maquina", incremento: 5, seriesMax: 4, seriesMin: 4 },
+  "🧱 Abdominal Supra no Banco Declinado com Anilha": { type: "isolador", cargaTipo: "halter",  incremento: 1, seriesMax: 4, seriesMin: 4 },
+  "⬇️ Abdominal Infra no Banco Reto ou Solo":         { type: "isolador", cargaTipo: "corpo",   incremento: 0, seriesMax: 4, seriesMin: 4 },
+  "🔄 Abdominal Reverso no Banco Inclinado":          { type: "isolador", cargaTipo: "corpo",   incremento: 0, seriesMax: 4, seriesMin: 4 },
+  "🪓 Rotação de Tronco na Polia (Woodchopper)":     { type: "isolador", cargaTipo: "maquina", incremento: 5, seriesMax: 4, seriesMin: 4 },
+  "🪵 Prancha Frontal com Carga":                     { type: "isolador", cargaTipo: "halter",  incremento: 1, seriesMax: 4, seriesMin: 4 },
 
   // PUSH 1
   "📐 Supino Inclinado c/ Halteres":  { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50  },
