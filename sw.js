@@ -1,5 +1,5 @@
-// Versão 3.4
-const CACHE_NAME = "planner-2026-v3.4"; 
+// Versão 3.5
+const CACHE_NAME = "planner-2026-v3.5"; 
 
 const urlsToCache = [
   "./",
