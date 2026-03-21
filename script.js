@@ -12,29 +12,13 @@ function showSection(sectionId) {
 // CONFIGURAÇÃO DOS EXERCÍCIOS
 // =============================================================
 const EXERCICIOS_CONFIG = {
-  // CORE — ABDÔMEN
+  // CORE (Atualizado)
   "🌪️ Stomach Vacuum":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "🛞 Roda Abdominal (Ab Wheel)":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
   "⚙️ Crunch na Máquina":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🧱 Supra Solo (c/ Anilha)":      { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 4, seriesMin: 4 },
-  "🔪 Canivete (V-up)":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
   "🔄 Abdominal Reverso no Solo":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "⬇️ Infra no Banco Reto":          { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
   "🪵 Prancha Lateral":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
   "📏 Extensão Lombar Banco":        { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🪵 Prancha Frontal":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🦸‍♂️ Superman Isométrico":         { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🐕 Perdigueiro":                  { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🛞 Roda Abdominal (Ab Wheel)":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "✋ Prancha c/ Toque no Ombro":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-
-  // CORE — NOVOS (1 extra por dia)
-  "🦵 Abdominal Supra com Pernas a 90º": { type: "isolador", cargaTipo: "halter", incremento: 1, seriesMax: 4, seriesMin: 4 },
-  "🌊 Hollow Body Hold":                  { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🏋️ Elevação de Pernas na Barra Fixa": { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "👟 Toque no Calcanhar no Solo":        { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🚣 Abdominal Remador":                 { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🚴 Abdominal Bicicleta no Solo":       { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 4, seriesMin: 4 },
-  "🍑 Ponte Pélvica Isométrica":          { type: "isolador", cargaTipo: "corpo",  incremento: 0, seriesMax: 3, seriesMin: 3 },
 
   // PUSH 1
   "📐 Supino Inclinado c/ Halteres":  { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50  },
@@ -56,13 +40,20 @@ const EXERCICIOS_CONFIG = {
   "🕷️ Rosca Spider (Banco 45º)":    { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
   "🔄 Rosca Inversa":               { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 3 },
 
-  // LEGS 1
-  "🏋️‍♂️ Agachamento Livre":         { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180 },
-  "☠️ Levantamento Terra":           { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220 },
-  "🍑 Elevação Pélvica":             { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200 },
-  "🇧🇬 Agachamento Búlgaro":         { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40  },
-  "🦵 Cadeira Extensora":            { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 4 },
-  "🦶 Panturrilha em Pé Unilateral": { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 6, seriesMin: 5 },
+  // LEGS 1 (Atualizado)
+  "🍑 Elevação Pélvica":                    { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 4, seriesMin: 4 },
+  "☠️ Levantamento Terra Sumô":             { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
+  "🏋️‍♂️ Agachamento Livre":               { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180, seriesMax: 3, seriesMin: 3 },
+  "🦵 Cadeira Extensora":                   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "👐 Cadeira Abdutora":                    { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦶 Panturrilha no Hack Machine":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+
+  // LEGS 2 (Atualizado)
+  "☠️ Levantamento Terra":                  { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
+  "📏 Stiff com Barra":                     { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150, seriesMax: 3, seriesMin: 3 },
+  "🛌 Mesa Flexora":                        { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "👐 Cadeira Abdutora (Tronco inclinado)": { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🪑 Panturrilha Sentado":                 { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
 
   // PUSH 2
   "🛫 Crossover Polia Baixa":        { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
@@ -82,25 +73,21 @@ const EXERCICIOS_CONFIG = {
   "🔨 Rosca Martelo":                { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
   "📐 Rosca Inclinada (Banco 45º)":  { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
 
-  // LEGS 2
-  "📏 Stiff com Barra":              { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150 },
-  "⏮️ Recuo com Halteres":           { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40  },
-  "🛌 Mesa Flexora":                 { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 4 },
-  "👐 Cadeira Abdutora":             { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 6, seriesMin: 5 },
-  "🪑 Panturrilha Sentado":          { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 6, seriesMin: 5 },
 };
 
 // =============================================================
 // PALETA DE CORES (Tailwind dark mode — sem repetições)
 // =============================================================
 const COLORS = {
-  cardio:      "#ef4444",
-  roadmap:     "#3b82f6",
-  musculacao:  "#10b981",
-  fac_calculo: "#8b5cf6",
-  fac_metodos: "#f59e0b",
-  fac_estrut:  "#ec4899",
-  fac_algo:    "#14b8a6",
+  cardio:      "#ef4444", // Red (Físico/Urgente)
+  musculacao:  "#22c55e", // Green (Saúde/Construção)
+  roadmap:     "#3b82f6", // Blue (Carreira/Foco)
+  estudo_c:    "#0ea5e9", // Sky Blue (Estudo Prático)
+  estudo_mat:  "#f59e0b", // Amber (Estudo Teórico/Atenção)
+  fac_calculo: "#8b5cf6", // Violet (Faculdade)
+  fac_metodos: "#d946ef", // Fuchsia (Faculdade)
+  fac_estrut:  "#ec4899", // Pink (Faculdade)
+  fac_algo:    "#14b8a6", // Teal (Faculdade)
 };
 
 // =============================================================
@@ -258,34 +245,37 @@ document.addEventListener("DOMContentLoaded", function () {
     // ROTINA DO SEMESTRE
     // -----------------------------------------------------------
     function carregarRotinaSemestre() {
-      // Segunda a Sexta (dias 1–5)
+      // --- Segunda a Sexta (Dias 1 a 5) - Rotina Diurna ---
       for (let d = 1; d <= 5; d++) {
-        adicionarAtividade("Cardio",     d, "10:00", "11:30", COLORS.cardio);
-        adicionarAtividade("Roadmap",    d, "11:30", "14:00", COLORS.roadmap);
-        adicionarAtividade("Musculação", d, "14:00", "16:00", COLORS.musculacao);
-        adicionarAtividade("Roadmap",    d, "16:00", "17:30", COLORS.roadmap);
+        adicionarAtividade("Cardio", d, "08:00", "09:30", COLORS.cardio);
+        adicionarAtividade("Linguagem C & Algo", d, "10:15", "12:15", COLORS.estudo_c);
+        adicionarAtividade("Matemática", d, "13:00", "14:00", COLORS.estudo_mat);
+        adicionarAtividade("Roadmap Estágio", d, "14:00", "15:00", COLORS.roadmap);
+        adicionarAtividade("Musculação", d, "15:00", "17:00", COLORS.musculacao);
       }
-
-      // Faculdade — Segunda (dia 1): 2 disciplinas
-      adicionarAtividade("Cálculo V.V",   1, "19:00", "20:40", COLORS.fac_calculo);
-      adicionarAtividade("Métodos Mat.",  1, "20:55", "22:35", COLORS.fac_metodos);
-
-      // Faculdade — Quinta (dia 4)
+      // --- Blocos Noturnos Originais da Faculdade e Estudos ---
+      // Segunda (1) - Faculdade
+      adicionarAtividade("Cálculo V.V", 1, "19:00", "20:40", COLORS.fac_calculo);
+      adicionarAtividade("Métodos Mat.", 1, "20:55", "22:35", COLORS.fac_metodos);
+      // Terça (2) - Estudo Aprofundado
+      adicionarAtividade("Matemática", 2, "18:00", "20:00", COLORS.estudo_mat);
+      adicionarAtividade("Roadmap Estágio", 2, "20:00", "22:00", COLORS.roadmap);
+      // Quinta (4) - Faculdade
       adicionarAtividade("Estrutura de Dados", 4, "19:00", "21:45", COLORS.fac_estrut);
-
-      // Faculdade — Sexta (dia 5)
+      // Sexta (5) - Faculdade
       adicionarAtividade("Algoritmos", 5, "19:00", "21:45", COLORS.fac_algo);
-
-      // Sábado (dia 6)
-      adicionarAtividade("Cardio",     6, "10:00", "11:30", COLORS.cardio);
-      adicionarAtividade("Roadmap",    6, "11:30", "14:00", COLORS.roadmap);
-      adicionarAtividade("Musculação", 6, "14:00", "16:00", COLORS.musculacao);
-      adicionarAtividade("Roadmap",    6, "16:00", "17:30", COLORS.roadmap);
-
-      // Domingo (dia 7)
-      adicionarAtividade("Cardio",  7, "10:00", "11:30", COLORS.cardio);
-      adicionarAtividade("Roadmap", 7, "11:30", "14:00", COLORS.roadmap);
-      adicionarAtividade("Roadmap", 7, "16:00", "17:30", COLORS.roadmap);
+      // --- Final de Semana ---
+      // Sábado (6)
+      adicionarAtividade("Cardio", 6, "08:00", "09:30", COLORS.cardio);
+      adicionarAtividade("Linguagem C & Algo", 6, "10:15", "12:15", COLORS.estudo_c);
+      adicionarAtividade("Matemática", 6, "13:00", "15:00", COLORS.estudo_mat);
+      adicionarAtividade("Musculação", 6, "15:00", "17:00", COLORS.musculacao);
+      adicionarAtividade("Roadmap Estágio", 6, "17:45", "19:45", COLORS.roadmap);
+      // Domingo (7)
+      adicionarAtividade("Cardio", 7, "08:00", "09:30", COLORS.cardio);
+      adicionarAtividade("Linguagem C & Algo", 7, "10:15", "12:15", COLORS.estudo_c);
+      adicionarAtividade("Matemática", 7, "13:00", "15:00", COLORS.estudo_mat);
+      adicionarAtividade("Roadmap Estágio", 7, "15:00", "17:00", COLORS.roadmap);
     }
 
     // Renderizar cards "Hoje"
