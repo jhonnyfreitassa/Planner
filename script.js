@@ -79,15 +79,13 @@ const EXERCICIOS_CONFIG = {
 // PALETA DE CORES (Tailwind dark mode — sem repetições)
 // =============================================================
 const COLORS = {
-  cardio:      "#ef4444", // Red (Físico/Urgente)
-  musculacao:  "#22c55e", // Green (Saúde/Construção)
-  roadmap:     "#3b82f6", // Blue (Carreira/Foco)
-  estudo_c:    "#0ea5e9", // Sky Blue (Estudo Prático)
-  estudo_mat:  "#f59e0b", // Amber (Estudo Teórico/Atenção)
-  fac_calculo: "#8b5cf6", // Violet (Faculdade)
-  fac_metodos: "#d946ef", // Fuchsia (Faculdade)
-  fac_estrut:  "#ec4899", // Pink (Faculdade)
-  fac_algo:    "#14b8a6", // Teal (Faculdade)
+  cardio:               "#f87171", // Coral Red    — Físico aeróbico
+  academia:             "#4ade80", // Mint Green   — Força/Construção
+  estudos_independentes:"#60a5fa", // Sky Blue     — Estudo pessoal
+  fac_calculo:          "#a78bfa", // Soft Violet  — Cálculo V.V
+  fac_metodos:          "#fb923c", // Peach Orange — Métodos Mat.
+  fac_estrut:           "#f472b6", // Rose Pink    — Estrutura de Dados
+  fac_algo:             "#34d399", // Emerald      — Algoritmos
 };
 
 // =============================================================
@@ -222,6 +220,36 @@ document.addEventListener("DOMContentLoaded", function () {
         bloco.style.backgroundColor = cor;
         bloco.style.zIndex          = durationTime < 1 ? "15" : "10";
         bloco.innerHTML = `<strong style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${nome}</strong><span style="font-size:0.9em; opacity:0.9;">${horaInicio}-${horaFim}</span>`;
+
+        // Regras de elegibilidade para o toggle Terreiro
+        const elegivel =
+          (diaIndex === 2 && hIni >= 17) ||
+          (diaIndex === 3 && hIni >= 17) ||
+          (diaIndex === 6 && hIni >= 15);
+
+        if (elegivel) {
+          bloco.dataset.corOriginal   = cor;
+          bloco.dataset.htmlOriginal  = bloco.innerHTML;
+          bloco.dataset.terreiro      = "false";
+          bloco.style.cursor          = "pointer";
+          bloco.onclick = function () {
+            if (this.dataset.terreiro === "false") {
+              // → Estado Terreiro
+              this.dataset.terreiro      = "true";
+              this.style.backgroundColor = "#ffffff";
+              this.style.color           = "#000000";
+              this.querySelector("strong").textContent = "🕊️ Terreiro";
+              this.querySelector("span").style.color   = "#000000";
+            } else {
+              // → Reverter para estado original
+              this.dataset.terreiro      = "false";
+              this.style.backgroundColor = this.dataset.corOriginal;
+              this.style.color           = "";
+              this.innerHTML             = this.dataset.htmlOriginal;
+            }
+          };
+        }
+
         const coluna = agendaGrid.querySelector(`.coluna-dia[data-dia-index='${diaIndex}']`);
         if (coluna) coluna.appendChild(bloco);
       }
@@ -247,35 +275,34 @@ document.addEventListener("DOMContentLoaded", function () {
     function carregarRotinaSemestre() {
       // --- Segunda a Sexta (Dias 1 a 5) - Rotina Diurna ---
       for (let d = 1; d <= 5; d++) {
-        adicionarAtividade("Cardio", d, "08:00", "09:30", COLORS.cardio);
-        adicionarAtividade("Linguagem C & Algo", d, "10:15", "12:15", COLORS.estudo_c);
-        adicionarAtividade("Matemática", d, "13:00", "14:00", COLORS.estudo_mat);
-        adicionarAtividade("Roadmap Estágio", d, "14:00", "15:00", COLORS.roadmap);
-        adicionarAtividade("Musculação", d, "15:00", "17:00", COLORS.musculacao);
+        adicionarAtividade("Cardio",                d, "08:00", "09:30", COLORS.cardio);
+        adicionarAtividade("Estudos Independentes", d, "10:00", "12:00", COLORS.estudos_independentes);
+        adicionarAtividade("Academia",              d, "13:00", "15:00", COLORS.academia);
       }
-      // --- Blocos Noturnos Originais da Faculdade e Estudos ---
-      // Segunda (1) - Faculdade
-      adicionarAtividade("Cálculo V.V", 1, "19:00", "20:40", COLORS.fac_calculo);
-      adicionarAtividade("Métodos Mat.", 1, "20:55", "22:35", COLORS.fac_metodos);
-      // Terça (2) - Estudo Aprofundado
-      adicionarAtividade("Matemática", 2, "18:00", "20:00", COLORS.estudo_mat);
-      adicionarAtividade("Roadmap Estágio", 2, "20:00", "22:00", COLORS.roadmap);
-      // Quinta (4) - Faculdade
-      adicionarAtividade("Estrutura de Dados", 4, "19:00", "21:45", COLORS.fac_estrut);
-      // Sexta (5) - Faculdade
-      adicionarAtividade("Algoritmos", 5, "19:00", "21:45", COLORS.fac_algo);
+      // --- Blocos Noturnos da Faculdade ---
+      // Segunda (1)
+      adicionarAtividade("Cálculo V.V",           1, "19:00", "20:40", COLORS.fac_calculo);
+      adicionarAtividade("Métodos Mat.",           1, "20:55", "22:35", COLORS.fac_metodos);
+      // Terça (2)
+      adicionarAtividade("Estudos Independentes", 2, "18:00", "20:00", COLORS.estudos_independentes);
+      adicionarAtividade("Estudos Independentes", 2, "21:00", "23:00", COLORS.estudos_independentes);
+      // Quarta (3)
+      adicionarAtividade("Estudos Independentes", 3, "18:00", "20:00", COLORS.estudos_independentes);
+      adicionarAtividade("Estudos Independentes", 3, "21:00", "23:00", COLORS.estudos_independentes);
+      // Quinta (4)
+      adicionarAtividade("Estrutura de Dados",    4, "19:00", "21:45", COLORS.fac_estrut);
+      // Sexta (5)
+      adicionarAtividade("Algoritmos",            5, "19:00", "21:45", COLORS.fac_algo);
       // --- Final de Semana ---
       // Sábado (6)
-      adicionarAtividade("Cardio", 6, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade("Linguagem C & Algo", 6, "10:15", "12:15", COLORS.estudo_c);
-      adicionarAtividade("Matemática", 6, "13:00", "15:00", COLORS.estudo_mat);
-      adicionarAtividade("Musculação", 6, "15:00", "17:00", COLORS.musculacao);
-      adicionarAtividade("Roadmap Estágio", 6, "17:45", "19:45", COLORS.roadmap);
+      adicionarAtividade("Cardio",                6, "08:00", "09:30", COLORS.cardio);
+      adicionarAtividade("Estudos Independentes", 6, "10:00", "12:00", COLORS.estudos_independentes);
+      adicionarAtividade("Academia",              6, "15:00", "17:00", COLORS.academia);
+      adicionarAtividade("Estudos Independentes", 6, "18:00", "20:00", COLORS.estudos_independentes);
+      adicionarAtividade("Estudos Independentes", 6, "21:00", "23:00", COLORS.estudos_independentes);
       // Domingo (7)
-      adicionarAtividade("Cardio", 7, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade("Linguagem C & Algo", 7, "10:15", "12:15", COLORS.estudo_c);
-      adicionarAtividade("Matemática", 7, "13:00", "15:00", COLORS.estudo_mat);
-      adicionarAtividade("Roadmap Estágio", 7, "15:00", "17:00", COLORS.roadmap);
+      adicionarAtividade("Cardio",                7, "08:00", "09:30", COLORS.cardio);
+      adicionarAtividade("Estudos Independentes", 7, "10:00", "12:00", COLORS.estudos_independentes);
     }
 
     // Renderizar cards "Hoje"
@@ -381,9 +408,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (id && cb) {
           if (cb.checked) i.classList.add("completed");
           else i.classList.remove("completed");
+          const wi = i.querySelector(".weight-input");
+          // Só persiste o weight se o usuário digitou explicitamente (evita salvar sugestões do progressoCargas)
+          const weightToSave = (wi?.dataset.userTyped === "true") ? (wi.value ?? "") : (saved[id]?.weight ?? "");
           data[id] = {
             done:   cb.checked,
-            weight: i.querySelector(".weight-input")?.value,
+            weight: weightToSave,
             series: Array.from(i.querySelectorAll(".series-dot")).map((d) =>
               d.classList.contains("completed")
             ),
@@ -441,11 +471,22 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const wi = item.querySelector(".weight-input");
       if (wi) {
-        if (progressoCargas[labelText]?.carga > 0) wi.value = progressoCargas[labelText].carga;
-        else if (saved[id]) wi.value = saved[id].weight || "";
+        // Prioridade 1: valor digitado explicitamente pelo usuário para este id/dia
+        if (saved[id]?.weight !== undefined && saved[id].weight !== "") {
+          wi.value = saved[id].weight;
+          wi.dataset.userTyped = "true";
+        } else if (progressoCargas[labelText]?.carga > 0) {
+          // Prioridade 2: sugestão do sistema de progressão (fallback visual apenas)
+          wi.value = progressoCargas[labelText].carga;
+          wi.dataset.userTyped = "false"; // marca como sugestão, não como entrada real
+        }
       }
       cb?.addEventListener("change", () => saveWorkout(true, item));
-      wi?.addEventListener("input",  () => saveWorkout(false, null));
+      wi?.addEventListener("input", () => {
+        // A partir do primeiro caractere digitado, marcar como entrada real do usuário
+        if (wi) wi.dataset.userTyped = "true";
+        saveWorkout(false, null);
+      });
     });
 
     updateVisibility();
