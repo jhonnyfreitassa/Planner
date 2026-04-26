@@ -355,19 +355,6 @@ textarea:focus {
   background-color: var(--surface-color);
   border-bottom: 1px solid #333;
 }
-.shopping-lists-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 15px;
-  margin-top: 25px;
-}
-.shopping-list {
-  background-color: var(--surface-color);
-  border: 1px solid var(--card-border-color);
-  border-left: 5px solid var(--color-dieta);
-  padding: 20px;
-  border-radius: 12px;
-}
 .checklist-item {
   display: flex;
   align-items: center;
@@ -667,4 +654,128 @@ textarea:focus {
   ::-webkit-scrollbar-track { background: #121212; }
   ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
   ::-webkit-scrollbar-thumb:hover { background: #555; }
+}
+
+/* ============================================================
+   DIETA — Meal Choice Blocks (Cardápio Semanal)
+============================================================ */
+.meal-choice-block {
+  margin-bottom: 16px;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.meal-choice-block:last-child { margin-bottom: 0; }
+
+.meal-choice-title {
+  background: #212121;
+  color: var(--color-dieta);
+  font-weight: bold;
+  font-size: 0.93em;
+  padding: 10px 14px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.meal-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1px;
+  background: #2a2a2a;
+}
+
+.meal-choice-item {
+  background: #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 14px;
+  gap: 8px;
+}
+
+.meal-choice-name {
+  color: #c0c0c0;
+  font-size: 0.87em;
+  line-height: 1.4;
+}
+
+.meal-choice-gram {
+  background: var(--color-dieta);
+  color: #000;
+  font-weight: bold;
+  font-size: 0.78em;
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .meal-choice-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   DIETA — Pós-Treino Radio Options
+============================================================ */
+.post-workout-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pw-option { display: block; cursor: pointer; }
+.pw-option input[type="radio"] { display: none; }
+
+.pw-option-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pw-option input[type="radio"]:checked + .pw-option-content {
+  border-color: var(--color-dieta);
+  background: #1a251a;
+}
+
+.pw-option-content:hover { border-color: #3a3a3a; }
+
+.pw-option-num {
+  background: #2a2a2a;
+  color: var(--color-dieta);
+  font-weight: bold;
+  font-size: 0.85em;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pw-option input[type="radio"]:checked + .pw-option-content .pw-option-num {
+  background: var(--color-dieta);
+  color: #000;
+}
+
+.pw-option-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pw-option-content strong {
+  color: #fff;
+  font-size: 0.92em;
+}
+
+.pw-option-content span {
+  font-size: 0.84em;
+  line-height: 1.4;
 }
