@@ -38,7 +38,7 @@ const EXERCICIOS_CONFIG = {
   "🦅 Crucifixo Inverso Máquina":   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 4 },
   "🦾 Rosca Direta":                { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 4 },
   "🕷️ Rosca Spider (Banco 45º)":    { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
-  "🔄 Rosca Inversa":               { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 3 },
+  "🔄 Rosca Inversa":               { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
 
   // LEGS 1 (Atualizado)
   "🍑 Elevação Pélvica":                    { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 4, seriesMin: 4 },
@@ -70,8 +70,16 @@ const EXERCICIOS_CONFIG = {
   "⛷️ Pulldown Corda":               { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
   "🪚 Remada Serrote":               { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50  },
   "👺 Face Pull":                    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
-  "🔨 Rosca Martelo":                { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
+  "🔨 Rosca Martelo":                { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
   "📐 Rosca Inclinada (Banco 45º)":  { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
+
+  // ANTEBRAÇOS — LEGS 1 (Segunda) e LEGS 2 (Quinta)
+  "💪 Flexão de Punho Barra/Halter": { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
+  "🏋️‍♂️ Flexão de Punho na Polia":    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+
+  // BÍCEPS ISOLADO — PULL 1 (Quarta) e PULL 2 (Sábado)
+  "🦍 Rosca Scott (Máquina ou Barra W)":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "⚡ Rosca na Polia Baixa (Barra Reta ou Corda)": { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
 
 };
 
@@ -86,6 +94,8 @@ const COLORS = {
   fac_metodos:          "#fb923c", // Peach Orange — Métodos Mat.
   fac_estrut:           "#f472b6", // Rose Pink    — Estrutura de Dados
   fac_algo:             "#34d399", // Emerald      — Algoritmos
+  reuniao_nite:         "#f59e0b", // Amber        — Reunião NITE
+  reuniao_dc:           "#3b82f6", // Blue         — Reunião Data Center
 };
 
 // =============================================================
@@ -279,30 +289,32 @@ document.addEventListener("DOMContentLoaded", function () {
         adicionarAtividade("Estudos Independentes", d, "10:00", "12:00", COLORS.estudos_independentes);
         adicionarAtividade("Academia",              d, "13:00", "15:00", COLORS.academia);
       }
+      // --- Estudos Independentes 16h-18h: Segunda a Quarta (dias 1, 2, 3) ---
+      for (let d = 1; d <= 3; d++) {
+        adicionarAtividade("Estudos Independentes", d, "16:00", "18:00", COLORS.estudos_independentes);
+      }
       // --- Blocos Noturnos da Faculdade ---
       // Segunda (1)
-      adicionarAtividade("Cálculo V.V",           1, "19:00", "20:40", COLORS.fac_calculo);
-      adicionarAtividade("Métodos Mat.",           1, "20:55", "22:35", COLORS.fac_metodos);
-      // Terça (2)
-      adicionarAtividade("Estudos Independentes", 2, "18:00", "20:00", COLORS.estudos_independentes);
-      adicionarAtividade("Estudos Independentes", 2, "21:00", "23:00", COLORS.estudos_independentes);
-      // Quarta (3)
-      adicionarAtividade("Estudos Independentes", 3, "18:00", "20:00", COLORS.estudos_independentes);
-      adicionarAtividade("Estudos Independentes", 3, "21:00", "23:00", COLORS.estudos_independentes);
+      adicionarAtividade("Cálculo V.V",        1, "19:00", "20:40", COLORS.fac_calculo);
+      adicionarAtividade("Métodos Mat.",        1, "20:55", "22:35", COLORS.fac_metodos);
+      // Terça (2) e Quarta (3): noite livre — sem blocos noturnos
       // Quinta (4)
-      adicionarAtividade("Estrutura de Dados",    4, "19:00", "21:45", COLORS.fac_estrut);
+      adicionarAtividade("Reunião NITE",        4, "17:00", "19:00", COLORS.reuniao_nite);
+      adicionarAtividade("Estrutura de Dados",  4, "19:00", "21:45", COLORS.fac_estrut);
       // Sexta (5)
-      adicionarAtividade("Algoritmos",            5, "19:00", "21:45", COLORS.fac_algo);
+      adicionarAtividade("Reunião Data Center", 5, "17:00", "19:00", COLORS.reuniao_dc);
+      adicionarAtividade("Algoritmos",          5, "19:00", "21:45", COLORS.fac_algo);
       // --- Final de Semana ---
       // Sábado (6)
       adicionarAtividade("Cardio",                6, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade("Estudos Independentes", 6, "10:00", "12:00", COLORS.estudos_independentes);
+      adicionarAtividade("Estudos Independentes", 6, "13:00", "15:00", COLORS.estudos_independentes);
       adicionarAtividade("Academia",              6, "15:00", "17:00", COLORS.academia);
-      adicionarAtividade("Estudos Independentes", 6, "18:00", "20:00", COLORS.estudos_independentes);
-      adicionarAtividade("Estudos Independentes", 6, "21:00", "23:00", COLORS.estudos_independentes);
       // Domingo (7)
       adicionarAtividade("Cardio",                7, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade("Estudos Independentes", 7, "10:00", "12:00", COLORS.estudos_independentes);
+      adicionarAtividade("Estudos Independentes", 7, "13:00", "15:00", COLORS.estudos_independentes);
+      adicionarAtividade("Estudos Independentes", 7, "16:00", "18:00", COLORS.estudos_independentes);
     }
 
     // Renderizar cards "Hoje"
@@ -548,27 +560,6 @@ document.addEventListener("DOMContentLoaded", function () {
       box.addEventListener("change", updateRoadmapProgress);
     });
     updateRoadmapProgress();
-  }
-
-  // ===========================================================
-  // DIETA — LISTA DE COMPRAS
-  // ===========================================================
-  if (document.getElementById("dieta-section")) {
-    const shoppingChecks = document.querySelectorAll(".shopping-check");
-    function saveDietState() {
-      shoppingChecks.forEach((box) => {
-        localStorage.setItem(box.id, box.checked);
-        const p = box.closest(".checklist-item");
-        if (p) { if (box.checked) p.classList.add("completed"); else p.classList.remove("completed"); }
-      });
-    }
-    shoppingChecks.forEach((box) => {
-      const isChecked = localStorage.getItem(box.id) === "true";
-      box.checked = isChecked;
-      const p = box.closest(".checklist-item");
-      if (p && isChecked) p.classList.add("completed");
-      box.addEventListener("change", saveDietState);
-    });
   }
 
   // ===========================================================
