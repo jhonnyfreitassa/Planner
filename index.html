@@ -323,10 +323,69 @@
 
       <div style="text-align: center; margin: 20px 0;"><button id="toggle-all-workouts-btn" class="toggle-btn">Ver Todos os Treinos</button></div>
 
-      <!-- SEGUNDA — PUSH 1 -->
+      <!-- SEGUNDA — LEGS 1 -->
       <div class="workout-day hidden-workout" data-day-name="Segunda" data-day-index="1">
         <div class="workout-day-header">
-          <h3>Segunda: PUSH 1</h3>
+          <h3>Segunda: LEGS 1</h3>
+        </div>
+        <ul>
+          <li class="exercise-item" data-exercise-id="qua_0_inversa">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🔄 Rosca Inversa<br><small>5 séries</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="qua_0_martelo">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🔨 Rosca Martelo<br><small>4 séries</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="qua_1_pelvica">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Elevação Pélvica<br><small>4 séries de 6-8</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="qua_2_terra_sumo">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>☠️ Levantamento Terra Sumô<br><small>4 séries de 5-6</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="qua_3_agachamento">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🏋️‍♂️ Agachamento Livre<br><small>3 séries de 6-8</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="qua_4_extensora">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Cadeira Extensora<br><small>3 séries de 8-10</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="qua_5_abdutora">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>👐 Cadeira Abdutora<br><small>3 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="qua_6_panturrilha_hack">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦶 Panturrilha no Hack Machine<br><small>4 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+        </ul>
+        <div style="text-align: center; margin-top: 15px;"><button class="toggle-btn finish-workout-btn" style="background-color: var(--color-treino); width: 100%;">Finalizar Treino</button>
+          <div class="workout-hint hint"></div>
+        </div>
+      </div>
+      <!-- TERÇA — PUSH 1 -->
+      <div class="workout-day hidden-workout" data-day-name="Terça" data-day-index="2">
+        <div class="workout-day-header">
+          <h3>Terça: PUSH 1</h3>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="seg_1_inc_halt">
@@ -388,11 +447,10 @@
           <div class="workout-hint hint"></div>
         </div>
       </div>
-
-      <!-- TERÇA — PULL 1 -->
-      <div class="workout-day hidden-workout" data-day-name="Terça" data-day-index="2">
+      <!-- QUARTA — PULL 1 -->
+      <div class="workout-day hidden-workout" data-day-name="Quarta" data-day-index="3">
         <div class="workout-day-header">
-          <h3>Terça: PULL 1</h3>
+          <h3>Quarta: PULL 1</h3>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="ter_1_remada_maq">
@@ -431,8 +489,8 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="ter_7_inversa">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🔄 Rosca Inversa<br><small>3 séries de 12</small></label></div>
+          <li class="exercise-item" data-exercise-id="ter_7_scott">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦍 Rosca Scott (Máquina ou Barra W)<br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -442,45 +500,56 @@
           <div class="workout-hint hint"></div>
         </div>
       </div>
-
-      <!-- QUARTA — LEGS 1 -->
-      <div class="workout-day hidden-workout" data-day-name="Quarta" data-day-index="3">
+      <!-- QUINTA — LEGS 2 -->
+      <div class="workout-day hidden-workout" data-day-name="Quinta" data-day-index="4">
         <div class="workout-day-header">
-          <h3>Quarta: LEGS 1</h3>
+          <h3>Quinta: LEGS 2</h3>
         </div>
         <ul>
-          <li class="exercise-item" data-exercise-id="qua_1_pelvica">
+          <li class="exercise-item" data-exercise-id="sab_0_flex_punho">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>💪 Flexão de Punho Barra/Halter<br><small>5 séries</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="sab_0_flex_polia">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🏋️‍♂️ Flexão de Punho na Polia<br><small>4 séries</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="sab_1_pelvica">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Elevação Pélvica<br><small>4 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_2_terra_sumo">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>☠️ Levantamento Terra Sumô<br><small>4 séries de 5-6</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_2_terra">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>☠️ Levantamento Terra<br><small>4 séries de 5-6</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_3_agachamento">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🏋️‍♂️ Agachamento Livre<br><small>3 séries de 6-8</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_3_stiff">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>📏 Stiff com Barra<br><small>3 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_4_extensora">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Cadeira Extensora<br><small>3 séries de 8-10</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_4_flexora">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🛌 Mesa Flexora<br><small>3 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_5_abdutora">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>👐 Cadeira Abdutora<br><small>3 séries de 10-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_5_abdutora_inclinada">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>👐 Cadeira Abdutora (Tronco inclinado)<br><small>3 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_6_panturrilha_hack">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦶 Panturrilha no Hack Machine<br><small>4 séries de 10-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_6_panturrilha_sentado">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🪑 Panturrilha Sentado<br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -490,11 +559,10 @@
           <div class="workout-hint hint"></div>
         </div>
       </div>
-
-      <!-- QUINTA — PUSH 2 -->
-      <div class="workout-day hidden-workout" data-day-name="Quinta" data-day-index="4">
+      <!-- SEXTA — PUSH 2 -->
+      <div class="workout-day hidden-workout" data-day-name="Sexta" data-day-index="5">
         <div class="workout-day-header">
-          <h3>Quinta: PUSH 2</h3>
+          <h3>Sexta: PUSH 2</h3>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="qui_1_inc_halt">
@@ -562,11 +630,10 @@
           <div class="workout-hint hint"></div>
         </div>
       </div>
-
-      <!-- SEXTA — PULL 2 -->
-      <div class="workout-day hidden-workout" data-day-name="Sexta" data-day-index="5">
+      <!-- SÁBADO — PULL 2 -->
+      <div class="workout-day hidden-workout" data-day-name="Sábado" data-day-index="6">
         <div class="workout-day-header">
-          <h3>Sexta: PULL 2</h3>
+          <h3>Sábado: PULL 2</h3>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="sex_1_barra">
@@ -599,62 +666,14 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sex_6_martelo">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🔨 Rosca Martelo<br><small>4 séries de 12</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
           <li class="exercise-item" data-exercise-id="sex_7_inclinada">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>📐 Rosca Inclinada (Banco 45º)<br><small>4 séries de 12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-        </ul>
-        <div style="text-align: center; margin-top: 15px;"><button class="toggle-btn finish-workout-btn" style="background-color: var(--color-treino); width: 100%;">Finalizar Treino</button>
-          <div class="workout-hint hint"></div>
-        </div>
-      </div>
-
-      <!-- SÁBADO — LEGS 2 -->
-      <div class="workout-day hidden-workout" data-day-name="Sábado" data-day-index="6">
-        <div class="workout-day-header">
-          <h3>Sábado: LEGS 2</h3>
-        </div>
-        <ul>
-          <li class="exercise-item" data-exercise-id="sab_1_pelvica">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Elevação Pélvica<br><small>4 séries de 6-8</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="sab_2_terra">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>☠️ Levantamento Terra<br><small>4 séries de 5-6</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="sab_3_stiff">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>📏 Stiff com Barra<br><small>3 séries de 6-8</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="sab_4_flexora">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🛌 Mesa Flexora<br><small>3 séries de 8-10</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="sab_5_abdutora_inclinada">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>👐 Cadeira Abdutora (Tronco inclinado)<br><small>3 séries de 8-10</small></label></div>
-            <div class="exercise-controls">
-              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
-            </div>
-          </li>
-          <li class="exercise-item" data-exercise-id="sab_6_panturrilha_sentado">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🪑 Panturrilha Sentado<br><small>4 séries de 10-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="sex_6_polia_biceps">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>⚡ Rosca na Polia Baixa (Barra Reta ou Corda)<br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -672,49 +691,252 @@
     <section id="dieta-section" class="content-section">
       <div class="container">
         <header>
-          <h1>🥗 Plano Alimentar 1600 kcal</h1>
+          <h1>🌿 Plano Alimentar — MTC (1600 kcal)</h1>
           <div class="water-goal" style="background: linear-gradient(90deg, #2e7d32, #4caf50); color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 20px;">
-            💧 Meta: 4 a 5 Litros
+            💧 Meta: 4 a 5 Litros de Água Morna / Natural por Dia
           </div>
         </header>
 
-        <div class="meal-plan-wrapper">
-          <h3 style="color: var(--color-dieta);">🥩 Estrutura Diária (~1.400 kcal)</h3>
-          <table class="meal-plan">
+        <!-- ⚠️ DIRETRIZES RÁPIDAS -->
+        <div class="protocol-card" style="background: var(--surface-color, #1e1e1e); border-left: 5px solid var(--color-dieta);">
+          <h2 style="color: var(--color-dieta);">⚠️ Diretrizes Rápidas (MTC)</h2>
+          <ul style="list-style: none; padding: 0; line-height: 2; color: #c0c0c0;">
+            <li>🚫 <strong style="color:#fff;">Evitar:</strong> Água gelada, alimentos crus em excesso e carne vermelha.</li>
+            <li>✅ <strong style="color:#fff;">Priorizar:</strong> Alimentos cozidos, ensopados e água morna ou em temperatura ambiente.</li>
+            <li>🔥 <strong style="color:#fff;">Princípio MTC:</strong> O Fogo Digestivo (Baço-Pâncreas) precisa de calor — alimentos frios enfraquecem o Qi.</li>
+            <li>⚖️ <strong style="color:#f87171;">OBRIGATÓRIO:</strong> Tudo deve ser pesado na balança. Sem exceções.</li>
+          </ul>
+        </div>
+
+        <!-- 👨‍🍳 GUIA DE PREPARO -->
+        <div class="protocol-card" style="background: var(--surface-color, #1e1e1e); border-left: 5px solid var(--color-dieta);">
+          <h2 style="color: var(--color-dieta);">👨‍🍳 Guia de Preparo e Receitas (MTC)</h2>
+
+          <h3 style="color: #fff; margin-top: 18px;">📌 Regra Geral de Cozimento</h3>
+          <p style="color: #a0a0a0; line-height: 1.75;">Cozinhar carnes e vegetais sempre em <strong style="color:#fff;">água ou vapor</strong>. Evitar Airfryer — resseca os alimentos e extingue o Yin. Raízes (inhame, batata-doce, abóbora) devem ser bem cozidas, preferencialmente em forma de purê ou creme.</p>
+
+          <h3 style="color: #fff; margin-top: 20px;">🌅 Mingau de Aveia</h3>
+          <p style="color: #a0a0a0; line-height: 1.75;">Cozinhar pera picada (50g) em água com canela em pau. Adicionar aveia em flocos (30g) e mexer até engrossar. Adoçar com mel se necessário.</p>
+
+          <h3 style="color: #fff; margin-top: 20px;">🍲 Sopas e Cremes de Raízes</h3>
+          <p style="color: #a0a0a0; line-height: 1.75;">Cozinhar inhame ou abóbora em água até muito macios. Bater no liquidificador com a água do cozimento. Misturar frango desfiado com temperos que movem o Qi: <em>cúrcuma, hortelã, coentro e alho-poró</em>.</p>
+
+          <h3 style="color: #fff; margin-top: 20px;">🍄 Creme de Cogumelos</h3>
+          <p style="color: #a0a0a0; line-height: 1.75;">Refogar shitake fatiado com cebolinha em ghee ou azeite. Adicionar um pouco de leite de coco e servir por cima do arroz. Tônico para o Yin e nutrição profunda.</p>
+        </div>
+
+        <!-- 🍱 CARDÁPIO — ALMOÇO E JANTAR -->
+        <div class="protocol-card" style="background: var(--surface-color, #1e1e1e); border-left: 5px solid var(--color-dieta);">
+          <h2 style="color: var(--color-dieta);">🍱 Almoço e Jantar</h2>
+          <p style="color: #f87171; font-weight: bold; margin: 10px 0 18px; font-size: 0.93em; letter-spacing: 0.02em;">
+            ⚖️ PESO OBRIGATÓRIO NA BALANÇA — ALIMENTOS JÁ COZIDOS
+          </p>
+
+          <!-- Proteína -->
+          <div class="meal-choice-block">
+            <div class="meal-choice-title">🥩 Escolha 1 Proteína</div>
+            <div class="meal-choice-grid">
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Filé de peito de frango</span>
+                <span class="meal-choice-gram">200g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Sobrecoxa sem pele/osso</span>
+                <span class="meal-choice-gram">160g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Peixe branco / Tilápia</span>
+                <span class="meal-choice-gram">250g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Tofu firme</span>
+                <span class="meal-choice-gram">230g</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carboidrato -->
+          <div class="meal-choice-block">
+            <div class="meal-choice-title">🍚 Escolha 1 Carboidrato</div>
+            <div class="meal-choice-grid">
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Arroz branco</span>
+                <span class="meal-choice-gram">150g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Arroz vermelho</span>
+                <span class="meal-choice-gram">170g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Quinoa</span>
+                <span class="meal-choice-gram">160g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Inhame</span>
+                <span class="meal-choice-gram">170g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Batata-doce</span>
+                <span class="meal-choice-gram">230g</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vegetal -->
+          <div class="meal-choice-block">
+            <div class="meal-choice-title">🥦 Escolha 1 Vegetal</div>
+            <div class="meal-choice-grid">
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Abobrinha ou Chuchu</span>
+                <span class="meal-choice-gram">200g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Brócolis ou Couve-flor</span>
+                <span class="meal-choice-gram">150g</span>
+              </div>
+              <div class="meal-choice-item">
+                <span class="meal-choice-name">Cenoura ou Abóbora Moranga</span>
+                <span class="meal-choice-gram">150g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🥣 PÓS-TREINO -->
+        <div class="protocol-card" style="background: var(--surface-color, #1e1e1e); border-left: 5px solid var(--color-dieta);">
+          <h2 style="color: var(--color-dieta);">🥣 Pós-Treino — Líquido e Sólido</h2>
+
+          <div style="background:#161616; border-radius:8px; padding:14px 16px; margin: 14px 0;">
+            <p style="color: var(--color-dieta); font-weight:bold; margin:0 0 4px;">💊 Líquido (imediatamente após o treino)</p>
+            <p style="color:#c0c0c0; margin:0; line-height:1.6;">1 Scoop <strong style="color:#fff;">Carnibol</strong> + <strong style="color:#fff;">10g Creatina</strong> em água em <strong style="color: var(--color-dieta);">temperatura ambiente</strong>. Nunca gelado.</p>
+          </div>
+
+          <p style="color:#a0a0a0; margin: 16px 0 10px; font-size:0.9em;"><strong style="color:#fff;">🍽️ Sólido (~200 kcal)</strong> — Escolha 1 opção:</p>
+
+          <div class="post-workout-options">
+            <label class="pw-option">
+              <input type="radio" name="pos_treino" value="1">
+              <div class="pw-option-content">
+                <span class="pw-option-num">1</span>
+                <div>
+                  <strong>Mingau</strong>
+                  <span style="color:#a0a0a0;">Aveia em flocos (30g) + Pera cozida (150g) + Canela a gosto</span>
+                </div>
+              </div>
+            </label>
+            <label class="pw-option">
+              <input type="radio" name="pos_treino" value="2">
+              <div class="pw-option-content">
+                <span class="pw-option-num">2</span>
+                <div>
+                  <strong>Maçã Assada</strong>
+                  <span style="color:#a0a0a0;">Maçã assada (250g) c/ canela + Iogurte natural desnatado (150g)</span>
+                </div>
+              </div>
+            </label>
+            <label class="pw-option">
+              <input type="radio" name="pos_treino" value="3">
+              <div class="pw-option-content">
+                <span class="pw-option-num">3</span>
+                <div>
+                  <strong>Smoothie</strong>
+                  <span style="color:#a0a0a0;">Banana in natura (150g) + Leite de coco light (200ml) + Hortelã — tudo em temp. ambiente</span>
+                </div>
+              </div>
+            </label>
+            <label class="pw-option">
+              <input type="radio" name="pos_treino" value="4">
+              <div class="pw-option-content">
+                <span class="pw-option-num">4</span>
+                <div>
+                  <strong>Purê Proteico</strong>
+                  <span style="color:#a0a0a0;">Purê de abóbora cozida (200g) + Peito de frango desfiado cozido (70g)</span>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 🌙 CEIA -->
+        <div class="protocol-card" style="background: var(--surface-color, #1e1e1e); border-left: 5px solid var(--color-dieta);">
+          <h2 style="color: var(--color-dieta);">🌙 Ceia (~80–100 kcal)</h2>
+          <p style="color: #a0a0a0; font-size: 0.88em; margin: 6px 0 16px;">Leve e terapêutica — escolha 1 opção. Pesar os ingredientes antes de preparar.</p>
+
+          <div class="meal-choice-block">
+            <div class="meal-choice-title" style="color: var(--color-dieta);">🌙 Escolha 1 Ceia</div>
+            <div style="display: flex; flex-direction: column; gap: 1px; background: #2a2a2a;">
+
+              <div style="background:#1a1a1a; display:flex; justify-content:space-between; align-items:center; padding:12px 14px; gap:12px;">
+                <div style="flex:1;">
+                  <span style="color: var(--color-dieta); font-weight:bold; font-size:0.88em;">1</span>
+                  <span style="color:#fff; font-size:0.9em; margin-left:8px; font-weight:600;">Sopa de Abóbora</span>
+                  <p style="color:#a0a0a0; font-size:0.83em; margin:4px 0 0; line-height:1.4;">Abóbora moranga cozida batida com água e pouco gengibre</p>
+                </div>
+                <span class="meal-choice-gram">250g</span>
+              </div>
+
+              <div style="background:#1a1a1a; display:flex; justify-content:space-between; align-items:center; padding:12px 14px; gap:12px;">
+                <div style="flex:1;">
+                  <span style="color: var(--color-dieta); font-weight:bold; font-size:0.88em;">2</span>
+                  <span style="color:#fff; font-size:0.9em; margin-left:8px; font-weight:600;">Caldo de Ossos Terapêutico</span>
+                  <p style="color:#a0a0a0; font-size:0.83em; margin:4px 0 0; line-height:1.4;">Apenas o líquido coado — rico em colágeno e minerais</p>
+                </div>
+                <span class="meal-choice-gram">300ml</span>
+              </div>
+
+              <div style="background:#1a1a1a; display:flex; justify-content:space-between; align-items:center; padding:12px 14px; gap:12px;">
+                <div style="flex:1;">
+                  <span style="color: var(--color-dieta); font-weight:bold; font-size:0.88em;">3</span>
+                  <span style="color:#fff; font-size:0.9em; margin-left:8px; font-weight:600;">Sopa de Legumes Leve</span>
+                  <p style="color:#a0a0a0; font-size:0.83em; margin:4px 0 0; line-height:1.4;">Chuchu (150g) + Cenoura (50g) — cozidos e batidos</p>
+                </div>
+                <span class="meal-choice-gram" style="white-space:nowrap;">200g total</span>
+              </div>
+
+              <div style="background:#1a1a1a; display:flex; justify-content:space-between; align-items:center; padding:12px 14px; gap:12px;">
+                <div style="flex:1;">
+                  <span style="color: var(--color-dieta); font-weight:bold; font-size:0.88em;">4</span>
+                  <span style="color:#fff; font-size:0.9em; margin-left:8px; font-weight:600;">Opção Zero</span>
+                  <p style="color:#a0a0a0; font-size:0.83em; margin:4px 0 0; line-height:1.4;">1 porção de Gelatina Zero + 1 xícara de chá terapêutico (Camomila ou Mulungu)</p>
+                </div>
+                <span class="meal-choice-gram">~0 kcal</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ☕ CHÁS TERAPÊUTICOS -->
+        <div class="protocol-card" style="background: var(--surface-color, #1e1e1e); border-left: 5px solid var(--color-dieta);">
+          <h2 style="color: var(--color-dieta);">☕ Rotina de Chás Terapêuticos</h2>
+          <table class="meal-plan" style="margin-top: 14px;">
             <tbody>
               <tr>
-                <td class="meal-time">Almoço / Pré-Treino (12:00)</td>
+                <td class="meal-time">🍐 Pera <em style="font-weight:normal; font-size:0.85em;">ou</em> 🍎 Maçã c/ Canela</td>
                 <td class="meal-details">
-                  200g Proteína Magra (Frango / Peixe / Chã de Dentro) + 150g Legumes Cozidos + 1 col. (sopa) de Azeite<br>
-                  <em style="color:#a0a0a0; font-size:0.9em;">Escolher 1 opção de carbo: 250g Arroz Branco &nbsp;|&nbsp; 150g Arroz + 150g Feijão &nbsp;|&nbsp; 400g Batata Inglesa</em>
+                  <strong>Decocção 10–15 min.</strong> Usar apenas <strong style="color:#fff;">50g da fruta picada</strong> em água. Tomar <strong style="color:#fff;">apenas o líquido</strong> — não comer a fruta. Nutre o Pulmão e aquece o Baço.
                 </td>
               </tr>
               <tr>
-                <td class="meal-time">Pós-Treino (15:00)</td>
-                <td class="meal-details">1 Scoop de Carnibol + 10g de Creatina + Água.</td>
+                <td class="meal-time">🌿 Erva-cidreira + Hortelã</td>
+                <td class="meal-details"><strong>Infusão 5–7 min.</strong> Zero calorias. Livre consumo nos horários terapêuticos. Move o Qi do Fígado, alivia tensão.</td>
               </tr>
               <tr>
-                <td class="meal-time">Jantar</td>
-                <td class="meal-details">200g Proteína Magra + 200g Legumes Cozidos + 1 col. (sopa) de Azeite. <em style="color:#a0a0a0;">(Zero Carbo)</em></td>
+                <td class="meal-time">🌙 Mulungu + Melissa</td>
+                <td class="meal-details"><strong>Infusão 10 min.</strong> Zero calorias. Livre consumo. Acalma o Shen, favorece sono profundo.</td>
               </tr>
               <tr>
-                <td class="meal-time">Ceia</td>
-                <td class="meal-details">Apenas Gelatina Zero.</td>
+                <td class="meal-time">🌼 Camomila + Funcho</td>
+                <td class="meal-details"><strong>Infusão 5 min.</strong> Zero calorias. Livre consumo. Relaxa o centro digestivo, alivia gases.</td>
               </tr>
             </tbody>
           </table>
+          <p style="color:#555; font-size:0.8em; margin-top:12px; line-height:1.5;">
+            * Ervas de infusão = zero calorias. Podem ser consumidas livremente dentro dos horários terapêuticos recomendados.
+          </p>
         </div>
 
-        <div class="shopping-lists-container">
-          <div class="shopping-list">
-            <h2>🛒 Lista Semanal</h2>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-legumes-cong"><label>🥦 Legumes Congelados — 1kg</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-proteina"><label>🥩 Proteínas — 4kg (peso cru) — Frango / Peixe / Chã de Dentro</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-raizes"><label>🍠 Batata-Inglesa / Abóbora Japonesa — 800g a 1kg</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-azeite"><label>🫒 Azeite de Oliva Extra Virgem — 1 vidro</label></div>
-            <div class="checklist-item"><input type="checkbox" class="shopping-check" id="s-gelatina"><label>🍮 Gelatina Zero — 7 pacotes</label></div>
-          </div>
-        </div>
+
       </div>
     </section>
 
