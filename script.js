@@ -12,7 +12,7 @@ function showSection(sectionId) {
 // CONFIGURAÇÃO DOS EXERCÍCIOS
 // =============================================================
 const EXERCICIOS_CONFIG = {
-  // CORE (Atualizado)
+  // CORE
   "🌪️ Stomach Vacuum":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
   "🛞 Roda Abdominal (Ab Wheel)":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
   "⚙️ Crunch na Máquina":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
@@ -40,7 +40,7 @@ const EXERCICIOS_CONFIG = {
   "🕷️ Rosca Spider (Banco 45º)":    { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
   "🔄 Rosca Inversa":               { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
 
-  // LEGS 1 (Atualizado)
+  // LEGS 1
   "🍑 Elevação Pélvica":                    { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 4, seriesMin: 4 },
   "☠️ Levantamento Terra Sumô":             { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
   "🏋️‍♂️ Agachamento Livre":               { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180, seriesMax: 3, seriesMin: 3 },
@@ -48,7 +48,7 @@ const EXERCICIOS_CONFIG = {
   "👐 Cadeira Abdutora":                    { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
   "🦶 Panturrilha no Hack Machine":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
 
-  // LEGS 2 (Atualizado)
+  // LEGS 2
   "☠️ Levantamento Terra":                  { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
   "📏 Stiff com Barra":                     { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150, seriesMax: 3, seriesMin: 3 },
   "🛌 Mesa Flexora":                        { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
@@ -73,29 +73,34 @@ const EXERCICIOS_CONFIG = {
   "🔨 Rosca Martelo":                { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
   "📐 Rosca Inclinada (Banco 45º)":  { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
 
-  // ANTEBRAÇOS — LEGS 1 (Segunda) e LEGS 2 (Quinta)
+  // ANTEBRAÇOS — LEGS 1 (Segunda)
   "💪 Flexão de Punho Barra/Halter": { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
   "🏋️‍♂️ Flexão de Punho na Polia":    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "📏 Extensão de Punho (Barra ou Halter)": { type: "isolador", cargaTipo: "barra", incremento: 2, seriesMax: 4, seriesMin: 4 },
+  "🪨 Farmer's Hold (Sustentação Estática)": { type: "composto", cargaTipo: "halter", incremento: 2, seriesMax: 3, seriesMin: 3 },
 
-  // BÍCEPS ISOLADO — PULL 1 (Quarta) e PULL 2 (Sábado)
+  // ANTEBRAÇOS — LEGS 2 (Quinta)
+  "🔄 Rotação de Punho com Halter":  { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "🦇 Dead Hang (Pendurado na Barra)": { type: "composto", cargaTipo: "corpo", incremento: 0,   seriesMax: 3, seriesMin: 3 },
+
+  // BÍCEPS ISOLADO — PULL 1 e PULL 2
   "🦍 Rosca Scott (Máquina ou Barra W)":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
   "⚡ Rosca na Polia Baixa (Barra Reta ou Corda)": { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-
 };
 
 // =============================================================
-// PALETA DE CORES (Tailwind dark mode — sem repetições)
+// PALETA DE CORES
 // =============================================================
 const COLORS = {
-  cardio:               "#f87171", // Coral Red    — Físico aeróbico
-  academia:             "#4ade80", // Mint Green   — Força/Construção
-  estudos_independentes:"#60a5fa", // Sky Blue     — Estudo pessoal
-  fac_calculo:          "#a78bfa", // Soft Violet  — Cálculo V.V
-  fac_metodos:          "#fb923c", // Peach Orange — Métodos Mat.
-  fac_estrut:           "#f472b6", // Rose Pink    — Estrutura de Dados
-  fac_algo:             "#34d399", // Emerald      — Algoritmos
-  reuniao_nite:         "#f59e0b", // Amber        — Reunião NITE
-  reuniao_dc:           "#3b82f6", // Blue         — Reunião Data Center
+  cardio:               "#f87171",
+  academia:             "#4ade80",
+  estudos_independentes:"#60a5fa",
+  fac_calculo:          "#a78bfa",
+  fac_metodos:          "#fb923c",
+  fac_estrut:           "#f472b6",
+  fac_algo:             "#34d399",
+  reuniao_nite:         "#f59e0b",
+  reuniao_dc:           "#3b82f6",
 };
 
 // =============================================================
@@ -131,12 +136,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // AGENDA
   // ===========================================================
   if (document.getElementById("agenda")) {
-    const agendaGrid      = document.getElementById("agenda");
-    const listaHoje       = document.getElementById("lista-atividades-hoje");
-    const tituloHoje      = document.getElementById("titulo-dia-hoje");
-    const toggleBtn       = document.getElementById("toggle-agenda-view-btn");
-    const gradeWrapper    = document.getElementById("agenda-grade-wrapper");
-    const containerHoje   = document.getElementById("agenda-hoje-container");
+    const agendaGrid       = document.getElementById("agenda");
+    const listaHoje        = document.getElementById("lista-atividades-hoje");
+    const tituloHoje       = document.getElementById("titulo-dia-hoje");
+    const toggleBtn        = document.getElementById("toggle-agenda-view-btn");
+    const gradeWrapper     = document.getElementById("agenda-grade-wrapper");
+    const containerHoje    = document.getElementById("agenda-hoje-container");
     const wrapperPrincipal = document.getElementById("agenda-wrapper");
 
     let showGrid = false;
@@ -231,7 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
         bloco.style.zIndex          = durationTime < 1 ? "15" : "10";
         bloco.innerHTML = `<strong style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${nome}</strong><span style="font-size:0.9em; opacity:0.9;">${horaInicio}-${horaFim}</span>`;
 
-        // Regras de elegibilidade para o toggle Terreiro
         const elegivel =
           (diaIndex === 2 && hIni >= 17) ||
           (diaIndex === 3 && hIni >= 17) ||
@@ -244,14 +248,12 @@ document.addEventListener("DOMContentLoaded", function () {
           bloco.style.cursor          = "pointer";
           bloco.onclick = function () {
             if (this.dataset.terreiro === "false") {
-              // → Estado Terreiro
               this.dataset.terreiro      = "true";
               this.style.backgroundColor = "#ffffff";
               this.style.color           = "#000000";
               this.querySelector("strong").textContent = "🕊️ Terreiro";
               this.querySelector("span").style.color   = "#000000";
             } else {
-              // → Reverter para estado original
               this.dataset.terreiro      = "false";
               this.style.backgroundColor = this.dataset.corOriginal;
               this.style.color           = "";
@@ -279,45 +281,31 @@ document.addEventListener("DOMContentLoaded", function () {
     gerarGrade();
     carregarRotinaSemestre();
 
-    // -----------------------------------------------------------
-    // ROTINA DO SEMESTRE
-    // -----------------------------------------------------------
     function carregarRotinaSemestre() {
-      // --- Segunda a Sexta (Dias 1 a 5) - Rotina Diurna ---
       for (let d = 1; d <= 5; d++) {
         adicionarAtividade("Cardio",                d, "08:00", "09:30", COLORS.cardio);
         adicionarAtividade("Estudos Independentes", d, "10:00", "12:00", COLORS.estudos_independentes);
         adicionarAtividade("Academia",              d, "13:00", "15:00", COLORS.academia);
       }
-      // --- Estudos Independentes 16h-18h: Segunda a Quarta (dias 1, 2, 3) ---
       for (let d = 1; d <= 3; d++) {
         adicionarAtividade("Estudos Independentes", d, "16:00", "18:00", COLORS.estudos_independentes);
       }
-      // --- Blocos Noturnos da Faculdade ---
-      // Segunda (1)
       adicionarAtividade("Cálculo V.V",        1, "19:00", "20:40", COLORS.fac_calculo);
       adicionarAtividade("Métodos Mat.",        1, "20:55", "22:35", COLORS.fac_metodos);
-      // Terça (2) e Quarta (3): noite livre — sem blocos noturnos
-      // Quinta (4)
       adicionarAtividade("Reunião NITE",        4, "17:00", "19:00", COLORS.reuniao_nite);
       adicionarAtividade("Estrutura de Dados",  4, "19:00", "21:45", COLORS.fac_estrut);
-      // Sexta (5)
       adicionarAtividade("Reunião Data Center", 5, "17:00", "19:00", COLORS.reuniao_dc);
       adicionarAtividade("Algoritmos",          5, "19:00", "21:45", COLORS.fac_algo);
-      // --- Final de Semana ---
-      // Sábado (6)
       adicionarAtividade("Cardio",                6, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade("Estudos Independentes", 6, "10:00", "12:00", COLORS.estudos_independentes);
       adicionarAtividade("Estudos Independentes", 6, "13:00", "15:00", COLORS.estudos_independentes);
       adicionarAtividade("Academia",              6, "15:00", "17:00", COLORS.academia);
-      // Domingo (7)
       adicionarAtividade("Cardio",                7, "08:00", "09:30", COLORS.cardio);
       adicionarAtividade("Estudos Independentes", 7, "10:00", "12:00", COLORS.estudos_independentes);
       adicionarAtividade("Estudos Independentes", 7, "13:00", "15:00", COLORS.estudos_independentes);
       adicionarAtividade("Estudos Independentes", 7, "16:00", "18:00", COLORS.estudos_independentes);
     }
 
-    // Renderizar cards "Hoje"
     atividadesHoje.sort((a, b) =>
       parseInt(a.horaInicio.replace(":", "")) - parseInt(b.horaInicio.replace(":", ""))
     );
@@ -344,8 +332,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // TREINO — PROGRESSÃO + CHECKBOX + HISTÓRICO
   // ===========================================================
   if (document.getElementById("treino-section")) {
-    const exerciseItems        = document.querySelectorAll(".exercise-item");
-    const toggleBtn            = document.getElementById("toggle-all-workouts-btn");
+    const exerciseItems         = document.querySelectorAll(".exercise-item");
+    const toggleBtn             = document.getElementById("toggle-all-workouts-btn");
     const specificWorkoutBlocks = document.querySelectorAll(".workout-day[data-day-index]");
 
     function getCleanExerciseName(item) {
@@ -421,7 +409,6 @@ document.addEventListener("DOMContentLoaded", function () {
           if (cb.checked) i.classList.add("completed");
           else i.classList.remove("completed");
           const wi = i.querySelector(".weight-input");
-          // Só persiste o weight se o usuário digitou explicitamente (evita salvar sugestões do progressoCargas)
           const weightToSave = (wi?.dataset.userTyped === "true") ? (wi.value ?? "") : (saved[id]?.weight ?? "");
           data[id] = {
             done:   cb.checked,
@@ -445,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    const saved          = JSON.parse(localStorage.getItem("workout_progress_v2026")) || {};
+    const saved           = JSON.parse(localStorage.getItem("workout_progress_v2026")) || {};
     const progressoCargas = JSON.parse(localStorage.getItem("frog_progresso_cargas")) || {};
 
     exerciseItems.forEach((item) => {
@@ -459,7 +446,6 @@ document.addEventListener("DOMContentLoaded", function () {
         seriesCount = m ? parseInt(m[1]) : 3;
       }
 
-      // Sincroniza o texto do <small> com o seriesCount real
       const smallTag = item.querySelector("small");
       if (smallTag) {
         smallTag.innerHTML = smallTag.innerHTML.replace(/\d+\s*séries/i, seriesCount + " séries");
@@ -483,19 +469,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const wi = item.querySelector(".weight-input");
       if (wi) {
-        // Prioridade 1: valor digitado explicitamente pelo usuário para este id/dia
         if (saved[id]?.weight !== undefined && saved[id].weight !== "") {
           wi.value = saved[id].weight;
           wi.dataset.userTyped = "true";
         } else if (progressoCargas[labelText]?.carga > 0) {
-          // Prioridade 2: sugestão do sistema de progressão (fallback visual apenas)
           wi.value = progressoCargas[labelText].carga;
-          wi.dataset.userTyped = "false"; // marca como sugestão, não como entrada real
+          wi.dataset.userTyped = "false";
         }
       }
       cb?.addEventListener("change", () => saveWorkout(true, item));
       wi?.addEventListener("input", () => {
-        // A partir do primeiro caractere digitado, marcar como entrada real do usuário
         if (wi) wi.dataset.userTyped = "true";
         saveWorkout(false, null);
       });
@@ -563,7 +546,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ===========================================================
-  // BEM-ESTAR — HISTÓRICOS (Anti-Sabotagem + Diários)
+  // BEM-ESTAR — HISTÓRICOS
   // ===========================================================
   window.deleteSabotageItem = function (i, t) {
     if (confirm("Apagar?")) {
@@ -643,7 +626,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function loadJournalHistory() {
-    const d = JSON.parse(localStorage.getItem("dreamEntries"))  || [];
+    const d = JSON.parse(localStorage.getItem("dreamEntries"))   || [];
     const n = JSON.parse(localStorage.getItem("journalEntries")) || [];
     const c = document.getElementById("combined-journal-history");
     if (!c) return;
