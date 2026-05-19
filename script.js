@@ -38,22 +38,29 @@ const EXERCICIOS_CONFIG = {
   "🦅 Crucifixo Inverso Máquina":   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 4 },
   "🦾 Rosca Direta":                { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 4 },
   "🕷️ Rosca Spider (Banco 45º)":    { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
-  "🔄 Rosca Inversa":               { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
+  "🔄 Rosca Inversa (Pull 1)":      { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
 
   // LEGS 1
-  "🍑 Elevação Pélvica":                    { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 4, seriesMin: 4 },
+  "🍑 Elevação Pélvica":                    { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 5, seriesMin: 5 },
   "☠️ Levantamento Terra Sumô":             { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
-  "🏋️‍♂️ Agachamento Livre":               { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180, seriesMax: 3, seriesMin: 3 },
-  "🦵 Cadeira Extensora":                   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🏋️‍♂️ Agachamento Livre":               { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180, seriesMax: 5, seriesMin: 5 },
+  "🦵 Agachamento Búlgaro":                 { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40,  seriesMax: 4, seriesMin: 4 },
+  "🦿 Cadeira Extensora":                   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "🦵 Cadeira Extensora":                   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
   "👐 Cadeira Abdutora":                    { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
-  "🦶 Panturrilha no Hack Machine":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "🦶 Panturrilha no Hack Machine":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
+  "💪 Flexão de Punho (Barra/Halter)":      { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "📏 Extensão de Punho (Barra/Halter)":    { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
 
   // LEGS 2
   "☠️ Levantamento Terra":                  { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
-  "📏 Stiff com Barra":                     { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150, seriesMax: 3, seriesMin: 3 },
-  "🛌 Mesa Flexora":                        { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
-  "👐 Cadeira Abdutora (Tronco inclinado)": { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
-  "🪑 Panturrilha Sentado":                 { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "📏 Stiff com Barra":                     { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150, seriesMax: 5, seriesMin: 5 },
+  "🛌 Mesa Flexora":                        { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "👐 Cadeira Abdutora (Tronco inclinado)": { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
+  "🪑 Panturrilha Sentado":                 { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
+  "🔄 Rosca Inversa":                       { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "🔄 Rotação de Punho com Halter":         { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "🦇 Dead Hang (Pendurado na Barra)":      { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 3, seriesMin: 3 },
 
   // PUSH 2
   "🛫 Crossover Polia Baixa":        { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
@@ -73,15 +80,11 @@ const EXERCICIOS_CONFIG = {
   "🔨 Rosca Martelo":                { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
   "📐 Rosca Inclinada (Banco 45º)":  { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
 
-  // ANTEBRAÇOS — LEGS 1 (Segunda)
-  "💪 Flexão de Punho Barra/Halter": { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
-  "🏋️‍♂️ Flexão de Punho na Polia":    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "📏 Extensão de Punho (Barra ou Halter)": { type: "isolador", cargaTipo: "barra", incremento: 2, seriesMax: 4, seriesMin: 4 },
-  "🪨 Farmer's Hold (Sustentação Estática)": { type: "composto", cargaTipo: "halter", incremento: 2, seriesMax: 3, seriesMin: 3 },
-
-  // ANTEBRAÇOS — LEGS 2 (Quinta)
-  "🔄 Rotação de Punho com Halter":  { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
-  "🦇 Dead Hang (Pendurado na Barra)": { type: "composto", cargaTipo: "corpo", incremento: 0,   seriesMax: 3, seriesMin: 3 },
+  // ANTEBRAÇOS — chaves legadas mantidas para retrocompatibilidade
+  "💪 Flexão de Punho Barra/Halter":         { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
+  "🏋️‍♂️ Flexão de Punho na Polia":          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "📏 Extensão de Punho (Barra ou Halter)":  { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "🪨 Farmer's Hold (Sustentação Estática)": { type: "composto", cargaTipo: "halter",  incremento: 2,   seriesMax: 3, seriesMin: 3 },
 
   // BÍCEPS ISOLADO — PULL 1 e PULL 2
   "🦍 Rosca Scott (Máquina ou Barra W)":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
