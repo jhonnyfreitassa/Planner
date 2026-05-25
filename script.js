@@ -12,83 +12,74 @@ function showSection(sectionId) {
 // CONFIGURAÇÃO DOS EXERCÍCIOS
 // =============================================================
 const EXERCICIOS_CONFIG = {
-  // CORE
-  "🌪️ Stomach Vacuum":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🛞 Roda Abdominal (Ab Wheel)":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "⚙️ Crunch na Máquina":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🔄 Abdominal Reverso no Solo":    { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🪵 Prancha Lateral":              { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "📏 Extensão Lombar Banco":        { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  // ── CORE & LOMBAR ────────────────────────────────────────────────────────────
+  "🌪️ Stomach Vacuum":                          { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "🔄 Abdominal Reverso":                       { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "⚙️ Crunch na Máquina (ou Polia)":            { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "🛞 Roda Abdominal (Ab Wheel)":               { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "🪵 Prancha Lateral":                         { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "📏 Extensão Lombar no Banco":                { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "🧱 Prancha Frontal":                         { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
 
-  // PUSH 1
-  "📐 Supino Inclinado c/ Halteres":  { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50  },
-  "💥 Supino Reto c/ Halteres":       { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 60  },
-  "⚙️ Supino Sentado (Máquina)":      { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120 },
-  "🦅 Crucifixo na Máquina":          { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 4 },
-  "🙅‍♂️ Crossover Polia Alta → Baixa": { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
-  "🆙 Desenvolvimento com Halteres":  { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40  },
-  "🥥 Elevação Lateral Halter":       { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 6, seriesMin: 5 },
-  "🔱 Tríceps Testa":                 { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 4 },
-  "🪜 Tríceps Corda":                 { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
+  // ── LEGS 1 (Segunda) ─────────────────────────────────────────────────────────
+  "☠️ Levantamento Terra Clássico":             { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
+  "🍑 Elevação Pélvica (Barra)":                { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 5, seriesMin: 5 },
+  "🦵 Agachamento Búlgaro":                     { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40,  seriesMax: 4, seriesMin: 4 },
+  "🦿 Cadeira Extensora":                       { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "🦶 Panturrilha no Hack Machine":             { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
+  "💪 Flexão de Punho (Barra/Halter)":          { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "📏 Extensão de Punho (Barra/Halter)":        { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "🪨 Farmer's Hold":                           { type: "composto", cargaTipo: "halter",  incremento: 2,   seriesMax: 3, seriesMin: 3 },
 
-  // PULL 1
-  "🚣 Remada Máquina (Neutra)":     { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120 },
-  "🦖 Remada Curvada":              { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 120 },
-  "⏬ Puxada Alta":                  { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120 },
-  "🦅 Crucifixo Inverso Máquina":   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 4 },
-  "🦾 Rosca Direta":                { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 4 },
-  "🕷️ Rosca Spider (Banco 45º)":    { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
-  "🔄 Rosca Inversa (Pull 1)":      { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
+  // ── PUSH 1 (Terça) ───────────────────────────────────────────────────────────
+  "📐 Supino Inclinado c/ Halteres":            { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50,  seriesMax: 4, seriesMin: 4 },
+  "💥 Supino Reto c/ Halteres":                 { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 60,  seriesMax: 4, seriesMin: 4 },
+  "⚙️ Supino Sentado (Máquina)":                { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
+  "🦅 Crucifixo Inclinado c/ Halteres":         { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "🙅‍♂️ Crossover Polia Alta para Baixa":      { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "🆙 Desenvolvimento com Halteres":            { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40,  seriesMax: 4, seriesMin: 4 },
+  "🥥 Elevação Lateral Halter":                 { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 5, seriesMin: 5 },
+  "🔱 Tríceps Testa (Barra W)":                 { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "🪜 Tríceps Corda":                           { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
 
-  // LEGS 1
-  "🍑 Elevação Pélvica":                    { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 5, seriesMin: 5 },
-  "☠️ Levantamento Terra Sumô":             { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
-  "🏋️‍♂️ Agachamento Livre":               { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180, seriesMax: 5, seriesMin: 5 },
-  "🦵 Agachamento Búlgaro":                 { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40,  seriesMax: 4, seriesMin: 4 },
-  "🦿 Cadeira Extensora":                   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🦵 Cadeira Extensora":                   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "👐 Cadeira Abdutora":                    { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
-  "🦶 Panturrilha no Hack Machine":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
-  "💪 Flexão de Punho (Barra/Halter)":      { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "📏 Extensão de Punho (Barra/Halter)":    { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  // ── PULL 1 (Quarta) ──────────────────────────────────────────────────────────
+  "🧗 Barra Fixa":                              { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "🦖 Remada Curvada (Supinada)":               { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
+  "🚣 Remada Máquina (Neutra)":                 { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
+  "🦅 Crucifixo Inverso Máquina":               { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "🦾 Rosca Direta (Barra)":                    { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "🕷️ Rosca Spider (Banco 45º)":               { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "⚡ Bíceps na Polia Alta":                    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
 
-  // LEGS 2
-  "☠️ Levantamento Terra":                  { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
-  "📏 Stiff com Barra":                     { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150, seriesMax: 5, seriesMin: 5 },
-  "🛌 Mesa Flexora":                        { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "👐 Cadeira Abdutora (Tronco inclinado)": { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
-  "🪑 Panturrilha Sentado":                 { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
-  "🔄 Rosca Inversa":                       { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "🔄 Rotação de Punho com Halter":         { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
-  "🦇 Dead Hang (Pendurado na Barra)":      { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 3, seriesMin: 3 },
+  // ── LEGS 2 (Quinta) ──────────────────────────────────────────────────────────
+  "🏋️‍♂️ Agachamento Livre":                   { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180, seriesMax: 4, seriesMin: 4 },
+  "📏 Stiff com Barra":                         { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150, seriesMax: 5, seriesMin: 5 },
+  "🛌 Mesa Flexora":                            { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "👐 Cadeira Abdutora (Tronco inclinado)":     { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
+  "🪑 Panturrilha Sentado":                     { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
+  "🔄 Rosca Inversa (Barra/W)":                 { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "🔄 Rotação de Punho com Halter":             { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "🦇 Dead Hang (Pendurado na Barra)":          { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 3, seriesMin: 3 },
 
-  // PUSH 2
-  "🛫 Crossover Polia Baixa":        { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
-  "🦋 Crucifixo na Máquina":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 4 },
-  "🧗 Flexão de Braço":              { type: "composto", cargaTipo: "corpo",   incremento: 0,   cargaMax: 0,  seriesMax: 4, seriesMin: 4 },
-  "🥥 Elevação Lateral no Cabo":     { type: "isolador", cargaTipo: "maquina", incremento: 1,   seriesMax: 5, seriesMin: 4 },
-  "💿 Elevação Frontal c/ Anilha":   { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 4, seriesMin: 3 },
-  "🪜 Mergulho":                     { type: "composto", cargaTipo: "corpo",   incremento: 0,   cargaMax: 0  },
-  "⏬ Tríceps Pulley":                { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
+  // ── PUSH 2 (Sexta) ───────────────────────────────────────────────────────────
+  "📐 Supino Inclinado Pegada Supinada (Barra)": { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 50,  seriesMax: 4, seriesMin: 4 },
+  "🪜 Mergulho nas Paralelas":                  { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "🦋 Crucifixo na Máquina (Voador)":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
+  "🛫 Crossover Polia Baixa para Alta":         { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "🆙 Desenvolvimento Máquina":                 { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
+  "🥥 Elevação Lateral no Cabo":                { type: "isolador", cargaTipo: "maquina", incremento: 1,   seriesMax: 4, seriesMin: 4 },
+  "💿 Elevação Frontal c/ Anilha":              { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "⏬ Tríceps Pulley (Barra Reta)":             { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "🔱 Tríceps Francês (Corda/Halter)":          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
 
-  // PULL 2
-  "🧗 Barra Fixa / Graviton":        { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 100 },
-  "⏬ Puxada Alta Aberta":            { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120 },
-  "⛷️ Pulldown Corda":               { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
-  "🪚 Remada Serrote":               { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50  },
-  "👺 Face Pull":                    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 5, seriesMin: 4 },
-  "🔨 Rosca Martelo":                { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "📐 Rosca Inclinada (Banco 45º)":  { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 5, seriesMin: 4 },
-
-  // ANTEBRAÇOS — chaves legadas mantidas para retrocompatibilidade
-  "💪 Flexão de Punho Barra/Halter":         { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 5, seriesMin: 5 },
-  "🏋️‍♂️ Flexão de Punho na Polia":          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "📏 Extensão de Punho (Barra ou Halter)":  { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "🪨 Farmer's Hold (Sustentação Estática)": { type: "composto", cargaTipo: "halter",  incremento: 2,   seriesMax: 3, seriesMin: 3 },
-
-  // BÍCEPS ISOLADO — PULL 1 e PULL 2
-  "🦍 Rosca Scott (Máquina ou Barra W)":         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "⚡ Rosca na Polia Baixa (Barra Reta ou Corda)": { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  // ── PULL 2 (Sábado) ──────────────────────────────────────────────────────────
+  "⏬ Puxada Alta Aberta":                      { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
+  "⛷️ Pulldown Corda":                          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "🪚 Remada Serrote":                          { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50,  seriesMax: 4, seriesMin: 4 },
+  "👺 Face Pull":                               { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "📐 Rosca Inclinada (Banco 45º)":             { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "⚡ Rosca na Polia Baixa (Barra Reta/Corda)": { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "🔨 Rosca Martelo com Halteres":              { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
 };
 
 // =============================================================
