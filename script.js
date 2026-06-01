@@ -33,10 +33,11 @@ const EXERCICIOS_CONFIG = {
 
   // ── PUSH 1 (Terça) ───────────────────────────────────────────────────────────
   "📐 Supino Inclinado c/ Halteres":            { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50,  seriesMax: 4, seriesMin: 4 },
-  "💥 Supino Reto c/ Halteres":                 { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 60,  seriesMax: 4, seriesMin: 4 },
-  "⚙️ Supino Sentado (Máquina)":                { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
   "🦅 Crucifixo Inclinado c/ Halteres":         { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "💥 Supino Reto c/ Halteres":                 { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 60,  seriesMax: 4, seriesMin: 4 },
+  "🦋 Crucifixo na Máquina (Voador)":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
   "🙅‍♂️ Crossover Polia Alta para Baixa":      { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "🪜 Mergulho no Graviton":                    { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
   "🆙 Desenvolvimento com Halteres":            { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40,  seriesMax: 4, seriesMin: 4 },
   "🥥 Elevação Lateral Halter":                 { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 5, seriesMin: 5 },
   "🔱 Tríceps Testa (Barra W)":                 { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
@@ -48,7 +49,7 @@ const EXERCICIOS_CONFIG = {
   "🚣 Remada Máquina (Neutra)":                 { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
   "🦅 Crucifixo Inverso Máquina":               { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
   "🦾 Rosca Direta (Barra)":                    { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "🕷️ Rosca Spider (Banco 45º)":               { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  "💪 Rosca Alternada com Halteres":            { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 4, seriesMin: 4 },
   "⚡ Bíceps na Polia Alta":                    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
 
   // ── LEGS 2 (Quinta) ──────────────────────────────────────────────────────────
@@ -62,15 +63,15 @@ const EXERCICIOS_CONFIG = {
   "🦇 Dead Hang (Pendurado na Barra)":          { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 3, seriesMin: 3 },
 
   // ── PUSH 2 (Sexta) ───────────────────────────────────────────────────────────
-  "📐 Supino Inclinado Pegada Supinada (Barra)": { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 50,  seriesMax: 4, seriesMin: 4 },
-  "🪜 Mergulho nas Paralelas":                  { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🦋 Crucifixo na Máquina (Voador)":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🛫 Crossover Polia Baixa para Alta":         { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "📐 Supino Inclinado na Barra":               { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
+  "💥 Supino Reto na Barra":                    { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
+  "📉 Supino Declinado na Barra":               { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
   "🆙 Desenvolvimento Máquina":                 { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
   "🥥 Elevação Lateral no Cabo":                { type: "isolador", cargaTipo: "maquina", incremento: 1,   seriesMax: 4, seriesMin: 4 },
   "💿 Elevação Frontal c/ Anilha":              { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
   "⏬ Tríceps Pulley (Barra Reta)":             { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
   "🔱 Tríceps Francês (Corda/Halter)":          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  "🔄 Tríceps Pulley Pegada Supinada":          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
 
   // ── PULL 2 (Sábado) ──────────────────────────────────────────────────────────
   "⏬ Puxada Alta Aberta":                      { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
