@@ -12,75 +12,51 @@ function showSection(sectionId) {
 // CONFIGURAÇÃO DOS EXERCÍCIOS
 // =============================================================
 const EXERCICIOS_CONFIG = {
-  // ── CORE & LOMBAR ────────────────────────────────────────────────────────────
-  "🌪️ Stomach Vacuum":                          { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🔄 Abdominal Reverso":                       { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "⚙️ Crunch na Máquina (ou Polia)":            { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🛞 Roda Abdominal (Ab Wheel)":               { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🪵 Prancha Lateral":                         { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "📏 Extensão Lombar no Banco":                { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🧱 Prancha Frontal":                         { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  // ── CORE / ABDÔMEN (Reabilitação — único exercício permitido) ─────────────────
+  "🌀 Stomach Vacuum":                          { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
+  "⬆️ Abdominal Superior — Crunch na Polia Alta": { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 3, seriesMin: 3 },
+  "⬇️ Abdominal Inferior — Elevação de Joelhos na Cadeira Romana": { type: "isolador", cargaTipo: "corpo", incremento: 0, seriesMax: 3, seriesMin: 3 },
+  "📏 Lombar — Extensão Lombar na Máquina":     { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 3, seriesMin: 3 },
 
-  // ── LEGS 1 (Segunda) ─────────────────────────────────────────────────────────
-  "☠️ Levantamento Terra Clássico":             { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 220, seriesMax: 4, seriesMin: 4 },
-  "🍑 Elevação Pélvica (Barra)":                { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 200, seriesMax: 5, seriesMin: 5 },
-  "🦵 Agachamento Búlgaro":                     { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40,  seriesMax: 4, seriesMin: 4 },
-  "🦿 Cadeira Extensora":                       { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🦶 Panturrilha no Hack Machine":             { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
-  "💪 Flexão de Punho (Barra/Halter)":          { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "📏 Extensão de Punho (Barra/Halter)":        { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "🪨 Farmer's Hold":                           { type: "composto", cargaTipo: "halter",  incremento: 2,   seriesMax: 3, seriesMin: 3 },
+  // ── PUSH (Domingo) ──────────────────────────────────────────────────────────
+  "🪑 Supino Sentado Máquina":                  { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦋 Voador Máquina":                          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 3, seriesMin: 3 },
+  "🆙 Desenvolvimento Máquina":                 { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🥥 Elevação Lateral Polia Baixa":            { type: "isolador", cargaTipo: "maquina", incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "⏬ Tríceps Pulley":                          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 3, seriesMin: 3 },
+  "🪜 Tríceps Corda":                           { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 3, seriesMin: 3 },
 
-  // ── PUSH 1 (Terça) ───────────────────────────────────────────────────────────
-  "📐 Supino Inclinado c/ Halteres":            { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50,  seriesMax: 4, seriesMin: 4 },
-  "🦅 Crucifixo Inclinado c/ Halteres":         { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "💥 Supino Reto c/ Halteres":                 { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 60,  seriesMax: 4, seriesMin: 4 },
-  "🦋 Crucifixo na Máquina (Voador)":           { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🙅‍♂️ Crossover Polia Alta para Baixa":      { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "🪜 Mergulho no Graviton":                    { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🆙 Desenvolvimento com Halteres":            { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 40,  seriesMax: 4, seriesMin: 4 },
-  "🥥 Elevação Lateral Halter":                 { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 5, seriesMin: 5 },
-  "🔱 Tríceps Testa (Barra W)":                 { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "🪜 Tríceps Corda":                           { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  // ── PULL (Segunda) ──────────────────────────────────────────────────────────
+  "⏫ Puxada Alta Frente":                      { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🚣 Remada Sentada Máquina (Neutra)":         { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦅 Crucifixo Inverso Máquina":               { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦾 Rosca Direta Polia Baixa":                { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 3, seriesMin: 3 },
+  "🔨 Rosca Martelo Halteres (leves)":          { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "📏 Extensão Lombar Banco (peso do corpo)":   { type: "isolador", cargaTipo: "corpo",   incremento: 0,   seriesMax: 3, seriesMin: 3 },
+  "🤜 Rosca de Punho c/ Halteres (Antebraço)":  { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "🔄 Rosca Inversa de Punho (Antebraço)":      { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
 
-  // ── PULL 1 (Quarta) ──────────────────────────────────────────────────────────
-  "🧗 Barra Fixa":                              { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 4, seriesMin: 4 },
-  "🦖 Remada Curvada (Supinada)":               { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
-  "🚣 Remada Máquina (Neutra)":                 { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
-  "🦅 Crucifixo Inverso Máquina":               { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "🦾 Rosca Direta (Barra)":                    { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "💪 Rosca Alternada com Halteres":            { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 4, seriesMin: 4 },
-  "⚡ Bíceps na Polia Alta":                    { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
+  // ── LEGS (Terça) ────────────────────────────────────────────────────────────
+  "🦿 Leg Press 45º (pés no meio)":             { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦵 Cadeira Extensora":                       { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🛌 Cadeira Flexora":                         { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "👐 Cadeira Abdutora":                        { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦶 Panturrilha Leg Press":                   { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
 
-  // ── LEGS 2 (Quinta) ──────────────────────────────────────────────────────────
-  "🏋️‍♂️ Agachamento Livre":                   { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 180, seriesMax: 4, seriesMin: 4 },
-  "📏 Stiff com Barra":                         { type: "composto", cargaTipo: "barra",   incremento: 5,   cargaMax: 150, seriesMax: 5, seriesMin: 5 },
-  "🛌 Mesa Flexora":                            { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
-  "👐 Cadeira Abdutora (Tronco inclinado)":     { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
-  "🪑 Panturrilha Sentado":                     { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 5, seriesMin: 5 },
-  "🔄 Rosca Inversa (Barra/W)":                 { type: "isolador", cargaTipo: "barra",   incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "🔄 Rotação de Punho com Halter":             { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
-  "🦇 Dead Hang (Pendurado na Barra)":          { type: "composto", cargaTipo: "corpo",   incremento: 0,   seriesMax: 3, seriesMin: 3 },
+  // ── UPPER (Quinta) ──────────────────────────────────────────────────────────
+  "📐 Supino Inclinado com Halteres (ou Barra)": { type: "composto", cargaTipo: "halter",  incremento: 2,   seriesMax: 3, seriesMin: 3 },
+  "🔺 Puxada Alta Triângulo":                   { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦖 Remada Curvada Halteres (apoiado no banco)": { type: "composto", cargaTipo: "halter", incremento: 2, seriesMax: 3, seriesMin: 3 },
+  "🥥 Elevação Lateral Halter":                 { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
+  "🔱 Tríceps Francês Polia":                   { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 3, seriesMin: 3 },
+  "💪 Rosca Alternada Halter":                  { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
 
-  // ── PUSH 2 (Sexta) ───────────────────────────────────────────────────────────
-  "📐 Supino Inclinado na Barra":               { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
-  "💥 Supino Reto na Barra":                    { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
-  "📉 Supino Declinado na Barra":               { type: "composto", cargaTipo: "barra",   incremento: 2,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
-  "🆙 Desenvolvimento Máquina":                 { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 100, seriesMax: 4, seriesMin: 4 },
-  "🥥 Elevação Lateral no Cabo":                { type: "isolador", cargaTipo: "maquina", incremento: 1,   seriesMax: 4, seriesMin: 4 },
-  "💿 Elevação Frontal c/ Anilha":              { type: "isolador", cargaTipo: "halter",  incremento: 1,   seriesMax: 3, seriesMin: 3 },
-  "⏬ Tríceps Pulley (Barra Reta)":             { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "🔱 Tríceps Francês (Corda/Halter)":          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "🔄 Tríceps Pulley Pegada Supinada":          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-
-  // ── PULL 2 (Sábado) ──────────────────────────────────────────────────────────
-  "⏬ Puxada Alta Aberta":                      { type: "composto", cargaTipo: "maquina", incremento: 5,   cargaMax: 120, seriesMax: 4, seriesMin: 4 },
-  "⛷️ Pulldown Corda":                          { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "🪚 Remada Serrote":                          { type: "composto", cargaTipo: "halter",  incremento: 2,   cargaMax: 50,  seriesMax: 4, seriesMin: 4 },
-  "👺 Face Pull":                               { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "📐 Rosca Inclinada (Banco 45º)":             { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
-  "⚡ Rosca na Polia Baixa (Barra Reta/Corda)": { type: "isolador", cargaTipo: "maquina", incremento: 2.5, seriesMax: 4, seriesMin: 4 },
-  "🔨 Rosca Martelo com Halteres":              { type: "isolador", cargaTipo: "halter",  incremento: 2,   seriesMax: 4, seriesMin: 4 },
+  // ── LOWER (Sexta) ───────────────────────────────────────────────────────────
+  "🛌 Mesa Flexora":                            { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🦿 Leg Press 45º (pés altos)":               { type: "composto", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🍑 Elevação Pélvica com Barra (no chão)":    { type: "composto", cargaTipo: "barra",   incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "👐 Cadeira Abdutora (tronco inclinado)":     { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 3, seriesMin: 3 },
+  "🪑 Panturrilha Sentado (Solear)":            { type: "isolador", cargaTipo: "maquina", incremento: 5,   seriesMax: 4, seriesMin: 4 },
 };
 
 // =============================================================
@@ -88,14 +64,18 @@ const EXERCICIOS_CONFIG = {
 // =============================================================
 const COLORS = {
   cardio:               "#f87171",
+  expediente:           "#38bdf8",
   academia:             "#4ade80",
   estudos_independentes:"#60a5fa",
-  fac_calculo:          "#a78bfa",
-  fac_metodos:          "#fb923c",
-  fac_estrut:           "#f472b6",
-  fac_algo:             "#34d399",
-  reuniao_nite:         "#f59e0b",
-  reuniao_dc:           "#3b82f6",
+  fac_aoo:              "#a78bfa",
+  fac_soc:              "#fb923c",
+  fac_eletri:           "#f472b6",
+  fac_poo:              "#34d399",
+  fac_modelagem:        "#facc15",
+  reuniao_liga:         "#f59e0b",
+  reuniao_nite:         "#ef4444",
+  reuniao_liau:         "#eab308",
+  terreiro:             "#e5e7eb",
 };
 
 // =============================================================
@@ -120,12 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("workout_progress_v2026", JSON.stringify(savedProgress));
   }
   localStorage.setItem("last_app_visit_date", dataFormatada);
-
-  // SETAR DATA NOS INPUTS DOS DIÁRIOS
-  const inputSonho = document.getElementById("dream-journal-date");
-  const inputNota  = document.getElementById("journal-date");
-  if (inputSonho) inputSonho.value = dataFormatada;
-  if (inputNota)  inputNota.value  = dataFormatada;
 
   // ===========================================================
   // AGENDA
@@ -231,32 +205,6 @@ document.addEventListener("DOMContentLoaded", function () {
         bloco.style.zIndex          = durationTime < 1 ? "15" : "10";
         bloco.innerHTML = `<strong style="display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${nome}</strong><span style="font-size:0.9em; opacity:0.9;">${horaInicio}-${horaFim}</span>`;
 
-        const elegivel =
-          (diaIndex === 2 && hIni >= 17) ||
-          (diaIndex === 3 && hIni >= 17) ||
-          (diaIndex === 6 && hIni >= 15);
-
-        if (elegivel) {
-          bloco.dataset.corOriginal   = cor;
-          bloco.dataset.htmlOriginal  = bloco.innerHTML;
-          bloco.dataset.terreiro      = "false";
-          bloco.style.cursor          = "pointer";
-          bloco.onclick = function () {
-            if (this.dataset.terreiro === "false") {
-              this.dataset.terreiro      = "true";
-              this.style.backgroundColor = "#ffffff";
-              this.style.color           = "#000000";
-              this.querySelector("strong").textContent = "🕊️ Terreiro";
-              this.querySelector("span").style.color   = "#000000";
-            } else {
-              this.dataset.terreiro      = "false";
-              this.style.backgroundColor = this.dataset.corOriginal;
-              this.style.color           = "";
-              this.innerHTML             = this.dataset.htmlOriginal;
-            }
-          };
-        }
-
         const coluna = agendaGrid.querySelector(`.coluna-dia[data-dia-index='${diaIndex}']`);
         if (coluna) coluna.appendChild(bloco);
       }
@@ -277,28 +225,41 @@ document.addEventListener("DOMContentLoaded", function () {
     carregarRotinaSemestre();
 
     function carregarRotinaSemestre() {
-      for (let d = 1; d <= 5; d++) {
-        adicionarAtividade("Cardio",                d, "08:00", "09:30", COLORS.cardio);
-        adicionarAtividade("Estudos Independentes", d, "10:00", "12:00", COLORS.estudos_independentes);
-        adicionarAtividade("Academia",              d, "13:00", "15:00", COLORS.academia);
-      }
-      for (let d = 1; d <= 3; d++) {
-        adicionarAtividade("Estudos Independentes", d, "16:00", "18:00", COLORS.estudos_independentes);
-      }
-      adicionarAtividade("Cálculo V.V",        1, "19:00", "20:40", COLORS.fac_calculo);
-      adicionarAtividade("Métodos Mat.",        1, "20:55", "22:35", COLORS.fac_metodos);
-      adicionarAtividade("Reunião NITE",        4, "17:00", "19:00", COLORS.reuniao_nite);
-      adicionarAtividade("Estrutura de Dados",  4, "19:00", "21:45", COLORS.fac_estrut);
-      adicionarAtividade("Reunião Data Center", 5, "17:00", "19:00", COLORS.reuniao_dc);
-      adicionarAtividade("Algoritmos",          5, "19:00", "21:45", COLORS.fac_algo);
-      adicionarAtividade("Cardio",                6, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade("Estudos Independentes", 6, "10:00", "12:00", COLORS.estudos_independentes);
-      adicionarAtividade("Estudos Independentes", 6, "13:00", "15:00", COLORS.estudos_independentes);
-      adicionarAtividade("Academia",              6, "15:00", "17:00", COLORS.academia);
-      adicionarAtividade("Cardio",                7, "08:00", "09:30", COLORS.cardio);
-      adicionarAtividade("Estudos Independentes", 7, "10:00", "12:00", COLORS.estudos_independentes);
-      adicionarAtividade("Estudos Independentes", 7, "13:00", "15:00", COLORS.estudos_independentes);
-      adicionarAtividade("Estudos Independentes", 7, "16:00", "18:00", COLORS.estudos_independentes);
+      // Segunda, Terça, Quinta, Sexta — padrão de expediente + treino
+      // Split: Domingo=Push, Segunda=Pull, Terça=Legs, Quinta=Upper, Sexta=Lower
+      const diasExpediente = [1, 2, 4, 5];
+      const splitMusculacao = { 1: "Pull", 2: "Legs", 4: "Upper", 5: "Lower" };
+      diasExpediente.forEach((d) => {
+        adicionarAtividade("🏃 Cardio",  d, "07:00", "08:00", COLORS.cardio);
+        adicionarAtividade("💼 Expediente (SENAI Cimatec)", d, "09:00", "15:00", COLORS.expediente);
+        adicionarAtividade(`🏋️ Musculação (${splitMusculacao[d]})`, d, "15:30", "17:30", COLORS.academia);
+      });
+
+      // Estudos Independentes — Segunda, Terça e Sexta (Quinta tem Reunião NITE no lugar)
+      [1, 2, 5].forEach((d) => {
+        adicionarAtividade("📚 Estudos Independentes", d, "17:30", "18:30", COLORS.estudos_independentes);
+      });
+
+      // Quinta — Reunião NITE no lugar do bloco de estudos
+      adicionarAtividade("🤝 Reunião NITE", 4, "17:00", "19:00", COLORS.reuniao_nite);
+
+      adicionarAtividade("🎓 Análise Orientada a Objetos (Sala 512)",            1, "19:00", "22:35", COLORS.fac_aoo);
+      adicionarAtividade("🎓 Arquitetura, Org. de Computadores e SO (Sala 512)", 2, "19:00", "22:35", COLORS.fac_soc);
+      adicionarAtividade("🎓 Eletricidade e Propagações (Sala 512)",            4, "19:00", "22:35", COLORS.fac_eletri);
+      adicionarAtividade("🎓 POO (Sala 512)",                                   5, "19:00", "22:35", COLORS.fac_poo);
+
+      // Quarta — só Cardio; expediente normal; sem musculação e sem faculdade; Terreiro à tarde
+      adicionarAtividade("🏃 Cardio",   3, "07:00", "08:00", COLORS.cardio);
+      adicionarAtividade("💼 Expediente (SENAI Cimatec)",  3, "09:00", "15:00", COLORS.expediente);
+      adicionarAtividade("🕊️ Terreiro",                    3, "15:00", "23:59", COLORS.terreiro);
+
+      // Sábado — faculdade virtual pela manhã, Terreiro
+      adicionarAtividade("🎓 Modelagem e Simulação Matemática (Virtual)", 6, "08:00", "10:00", COLORS.fac_modelagem);
+      adicionarAtividade("🕊️ Terreiro",                                   6, "13:00", "23:59", COLORS.terreiro);
+
+      // Domingo — sem cardio; academia abre às 11h; Push
+      adicionarAtividade("🤝 Reunião da Liga",     7, "10:00", "11:00", COLORS.reuniao_liga);
+      adicionarAtividade("🏋️ Musculação (Push)", 7, "11:00", "13:00", COLORS.academia);
     }
 
     atividadesHoje.sort((a, b) =>
@@ -379,11 +340,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const idx = parseInt(b.dataset.dayIndex);
         if (showAll || idx === today) b.classList.remove("hidden-workout");
         else b.classList.add("hidden-workout");
-      });
-      document.querySelectorAll(".core-day-list").forEach((list) => {
-        const coreDayIdx = parseInt(list.getAttribute("data-core-day"));
-        if (showAll || coreDayIdx === today) list.classList.remove("hidden-workout");
-        else list.classList.add("hidden-workout");
       });
     }
 
@@ -511,163 +467,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ===========================================================
-  // ROADMAP — PROGRESSO
+  // DIETA — SUPLEMENTAÇÃO (PERSISTÊNCIA SIMPLES)
   // ===========================================================
-  if (document.getElementById("carreira-section")) {
-    const roadmapCheckboxes  = document.querySelectorAll(".roadmap-check");
-    const roadmapProgressBar = document.getElementById("roadmapProgressBar");
-    function updateRoadmapProgress() {
-      const total      = roadmapCheckboxes.length;
-      const checked    = document.querySelectorAll(".roadmap-check:checked").length;
-      const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
-      if (roadmapProgressBar) {
-        roadmapProgressBar.style.width = percentage + "%";
-        roadmapProgressBar.textContent = percentage + "%";
-      }
-      roadmapCheckboxes.forEach((box) => {
-        localStorage.setItem(box.id, box.checked);
-        const p = box.closest(".checklist-item");
-        if (p) { if (box.checked) p.classList.add("completed"); else p.classList.remove("completed"); }
-      });
-    }
-    roadmapCheckboxes.forEach((box) => {
-      const isChecked = localStorage.getItem(box.id) === "true";
-      box.checked = isChecked;
-      const p = box.closest(".checklist-item");
-      if (p && isChecked) p.classList.add("completed");
-      box.addEventListener("change", updateRoadmapProgress);
-    });
-    updateRoadmapProgress();
-  }
-
-  // ===========================================================
-  // BEM-ESTAR — HISTÓRICOS
-  // ===========================================================
-  window.deleteSabotageItem = function (i, t) {
-    if (confirm("Apagar?")) {
-      if (t === "sab") {
-        const l = JSON.parse(localStorage.getItem("sabotageList")) || [];
-        l.splice(i, 1);
-        localStorage.setItem("sabotageList", JSON.stringify(l));
-      } else {
-        const l = JSON.parse(localStorage.getItem("microWins")) || [];
-        l.splice(i, 1);
-        localStorage.setItem("microWins", JSON.stringify(l));
-      }
-      loadSabotageHistory();
-    }
-  };
-
-  function loadSabotageHistory() {
-    const l = JSON.parse(localStorage.getItem("sabotageList")) || [];
-    const w = JSON.parse(localStorage.getItem("microWins"))    || [];
-    const c = document.getElementById("combined-sabotage-history");
-    if (!c) return;
-    c.innerHTML = "";
-    w.forEach((x, i) => {
-      const li = document.createElement("li");
-      li.className = "history-item-wrapper";
-      li.innerHTML = `<span class="history-content" style="color:#4caf50;">🏆 ${x}</span><button class="delete-btn" onclick="deleteSabotageItem(${i},'win')">🗑️</button>`;
-      c.appendChild(li);
-    });
-    l.forEach((x, i) => {
-      const li = document.createElement("li");
-      li.className = "history-item-wrapper";
-      li.innerHTML = `<span class="history-content" style="color:#e74c3c;">⚠️ ${x.action}</span><button class="delete-btn" onclick="deleteSabotageItem(${i},'sab')">🗑️</button>`;
-      c.appendChild(li);
+  const boxSuplementos = document.getElementById("box-suplementos");
+  if (boxSuplementos) {
+    boxSuplementos.value = localStorage.getItem("box_suplementos") || "";
+    boxSuplementos.addEventListener("input", () => {
+      localStorage.setItem("box_suplementos", boxSuplementos.value);
     });
   }
 
-  const addWinBtn = document.getElementById("add-micro-win-btn");
-  if (addWinBtn)
-    addWinBtn.onclick = () => {
-      const i = document.getElementById("micro-win-input");
-      if (i.value) {
-        const w = JSON.parse(localStorage.getItem("microWins")) || [];
-        w.unshift(i.value);
-        localStorage.setItem("microWins", JSON.stringify(w));
-        i.value = "";
-        loadSabotageHistory();
-      }
-    };
-
-  const addSabBtn = document.getElementById("add-sabotage-btn");
-  if (addSabBtn)
-    addSabBtn.onclick = () => {
-      const i = document.getElementById("sabotage-action");
-      if (i.value) {
-        const l = JSON.parse(localStorage.getItem("sabotageList")) || [];
-        l.unshift({ action: i.value });
-        localStorage.setItem("sabotageList", JSON.stringify(l));
-        i.value = "";
-        loadSabotageHistory();
-      }
-    };
-  loadSabotageHistory();
-
-  window.deleteJournalItem = function (i, t) {
-    if (confirm("Apagar?")) {
-      if (t === "dream") {
-        const l = JSON.parse(localStorage.getItem("dreamEntries")) || [];
-        l.splice(i, 1);
-        localStorage.setItem("dreamEntries", JSON.stringify(l));
-      } else {
-        const l = JSON.parse(localStorage.getItem("journalEntries")) || [];
-        l.splice(i, 1);
-        localStorage.setItem("journalEntries", JSON.stringify(l));
-      }
-      loadJournalHistory();
-    }
-  };
-
-  function loadJournalHistory() {
-    const d = JSON.parse(localStorage.getItem("dreamEntries"))   || [];
-    const n = JSON.parse(localStorage.getItem("journalEntries")) || [];
-    const c = document.getElementById("combined-journal-history");
-    if (!c) return;
-    c.innerHTML = "";
-    d.forEach((x, i) => {
-      const div = document.createElement("div");
-      div.className = "history-item-wrapper";
-      div.style.borderBottom = "1px solid #333";
-      div.innerHTML = `<div class="history-content"><div style="font-size:0.8em;color:#a0a0a0;">${x.date} - 🌙</div><div>${x.text}</div></div><button class="delete-btn" onclick="deleteJournalItem(${i},'dream')">🗑️</button>`;
-      c.appendChild(div);
-    });
-    n.forEach((x, i) => {
-      const div = document.createElement("div");
-      div.className = "history-item-wrapper";
-      div.style.borderBottom = "1px solid #333";
-      div.innerHTML = `<div class="history-content"><div style="font-size:0.8em;color:#a0a0a0;">${x.date} - 📓</div><div>${x.text}</div></div><button class="delete-btn" onclick="deleteJournalItem(${i},'note')">🗑️</button>`;
-      c.appendChild(div);
-    });
-  }
-
-  const addDBtn = document.getElementById("add-dream-button");
-  if (addDBtn)
-    addDBtn.onclick = () => {
-      const d = document.getElementById("dream-journal-date").value;
-      const t = document.getElementById("dream-journal-text").value;
-      if (d && t) {
-        const l = JSON.parse(localStorage.getItem("dreamEntries")) || [];
-        l.unshift({ date: d, text: t });
-        localStorage.setItem("dreamEntries", JSON.stringify(l));
-        document.getElementById("dream-journal-text").value = "";
-        loadJournalHistory();
-      }
-    };
-
-  const addNBtn = document.getElementById("add-note-button");
-  if (addNBtn)
-    addNBtn.onclick = () => {
-      const d = document.getElementById("journal-date").value;
-      const t = document.getElementById("journal-text").value;
-      if (d && t) {
-        const l = JSON.parse(localStorage.getItem("journalEntries")) || [];
-        l.unshift({ date: d, text: t });
-        localStorage.setItem("journalEntries", JSON.stringify(l));
-        document.getElementById("journal-text").value = "";
-        loadJournalHistory();
-      }
-    };
-  loadJournalHistory();
 });
