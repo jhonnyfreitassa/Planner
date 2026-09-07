@@ -15,7 +15,7 @@ function showSection(sectionId) {
 }
 
 // =============================================================
-// CONFIGURAÇÃO DOS EXERCÍCIOS (REABILITAÇÃO PÓS-CIRÚRGICA)
+// CONFIGURAÇÃO DOS EXERCÍCIOS
 // =============================================================
 const EXERCICIOS_CONFIG = {
   // ── CORE (Reabilitação) ─────────────────
@@ -48,94 +48,272 @@ const EXERCICIOS_CONFIG = {
     seriesMin: 3,
   },
 
-  // ── LEGS (Seg e Qui) ────────────────────
-  "🦵 Cadeira Extensora": {
+  // ── PUSH A & B ──────────────────────────
+  "🪑 Supino Reto com Barra": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🪑 Supino Inclinado com Halteres": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦅 Crucifixo Reto com Halteres": {
     type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 5,
+    cargaTipo: "halter",
+    incremento: 2,
     seriesMax: 3,
     seriesMin: 3,
   },
-  "🛌 Mesa Flexora": {
+  "🥥 Desenvolvimento Militar (Halteres/Barra)": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🥥 Elevação Lateral com Halteres": {
     type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 5,
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "⏬ Mergulho nas Paralelas": {
+    type: "composto",
+    cargaTipo: "corpo",
+    incremento: 0,
     seriesMax: 3,
     seriesMin: 3,
   },
-  "🦿 Leg Press 45º (Carga Leve, sem descer muito)": {
+  "⏬ Tríceps Testa (Barra W)": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+
+  "🦅 Crucifixo Inclinado com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+  "🦋 Crossover Polia Média": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦋 Crossover Polia Alta": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🥥 Elevação Lateral na Polia (Unilateral)": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "⏬ Tríceps Corda na Polia": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "⏬ Tríceps Testa na Polia (ou Francês)": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+
+  // ── PULL A & B ──────────────────────────
+  "⏫ Barra Fixa ou Puxada Alta": {
     type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚣 Remada Curvada com Barra": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚣 Remada Unilateral (Serrote)": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦅 Crucifixo Invertido com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
     seriesMax: 3,
     seriesMin: 3,
   },
-  "🦶 Panturrilha Sentado (Solear)": {
+  "🦾 Rosca Direta (Barra W ou Reta)": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Alternada com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+
+  "⏫ Pulldown na Polia": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "⏫ Puxada Alta com Triângulo": {
+    type: "composto",
+    cargaTipo: "maquina",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚣 Remada Baixa na Polia": {
+    type: "composto",
+    cargaTipo: "maquina",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦅 Crucifixo Invertido na Polia": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🤷 Encolhimento com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Inclinada no Banco com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Martelo com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+
+  // ── LEGS A & B ──────────────────────────
+  "🦵 Agachamento (Livre ou Smith)": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦿 Leg Press 45°": {
+    type: "composto",
+    cargaTipo: "maquina",
+    incremento: 10,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🍑 Elevação Pélvica Pesada (Barra)": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🛌 Levantamento Terra Romeno (RDL)": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦶 Panturrilha em Pé": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 5,
+    seriesMin: 5,
+  },
+
+  "🍑 Elevação Pélvica": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦵 Agachamento Búlgaro com Halteres": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🍑 Cadeira Abdutora": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 5,
+    seriesMax: 5,
+    seriesMin: 5,
+  },
+  "🦵 Cadeira Extensora": {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 4,
     seriesMin: 4,
   },
-
-  // ── PUSH (Ter e Sex) ────────────────────
-  "🪑 Supino Sentado Máquina": {
-    type: "composto",
+  "🛌 Cadeira ou Mesa Flexora": {
+    type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
-    seriesMax: 3,
-    seriesMin: 3,
+    seriesMax: 4,
+    seriesMin: 4,
   },
-  "🦋 Voador Máquina (Peck Deck)": {
+  "🦶 Panturrilha Sentado (Máquina)": {
     type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "🥥 Elevação Lateral Polia Baixa": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 1,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "⏬ Tríceps Pulley": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-
-  // ── PULL (Qua e Sáb) ────────────────────
-  "⏫ Puxada Alta Frente": {
-    type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "🚣 Remada Sentada Máquina (peito apoiado)": {
-    type: "composto",
-    cargaTipo: "maquina",
-    incremento: 5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "🦅 Crucifixo Inverso Máquina": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "🦾 Rosca Direta Polia Baixa": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
+    seriesMax: 5,
+    seriesMin: 5,
   },
 };
 
@@ -366,7 +544,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // ── SEGUNDA-FEIRA ──
       adicionarAtividade("🏋️ Academia", 1, "15:30", "17:30", COLORS.academia);
       adicionarAtividade(
-        "🎓 Análise Orientada a Objetos",
+        "🎓 Análise Orientada A Objetos",
         1,
         "19:00",
         "21:45",
@@ -376,7 +554,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // ── TERÇA-FEIRA ──
       adicionarAtividade(
-        "🎓 Prog. de Sistemas Especialistas",
+        "🎓 Arquitetura, Org. E Func. De Computadores...",
         2,
         "19:00",
         "22:35",
@@ -391,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // ── QUINTA-FEIRA ──
       adicionarAtividade("🏋️ Academia", 4, "15:00", "16:30", COLORS.academia);
       adicionarAtividade(
-        "🎓 Eletricidade, Propagações Ondulatórias e Magnéticas",
+        "🎓 Eletricidade, Propagações Ond. E Magnéticas (teórica)",
         4,
         "19:00",
         "22:35",
@@ -402,7 +580,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // ── SEXTA-FEIRA ──
       adicionarAtividade("🏋️ Academia", 5, "15:30", "17:30", COLORS.academia);
       adicionarAtividade(
-        "🎓 Programação Orientada a Objetos",
+        "🎓 Programação Orientada A Objetos",
         5,
         "19:00",
         "22:35",
@@ -412,7 +590,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // ── SÁBADO ──
       adicionarAtividade(
-        "🎓 Modelagem e Simulação Matemática (Virtualizada)",
+        "🎓 Modelagem E Simulação Matemática",
         6,
         "08:00",
         "09:40",
