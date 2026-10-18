@@ -48,7 +48,130 @@ const EXERCICIOS_CONFIG = {
     seriesMin: 3,
   },
 
-  // ── PUSH A & B ──────────────────────────
+  // ── PUSH A (Força) ──────────────────────────
+  "🪑 Supino Inclinado com Barra": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🪑 Supino Reto com Halteres": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "⏬ Mergulho nas Paralelas": {
+    type: "composto",
+    cargaTipo: "corpo",
+    incremento: 0,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦋 Crossover Polia Alta": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🥥 Desenvolvimento Militar com Barra": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🥥 Elevação Lateral com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦅 Crucifixo Invertido com Halteres no Banco Inclinado": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🪑 Supino Fechado": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+  "⏬ Tríceps Testa (Barra W)": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+
+  // ── PULL A (Força) ──────────────────────────
+  "⏫ Barra Fixa com Carga": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚣 Remada Curvada com Barra": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚣 Remada Baixa na Polia Pesada com Triângulo": {
+    type: "composto",
+    cargaTipo: "maquina",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🚣 Remada Unilateral (Serrote)": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🤷 Encolhimento com Barra": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Direta (Barra W ou Reta)": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Alternada com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Inversa com Barra W": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+
+  // ── PUSH B (Hipertrofia e Pump) ──────────────────────────
   "🪑 Supino Reto com Barra": {
     type: "composto",
     cargaTipo: "livre",
@@ -63,60 +186,24 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦅 Crucifixo Reto com Halteres": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 2,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "🥥 Desenvolvimento Militar (Halteres/Barra)": {
-    type: "composto",
-    cargaTipo: "livre",
-    incremento: 2,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🥥 Elevação Lateral com Halteres": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 1,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "⏬ Mergulho nas Paralelas": {
-    type: "composto",
-    cargaTipo: "corpo",
-    incremento: 0,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "⏬ Tríceps Testa (Barra W)": {
-    type: "isolador",
-    cargaTipo: "livre",
-    incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-
-  "🦅 Crucifixo Inclinado com Halteres": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 2,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "🦋 Crossover Polia Média": {
+  "🦋 Crossover Polia Baixa (Puxando de Baixo)": {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦋 Crossover Polia Alta": {
+  "🦋 Voador Peck Deck": {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+  "🥥 Desenvolvimento com Halteres": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -127,6 +214,20 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
+  "🎯 Face Pull na Polia Alta": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "⏬ Tríceps Francês na Polia": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
   "⏬ Tríceps Corda na Polia": {
     type: "isolador",
     cargaTipo: "maquina",
@@ -134,58 +235,15 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "⏬ Tríceps Testa na Polia (ou Francês)": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
 
-  // ── PULL A & B ──────────────────────────
-  "⏫ Barra Fixa ou Puxada Alta": {
+  // ── PULL B (Hipertrofia) ──────────────────────────
+  "⏫ Puxada Alta Pegada Aberta": {
     type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🚣 Remada Curvada com Barra": {
-    type: "composto",
-    cargaTipo: "livre",
-    incremento: 2.5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🚣 Remada Unilateral (Serrote)": {
-    type: "composto",
-    cargaTipo: "halter",
-    incremento: 2,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🦅 Crucifixo Invertido com Halteres": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 1,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "🦾 Rosca Direta (Barra W ou Reta)": {
-    type: "isolador",
-    cargaTipo: "livre",
-    incremento: 2.5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🦾 Rosca Alternada com Halteres": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 2,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-
   "⏫ Pulldown na Polia": {
     type: "isolador",
     cargaTipo: "maquina",
@@ -193,24 +251,17 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "⏫ Puxada Alta com Triângulo": {
+  "🚣 Remada Baixa na Polia Drop-set": {
     type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🚣 Remada Baixa na Polia": {
+  "⏫ Puxada Alta Pegada Supinada": {
     type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🦅 Crucifixo Invertido na Polia": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 1,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -228,10 +279,17 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦾 Rosca Martelo com Halteres": {
+  "🦾 Rosca Scott Máquina ou W": {
     type: "isolador",
-    cargaTipo: "halter",
-    incremento: 2,
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Martelo com Corda na Polia": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -519,93 +577,22 @@ document.addEventListener("DOMContentLoaded", function () {
     carregarRotinaSemestre();
 
     function carregarRotinaSemestre() {
-      // Segunda a Sexta — padrão de expediente
-      const diasExpediente = [1, 2, 3, 4, 5];
-      diasExpediente.forEach((d) => {
+      // Segunda a Sexta — rotina fixa
+      const diasUteis = [1, 2, 3, 4, 5];
+      diasUteis.forEach((d) => {
         adicionarAtividade("🏃 Cardio", d, "07:00", "08:00", COLORS.cardio);
         adicionarAtividade(
-          "💼 Expediente (SENAI Cimatec)",
+          "💼 SENAI CIMATEC",
           d,
-          "09:00",
-          "15:00",
+          "10:00",
+          "16:00",
           COLORS.expediente,
         );
+        adicionarAtividade("🏋️ Academia", d, "21:00", "23:00", COLORS.academia);
       });
 
-      // Quinta — Reunião NITE
-      adicionarAtividade(
-        "🤝 Reunião NITE",
-        4,
-        "17:00",
-        "19:00",
-        COLORS.reuniao_nite,
-      );
-
-      // ── SEGUNDA-FEIRA ──
-      adicionarAtividade("🏋️ Academia", 1, "15:30", "17:30", COLORS.academia);
-      adicionarAtividade(
-        "🎓 Análise Orientada A Objetos",
-        1,
-        "19:00",
-        "21:45",
-        COLORS.fac_aoo,
-        "Prédio I, Nível 5 - Sala 512",
-      );
-
-      // ── TERÇA-FEIRA ──
-      adicionarAtividade(
-        "🎓 Arquitetura, Org. E Func. De Computadores...",
-        2,
-        "19:00",
-        "22:35",
-        COLORS.fac_sistemas_esp,
-        "Sala 703",
-      );
-      adicionarAtividade("🏋️ Academia", 2, "15:30", "17:30", COLORS.academia);
-
-      // ── QUARTA-FEIRA ──
-      adicionarAtividade("🏋️ Academia", 3, "15:30", "17:30", COLORS.academia);
-
-      // ── QUINTA-FEIRA ──
-      adicionarAtividade("🏋️ Academia", 4, "15:00", "16:30", COLORS.academia);
-      adicionarAtividade(
-        "🎓 Eletricidade, Propagações Ond. E Magnéticas (teórica)",
-        4,
-        "19:00",
-        "22:35",
-        COLORS.fac_eletri,
-        "Prédio I, Nível 5 - Sala 512",
-      );
-
-      // ── SEXTA-FEIRA ──
-      adicionarAtividade("🏋️ Academia", 5, "15:30", "17:30", COLORS.academia);
-      adicionarAtividade(
-        "🎓 Programação Orientada A Objetos",
-        5,
-        "19:00",
-        "22:35",
-        COLORS.fac_poo,
-        "Prédio I, Nível 5 - Sala 512",
-      );
-
       // ── SÁBADO ──
-      adicionarAtividade(
-        "🎓 Modelagem E Simulação Matemática",
-        6,
-        "08:00",
-        "09:40",
-        COLORS.fac_modelagem,
-      );
       adicionarAtividade("🏋️ Academia", 6, "09:40", "11:00", COLORS.academia);
-
-      // ── DOMINGO ──
-      adicionarAtividade(
-        "🏃 Cardio Leve (Descanso Ativo)",
-        7,
-        "09:00",
-        "10:00",
-        COLORS.cardio,
-      );
     }
 
     atividadesHoje.sort(
