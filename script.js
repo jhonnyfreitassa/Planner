@@ -390,6 +390,9 @@ const COLORS = {
   fac_modelagem: "#facc15",
   fac_transportes: "#22d3ee",
   fac_sistemas_esp: "#818cf8",
+  fac_arq_org: "#2dd4bf",
+  fac_mec_solidos: "#a3e635",
+  fac_ciencia_materiais: "#e879f9",
   reuniao_liga: "#f59e0b",
   reuniao_nite: "#ef4444",
   reuniao_liau: "#eab308",
@@ -588,8 +591,51 @@ document.addEventListener("DOMContentLoaded", function () {
           "16:00",
           COLORS.expediente,
         );
-        adicionarAtividade("🏋️ Academia", d, "21:00", "23:00", COLORS.academia);
       });
+
+      // Academia — horários ajustados para não conflitar com as aulas
+      const horariosAcademia = {
+        1: ["18:00", "20:00"], // Segunda (aula às 20:20)
+        2: ["21:00", "23:00"], // Terça
+        3: ["21:00", "23:00"], // Quarta
+        4: ["21:00", "23:00"], // Quinta
+        5: ["16:30", "18:30"], // Sexta (aula às 19:00)
+      };
+      Object.entries(horariosAcademia).forEach(([d, [ini, fim]]) => {
+        adicionarAtividade(
+          "🏋️ Academia",
+          Number(d),
+          ini,
+          fim,
+          COLORS.academia,
+        );
+      });
+
+      // ── AULAS DA FACULDADE ──
+      adicionarAtividade(
+        "🎓 Arq. e Org. de Computadores",
+        1,
+        "20:20",
+        "22:00",
+        COLORS.fac_arq_org,
+        "Sala: Virtualizada",
+      );
+      adicionarAtividade(
+        "🎓 Mecânica dos Sólidos",
+        4,
+        "18:30",
+        "20:10",
+        COLORS.fac_mec_solidos,
+        "Sala: Virtualizada",
+      );
+      adicionarAtividade(
+        "🎓 Ciências dos Materiais",
+        5,
+        "19:00",
+        "21:30",
+        COLORS.fac_ciencia_materiais,
+        "Sala: Indeterminada",
+      );
 
       // ── SÁBADO ──
       adicionarAtividade("🏋️ Academia", 6, "09:40", "11:00", COLORS.academia);
@@ -855,4 +901,49 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("box_suplementos", boxSuplementos.value);
     });
   }
+
+  // ===========================================================
+  // DIETA — DICA DINÂMICA DE PRÉ/PÓS-TREINO (CONFORME O DIA)
+  // ===========================================================
+  const diaHojeDieta = new Date().getDay(); // 0 = Domingo ... 6 = Sábado
+  const nomesDiasDieta = [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
+  ];
+
+  ["pre", "pos"].forEach((tipo) => {
+    const lista = document.querySelector(`[data-horarios="${tipo}"]`);
+    const dica = document.querySelector(`[data-dica-hoje="${tipo}"]`);
+    if (!lista || !dica) return;
+
+    const rotulo = tipo === "pre" ? "Pré-treino" : "Pós-treino";
+    let linhaHoje = null;
+
+    lista.querySelectorAll(".horario-dia").forEach((linha) => {
+      const dias = linha.dataset.dias.split(",").map(Number);
+      if (dias.includes(diaHojeDieta)) linhaHoje = linha;
+    });
+
+    let texto;
+    if (linhaHoje) {
+      // Destaca a linha do dia atual dentro do subtítulo
+      linhaHoje.style.color = "#4caf50";
+      linhaHoje.style.fontWeight = "bold";
+      const badge = document.createElement("span");
+      badge.textContent = " ← HOJE";
+      linhaHoje.appendChild(badge);
+      texto = linhaHoje.querySelector(".detalhe").textContent.trim();
+    } else {
+      texto = "sem treino programado hoje.";
+    }
+
+    dica.textContent = `⏰ ${rotulo} de hoje (${nomesDiasDieta[diaHojeDieta]}): ${texto}`;
+    dica.style.cssText =
+      "display:block; background:#1a251a; border:1px solid var(--color-dieta); border-radius:8px; padding:10px 14px; margin-bottom:16px; color:#fff; font-size:0.9em; font-weight:bold; line-height:1.5;";
+  });
 });
