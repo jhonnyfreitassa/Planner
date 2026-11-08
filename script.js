@@ -33,19 +33,33 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 3,
     seriesMin: 3,
   },
-  "🪲 Inseto Morto (Dead Bug)": {
+  "🍫 Abdominal Supra na Polia ou Máquina": {
     type: "isolador",
-    cargaTipo: "corpo",
-    incremento: 0,
-    seriesMax: 3,
-    seriesMin: 3,
+    cargaTipo: "maquina",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
   },
-  "🐕 Perdigueiro (Bird-Dog)": {
+  "🦵 Elevação de Pernas (Pendurado ou Banco)": {
     type: "isolador",
     cargaTipo: "corpo",
     incremento: 0,
-    seriesMax: 3,
-    seriesMin: 3,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "✊ Flexão de Punho com Barra": {
+    type: "isolador",
+    cargaTipo: "livre",
+    incremento: 2.5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "✊ Extensão de Punho com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
   },
 
   // ── PUSH A (Força) ──────────────────────────
@@ -98,19 +112,19 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🪑 Supino Fechado": {
-    type: "composto",
-    cargaTipo: "livre",
-    incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
-  },
-  "⏬ Tríceps Testa (Barra W)": {
+  "⏬ Tríceps na Polia com Barra (Reta ou V)": {
     type: "isolador",
-    cargaTipo: "livre",
-    incremento: 2.5,
+    cargaTipo: "maquina",
+    incremento: 5,
     seriesMax: 4,
     seriesMin: 4,
+  },
+  "⏬ Tríceps Francês Sentado (Halter Pesado)": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 3,
+    seriesMin: 3,
   },
 
   // ── PULL A (Força) ──────────────────────────
@@ -156,10 +170,10 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦾 Rosca Alternada com Halteres": {
+  "🦾 Rosca na Polia Alta (Rosca Hércules)": {
     type: "isolador",
-    cargaTipo: "halter",
-    incremento: 2,
+    cargaTipo: "maquina",
+    incremento: 2.5,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -171,7 +185,7 @@ const EXERCICIOS_CONFIG = {
     seriesMin: 3,
   },
 
-  // ── PUSH B (Hipertrofia e Pump) ──────────────────────────
+  // ── PUSH B (Hipertrofia) ──────────────────────────
   "🪑 Supino Reto com Barra": {
     type: "composto",
     cargaTipo: "livre",
@@ -272,14 +286,14 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦾 Rosca Inclinada no Banco com Halteres": {
+  "🦾 Rosca Direta no Cabo (Bayesian Curl)": {
     type: "isolador",
-    cargaTipo: "halter",
-    incremento: 2,
+    cargaTipo: "maquina",
+    incremento: 2.5,
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦾 Rosca Scott Máquina ou W": {
+  "🦾 Rosca Unilateral no Cabo Baixo": {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
@@ -294,14 +308,45 @@ const EXERCICIOS_CONFIG = {
     seriesMin: 4,
   },
 
-  // ── LEGS A & B ──────────────────────────
-  "🦵 Agachamento (Livre ou Smith)": {
+  // ── PERNAS (Quarta — Foco Força/Glúteo, máx 50 min) ──────────────────────────
+  "🦵 Agachamento Livre": {
     type: "composto",
     cargaTipo: "livre",
     incremento: 5,
     seriesMax: 4,
     seriesMin: 4,
   },
+  "🍑 Elevação Pélvica com Barra": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🛌 Stiff com Barra ou Halteres": {
+    type: "composto",
+    cargaTipo: "livre",
+    incremento: 5,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+  "🍑 Cadeira Abdutora": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 5,
+    seriesMax: 3,
+    seriesMin: 3,
+  },
+  "🦶 Panturrilha em Pé ou no Leg Press": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+
+  // ── FULLBODY A (Sábado — Foco Anterior) ──────────────────────────
+  // (Supino Inclinado com Halteres, Puxada Alta Pegada Supinada e Elevação Lateral com Halteres já estão definidos acima)
   "🦿 Leg Press 45°": {
     type: "composto",
     cargaTipo: "maquina",
@@ -309,57 +354,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🍑 Elevação Pélvica Pesada (Barra)": {
-    type: "composto",
-    cargaTipo: "livre",
-    incremento: 5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🛌 Levantamento Terra Romeno (RDL)": {
-    type: "composto",
-    cargaTipo: "livre",
-    incremento: 5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🦶 Panturrilha em Pé": {
-    type: "isolador",
-    cargaTipo: "livre",
-    incremento: 5,
-    seriesMax: 5,
-    seriesMin: 5,
-  },
-
-  "🍑 Elevação Pélvica": {
-    type: "composto",
-    cargaTipo: "livre",
-    incremento: 5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🦵 Agachamento Búlgaro com Halteres": {
-    type: "composto",
-    cargaTipo: "halter",
-    incremento: 2,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🍑 Cadeira Abdutora": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 5,
-    seriesMax: 5,
-    seriesMin: 5,
-  },
   "🦵 Cadeira Extensora": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🛌 Cadeira ou Mesa Flexora": {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
@@ -370,8 +365,32 @@ const EXERCICIOS_CONFIG = {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
-    seriesMax: 5,
-    seriesMin: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+
+  // ── FULLBODY B (Domingo — Foco Posterior) ──────────────────────────
+  // (Remada Curvada com Barra, Desenvolvimento com Halteres e Tríceps Corda na Polia já estão definidos acima)
+  "🦵 Agachamento Búlgaro com Halteres": {
+    type: "composto",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🛌 Cadeira ou Mesa Flexora": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 5,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🦾 Rosca Martelo com Halteres": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 2,
+    seriesMax: 3,
+    seriesMin: 3,
   },
 };
 
@@ -583,62 +602,28 @@ document.addEventListener("DOMContentLoaded", function () {
       // Segunda a Sexta — rotina fixa
       const diasUteis = [1, 2, 3, 4, 5];
       diasUteis.forEach((d) => {
-        adicionarAtividade("🏃 Cardio", d, "07:00", "08:00", COLORS.cardio);
-        adicionarAtividade(
-          "💼 SENAI CIMATEC",
-          d,
-          "10:00",
-          "16:00",
-          COLORS.expediente,
-        );
+        adicionarAtividade("💼 SENAI CIMATEC", d, "10:00", "16:00", COLORS.expediente);
       });
 
-      // Academia — horários ajustados para não conflitar com as aulas
+      // Academia (Musculação + Abdômen + Cardio Pós-Treino)
       const horariosAcademia = {
-        1: ["18:00", "20:00"], // Segunda (aula às 20:20)
+        1: ["21:00", "23:00"], // Segunda
         2: ["21:00", "23:00"], // Terça
         3: ["21:00", "23:00"], // Quarta
         4: ["21:00", "23:00"], // Quinta
-        5: ["16:30", "18:30"], // Sexta (aula às 19:00)
+        5: ["21:00", "23:00"], // Sexta
+        6: ["09:40", "11:00"], // Sábado
+        7: ["09:40", "11:00"], // Domingo (Fullbody B)
       };
       Object.entries(horariosAcademia).forEach(([d, [ini, fim]]) => {
-        adicionarAtividade(
-          "🏋️ Academia",
-          Number(d),
-          ini,
-          fim,
-          COLORS.academia,
-        );
+        adicionarAtividade("🏋️ Academia + Cardio", Number(d), ini, fim, COLORS.academia);
       });
 
       // ── AULAS DA FACULDADE ──
-      adicionarAtividade(
-        "🎓 Arq. e Org. de Computadores",
-        1,
-        "20:20",
-        "22:00",
-        COLORS.fac_arq_org,
-        "Sala: Virtualizada",
-      );
-      adicionarAtividade(
-        "🎓 Mecânica dos Sólidos",
-        4,
-        "18:30",
-        "20:10",
-        COLORS.fac_mec_solidos,
-        "Sala: Virtualizada",
-      );
-      adicionarAtividade(
-        "🎓 Ciências dos Materiais",
-        5,
-        "19:00",
-        "21:30",
-        COLORS.fac_ciencia_materiais,
-        "Sala: Indeterminada",
-      );
-
-      // ── SÁBADO ──
-      adicionarAtividade("🏋️ Academia", 6, "09:40", "11:00", COLORS.academia);
+      // Segunda no mesmo horário da quinta (18:30–20:10), sem conflito com a academia
+      adicionarAtividade("🎓 Arq. e Org. de Computadores", 1, "18:30", "20:10", COLORS.fac_arq_org, "Sala: Virtualizada");
+      // Quinta-feira mantida
+      adicionarAtividade("🎓 Mecânica dos Sólidos", 4, "18:30", "20:10", COLORS.fac_mec_solidos, "Sala: Virtualizada");
     }
 
     atividadesHoje.sort(
@@ -901,49 +886,4 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("box_suplementos", boxSuplementos.value);
     });
   }
-
-  // ===========================================================
-  // DIETA — DICA DINÂMICA DE PRÉ/PÓS-TREINO (CONFORME O DIA)
-  // ===========================================================
-  const diaHojeDieta = new Date().getDay(); // 0 = Domingo ... 6 = Sábado
-  const nomesDiasDieta = [
-    "Domingo",
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
-    "Sábado",
-  ];
-
-  ["pre", "pos"].forEach((tipo) => {
-    const lista = document.querySelector(`[data-horarios="${tipo}"]`);
-    const dica = document.querySelector(`[data-dica-hoje="${tipo}"]`);
-    if (!lista || !dica) return;
-
-    const rotulo = tipo === "pre" ? "Pré-treino" : "Pós-treino";
-    let linhaHoje = null;
-
-    lista.querySelectorAll(".horario-dia").forEach((linha) => {
-      const dias = linha.dataset.dias.split(",").map(Number);
-      if (dias.includes(diaHojeDieta)) linhaHoje = linha;
-    });
-
-    let texto;
-    if (linhaHoje) {
-      // Destaca a linha do dia atual dentro do subtítulo
-      linhaHoje.style.color = "#4caf50";
-      linhaHoje.style.fontWeight = "bold";
-      const badge = document.createElement("span");
-      badge.textContent = " ← HOJE";
-      linhaHoje.appendChild(badge);
-      texto = linhaHoje.querySelector(".detalhe").textContent.trim();
-    } else {
-      texto = "sem treino programado hoje.";
-    }
-
-    dica.textContent = `⏰ ${rotulo} de hoje (${nomesDiasDieta[diaHojeDieta]}): ${texto}`;
-    dica.style.cssText =
-      "display:block; background:#1a251a; border:1px solid var(--color-dieta); border-radius:8px; padding:10px 14px; margin-bottom:16px; color:#fff; font-size:0.9em; font-weight:bold; line-height:1.5;";
-  });
 });
