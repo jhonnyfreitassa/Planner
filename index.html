@@ -115,13 +115,12 @@
         </ul>
       </div>
 
-      <!-- CORE / ABDÔMEN (Reabilitação) -->
+      <!-- CORE / ABDÔMEN (Diário) -->
       <div class="workout-day" id="core-diario-block">
         <div class="workout-day-header">
-          <h3>🛡️ Core / Abdômen (Reabilitação)</h3>
+          <h3>🛡️ Core / Abdômen (Diário)</h3>
           <button class="reset-button">Resetar</button>
         </div>
-        <p style="font-size: 0.9em; color: #a0a0a0; margin-bottom: 15px;">⚠️ Fase 1 (1 mês): Foco em isometria e estabilidade para proteger a fáscia abdominal. Sem flexão de tronco.</p>
         <ul>
           <li class="exercise-item" data-exercise-id="core_vacuum">
             <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🌀 Stomach Vacuum<br><small>4 séries de 4-6 contrações lentas</small></label></div>
@@ -135,14 +134,14 @@
               <div class="series-counter"></div>
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="core_deadbug">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🪲 Inseto Morto (Dead Bug)<br><small>3 séries de 10-12 repetições (lento, lombar colada no chão)</small></label></div>
+          <li class="exercise-item" data-exercise-id="core_supraPolia">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍫 Abdominal Supra na Polia ou Máquina<br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="core_birddog">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🐕 Perdigueiro (Bird-Dog)<br><small>3 séries de 10-12 repetições (cada lado)</small></label></div>
+          <li class="exercise-item" data-exercise-id="core_elevacaoPernas">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Elevação de Pernas (Pendurado ou Banco)<br><small>4 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div>
             </div>
@@ -200,14 +199,14 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="seg_pushA_supinoFechado">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🪑 Supino Fechado<br><small>3 séries de 6-8</small></label></div>
+          <li class="exercise-item" data-exercise-id="seg_pushA_tricepsPoliaBarra">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>⏬ Tríceps na Polia com Barra (Reta ou V)<br><small>4 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="seg_pushA_testa">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>⏬ Tríceps Testa (Barra W)<br><small>4 séries de 6-8</small></label></div>
+          <li class="exercise-item" data-exercise-id="seg_pushA_francesSentado">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>⏬ Tríceps Francês Sentado (Halter Pesado)<br><small>3 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -260,8 +259,8 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="ter_pullA_roscaAlt">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦾 Rosca Alternada com Halteres<br><small>4 séries de 6-8</small></label></div>
+          <li class="exercise-item" data-exercise-id="ter_pullA_roscaHercules">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦾 Rosca na Polia Alta (Rosca Hércules)<br><small>4 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -272,44 +271,50 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
+          <li class="exercise-item" data-exercise-id="ter_pullA_flexaoPunho">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>✊ Flexão de Punho com Barra<br><small>4 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
         </ul>
         <div style="text-align: center; margin-top: 15px;"><button class="toggle-btn finish-workout-btn" style="background-color: var(--color-treino); width: 100%;">Finalizar Treino</button>
           <div class="workout-hint hint"></div>
         </div>
       </div>
 
-      <!-- QUARTA — LEGS A (Força) -->
+      <!-- QUARTA — PERNAS (Força) -->
       <div class="workout-day hidden-workout" data-day-name="Quarta" data-day-index="3">
         <div class="workout-day-header">
-          <h3>Quarta: LEGS A (Força)</h3>
+          <h3>Quarta: PERNAS (Força)</h3>
         </div>
         <ul>
-          <li class="exercise-item" data-exercise-id="qua_legsA_agachamento">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Agachamento (Livre ou Smith)<br><small>4 séries de 4-6</small></label></div>
+          <li class="exercise-item" data-exercise-id="qua_pernas_agachamento">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Agachamento Livre<br><small>4 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_legsA_legpress">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦿 Leg Press 45°<br><small>4 séries de 6-8</small></label></div>
+          <li class="exercise-item" data-exercise-id="qua_pernas_pelvica">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Elevação Pélvica com Barra<br><small>4 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_legsA_pelvica">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Elevação Pélvica Pesada (Barra)<br><small>4 séries de 6-8</small></label></div>
+          <li class="exercise-item" data-exercise-id="qua_pernas_stiff">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🛌 Stiff com Barra ou Halteres<br><small>3 séries de 6-8</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_legsA_rdl">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🛌 Levantamento Terra Romeno (RDL)<br><small>4 séries de 6-8</small></label></div>
+          <li class="exercise-item" data-exercise-id="qua_pernas_abdutora">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Cadeira Abdutora<br><small>3 séries de 12-15</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="qua_legsA_panturrilha">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦶 Panturrilha em Pé<br><small>5 séries de 8-10</small></label></div>
+          <li class="exercise-item" data-exercise-id="qua_pernas_panturrilha">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦶 Panturrilha em Pé ou no Leg Press<br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -320,10 +325,10 @@
         </div>
       </div>
 
-      <!-- QUINTA — PUSH B (Hipertrofia e Pump) -->
+      <!-- QUINTA — PUSH B (Hipertrofia) -->
       <div class="workout-day hidden-workout" data-day-name="Quinta" data-day-index="4">
         <div class="workout-day-header">
-          <h3>Quinta: PUSH B (Hipertrofia e Pump)</h3>
+          <h3>Quinta: PUSH B (Hipertrofia)</h3>
         </div>
         <ul>
           <li class="exercise-item" data-exercise-id="qui_pushB_retoBarra">
@@ -422,14 +427,14 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sex_pullB_roscaInc">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦾 Rosca Inclinada no Banco com Halteres<br><small>4 séries de 10-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="sex_pullB_roscaBayesian">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦾 Rosca Direta no Cabo (Bayesian Curl)<br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sex_pullB_roscaScott">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦾 Rosca Scott Máquina ou W<br><small>4 séries de 10-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="sex_pullB_roscaUnilateral">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦾 Rosca Unilateral no Cabo Baixo<br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -440,50 +445,104 @@
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
+          <li class="exercise-item" data-exercise-id="sex_pullB_extensaoPunho">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>✊ Extensão de Punho com Halteres<br><small>4 séries de 12-15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
         </ul>
         <div style="text-align: center; margin-top: 15px;"><button class="toggle-btn finish-workout-btn" style="background-color: var(--color-treino); width: 100%;">Finalizar Treino</button>
           <div class="workout-hint hint"></div>
         </div>
       </div>
 
-      <!-- SÁBADO — LEGS B (Hipertrofia) -->
+      <!-- SÁBADO — FULLBODY A (Foco Anterior) -->
       <div class="workout-day hidden-workout" data-day-name="Sábado" data-day-index="6">
         <div class="workout-day-header">
-          <h3>Sábado: LEGS B (Hipertrofia)</h3>
+          <h3>Sábado: FULLBODY A (Foco Anterior)</h3>
         </div>
         <ul>
-          <li class="exercise-item" data-exercise-id="sab_legsB_pelvica">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Elevação Pélvica<br><small>4 séries de 10-12 (Segurar 2s no topo)</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_fullbodyA_legpress">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦿 Leg Press 45°<br><small>4 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sab_legsB_bulgaro">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Agachamento Búlgaro com Halteres<br><small>4 séries de 10-12</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_fullbodyA_extensora">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Cadeira Extensora<br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sab_legsB_abdutora">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🍑 Cadeira Abdutora<br><small>5 séries de 15-20 (Tronco à frente)</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_fullbodyA_supinoInclinado">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🪑 Supino Inclinado com Halteres<br><small>4 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sab_legsB_extensora">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Cadeira Extensora<br><small>4 séries de 12-15</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_fullbodyA_puxadaSupinada">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>⏫ Puxada Alta Pegada Supinada<br><small>4 séries de 8-10</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sab_legsB_flexora">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🛌 Cadeira ou Mesa Flexora<br><small>4 séries de 12-15</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_fullbodyA_lateral">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🥥 Elevação Lateral com Halteres<br><small>4 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
           </li>
-          <li class="exercise-item" data-exercise-id="sab_legsB_panturrilha">
-            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦶 Panturrilha Sentado (Máquina)<br><small>5 séries de 15-20</small></label></div>
+          <li class="exercise-item" data-exercise-id="sab_fullbodyA_panturrilha">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦶 Panturrilha Sentado (Máquina)<br><small>4 séries de 12-15</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+        </ul>
+        <div style="text-align: center; margin-top: 15px;"><button class="toggle-btn finish-workout-btn" style="background-color: var(--color-treino); width: 100%;">Finalizar Treino</button>
+          <div class="workout-hint hint"></div>
+        </div>
+      </div>
+
+      <!-- DOMINGO — FULLBODY B (Foco Posterior) -->
+      <div class="workout-day hidden-workout" data-day-name="Domingo" data-day-index="7">
+        <div class="workout-day-header">
+          <h3>Domingo: FULLBODY B (Foco Posterior)</h3>
+        </div>
+        <ul>
+          <li class="exercise-item" data-exercise-id="dom_fullbodyB_bulgaro">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦵 Agachamento Búlgaro com Halteres<br><small>4 séries de 8-10</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="dom_fullbodyB_flexora">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🛌 Cadeira ou Mesa Flexora<br><small>4 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="dom_fullbodyB_remada">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🚣 Remada Curvada com Barra<br><small>4 séries de 8-10</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="dom_fullbodyB_desenvolvimento">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🥥 Desenvolvimento com Halteres<br><small>4 séries de 8-10</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="dom_fullbodyB_tricepsCorda">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>⏬ Tríceps Corda na Polia<br><small>3 séries de 10-12</small></label></div>
+            <div class="exercise-controls">
+              <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
+            </div>
+          </li>
+          <li class="exercise-item" data-exercise-id="dom_fullbodyB_roscaMartelo">
+            <div class="exercise-info"><input type="checkbox" class="exercise-checkbox"><label>🦾 Rosca Martelo com Halteres<br><small>3 séries de 10-12</small></label></div>
             <div class="exercise-controls">
               <div class="series-counter"></div><input type="text" class="weight-input" placeholder="kg">
             </div>
@@ -511,7 +570,7 @@
              MÓDULO 1 — CAFÉ DA MANHÃ (08:00 - PÓS-CARDIO)
         ======================================================= -->
         <div class="protocol-card" style="border-left: 5px solid var(--color-dieta);">
-          <h2 style="color: var(--color-dieta);">☕ Módulo 1 — Café da Manhã (08:00 - Pós-Cardio)</h2>
+          <h2 style="color: var(--color-dieta);">☕ Módulo 1 — Café da Manhã</h2>
           <div class="meal-choice-block">
             <div class="meal-choice-title">🍞 Carboidrato (Escolha 1)</div>
             <div class="meal-choice-grid">
@@ -542,7 +601,7 @@
              MÓDULO 2 — ALMOÇO (12:30 - 13:00)
         ======================================================= -->
         <div class="protocol-card" style="border-left: 5px solid var(--color-dieta);">
-          <h2 style="color: var(--color-dieta);">🍽️ Módulo 2 — Almoço (12:30 - 13:00)</h2>
+          <h2 style="color: var(--color-dieta);">🍽️ Módulo 2 — Almoço</h2>
           <div class="meal-choice-block">
             <div class="meal-choice-title">🍚 Carboidrato Flexível (Escolha 1)</div>
             <div class="meal-choice-grid">
@@ -579,14 +638,7 @@
              MÓDULO 3 — LANCHE PRÉ-TREINO (HORÁRIO CONFORME O DIA DE TREINO)
         ======================================================= -->
         <div class="protocol-card" style="border-left: 5px solid var(--color-dieta);">
-          <h2 style="color: var(--color-dieta);">⚡ Módulo 3 — Lanche Pré-Treino (Horário conforme o dia de treino)</h2>
-          <p class="horarios-treino" data-horarios="pre" style="font-size: 0.85em; color: #a0a0a0; margin: 4px 0 16px; line-height: 1.6;">
-            <span class="horario-dia" data-dias="2,3,4" style="display: block;"><span class="rotulo">📅 Ter/Qua/Qui:</span><span class="detalhe"> 19:00–19:30 (Treino às 21:00)</span></span>
-            <span class="horario-dia" data-dias="1" style="display: block;"><span class="rotulo">📅 Segunda:</span><span class="detalhe"> 16:30–17:00 (Treino às 18:00)</span></span>
-            <span class="horario-dia" data-dias="5" style="display: block;"><span class="rotulo">📅 Sexta:</span><span class="detalhe"> 15:00–15:30 (Treino às 16:30)</span></span>
-            <span class="horario-dia" data-dias="6" style="display: block;"><span class="rotulo">📅 Sábado:</span><span class="detalhe"> consumir como lanche da tarde às 16:30 (o Café da Manhã das 08:00 serve como pré-treino para as 09:40)</span></span>
-          </p>
-          <div class="dica-hoje" data-dica-hoje="pre" style="display: none;"></div>
+          <h2 style="color: var(--color-dieta);">⚡ Módulo 3 — Lanche Pré-Treino</h2>
           <div class="meal-choice-block">
             <div class="meal-choice-title">🍞 Carboidrato Prático — Escolha UMA opção</div>
             <div class="meal-choice-grid">
@@ -607,14 +659,7 @@
              MÓDULO 4 — PÓS-TREINO (JANELA CONFORME O TÉRMINO DO TREINO)
         ======================================================= -->
         <div class="protocol-card" style="border-left: 5px solid var(--color-dieta);">
-          <h2 style="color: var(--color-dieta);">🥤 Módulo 4 — Pós-Treino (Recuperação Rápida)</h2>
-          <p class="horarios-treino" data-horarios="pos" style="font-size: 0.85em; color: #a0a0a0; margin: 4px 0 16px; line-height: 1.6;">
-            <span class="horario-dia" data-dias="2,3,4" style="display: block;"><span class="rotulo">📅 Ter/Qua/Qui:</span><span class="detalhe"> 23:00–23:15</span></span>
-            <span class="horario-dia" data-dias="1" style="display: block;"><span class="rotulo">📅 Segunda:</span><span class="detalhe"> 20:00–20:15 (antes da aula das 20:20)</span></span>
-            <span class="horario-dia" data-dias="5" style="display: block;"><span class="rotulo">📅 Sexta:</span><span class="detalhe"> 18:30–18:50 (antes da aula das 19:00)</span></span>
-            <span class="horario-dia" data-dias="6" style="display: block;"><span class="rotulo">📅 Sábado:</span><span class="detalhe"> 11:00–11:15</span></span>
-          </p>
-          <div class="dica-hoje" data-dica-hoje="pos" style="display: none;"></div>
+          <h2 style="color: var(--color-dieta);">🥤 Módulo 4 — Pós-Treino</h2>
           <div class="meal-choice-block">
             <div class="meal-choice-title">🥤 Proteína</div>
             <div class="meal-choice-grid">
@@ -635,7 +680,7 @@
              MÓDULO 5 — CEIA (23:45 - ANTES DE DORMIR)
         ======================================================= -->
         <div class="protocol-card" style="border-left: 5px solid var(--color-dieta);">
-          <h2 style="color: var(--color-dieta);">🌙 Módulo 5 — Ceia (Antes de dormir)</h2>
+          <h2 style="color: var(--color-dieta);">🌙 Módulo 5 — Ceia</h2>
           <div class="meal-choice-block">
             <div class="meal-choice-title">🥚 Proteína Leve — Escolha UMA opção</div>
             <div class="meal-choice-grid">
