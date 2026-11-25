@@ -47,20 +47,6 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "✊ Flexão de Punho com Barra": {
-    type: "isolador",
-    cargaTipo: "livre",
-    incremento: 2.5,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "✊ Extensão de Punho com Halteres": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 1,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
 
   // ── PUSH A (Força) ──────────────────────────
   "🪑 Supino Inclinado com Barra": {
@@ -84,7 +70,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦋 Crossover Polia Alta": {
+  "🦋 Crossover Polia Média": {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
@@ -99,13 +85,6 @@ const EXERCICIOS_CONFIG = {
     seriesMin: 4,
   },
   "🥥 Elevação Lateral com Halteres": {
-    type: "isolador",
-    cargaTipo: "halter",
-    incremento: 1,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🦅 Crucifixo Invertido com Halteres no Banco Inclinado": {
     type: "isolador",
     cargaTipo: "halter",
     incremento: 1,
@@ -163,6 +142,13 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
+  "🦅 Crucifixo Invertido com Halteres no Banco Inclinado": {
+    type: "isolador",
+    cargaTipo: "halter",
+    incremento: 1,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
   "🦾 Rosca Direta (Barra W ou Reta)": {
     type: "isolador",
     cargaTipo: "livre",
@@ -177,12 +163,12 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🦾 Rosca Inversa com Barra W": {
+  "✊ Flexão de Punho com Barra": {
     type: "isolador",
     cargaTipo: "livre",
     incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
+    seriesMax: 4,
+    seriesMin: 4,
   },
 
   // ── PUSH B (Hipertrofia) ──────────────────────────
@@ -211,8 +197,8 @@ const EXERCICIOS_CONFIG = {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 2.5,
-    seriesMax: 3,
-    seriesMin: 3,
+    seriesMax: 4,
+    seriesMin: 4,
   },
   "🥥 Desenvolvimento com Halteres": {
     type: "composto",
@@ -225,13 +211,6 @@ const EXERCICIOS_CONFIG = {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 1,
-    seriesMax: 4,
-    seriesMin: 4,
-  },
-  "🎯 Face Pull na Polia Alta": {
-    type: "isolador",
-    cargaTipo: "maquina",
-    incremento: 2.5,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -265,7 +244,7 @@ const EXERCICIOS_CONFIG = {
     seriesMax: 4,
     seriesMin: 4,
   },
-  "🚣 Remada Baixa na Polia Drop-set": {
+  "🚣 Remada Baixa na Polia": {
     type: "composto",
     cargaTipo: "maquina",
     incremento: 5,
@@ -283,6 +262,13 @@ const EXERCICIOS_CONFIG = {
     type: "isolador",
     cargaTipo: "halter",
     incremento: 2,
+    seriesMax: 4,
+    seriesMin: 4,
+  },
+  "🎯 Face Pull na Polia Alta": {
+    type: "isolador",
+    cargaTipo: "maquina",
+    incremento: 2.5,
     seriesMax: 4,
     seriesMin: 4,
   },
@@ -334,8 +320,8 @@ const EXERCICIOS_CONFIG = {
     type: "isolador",
     cargaTipo: "maquina",
     incremento: 5,
-    seriesMax: 3,
-    seriesMin: 3,
+    seriesMax: 4,
+    seriesMin: 4,
   },
   "🦶 Panturrilha em Pé ou no Leg Press": {
     type: "isolador",
@@ -776,14 +762,18 @@ document.addEventListener("DOMContentLoaded", function () {
     exerciseItems.forEach((item) => {
       const id = item.dataset.exerciseId;
       const labelText = getCleanExerciseName(item);
-      let seriesCount = 3;
-      if (progressoCargas[labelText]?.series)
+      const htmlMatch = item
+        .querySelector("small")
+        ?.textContent.match(/(\d+)\s*séries/i);
+      const htmlSeries = htmlMatch ? parseInt(htmlMatch[1]) : 3;
+      let seriesCount = htmlSeries;
+      const cfg = EXERCICIOS_CONFIG[labelText];
+      if (
+        cfg &&
+        cfg.seriesMin !== cfg.seriesMax &&
+        progressoCargas[labelText]?.series
+      ) {
         seriesCount = progressoCargas[labelText].series;
-      else {
-        const m = item
-          .querySelector("small")
-          ?.textContent.match(/(\d+)\s*séries/i);
-        seriesCount = m ? parseInt(m[1]) : 3;
       }
 
       const smallTag = item.querySelector("small");
